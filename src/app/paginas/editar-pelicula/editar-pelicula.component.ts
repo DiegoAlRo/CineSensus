@@ -1,3 +1,4 @@
+/* Importaciones necesarias para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -5,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
 
+/* Decorador del componente con su configuración. */
 @Component({
   selector: 'app-editar-pelicula',
   standalone: true,
@@ -13,6 +15,7 @@ import { Pelicula } from '../../modelos/pelicula';
   styleUrls: ['./editar-pelicula.component.css']
 })
 
+/* Clase del componente que implementa OnInit para inicializar datos. */
 export class EditarPeliculaComponent implements OnInit {
   
   pelicula: Pelicula = {
@@ -24,6 +27,7 @@ export class EditarPeliculaComponent implements OnInit {
     imagen: ''
   };
     
+  /* Constructor para inyectar servicios necesarios. */
   constructor(
 
     private route: ActivatedRoute,
@@ -31,6 +35,7 @@ export class EditarPeliculaComponent implements OnInit {
     private router: Router
   ) {}
     
+  /* Método ngOnInit para cargar la película a editar al iniciar el componente. */
   ngOnInit(): void {
       
      const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -38,6 +43,7 @@ export class EditarPeliculaComponent implements OnInit {
        this.pelicula = p;
      });
 
+     /* Método para guardar los cambios realizados en la película. */
    } guardar() {
       
     this.peliculasService.actualizarPelicula(this.pelicula).subscribe(() => {

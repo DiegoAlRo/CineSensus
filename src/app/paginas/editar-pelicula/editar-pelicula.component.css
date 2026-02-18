@@ -1,3 +1,4 @@
+/* Estilos para el componente Añadir Película. */
 :host {
     display: block;
     background: #000;
@@ -6,6 +7,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Contenedor principal del formulario. */
 .contenedor-form {
     display: flex;
     flex-direction: column;
@@ -14,12 +16,14 @@
     padding-bottom: 80px;
 }
 
+/* Título del formulario. */
 .titulo-form {
     font-size: 2rem;
     margin-bottom: 30px;
     font-weight: bold;
 }
 
+/* Tarjeta del formulario. */
 .form-card {
     background: #141414;
     padding: 30px;
@@ -32,12 +36,14 @@
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
 }
 
+/* Estilos para las etiquetas de los campos del formulario. */
 label {
     font-size: 1rem;
     color: #e50914;
     font-weight: bold;
 }
 
+/* Estilos para los campos de entrada y textarea. */
 input,
 textarea {
     background: #1f1f1f;
@@ -50,16 +56,19 @@ textarea {
     transition: 0.2s;
 }
 
+/* Estilos para los campos de entrada y textarea cuando están enfocados. */
 input:focus,
 textarea:focus {
     border-color: #e50914;
 }
 
+/* Estilos específicos para el textarea para permitir redimensionamiento vertical y establecer una altura mínima. */
 textarea {
     resize: vertical;
     min-height: 90px;
 }
 
+/* Estilos para el botón de guardar cambios. */
 .btn-rojo {
     width: 100%;
     padding: 14px;
@@ -73,6 +82,7 @@ textarea {
     transition: 0.2s;
 }
 
+/* Estilos para el botón de guardar cambios cuando se pasa el cursor por encima. */
 .btn-rojo:hover {
     background: #b20710;
 }

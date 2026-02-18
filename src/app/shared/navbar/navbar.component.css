@@ -1,3 +1,4 @@
+/* Estilos para la barra de navegación. */
 .navbar {
     background: #111;
     padding: 15px 25px;
@@ -6,12 +7,14 @@
     justify-content: space-between;
 }
 
+/* Estilos para la sección izquierda de la barra de navegación. */
 .nav-izquierda {
     display: flex;
     align-items: center;
     gap: 25px;
 }
 
+/* Estilo para el logo y el título. */
 .logo {
     display: flex;
     align-items: center;
@@ -19,30 +22,35 @@
     text-decoration: none;
 }
 
+/* Estilo para la imagen del logo. */
 .logo-img {
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
+/* Estilo para el título del sitio. */
 .titulo {
     color: #e50914;
     font-size: 1.7rem;
     font-weight: bold;
 }
 
+/*Estilo para el nombre de usuario y botón de cerrar sesión. */
 .usuario-grupo {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
+/* Estilo para el nombre de usuario. */
 .usuario-nombre {
     color: white;
     font-weight: bold;
     font-size: 1.1rem;
 }
 
+/* Estilo para el separador entre el nombre de usuario y el botón de cerrar sesión. */
 .separador {
     width: 2px;
     height: 24px;
@@ -50,6 +58,7 @@
     border-radius: 2px;
 }
 
+/* Estilos para el botón de cerrar sesión. */
 .btn-cerrar {
     background: transparent;
     border: 1px solid #e50914;
@@ -60,11 +69,13 @@
     transition: 0.2s;
 }
 
+/* Efecto hover al pasar el ratón para el botón de cerrar sesión. */
 .btn-cerrar:hover {
     background: #e50914;
     color: white;
 }
 
+/* Estilos para el botón de volver a la página principal. */
 .btn-volver {
     background: transparent;
     border: 2px solid #e50914;
@@ -76,6 +87,7 @@
     transition: 0.2s ease;
 }
 
+/* Efecto hover al pasar el ratón para el botón de volver a la página principal. */
 .btn-volver:hover {
     background: rgba(229, 9, 20, 0.15);
 }

@@ -1,5 +1,5 @@
 
-// Define la interfaz para un usuario.
+/* Define la interfaz para un usuario. */
 export interface Usuario {
   id: number;
   username: string;

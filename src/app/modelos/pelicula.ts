@@ -1,5 +1,5 @@
 
-// Define la interfaz para una película.
+/* Define la interfaz para una película. */
 export interface Pelicula {
     id: number;
     titulo: string;

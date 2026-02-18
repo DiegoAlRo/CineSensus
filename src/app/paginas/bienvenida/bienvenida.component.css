@@ -1,9 +1,11 @@
+/* Estilos para el componente de bienvenida. */
 :host {
     display: block;
     background: #000;
     min-height: 100vh;
 }
 
+/* Estilos para el contenedor principal de bienvenida. */
 .bienvenida-container {
     display: flex;
     flex-direction: column;
@@ -14,22 +16,26 @@
     font-family: Arial, sans-serif;
 }
 
+/* Estilos para el logo y el título. */
 .logo img {
     width: 80px;
     height: 80px;
     object-fit: contain;
 }
 
+/* Estilos para el título del logo. */
 .logo img {
     width: 80px;
     height: 80px;
 }
 
+/* Estilos para el título del logo. */
 .logo h1 {
     font-size: 2.5rem;
     margin: 0;
 }
 
+/* Estilos para el eslogan. */
 .eslogan {
     color: #b3b3b3;
     margin-top: 10px;
@@ -37,6 +43,7 @@
     font-size: 1.1rem;
 }
 
+/* Estilos para los botones. */
 .btn-rojo {
     width: 260px;
     padding: 14px;
@@ -50,10 +57,12 @@
     transition: 0.2s;
 }
 
+/* Estilos para el botón rojo al pasar el mouse. */
 .btn-rojo:hover {
     background: #b20710;
 }
 
+/* Estilos para el separador. */
 .separador {
     width: 260px;
     height: 1px;
@@ -61,6 +70,7 @@
     margin-bottom: 20px;
 }
 
+/* Estilos para el botón gris. */
 .btn-gris {
     width: 260px;
     padding: 14px;
@@ -74,10 +84,12 @@
     transition: 0.2s;
 }
 
+/* Estilos para el botón gris al pasar el mouse. */
 .btn-gris:hover {
     background: #444;
 }
 
+/* Estilos para el enlace de "Entrar sin registrarse". */
 .entrar-sin {
     color: #b3b3b3;
     text-decoration: none;
@@ -85,6 +97,7 @@
     margin-top: 10px;
 }
 
+/* Estilos para el enlace de "Entrar sin registrarse" al pasar el mouse. */
 .entrar-sin:hover {
     color: white;
 }

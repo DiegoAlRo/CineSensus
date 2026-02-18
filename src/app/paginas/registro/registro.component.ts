@@ -1,9 +1,11 @@
+/* imports del componente. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 
+/* Decorador del componente con su configuración. */
 @Component({
   selector: 'app-registro',
   standalone: true,
@@ -12,10 +14,13 @@ import { UsuariosService } from '../../servicios/usuarios.service';
   styleUrls: ['./registro.component.css'],
 })
 
+/* Clase del componente de registro. */
 export class RegistroComponent {
 
+  /* Declaración del formulario reactivo. */
   form: FormGroup;
 
+  /* Constructor del componente con inyección de dependencias. */
   constructor(
 
     private fb: FormBuilder,
@@ -34,6 +39,7 @@ export class RegistroComponent {
     });
   }
 
+  /* Método para registrar un nuevo usuario. */
   registrar() {
 
     if (this.form.invalid) {

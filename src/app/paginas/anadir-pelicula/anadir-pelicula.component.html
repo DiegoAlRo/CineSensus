@@ -1,9 +1,13 @@
+<!-- La clase "contenedor-form" se encarga de centrar el formulario y darle un estilo de tarjeta. -->
 <div class="contenedor-form">
 
+    <!-- El título del formulario. -->
     <h2 class="titulo-form">Añadir Película</h2>
 
+    <!-- El formulario para añadir una película. Se vincula a la función "guardar()" en el componente TypeScript. -->
     <form (ngSubmit)="guardar()" class="form-card">
         
+        <!-- Aquí se definen los campos del formulario para añadir una película. -->
         <label>Título</label>
         
         <input type="text" [(ngModel)]="pelicula.titulo" name="titulo" required>

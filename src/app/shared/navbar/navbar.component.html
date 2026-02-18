@@ -1,21 +1,30 @@
+<!-- Estilo para la barra de navegación. -->
 <nav class="navbar">
-  
+
+  <!-- Sección izquierda de la barra de navegación. -->
   <div class="nav-izquierda">
 
+    <!-- Enlace al inicio con el logo y el título del sitio. -->
     <a routerLink="/" class="logo">
 
+      <!-- Logo de CineSensus. -->
       <img src="../../../../public/Icono-CineSensus.png" alt="logo" class="logo-img">
 
+      <!-- Título de la web. -->
       <span class="titulo">CineSensus</span>
 
     </a>
 
+    <!-- Sección derecha de la barra de navegación. -->
     <div *ngIf="usuarioLogueado" class="usuario-grupo">
 
+      <!-- Se mostrará el nombre del usuario logueado. -->
       <span class="usuario-nombre">{{ usuarioLogueado.username }}</span>
 
+      <!-- Separador visual en forma de línea. -->
       <span class="separador"></span>
 
+      <!-- Botón para cerrar sesión. -->
       <button class="btn-cerrar" (click)="cerrarSesion()">
         Cerrar sesión
       </button>
@@ -24,6 +33,7 @@
 
   </div>
   
+  <!-- Botón para volver a la página principal. -->
   <button class="btn-volver" (click)="volver()">
     ← Volver
   </button>

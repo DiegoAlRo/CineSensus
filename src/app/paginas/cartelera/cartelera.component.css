@@ -1,3 +1,4 @@
+/* Estilos para CarteleraComponent. */
 :host {
     display: block;
     background: #000;
@@ -6,6 +7,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Contenedor principal de la página. */
 .contenedor-pagina {
     width: 90%;
     max-width: 1100px;
@@ -13,6 +15,7 @@
     padding-top: 60px;
 }
 
+/* Título principal de la página. */
 .titulo-principal {
     text-align: center;
     font-size: 2.2rem;
@@ -20,12 +23,14 @@
     font-weight: bold;
 }
 
+/* Contenedor de las películas. */
 .peliculas {
     display: flex;
     flex-direction: column;
     gap: 35px;
 }
 
+/* Tarjeta individual de película. */
 .pelicula-card {
     display: flex;
     align-items: flex-start;
@@ -37,11 +42,13 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Efecto hover para la tarjeta de película. */
 .pelicula-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.10);
 }
 
+/* Imagen del póster de la película. */
 .poster {
     width: 140px;
     height: 200px;
@@ -49,6 +56,7 @@
     border-radius: 12px;
 }
 
+/* Contenedor de la información de la película. */
 .info {
     display: flex;
     flex-direction: column;
@@ -56,6 +64,7 @@
     padding-top: 5px;
 }
 
+/* Título de la película. */
 .pelicula-titulo {
     color: #ffffff;
     font-size: 1.5rem;
@@ -63,23 +72,27 @@
     font-weight: bold;
 }
 
+/* Detalles adicionales de la película. */
 .pelicula-detalles {
     color: #e50914;
     font-size: 1.05rem;
     margin: 0;
 }
 
+/* Contenedor del botón de añadir película. */
 .boton-anadir-container {
     text-align: center;
     margin-top: 50px;
 }
 
+/* Botón de añadir película. */
 .acciones {
     margin-top: 20px;
     display: flex;
     gap: 12px;
 }
 
+/* Estilos para el botón de añadir película. */
 .btn-outline {
     padding: 10px 18px;
     border-radius: 6px;
@@ -91,14 +104,17 @@
     transition: 0.2s ease;
 }
 
+/* Efecto hover para el botón de añadir película. */
 .btn-outline:hover {
     background: rgba(229, 9, 20, 0.15);
 }
 
+/* Estilos para el botón de eliminar película. */
 .btn-outline.eliminar {
     color: #e50914;
 }
 
+/* Efecto hover para el botón de eliminar película. */
 .btn-outline.eliminar:hover {
     background: rgba(229, 9, 20, 0.25);
 }

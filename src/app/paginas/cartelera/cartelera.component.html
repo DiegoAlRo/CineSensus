@@ -1,13 +1,19 @@
+<!-- Contenedor principal de la página. -->
 <div class="contenedor-pagina">
 
+    <!-- Título principal de la página. -->
     <h2 class="titulo-principal">Cartelera</h2>
 
+    <!-- Contenedor de las tarjetas de películas. -->
     <div class="peliculas">
 
+        <!-- Tarjeta de película, se repite por cada película en la lista. -->
         <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
 
+            <!-- Imagen de la película. -->
             <img class="poster" [src]="pelicula.imagen" alt="{{ pelicula.titulo }}">
 
+            <!-- Información de la película. -->
             <div class="info">
 
                 <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
@@ -20,6 +26,7 @@
 
                 </p>
 
+                <!-- Botones de acción para editar y eliminar, visibles solo si el usuario está logueado. -->
                 <div class="acciones">
 
                     <button *ngIf="usuarioLogueado" class="btn-outline" (click)="editarPelicula(pelicula, $event)">
@@ -38,6 +45,7 @@
 
     </div>
 
+    <!-- Contenedor del botón para añadir una nueva película, visible solo si el usuario está logueado -->
     <div class="boton-anadir-container">
 
         <button *ngIf="usuarioLogueado" routerLink="/anadir" class="btn-rojo"> 
