@@ -1,0 +1,77 @@
+:host {
+    display: block;
+    background: #000;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.titulo-form {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.form-card {
+    background: #141414;
+    padding: 30px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
+}
+
+label {
+    font-size: 1rem;
+    color: #e50914;
+    font-weight: bold;
+}
+
+input {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #e50914;
+}
+
+.btn-rojo {
+    width: 100%;
+    padding: 14px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.btn-rojo:hover {
+    background: #b20710;
+}
+
+.mensaje-error {
+    color: #ff4d4d;
+    margin-top: 10px;
+    text-align: center;
+}

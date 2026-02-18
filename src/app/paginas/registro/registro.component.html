@@ -1,1 +1,50 @@
-<p>registro works!</p>
+<div class="contenedor-form">
+
+    <h2 class="titulo-form">Crear Cuenta</h2>
+
+    <form [formGroup]="form" (ngSubmit)="registrar()" class="form-card">
+
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre">
+        <p class="mensaje-error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched"> 
+            El nombre es obligatorio.
+        </p>
+            
+        <label>Apellidos</label>
+        <input type="text" formControlName="apellidos">
+        <p class="mensaje-error" *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched"> 
+            Los apellidos son obligatorios.
+        </p>
+            
+        <label>Nombre de usuario</label>
+        <input type="text" formControlName="username">
+        <p class="mensaje-error" *ngIf="form.get('username')?.errors?.['required'] && form.get('username')?.touched"> 
+            El nombre de usuario es obligatorio.
+        </p>
+        <p class="mensaje-error" *ngIf="form.get('username')?.errors?.['minlength'] && form.get('username')?.touched">
+            Debe tener al menos 4 caracteres. 
+        </p>
+        
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email">
+        <p class="mensaje-error" *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched"> 
+            El correo es obligatorio. 
+        </p>
+        <p class="mensaje-error" *ngIf="form.get('email')?.errors?.['email'] && form.get('email')?.touched"> 
+            Debe ser un correo válido. 
+        </p>
+        
+        <label>Contraseña</label>
+        <input type="password" formControlName="password">
+        <p class="mensaje-error" *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched"> 
+            La contraseña es obligatoria. 
+        </p>
+        <p class="mensaje-error" *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.touched">
+            Debe tener al menos 4 caracteres.
+        </p>
+        
+        <button type="submit" class="btn-rojo">Registrarse</button>
+
+    </form>
+
+</div>

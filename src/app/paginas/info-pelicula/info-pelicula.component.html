@@ -1,0 +1,21 @@
+<div class="detalle-wrapper">
+
+    <div class="detalle-card">
+        
+        <img [src]="pelicula?.imagen" alt="{{ pelicula?.titulo }}">
+
+        <div class="info">
+
+            <h2>{{ pelicula?.titulo }}</h2>
+
+            <p class="sub-info"><strong>Género:</strong> {{ pelicula?.genero }}</p>
+            <p class="sub-info"><strong>Director:</strong> {{ pelicula?.director }}</p>
+
+            <h3>Descripción</h3>
+            <p class="descripcion">{{ pelicula?.descripcion }}</p>
+
+        </div>
+
+    </div>
+    
+</div>

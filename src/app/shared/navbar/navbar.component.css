@@ -1,0 +1,81 @@
+.navbar {
+    background: #111;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.titulo {
+    color: #e50914;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.usuario-grupo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.usuario-nombre {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.separador {
+    width: 2px;
+    height: 24px;
+    background: #444;
+    border-radius: 2px;
+}
+
+.btn-cerrar {
+    background: transparent;
+    border: 1px solid #e50914;
+    color: #e50914;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cerrar:hover {
+    background: #e50914;
+    color: white;
+}
+
+.btn-volver {
+    background: transparent;
+    border: 2px solid #e50914;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-volver:hover {
+    background: rgba(229, 9, 20, 0.15);
+}

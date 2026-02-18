@@ -1,2 +1,49 @@
-<h1>Cartelera</h1>
-<p>Aquí se mostrarán las películas disponibles.</p>
+<div class="contenedor-pagina">
+
+    <h2 class="titulo-principal">Cartelera</h2>
+
+    <div class="peliculas">
+
+        <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
+
+            <img class="poster" [src]="pelicula.imagen" alt="{{ pelicula.titulo }}">
+
+            <div class="info">
+
+                <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
+
+                <p class="pelicula-detalles">
+
+                    {{ pelicula.genero }}
+
+                    <span *ngIf="pelicula.director"> • Dir. {{ pelicula.director }}</span>
+
+                </p>
+
+                <div class="acciones">
+
+                    <button *ngIf="usuarioLogueado" class="btn-outline" (click)="editarPelicula(pelicula, $event)">
+                        Editar
+                    </button>
+                        
+                    <button *ngIf="usuarioLogueado" class="btn-outline eliminar" (click)="eliminarPelicula(pelicula.id, $event)"> 
+                        Eliminar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="boton-anadir-container">
+
+        <button *ngIf="usuarioLogueado" routerLink="/anadir" class="btn-rojo"> 
+            Añadir película 
+        </button>
+
+    </div>
+
+</div>

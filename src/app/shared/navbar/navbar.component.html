@@ -1,7 +1,31 @@
-<nav style="padding: 10px; background: #222; color: white; display: flex; gap: 20px;">
+<nav class="navbar">
+  
+  <div class="nav-izquierda">
 
-  <a routerLink="/" style="color: white;">Inicio</a>
-  <a routerLink="/cartelera" style="color: white;">Cartelera</a>
-  <a routerLink="/perfil" style="color: white;">Perfil</a>
-  <a routerLink="/login" style="color: white; margin-left:auto;">Login</a>
+    <a routerLink="/" class="logo">
+
+      <img src="../../../../public/Icono-CineSensus.png" alt="logo" class="logo-img">
+
+      <span class="titulo">CineSensus</span>
+
+    </a>
+
+    <div *ngIf="usuarioLogueado" class="usuario-grupo">
+
+      <span class="usuario-nombre">{{ usuarioLogueado.username }}</span>
+
+      <span class="separador"></span>
+
+      <button class="btn-cerrar" (click)="cerrarSesion()">
+        Cerrar sesión
+      </button>
+
+    </div>
+
+  </div>
+  
+  <button class="btn-volver" (click)="volver()">
+    ← Volver
+  </button>
+
 </nav>

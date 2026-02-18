@@ -1,0 +1,31 @@
+<div class="contenedor-form">
+
+    <h2 class="titulo-form">Añadir Película</h2>
+
+    <form (ngSubmit)="guardar()" class="form-card">
+        
+        <label>Título</label>
+        
+        <input type="text" [(ngModel)]="pelicula.titulo" name="titulo" required>
+        
+        <label>Género</label>
+        
+        <input type="text" [(ngModel)]="pelicula.genero" name="genero" required>
+        
+        <label>Director</label>
+        
+        <input type="text" [(ngModel)]="pelicula.director" name="director" required>
+        
+        <label>Descripción</label>
+        
+        <textarea [(ngModel)]="pelicula.descripcion" name="descripcion" required></textarea>
+        
+        <label>URL de la imagen</label>
+
+        <input type="text" [(ngModel)]="pelicula.imagen" name="imagen" required>
+        
+        <button type="submit" class="btn-rojo">Guardar</button>
+    
+    </form>
+    
+</div>

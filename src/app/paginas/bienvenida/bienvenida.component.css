@@ -1,0 +1,90 @@
+:host {
+    display: block;
+    background: #000;
+    min-height: 100vh;
+}
+
+.bienvenida-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 30vh;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.eslogan {
+    color: #b3b3b3;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.btn-rojo {
+    width: 260px;
+    padding: 14px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+.btn-rojo:hover {
+    background: #b20710;
+}
+
+.separador {
+    width: 260px;
+    height: 1px;
+    background: #333;
+    margin-bottom: 20px;
+}
+
+.btn-gris {
+    width: 260px;
+    padding: 14px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: 0.2s;
+}
+
+.btn-gris:hover {
+    background: #444;
+}
+
+.entrar-sin {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-top: 10px;
+}
+
+.entrar-sin:hover {
+    color: white;
+}
