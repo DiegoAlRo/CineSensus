@@ -18,9 +18,19 @@
 
 /* Título del formulario. */
 .titulo-form {
-    font-size: 2rem;
-    margin-bottom: 30px;
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
     font-weight: bold;
+    text-align: center;
+}
+
+/* Subtítulo del formulario */
+.subtitulo-form {
+    color: #b3b3b3;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 /* Tarjeta del formulario. */

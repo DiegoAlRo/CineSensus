@@ -53,7 +53,7 @@
     border-radius: 6px;
     font-size: 1.1rem;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     transition: 0.2s;
 }
 
@@ -64,10 +64,28 @@
 
 /* Estilos para el separador. */
 .separador {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 260px;
+    margin: 12px 0;
+}
+
+.separador::before,
+.separador::after {
+    content: "";
+    flex: 1;
     height: 1px;
-    background: #333;
-    margin-bottom: 20px;
+    background-color: #ffffff33;
+    /* línea suave estilo Figma */
+}
+
+.circulo {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff55;
+    border-radius: 50%;
+    margin: 0 12px;
 }
 
 /* Estilos para el botón gris. */
@@ -80,7 +98,8 @@
     border-radius: 6px;
     font-size: 1.1rem;
     cursor: pointer;
-    margin-bottom: 25px;
+    margin-top: 12px;
+    margin-bottom: 20px;
     transition: 0.2s;
 }
 
