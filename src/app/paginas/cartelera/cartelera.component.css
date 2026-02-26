@@ -118,3 +118,66 @@
 .btn-outline.eliminar:hover {
     background: rgba(229, 9, 20, 0.25);
 }
+
+/* Barra completa. */
+.tabs-bar {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 35px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Cada mitad. */
+.tab {
+    flex: 1;
+    padding: 14px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: white;
+    background: #0d0d0d;
+    transition: 0.25s ease;
+}
+
+.tab.activa {
+    color: #b3b3b3 !important;
+}
+
+/* Bordes exteriores redondeados. */
+.tab:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.tab:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Cartelera seleccionada. */
+.tab.activa:first-child {
+    color: #b3b3b3;
+
+    background: linear-gradient(to left,
+            rgba(229, 9, 20, 0.35) 0%,
+            rgba(229, 9, 20, 0.15) 50%,
+            rgba(229, 9, 20, 0.05) 100%);
+}
+
+/* Perfil seleccionado. */
+.tab.activa:last-child {
+    color: #b3b3b3;
+
+    background: linear-gradient(to right,
+            rgba(229, 9, 20, 0.35) 0%,
+            rgba(229, 9, 20, 0.15) 50%,
+            rgba(229, 9, 20, 0.05) 100%);
+}
+
+/* Hover. */
+.tab:hover {
+    color: #b3b3b3;
+}
