@@ -4,7 +4,6 @@ import { Routes } from '@angular/router';
 import { RegistroComponent } from './paginas/registro/registro.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { CarteleraComponent } from './paginas/cartelera/cartelera.component';
-import { PeliculaComponent } from './paginas/pelicula/pelicula.component';
 import { AsientosComponent } from './paginas/asientos/asientos.component';
 import { PerfilComponent } from './paginas/perfil/perfil.component';
 
