@@ -17,6 +17,8 @@ import { Pelicula } from '../../modelos/pelicula';
 /* Clase del componente que implementa la interfaz OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
 
+  vista: string = 'cartelera';
+
   /* Propiedades del componente */
   peliculas: Pelicula[] = [];
   usuarioLogueado: any = null;

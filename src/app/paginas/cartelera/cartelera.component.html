@@ -1,41 +1,48 @@
+
+
+<!-- Barra de selección de menú -->
+<div class="tabs-bar">
+
+    <button class="tab" [class.activa]="vista === 'cartelera'" (click)="vista = 'cartelera'">
+          CARTELERA
+    </button>
+
+    <button class="tab" [class.activa]="vista === 'perfil'" (click)="vista = 'perfil'">
+         PERFIL
+    </button>
+
+</div>
+
 <!-- Contenedor principal de la página. -->
 <div class="contenedor-pagina">
 
-    <!-- Título principal de la página. -->
-    <h2 class="titulo-principal">Cartelera</h2>
+    <!-- Vista de la CARTELERA -->
+    <div *ngIf="vista === 'cartelera'">
 
-    <!-- Contenedor de las tarjetas de películas. -->
-    <div class="peliculas">
+        <!-- Título principal de la página. -->
+        <h2 class="titulo-principal">Cartelera</h2>
 
-        <!-- Tarjeta de película, se repite por cada película en la lista. -->
-        <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
+        <!-- Contenedor de las tarjetas de películas. -->
+        <div class="peliculas">
 
-            <!-- Imagen de la película. -->
-            <img class="poster" [src]="pelicula.imagen" alt="{{ pelicula.titulo }}">
+            <!-- Tarjeta de película, se repite por cada película en la lista. -->
+            <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
 
-            <!-- Información de la película. -->
-            <div class="info">
+                <!-- Imagen de la película. -->
+                <img class="poster" [src]="pelicula.imagen" alt="{{ pelicula.titulo }}">
 
-                <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
+                <!-- Información de la película. -->
+                <div class="info">
 
-                <p class="pelicula-detalles">
+                    <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
 
-                    {{ pelicula.genero }}
+                    <p class="pelicula-detalles">
 
-                    <span *ngIf="pelicula.director"> • Dir. {{ pelicula.director }}</span>
+                        {{ pelicula.genero }}
 
-                </p>
+                        <span *ngIf="pelicula.director"> • Dir. {{ pelicula.director }}</span>
 
-                <!-- Botones de acción para editar y eliminar, visibles solo si el usuario está logueado. -->
-                <div class="acciones">
-
-                    <button *ngIf="usuarioLogueado" class="btn-outline" (click)="editarPelicula(pelicula, $event)">
-                        Editar
-                    </button>
-                        
-                    <button *ngIf="usuarioLogueado" class="btn-outline eliminar" (click)="eliminarPelicula(pelicula.id, $event)"> 
-                        Eliminar
-                    </button>
+                    </p>
 
                 </div>
 
@@ -45,13 +52,10 @@
 
     </div>
 
-    <!-- Contenedor del botón para añadir una nueva película, visible solo si el usuario está logueado -->
-    <div class="boton-anadir-container">
-
-        <button *ngIf="usuarioLogueado" routerLink="/anadir" class="btn-rojo"> 
-            Añadir película 
-        </button>
-
+    <!-- Vista del PERFIL -->
+    <div *ngIf="vista === 'perfil'">
+        <h2 class="titulo-principal">Perfil</h2>
+        
     </div>
 
 </div>
