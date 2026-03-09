@@ -1,9 +1,11 @@
 /* Define la interfaz de una reserva. */
 export interface Reserva {
-  id: number;
-  usuarioId: number;
-  peliculaId: number;
-  horarioId: number;
-  asientos: number[]; // índices de asientos reservados 
-  fechaCompra: string; // ISO string
+  id: string;
+  usuario: string;
+  sesion: string;
+  fechaReserva: string; // ISO string
+  asientos: {
+    fila: number;
+    columna: number;
+  }[]; // índices de asientos reservados
 }

@@ -51,7 +51,7 @@ export class CarteleraComponent implements OnInit {
   }
   
   /* Método para eliminar una película, muestra una confirmación antes de proceder con la eliminación. */
-  eliminarPelicula(id: number, event: Event) {
+  eliminarPelicula(id: string, event: Event) {
     
     event.stopPropagation();
     

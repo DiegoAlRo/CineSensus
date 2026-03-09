@@ -1,14 +1,13 @@
 /* Define la interfaz para un usuario. */
 export interface Usuario {
-  id: number;
+  id: string;
   username: string;
   email: string;
-  password: string;
   nombre: string;
   apellidos: string;
 
   /* Los IDs de elementos que referenciará. */
-  historialPeliculas?: number[];
-  historialReservas?: number[];
-  historialResenas?: number[];
+  historialPeliculas?: string[];
+  historialReservas?: string[];
+  historialResenas?: string[];
 }

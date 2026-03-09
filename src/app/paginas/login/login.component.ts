@@ -36,7 +36,7 @@ export class LoginComponent {
     
     this.usuariosService.getUsuarios().subscribe(usuarios => {
       
-      const usuario = usuarios.find(u => u.email === this.email && u.password === this.password );
+      const usuario = usuarios.find(u => u.email === this.email && false );
       
       if (usuario) {
         

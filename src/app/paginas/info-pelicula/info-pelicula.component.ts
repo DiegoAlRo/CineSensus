@@ -27,7 +27,7 @@ export class InfoPeliculaComponent implements OnInit {
   
   /* Método que se ejecuta al inicializar el componente, obtiene el ID de la película de la ruta y llama al servicio para obtener su información. */
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id')!;
     
     this.peliculasService.getPelicula(id).subscribe(p => {
       this.pelicula = p;

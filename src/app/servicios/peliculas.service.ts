@@ -18,7 +18,7 @@ export class PeliculasService {
   }
 
   /* GET: sirve para obtener una película por ID. */
-  getPelicula(id: number): Observable<Pelicula> {
+  getPelicula(id: string): Observable<Pelicula> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Pelicula>(url);
   }
@@ -29,7 +29,7 @@ export class PeliculasService {
   }
 
   /* DELETE: eliminar una película por ID. */
-  eliminarPelicula(id: number): Observable<void> {
+  eliminarPelicula(id: string): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url);
   }

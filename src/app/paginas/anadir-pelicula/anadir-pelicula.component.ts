@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
+import { Genero } from '../../enums/genero';
+import { Tono } from '../../enums/tono';
 
 /* Decorador @Component que define el selector, las dependencias, la plantilla y los estilos del componente AnadirPeliculaComponent. */
 @Component({
@@ -18,15 +20,22 @@ import { Pelicula } from '../../modelos/pelicula';
 /* Clase AnadirPeliculaComponent que se encarga de añadir una nueva película. */
 export class AnadirPeliculaComponent {
 
+  generos = Object.values(Genero);
+
   /* Objeto "pelicula" que se vincula al formulario para añadir una nueva película. */
   pelicula: Pelicula = {
     
-    id: 0,
+    id: '',
     titulo: '',
-    genero: '',
+    genero: Genero.Accion,  // Valor por defecto.
     director: '',
-    descripcion: '',
-    imagen: ''
+    sinopsis: '',
+    puntuacionMedia: 0,
+    entradasVendidas: 0,
+    tono: Tono.Neutral,      // valor por defecto.
+    duracion: 90,
+    poster: '',
+    trailer: ''
   };
     
   /* Constructor que conecta servicio PeliculasService y el Router. */

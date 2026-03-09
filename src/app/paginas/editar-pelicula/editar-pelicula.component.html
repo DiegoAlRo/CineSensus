@@ -9,17 +9,26 @@
         
         <label>Título</label>
         <input type="text" [(ngModel)]="pelicula.titulo" name="titulo" required>
-        
-        <label>Género</label> <input type="text" [(ngModel)]="pelicula.genero" name="genero" required>
-        
+
+        <label>Género</label>
+        <select [(ngModel)]="pelicula.genero" name="genero" required>
+            <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+        </select>
+
         <label>Director</label>
         <input type="text" [(ngModel)]="pelicula.director" name="director" required>
-        
-        <label>Descripción</label>
-        <textarea [(ngModel)]="pelicula.descripcion" name="descripcion" required></textarea>
-        
-        <label>URL de la imagen</label>
-        <input type="text" [(ngModel)]="pelicula.imagen" name="imagen" required>
+
+        <label>Sinopsis</label>
+        <textarea [(ngModel)]="pelicula.sinopsis" name="sinopsis" required></textarea>
+
+        <label>URL del póster</label>
+        <input type="text" [(ngModel)]="pelicula.poster" name="poster" required>
+
+        <label>URL del tráiler</label>
+        <input type="text" [(ngModel)]="pelicula.trailer" name="trailer" required>
+
+        <label>Duración (minutos)</label>
+        <input type="number" [(ngModel)]="pelicula.duracion" name="duracion" required>
 
         <button type="submit" class="btn-rojo">Guardar cambios</button>
 

@@ -1,6 +1,6 @@
 /* Define la interfaz para una sala. */
 export interface Sala {
-  id: number;
+  id: string;
   nombre: string;
   filas: number;
   columnas: number;

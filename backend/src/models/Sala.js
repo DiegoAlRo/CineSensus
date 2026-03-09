@@ -2,8 +2,9 @@ import mongoose from 'mongoose';
 
 const SalaSchema = new mongoose.Schema({ 
 
-    nombre: { type: String, required: true }, 
-    capacidad: { type: Number, required: true } 
+    nombre: { type: String, required: true },
+    filas: { type: Number, required: true },
+    columnas: { type: Number, required: true }
 
 }, { 
     timestamps: true 

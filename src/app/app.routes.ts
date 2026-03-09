@@ -9,7 +9,7 @@ import { PerfilComponent } from './paginas/perfil/perfil.component';
 
 /* Se definen las rutas de la aplicación. */
 export const routes: Routes = [
-  { path: 'asientos/:horarioId', component: AsientosComponent },
+  { path: 'asientos/:sesionId', component: AsientosComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'cartelera', loadComponent: () => import('./paginas/cartelera/cartelera.component').then(m => m.CarteleraComponent) },
   { path: 'pelicula/:id', loadComponent: () => import('./paginas/info-pelicula/info-pelicula.component').then(m => m.InfoPeliculaComponent) },

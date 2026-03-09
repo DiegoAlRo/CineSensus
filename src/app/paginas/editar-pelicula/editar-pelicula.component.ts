@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
+import { Genero } from '../../enums/genero';
+import { Tono } from '../../enums/tono';
 
 /* Decorador del componente con su configuración. */
 @Component({
@@ -17,14 +19,21 @@ import { Pelicula } from '../../modelos/pelicula';
 
 /* Clase del componente que implementa OnInit para inicializar datos. */
 export class EditarPeliculaComponent implements OnInit {
+
+  generos = Object.values(Genero);
   
   pelicula: Pelicula = {
-    id: 0,
+    id: '',
     titulo: '',
-    genero: '',
     director: '',
-    descripcion: '',
-    imagen: ''
+    genero: Genero.Accion,
+    sinopsis: '',
+    puntuacionMedia: 0,
+    entradasVendidas: 0,
+    tono: Tono.Neutral,
+    duracion: 90,
+    poster: '',
+    trailer: ''
   };
     
   /* Constructor para inyectar servicios necesarios. */
@@ -38,7 +47,7 @@ export class EditarPeliculaComponent implements OnInit {
   /* Método ngOnInit para cargar la película a editar al iniciar el componente. */
   ngOnInit(): void {
       
-     const id = Number(this.route.snapshot.paramMap.get('id'));
+     const id = this.route.snapshot.paramMap.get('id')!;
     this.peliculasService.getPelicula(id).subscribe(p => {
        this.pelicula = p;
      });
