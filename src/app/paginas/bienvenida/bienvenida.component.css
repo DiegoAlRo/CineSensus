@@ -16,21 +16,15 @@
     font-family: Arial, sans-serif;
 }
 
-/* Estilos para el logo y el título. */
-.logo img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+
+/* Estilos para el título del logo. */
+.logo-img {
+    width: 305px;
+    height: 225px;
 }
 
 /* Estilos para el título del logo. */
-.logo img {
-    width: 80px;
-    height: 80px;
-}
-
-/* Estilos para el título del logo. */
-.logo h1 {
+.logo-title {
     font-size: 2.5rem;
     margin: 0;
 }
