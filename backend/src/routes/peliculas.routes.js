@@ -7,5 +7,5 @@ const router = express.Router();
  * GET /peliculas
  * Devuelve Todas las películas
  */
-router.get('/', obtenerPeliculas);
+router.get('/peliculas', obtenerPeliculas);
 export default router;

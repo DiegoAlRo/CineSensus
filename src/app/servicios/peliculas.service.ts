@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 
 export class PeliculasService {
-  private apiUrl = 'api/peliculas';
+  private apiUrl = 'http://localhost:3000/peliculas';
   constructor(private http: HttpClient) {}
 
   /* GET: para obtener todas las películas. */
