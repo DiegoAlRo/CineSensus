@@ -1,7 +1,7 @@
 /* imports del componente. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 
@@ -20,7 +20,7 @@ export class RegistroComponent {
   /* Declaración del formulario reactivo. */
   form: FormGroup;
 
-  /* Constructor del componente con inyección de dependencias. */
+  /* Constructor del componente con la inyección de dependencias. */
   constructor(
 
     private fb: FormBuilder,
@@ -29,14 +29,34 @@ export class RegistroComponent {
 
   ) {
 
-    this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      username: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+    /* Formulario con validaciones. */
+    this.form = this.fb.group( {
 
-    });
+        nombre: ['', Validators.required],
+        apellidos: ['', Validators.required],
+        username: ['', [Validators.required, Validators.minLength(4)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        confirmarPassword: ['', Validators.required],
+
+      },{ validators: this.passwordsIguales('password', 'confirmarPassword'), },
+    );
+  }
+
+  /* Se comprueba que las contraseñas coincidan. */
+  passwordsIguales(pass1: string, pass2: string) {
+
+    return (formGroup: FormGroup) => {
+
+      const p1 = formGroup.get(pass1);
+      const p2 = formGroup.get(pass2);
+
+      if (p1?.value !== p2?.value) { p2?.setErrors({ noCoincide: true }); } else {
+
+        if (p2?.hasError('noCoincide')) { p2.setErrors(null); }
+
+      }
+    };
   }
 
   /* Método para registrar un nuevo usuario. */
@@ -47,9 +67,16 @@ export class RegistroComponent {
       return;
     }
 
-    this.usuariosService.addUsuario(this.form.value).subscribe(() => {
+    const usuario = {
+      nombre: this.form.value.nombre,
+      apellidos: this.form.value.apellidos,
+      username: this.form.value.username,
+      email: this.form.value.email,
+      password: this.form.value.password,
+    };
+
+    this.usuariosService.addUsuario(usuario).subscribe(() => {
       this.router.navigate(['/login']);
     });
-    
   }
 }

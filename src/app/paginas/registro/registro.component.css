@@ -49,7 +49,7 @@
 /* Estilos para las etiquetas de los campos del formulario. */
 label {
     font-size: 1rem;
-    color: #e50914;
+    color: #e7000b;
     font-weight: bold;
 }
 
@@ -67,14 +67,14 @@ input {
 
 /* Estilos para los campos de entrada y textarea cuando están enfocados. */
 input:focus {
-    border-color: #e50914;
+    border-color: #e7000b;
 }
 
 /* Estilos para el botón de registro. */
 .btn-rojo {
     width: 100%;
     padding: 14px;
-    background: #e50914;
+    background: #e7000b;
     color: white;
     border: none;
     border-radius: 6px;
