@@ -23,8 +23,8 @@ export class UsuariosService {
     return this.http.post<any>(this.apiUrl, usuario);
   }
 
-  /* El método getUsuarios envía una solicitud GET al backend para obtener la lista de usuarios registrados en la base de datos. */
-  getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl);
+  /* Este método se encaargará de enviar los datos de inicio del usuario al backend para buscar coincidencias. */
+  login(email: string, password: string): Observable<any> {
+    return this.http.post('http://localhost:3000/usuarios/login', { email, password });
   }
 }

@@ -16,7 +16,7 @@
     color: white;
     font-family: Arial, sans-serif;
 
-    /* El espaciado desde distintos lados */
+    /* El espaciado desde distintos lados. */
     padding: 7vh 20px 0 20px;
 }
 
@@ -71,15 +71,16 @@
     margin: 12px 0;
 }
 
+/* Línea separadora decorativa. */
 .separador::before,
 .separador::after {
     content: "";
     flex: 1;
     height: 1px;
     background-color: #ffffff33;
-    /* línea suave estilo Figma */
 }
 
+/* Círculo decorativo entre líneas. */
 .circulo {
     width: 8px;
     height: 8px;

@@ -8,20 +8,23 @@
     <!-- Formulario de registro con todas sus validacións. -->
     <form [formGroup]="form" (ngSubmit)="registrar()" class="form-card">
 
+        <!-- Se pide el nombre real del usuario. -->
         <label>Nombre</label>
-        <input type="text" formControlName="nombre">
+        <input type="text" formControlName="nombre" placeholder="Tu nombre">
         <p class="mensaje-error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
             El nombre es obligatorio.
         </p>
 
+        <!-- Se piden los apellidos también. -->
         <label>Apellidos</label>
-        <input type="text" formControlName="apellidos">
+        <input type="text" formControlName="apellidos" placeholder="Tus apellidos">
         <p class="mensaje-error" *ngIf="form.get('apellidos')?.invalid && form.get('apellidos')?.touched">
             Los apellidos son obligatorios.
         </p>
 
+        <!-- Se solicitará un nombre de usuario. -->
         <label>Nombre de usuario</label>
-        <input type="text" formControlName="username">
+        <input type="text" formControlName="username" placeholder="Tu nombre de usuario">
         <p class="mensaje-error" *ngIf="form.get('username')?.errors?.['required'] && form.get('username')?.touched">
             El nombre de usuario es obligatorio.
         </p>
@@ -29,8 +32,9 @@
             Debe tener al menos 4 caracteres.
         </p>
 
+        <!-- También será obligatorio el email. -->
         <label>Correo electrónico</label>
-        <input type="email" formControlName="email">
+        <input type="email" formControlName="email" placeholder="Tu @email.com">
         <p class="mensaje-error" *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched">
             El correo es obligatorio.
         </p>
@@ -38,8 +42,9 @@
             Debe ser un correo válido.
         </p>
 
+        <!-- Y se pedirá una contraseña dos veces que deberán coincidir. -->
         <label>Contraseña</label>
-        <input type="password" formControlName="password">
+        <input type="password" formControlName="password" placeholder="********">
         <p class="mensaje-error" *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">
             La contraseña es obligatoria.
         </p>
@@ -48,7 +53,7 @@
         </p>
 
         <label>Confirmar contraseña</label>
-        <input type="password" formControlName="confirmarPassword">
+        <input type="password" formControlName="confirmarPassword" placeholder="********">
 
         <p class="mensaje-error"
             *ngIf="form.get('confirmarPassword')?.errors?.['required'] && form.get('confirmarPassword')?.touched">
@@ -60,6 +65,7 @@
             Las contraseñas no coinciden.
         </p>
 
+        <!-- El botón de registrarse. -->
         <button type="submit" class="btn-rojo">Registrarse</button>
 
     </form>

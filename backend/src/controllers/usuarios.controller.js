@@ -1,18 +1,21 @@
 import Usuario from '../models/Usuario.js';
 
 // GET /usuarios 
-export const obtenerUsuarios = async (req, res) => {
-    
-    try {
-        
-        const usuarios = await Usuario.find();
-        res.json(usuarios);
-    
-    } catch (error) {
-        
-        res.status(500).json({ mensaje: 'Error al obtener usuarios', error });
-    
+export const loginUsuario = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const usuario = await Usuario.findOne({ email });
+
+    if (!usuario || usuario.password !== password) {
+      return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     }
+
+    res.json(usuario);
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error en el login', error });
+  }
 };
 
 // POST /usuarios

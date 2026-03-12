@@ -13,7 +13,7 @@ import { AuthService } from '../../servicios/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 
 /* Clase del componente de login. */
@@ -23,28 +23,26 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   error: string = '';
-  
+
   /* Constructor para inyectar los servicios necesarios. */
   constructor(
     private usuariosService: UsuariosService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
-  
-  /* Método para manejar el proceso de login. */
+
+  /* Método para manejar el proceso de inicio de sesión. */
   login() {
-    
-    this.usuariosService.getUsuarios().subscribe(usuarios => {
-      
-      const usuario = usuarios.find(u => u.email === this.email && false );
-      
-      if (usuario) {
-        
+    this.usuariosService.login(this.email, this.password).subscribe({
+
+      /* Se buscarán coincidencias en la base de datos y de existir, el usuario pasará a la cartelera. */
+      next: (usuario) => {
         this.authService.login(usuario);
         this.router.navigate(['/cartelera']);
-      } else { 
-        this.error = 'Correo o contraseña incorrectos'; 
-      } 
-    }); 
+      },
+      error: () => {
+        this.error = 'Correo o contraseña incorrectos';
+      }
+    });
   }
 }

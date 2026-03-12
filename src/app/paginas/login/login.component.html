@@ -8,12 +8,15 @@
     <!-- Formulario de login con enlace al método login. -->
     <form (ngSubmit)="login()" class="form-card">
         
+        <!-- Se pedirá el correo del usuario. -->
         <label>Correo electrónico</label>
-        <input type="email" [(ngModel)]="email" name="email" required>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Tu @email.com" required>
         
+        <!-- Se solicitará la contraseña. -->
         <label>Contraseña</label>
-        <input type="password" [(ngModel)]="password" name="password" required>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="********" required>
         
+        <!-- botón de iniciar sesión. -->
         <button type="submit" class="btn-rojo">Entrar</button>
 
         <p class="mensaje-error" *ngIf="error">{{ error }}</p>

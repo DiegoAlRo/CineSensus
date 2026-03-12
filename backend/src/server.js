@@ -11,7 +11,6 @@ import salasRoutes from './routes/salas.routes.js';
 import sesionesRoutes from './routes/sesiones.routes.js'; 
 import reservasRoutes from './routes/reservas.routes.js'; 
 import resenasRoutes from './routes/resenas.routes.js'; 
-import { obtenerPeliculas } from './controllers/peliculas.controller.js';
 
 /* Variables de .env. */ 
 dotenv.config(); 
@@ -28,7 +27,7 @@ app.get('/', (req, res) => {
 }); 
 
 /* Rutas del API */ 
-app.use('/peliculas', obtenerPeliculas); 
+app.use('/peliculas', peliculasRoutes); 
 app.use('/usuarios', usuariosRoutes); 
 app.use('/salas', salasRoutes); 
 app.use('/sesiones', sesionesRoutes); 

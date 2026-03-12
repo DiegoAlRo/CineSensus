@@ -70,7 +70,7 @@ input:focus {
     border-color: #e7000b;
 }
 
-/* Estilos para el botón de registro. */
+/* Estilo para el botón de registro. */
 .btn-rojo {
     width: 100%;
     padding: 14px;
@@ -84,7 +84,7 @@ input:focus {
     transition: 0.2s;
 }
 
-/* Estilos para el botón de registro cuando se pasa el mouse por encima. */
+/* Estilo del botón de registro cuando se pasa el cursor por encima. */
 .btn-rojo:hover {
     background: #b20710;
 }

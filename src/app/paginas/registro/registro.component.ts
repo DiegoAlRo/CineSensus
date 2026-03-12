@@ -75,6 +75,7 @@ export class RegistroComponent {
       password: this.form.value.password,
     };
 
+    /* El usuario se añadirá a la BDD y se le enviará al login. */
     this.usuariosService.addUsuario(usuario).subscribe(() => {
       this.router.navigate(['/login']);
     });

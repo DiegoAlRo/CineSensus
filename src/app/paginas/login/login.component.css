@@ -46,14 +46,14 @@
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
 }
 
-/* Estilos para las etiquetas de los campos del formulario. */
+/* Estilo para las etiquetas de los campos del formulario. */
 label {
     font-size: 1rem;
-    color: #e50914;
+    color: #e7000b;
     font-weight: bold;
 }
 
-/* Estilos para los campos de entrada y textarea. */
+/* Estilo para los campos de entrada y textarea. */
 input {
     background: #1f1f1f;
     border: 1px solid #333;
@@ -65,16 +65,16 @@ input {
     transition: 0.2s;
 }
 
-/* Estilos para los campos de entrada y textarea cuando están enfocados. */
+/* Estilo para los campos de entrada y textarea cuando están enfocados. */
 input:focus {
-    border-color: #e50914;
+    border-color: #e7000b;
 }
 
-/* Estilos para el botón de inicio de sesión. */
+/* Estilo para el botón de inicio de sesión. */
 .btn-rojo {
     width: 100%;
     padding: 14px;
-    background: #e50914;
+    background: #e7000b;
     color: white;
     border: none;
     border-radius: 6px;
@@ -84,12 +84,12 @@ input:focus {
     transition: 0.2s;
 }
 
-/* Estilos para el botón de inicio de sesión cuando se pasa el mouse por encima. */
+/* Estilo para el botón de inicio de sesión cuando se pasa el cursor por encima. */
 .btn-rojo:hover {
     background: #b20710;
 }
 
-/* Estilos para el mensaje de error en caso de credenciales incorrectas. */
+/* Estilo para el mensaje de error en caso de credenciales incorrectas. */
 .mensaje-error {
     color: #ff4d4d;
     margin-top: 10px;
