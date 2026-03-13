@@ -1,6 +1,7 @@
+/* Imports necesarios. */
 import Pelicula from '../models/Pelicula.js'; 
 
-/** Devuelve todas las películas almacenadas en la base de datos. */ 
+/* Devuelve todas las películas almacenadas en la base de datos. */ 
 export const obtenerPeliculas = async (req, res) => {
     
     try {

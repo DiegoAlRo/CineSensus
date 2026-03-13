@@ -1,5 +1,10 @@
+/* Imports necesarios. */
 import mongoose from 'mongoose'; 
 
+/** 
+ * Modelo de Sala para CineSensus. 
+ * Representa la información básica de una sala de cine almacenada en MongoDB.
+ */
 const SalaSchema = new mongoose.Schema({ 
 
     nombre: { type: String, required: true },

@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'; 
 import { connectDB } from './config/db.js'; 
 
-/* Rutas */ 
+/* Rutas. */ 
 import peliculasRoutes from './routes/peliculas.routes.js'; 
 import usuariosRoutes from './routes/usuarios.routes.js'; 
 import salasRoutes from './routes/salas.routes.js'; 
@@ -21,12 +21,12 @@ app.use(express.json());
 /* Conexión a la base de datos. */ 
 connectDB(); 
 
-/* Ruta principal */ 
+/* Ruta principal. */ 
 app.get('/', (req, res) => { 
   res.send('Backend de CineSensus funcionando'); 
 }); 
 
-/* Rutas del API */ 
+/* Rutas del API. */ 
 app.use('/peliculas', peliculasRoutes); 
 app.use('/usuarios', usuariosRoutes); 
 app.use('/salas', salasRoutes); 
@@ -34,7 +34,7 @@ app.use('/sesiones', sesionesRoutes);
 app.use('/reservas', reservasRoutes); 
 app.use('/resenas', resenasRoutes); 
 
-/* Inicia el Servidor */ 
+/* Inicia el Servidor. */ 
 app.listen(process.env.PORT, () => { 
   console.log(`Servidor escuchando en puerto ${process.env.PORT}`); 
 });

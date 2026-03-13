@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import express from 'express'; 
 import { obtenerReservas, crearReserva } from '../controllers/reservas.controller.js'; 
 

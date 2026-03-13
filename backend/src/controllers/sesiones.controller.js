@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import Sesion from '../models/Sesion.js'; 
 
 export const obtenerSesiones = async (req, res) => { 

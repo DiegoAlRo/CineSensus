@@ -7,5 +7,5 @@ export interface Reserva {
   asientos: {
     fila: number;
     columna: number;
-  }[]; // índices de asientos reservados
+  }[]; // Índices de asientos reservados
 }

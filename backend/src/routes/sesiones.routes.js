@@ -1,3 +1,4 @@
+/* imports necesarios. */
 import express from 'express'; 
 import { obtenerSesiones, crearSesion } from '../controllers/sesiones.controller.js'; 
 

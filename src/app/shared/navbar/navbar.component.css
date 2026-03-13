@@ -1,4 +1,4 @@
-/* Estilos para la barra de navegación. */
+/* Estilo para la barra de navegación. */
 .navbar {
     background: #111;
     padding: 15px 25px;
@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 
-/* Estilos para la sección izquierda de la barra de navegación. */
+/* Estilo para la sección izquierda de la barra de navegación. */
 .nav-izquierda {
     display: flex;
     align-items: center;
@@ -58,7 +58,7 @@
     border-radius: 2px;
 }
 
-/* Estilos para el botón de cerrar sesión. */
+/* Estilo para el botón de cerrar sesión. */
 .btn-cerrar {
     background: transparent;
     border: 1px solid #e7000b;
@@ -75,7 +75,7 @@
     color: white;
 }
 
-/* Estilos para el botón de volver a la página principal. */
+/* Estilo para el botón de volver a la página principal. */
 .btn-volver {
     background: transparent;
     border: 2px solid #e7000b;

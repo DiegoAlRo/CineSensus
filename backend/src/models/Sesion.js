@@ -1,5 +1,10 @@
+/* Imports necesarios. */
 import mongoose from 'mongoose'; 
 
+/** 
+ * Modelo de Sesion para CineSensus. 
+ * Representa la información básica de una sesion almacenada en MongoDB.
+ */
 const SesionSchema = new mongoose.Schema({ 
     
     pelicula: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true }, 

@@ -1,5 +1,5 @@
 
-/* Importaciones necesarias para el componente principal de la aplicación */
+/* Importaciones necesarias para el componente principal de la aplicación. */
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router'; 
 import { RouterOutlet } from '@angular/router';

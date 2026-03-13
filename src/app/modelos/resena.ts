@@ -1,4 +1,4 @@
-/* Import del enum usado */
+/* Import del enum usado. */
 import { Puntuacion } from '../enums/puntuacion';
 
 /* Define la interfaz de una reseña. */

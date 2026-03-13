@@ -1,3 +1,4 @@
+/* imports necesarios. */
 import Sala from '../models/Sala.js'; 
 
 export const obtenerSalas = async (req, res) => { 

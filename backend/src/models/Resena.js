@@ -1,5 +1,10 @@
+/* Imports necesatios. */
 import mongoose from 'mongoose'; 
 
+/** 
+ * Modelo de Reseña para CineSensus. 
+ * Representa la información básica de una reseña almacenada en MongoDB.
+ */
 const ResenaSchema = new mongoose.Schema({
     
     usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }, 

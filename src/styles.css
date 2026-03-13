@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Fondo negro en toda la página web */
+/* Fondo negro en toda la página web. */
 html,
 body {
 
@@ -10,7 +10,7 @@ body {
     height: 100%;
 }
 
-/* Estilo de botón Rojo LLamativo */
+/* Estilo de botón Rojo LLamativo. */
 .btn-rojo {
     width: 260px;
     padding: 14px;
@@ -24,6 +24,7 @@ body {
     transition: 0.2s;
 }
 
+/* Fondo rojo en el botón. */
 .btn-rojo:hover {
     background: #b20710;
 }

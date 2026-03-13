@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import Resena from '../models/Resena.js'; 
 
 export const obtenerResenas = async (req, res) => { 

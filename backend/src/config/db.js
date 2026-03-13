@@ -1,3 +1,4 @@
+/* Import de la base de datos de mongo. */
 import mongoose from 'mongoose'; 
 
 /**
@@ -6,6 +7,7 @@ import mongoose from 'mongoose';
  */
 export const connectDB = async () => {
     
+    /* Se avisará si la conexión es exitosa o no. */
     try {
         
         await mongoose.connect(process.env.MONGO_URI);

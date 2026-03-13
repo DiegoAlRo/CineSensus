@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import express from 'express'; 
 import { obtenerSalas, crearSala } from '../controllers/salas.controller.js'; 
 

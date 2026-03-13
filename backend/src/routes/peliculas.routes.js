@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import express from 'express';
 import { obtenerPeliculas } from '../controllers/peliculas.controller.js';
 

@@ -1,6 +1,10 @@
-/* Import necesario */
+/* Imports necesario. */
 import mongoose from 'mongoose';
 
+/** 
+ * Modelo de Usuario para CineSensus. 
+ * Representa la información básica de un usuario de la app almacenado en MongoDB.
+ */
 const UsuarioSchema = new mongoose.Schema({ 
     username: { type: String, required: true, unique: true }, 
     nombre: { type: String, required: true }, 

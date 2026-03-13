@@ -1,6 +1,7 @@
+/* Imports necesarios. */
 import Usuario from '../models/Usuario.js';
 
-// GET /usuarios 
+/* Este método comprobará coincidencias en la base de datos e identificará al usuario. */ 
 export const loginUsuario = async (req, res) => {
   const { email, password } = req.body;
 
@@ -18,7 +19,7 @@ export const loginUsuario = async (req, res) => {
   }
 };
 
-// POST /usuarios
+/* Este método creará y añadirá un usuario a la base de datos. */
 export const crearUsuario = async (req, res) => { 
     
     try { 

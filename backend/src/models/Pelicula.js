@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import mongoose from 'mongoose'; 
 
 /** 

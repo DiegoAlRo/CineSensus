@@ -1,4 +1,4 @@
-/* Imports de los enums */
+/* Imports de los enums. */
 import { Genero } from '../enums/genero';
 import { Tono } from '../enums/tono';
 

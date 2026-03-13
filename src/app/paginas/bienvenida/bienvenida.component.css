@@ -1,11 +1,11 @@
-/* Estilos para el componente de bienvenida. */
+/* Estilo para el componente de bienvenida. */
 :host {
     display: block;
     background: #000;
     min-height: 100vh;
 }
 
-/* Estilos para el contenedor principal de bienvenida. */
+/* Estilo para el contenedor principal de bienvenida. */
 .bienvenida-container {
     display: flex;
     flex-direction: column;
@@ -21,21 +21,21 @@
 }
 
 
-/* Estilos para el título del logo. */
+/* Estilo para el título del logo. */
 .logo-img {
     width: 340px;
     height: auto;
     margin-bottom: 0px;
 }
 
-/* Estilos para el título del logo. */
+/* Estilo para el título del logo. */
 .logo-title {
     font-size: 3.3rem;
     margin-top: 1px;
     margin-bottom: 5px; 
 }
 
-/* Estilos para el eslogan. */
+/* Estilo para el eslogan. */
 .eslogan {
     color: #b3b3b3;
     margin-top: 8px;
@@ -43,7 +43,7 @@
     font-size: 1.1rem;
 }
 
-/* Estilos para los botones. */
+/* Estilo para los botones. */
 .btn-rojo {
     width: 380px;
     padding: 14px;
@@ -57,12 +57,12 @@
     transition: 0.2s;
 }
 
-/* Estilos para el botón rojo al pasar el mouse. */
+/* Estilo para el botón rojo al pasar el mouse. */
 .btn-rojo:hover {
     background: #b20710;
 }
 
-/* Estilos para el separador. */
+/* Estilo para el separador. */
 .separador {
     display: flex;
     align-items: center;
@@ -89,7 +89,7 @@
     margin: 0 12px;
 }
 
-/* Estilos para el botón gris. */
+/* Estilo para el botón gris. */
 .btn-gris {
     width: 380px;
     padding: 14px;
@@ -104,12 +104,12 @@
     transition: 0.2s;
 }
 
-/* Estilos para el botón gris al pasar el mouse. */
+/* Estilo para el botón gris al pasar el mouse. */
 .btn-gris:hover {
     background: #444;
 }
 
-/* Estilos para el enlace de "Entrar sin registrarse". */
+/* Estilo para el enlace de "Entrar sin registrarse". */
 .entrar-sin {
     color: #b3b3b3;
     text-decoration: none;
@@ -117,7 +117,7 @@
     margin-top: 10px;
 }
 
-/* Estilos para el enlace de "Entrar sin registrarse" al pasar el mouse. */
+/* Estilo para el enlace de "Entrar sin registrarse" al pasar el mouse. */
 .entrar-sin:hover {
     color: white;
 }

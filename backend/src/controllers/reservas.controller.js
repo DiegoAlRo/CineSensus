@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import Reserva from '../models/Reserva.js'; 
 
 export const obtenerReservas = async (req, res) => { 

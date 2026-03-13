@@ -1,5 +1,5 @@
+/* Imports necesarios. */
 import { TestBed } from '@angular/core/testing';
-
 import { PeliculasService } from './peliculas.service';
 
 describe('PeliculasService', () => {
