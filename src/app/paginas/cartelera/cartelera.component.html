@@ -1,24 +1,64 @@
-<!-- Barra de selección de menú -->
-<div class="tabs-bar">
-
-    <button class="tab" [class.activa]="vista === 'cartelera'" (click)="vista = 'cartelera'">
-          CARTELERA
-    </button>
-
-    <button class="tab" [class.activa]="vista === 'perfil'" (click)="vista = 'perfil'">
-         PERFIL
-    </button>
-
-</div>
-
 <!-- Contenedor principal de la página. -->
 <div class="contenedor-pagina">
 
-    <!-- Vista de la CARTELERA -->
-    <div *ngIf="vista === 'cartelera'">
+    <div class="cinta-posters" *ngIf="peliculas.length > 0">
+        <div class="cinta-inner">
+            <img *ngFor="let p of peliculas" [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
+        </div>
+    </div>
 
-        <!-- Título principal de la página. -->
-        <h2 class="titulo-principal">Cartelera</h2>
+    <!-- Vista de la CARTELERA -->
+
+    <!-- Barra de acciones -->
+    <div class="barra-acciones">
+        <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">Filtro</button>
+
+        <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">Fecha</button>
+    </div>
+
+    <!-- Zona de Filtros -->
+    <div class="zona-contenido">
+
+        <!-- Panel lateral de filtros -->
+        <div class="panel-filtros" *ngIf="mostrarFiltro">
+            <h3>Filtros</h3>
+
+            <label>Buscar película</label>
+            <input type="text" placeholder="Título...">
+
+            <label>Género</label>
+            <select>
+                <option>Por defecto</option>
+                <option>Acción</option>
+                <option>Drama</option>
+                <option>Comedia</option>
+            </select>
+
+            <label>Tono</label>
+            <select>
+                <option>Por defecto</option>
+                <option>Oscuro</option>
+                <option>Ligero</option>
+            </select>
+
+            <label>Duración</label>
+            <select>
+                <option>Por defecto</option>
+                <option>Menos de 90 min</option>
+                <option>90 - 120 min</option>
+                <option>Más de 120 min</option>
+            </select>
+
+            <label>Puntuación mínima</label>
+            <select>
+                <option>Por defecto</option>
+                <option>1 ⭐</option>
+                <option>2 ⭐⭐</option>
+                <option>3 ⭐⭐⭐</option>
+                <option>4 ⭐⭐⭐⭐</option>
+                <option>5 ⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
 
         <!-- Contenedor de las tarjetas de películas. -->
         <div class="peliculas">
@@ -27,7 +67,7 @@
             <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
 
                 <!-- Imagen de la película. -->
-                <img class="poster" [src]="pelicula.poster" alt="{{ pelicula.titulo }}">
+                <img class="poster" [src]="pelicula.poster">
 
                 <!-- Información de la película. -->
                 <div class="info">
@@ -48,12 +88,6 @@
 
         </div>
 
-    </div>
-
-    <!-- Vista del PERFIL -->
-    <div *ngIf="vista === 'perfil'">
-        <h2 class="titulo-principal">Perfil</h2>
-        
     </div>
 
 </div>

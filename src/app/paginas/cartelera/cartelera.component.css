@@ -9,8 +9,8 @@
 
 /* Contenedor principal de la página. */
 .contenedor-pagina {
-    width: 90%;
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
     padding-top: 60px;
 }
@@ -25,6 +25,7 @@
 
 /* Contenedor de las películas. */
 .peliculas {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -40,6 +41,7 @@
     gap: 22px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
 }
 
 /* Efecto hover para la tarjeta de película. */
@@ -74,7 +76,7 @@
 
 /* Detalles adicionales de la película. */
 .pelicula-detalles {
-    color: #e50914;
+    color: #e7000b;
     font-size: 1.05rem;
     margin: 0;
 }
@@ -97,7 +99,7 @@
     padding: 10px 18px;
     border-radius: 6px;
     background: transparent;
-    border: 2px solid #e50914;
+    border: 2px solid #e7000b;
     color: white;
     font-size: 0.95rem;
     cursor: pointer;
@@ -111,7 +113,7 @@
 
 /* Estilos para el botón de eliminar película. */
 .btn-outline.eliminar {
-    color: #e50914;
+    color: #e7000b;
 }
 
 /* Efecto hover para el botón de eliminar película. */
@@ -119,65 +121,105 @@
     background: rgba(229, 9, 20, 0.25);
 }
 
-/* Barra completa. */
-.tabs-bar {
-    display: flex;
+/* Cinta deslizante */
+.cinta-posters {
     width: 100%;
-    padding: 0;
-    margin-bottom: 35px;
-    border-radius: 12px;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 
-/* Cada mitad. */
-.tab {
-    flex: 1;
-    padding: 14px 0;
-    border: none;
-    cursor: pointer;
-    font-size: 1.15rem;
-    font-weight: bold;
+.cinta-inner {
+    display: flex;
+    gap: 25px;
+    animation: deslizar 22s linear infinite;
+}
+
+.poster-cinta {
+    height: 160px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.poster-cinta:hover {
+    transform: scale(1.05);
+}
+
+/* Animación */
+@keyframes deslizar {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Barra de acciones */
+.barra-acciones {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.btn-accion {
+    background: #1e2939;
     color: white;
-    background: #0d0d0d;
-    transition: 0.25s ease;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s ease;
 }
 
-.tab.activa {
-    color: #b3b3b3 !important;
+.btn-accion:hover {
+    background: #2f3b4d;
 }
 
-/* Bordes exteriores redondeados. */
-.tab:first-child {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+/* Zona con filtros + tarjetas */
+.zona-contenido {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    transition: 0.3s ease;
 }
 
-.tab:last-child {
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+/* Panel lateral */
+.panel-filtros {
+    width: 260px;
+    background: #141414;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 15px;
+    animation: aparecer 0.25s ease;
 }
 
-/* Cartelera seleccionada. */
-.tab.activa:first-child {
-    color: #b3b3b3;
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
 
-    background: linear-gradient(to left,
-            rgba(229, 9, 20, 0.35) 0%,
-            rgba(229, 9, 20, 0.15) 50%,
-            rgba(229, 9, 20, 0.05) 100%);
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-/* Perfil seleccionado. */
-.tab.activa:last-child {
-    color: #b3b3b3;
-
-    background: linear-gradient(to right,
-            rgba(229, 9, 20, 0.35) 0%,
-            rgba(229, 9, 20, 0.15) 50%,
-            rgba(229, 9, 20, 0.05) 100%);
-}
-
-/* Hover. */
-.tab:hover {
-    color: #b3b3b3;
+.panel-filtros input,
+.panel-filtros select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #1e1e1e;
+    color: white;
 }

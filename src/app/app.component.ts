@@ -4,13 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router'; 
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SelectoresDeMenuComponent } from './shared/selectores-de-menu/selectores-de-menu.component';
 import { CommonModule } from '@angular/common';
 
 /* Especifica la configuración del componente principal de la aplicación. */
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, RouterOutlet, CommonModule],
+  imports: [NavbarComponent, SelectoresDeMenuComponent, RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
