@@ -1,11 +1,16 @@
+<!-- Aquí se mostrarán los botones que alternan entre la vista de perfil y cartelera en el menú principal. -->
+<app-selectores-de-menu></app-selectores-de-menu>
+
+<!-- Cinta con imágenes de posters. -->
+<div class="cinta-posters" *ngIf="peliculas.length > 0">
+    <div class="cinta-inner">
+        <img *ngFor="let p of peliculas" [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
+    </div>
+</div>
+
+
 <!-- Contenedor principal de la página. -->
 <div class="contenedor-pagina">
-
-    <div class="cinta-posters" *ngIf="peliculas.length > 0">
-        <div class="cinta-inner">
-            <img *ngFor="let p of peliculas" [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
-        </div>
-    </div>
 
     <!-- Vista de la CARTELERA -->
 
@@ -45,19 +50,20 @@
             <select>
                 <option>Por defecto</option>
                 <option>Menos de 90 min</option>
-                <option>90 - 120 min</option>
+                <option>Entre 90 - 120 min</option>
                 <option>Más de 120 min</option>
             </select>
 
             <label>Puntuación mínima</label>
             <select>
                 <option>Por defecto</option>
-                <option>1 ⭐</option>
-                <option>2 ⭐⭐</option>
-                <option>3 ⭐⭐⭐</option>
-                <option>4 ⭐⭐⭐⭐</option>
-                <option>5 ⭐⭐⭐⭐⭐</option>
+                <option>1 - ⭐</option>
+                <option>2 - ⭐⭐</option>
+                <option>3 - ⭐⭐⭐</option>
+                <option>4 - ⭐⭐⭐⭐</option>
+                <option>5 - ⭐⭐⭐⭐⭐</option>
             </select>
+            
         </div>
 
         <!-- Contenedor de las tarjetas de películas. -->

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selectores-de-menu.component';
 
 @Component({
   selector: 'app-perfil',
-  imports: [],
+  imports: [SelectoresDeMenuComponent],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })

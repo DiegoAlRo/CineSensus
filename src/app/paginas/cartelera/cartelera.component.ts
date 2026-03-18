@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
+import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selectores-de-menu.component';
 
 /* Decorador que define el componente. */
 @Component({
   selector: 'app-cartelera',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SelectoresDeMenuComponent],
   templateUrl: './cartelera.component.html',
   styleUrls: ['./cartelera.component.css'],
 })

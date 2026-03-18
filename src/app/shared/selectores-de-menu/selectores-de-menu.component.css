@@ -23,7 +23,7 @@
 
 /* Color de tabla activada. */
 .tab.activa {
-    color: #b3b3b3 !important;
+    color: white !important;
 }
 
 /* Bordes exteriores redondeados. */
@@ -42,9 +42,9 @@
     color: #b3b3b3;
 
     background: linear-gradient(to left,
-            rgba(229, 9, 20, 0.35) 0%,
-            rgba(229, 9, 20, 0.15) 50%,
-            rgba(229, 9, 20, 0.05) 100%);
+            rgb(229, 9, 20) 0%,
+            rgba(229, 9, 20, 0.429) 50%,
+            rgba(229, 9, 20, 0.363) 100%);
 }
 
 /* Perfil seleccionado. */
@@ -52,9 +52,9 @@
     color: #b3b3b3;
 
     background: linear-gradient(to right,
-            rgba(229, 9, 20, 0.35) 0%,
-            rgba(229, 9, 20, 0.15) 50%,
-            rgba(229, 9, 20, 0.05) 100%);
+            rgb(229, 9, 20) 0%,
+            rgba(229, 9, 20, 0.429) 50%,
+            rgba(229, 9, 20, 0.363) 100%);
 }
 
 /* Hover. */
