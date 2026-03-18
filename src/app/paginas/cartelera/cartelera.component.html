@@ -12,58 +12,68 @@
 <!-- Contenedor principal de la página. -->
 <div class="contenedor-pagina">
 
-    <!-- Vista de la CARTELERA -->
+    <!-- Vista de la CARTELERA. -->
 
-    <!-- Barra de acciones -->
+    <!-- Barra de acciones. -->
     <div class="barra-acciones">
         <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">Filtro</button>
 
         <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">Fecha</button>
     </div>
 
-    <!-- Zona de Filtros -->
+    <!-- Zona de Filtros. -->
     <div class="zona-contenido">
 
-        <!-- Panel lateral de filtros -->
+        <!-- Panel lateral de filtros. -->
         <div class="panel-filtros" *ngIf="mostrarFiltro">
             <h3>Filtros</h3>
 
+            <!-- Filtro por título. -->
             <label>Buscar película</label>
-            <input type="text" placeholder="Título...">
+            <input type="text" placeholder="Título..." [(ngModel)]="filtroTitulo" (input)="aplicarFiltros()">
 
+            <!-- Filtro por género. -->
             <label>Género</label>
-            <select>
-                <option>Por defecto</option>
-                <option>Acción</option>
-                <option>Drama</option>
-                <option>Comedia</option>
+            <select [(ngModel)]="filtroGenero" (change)="aplicarFiltros()">
+                <option value="">Por defecto</option>
+                <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
             </select>
 
+            <!-- Filtro por tono. -->
             <label>Tono</label>
-            <select>
-                <option>Por defecto</option>
-                <option>Oscuro</option>
-                <option>Ligero</option>
+            <select [(ngModel)]="filtroTono" (change)="aplicarFiltros()">
+                <option value="">Por defecto</option>
+                <option *ngFor="let t of tonos" [value]="t">{{ t }}</option>
             </select>
 
+            <!-- Filtro por duración. -->
             <label>Duración</label>
-            <select>
+            <select [(ngModel)]="filtroDuracion" (change)="aplicarFiltros()">
                 <option>Por defecto</option>
                 <option>Menos de 90 min</option>
                 <option>Entre 90 - 120 min</option>
                 <option>Más de 120 min</option>
             </select>
 
+            <!-- Filtro por puntuación media mínima. -->
             <label>Puntuación mínima</label>
-            <select>
-                <option>Por defecto</option>
-                <option>1 - ⭐</option>
-                <option>2 - ⭐⭐</option>
-                <option>3 - ⭐⭐⭐</option>
-                <option>4 - ⭐⭐⭐⭐</option>
-                <option>5 - ⭐⭐⭐⭐⭐</option>
+            <select [(ngModel)]="filtroPuntuacion" (change)="aplicarFiltros()">
+                <option value="">Por defecto</option>
+                <option *ngFor="let p of puntuacion" [value]="p">
+                    {{ p }} -
+                    <span class="estrellas">
+                        <ng-container *ngFor="let _ of [].constructor(p)">
+                            ⭐
+                        </ng-container>
+                    </span>
+                </option>
             </select>
-            
+
+            <!-- Bootón para borrar los filtros aplicados. -->
+            <button class="btn-quitar-filtros" (click)="quitarFiltros()">
+                Quitar filtros
+            </button>
+
         </div>
 
         <!-- Contenedor de las tarjetas de películas. -->

@@ -5,12 +5,16 @@ import { Router, RouterModule } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
 import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selectores-de-menu.component';
+import { FormsModule } from '@angular/forms';
+import { Genero } from '../../enums/genero';
+import { Puntuacion } from '../../enums/puntuacion';
+import { Tono } from '../../enums/tono';
 
 /* Decorador que define el componente. */
 @Component({
   selector: 'app-cartelera',
   standalone: true,
-  imports: [CommonModule, RouterModule, SelectoresDeMenuComponent],
+  imports: [CommonModule, RouterModule, SelectoresDeMenuComponent, FormsModule],
   templateUrl: './cartelera.component.html',
   styleUrls: ['./cartelera.component.css'],
 })
@@ -19,10 +23,19 @@ import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selec
 export class CarteleraComponent implements OnInit {
 
   /* Propiedades del componente */
+  peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
   usuarioLogueado: any = null;
   mostrarFiltro: boolean = false;
   mostrarFecha: boolean = false;
+  filtroTitulo: string = '';
+  filtroGenero: string = '';
+  filtroTono: string = '';
+  filtroDuracion: string = '';
+  filtroPuntuacion: string = '';
+  generos = Object.values(Genero);
+  puntuacion = Object.values(Puntuacion).filter((v) => typeof v === 'number');
+  tonos = Object.values(Tono);
 
   /* Constructor que inyecta los servicios necesarios para obtener datos de películas y manejar la navegación. */
   constructor(
@@ -39,25 +52,64 @@ export class CarteleraComponent implements OnInit {
     }
 
     this.peliculasService.getPeliculas().subscribe((peliculas) => {
+      this.peliculasOriginales = peliculas;
       this.peliculas = peliculas;
     });
   }
 
-  /* Método para navegar a la página de edición de una película. */
-  editarPelicula(pelicula: Pelicula, event: Event) {
-    event.stopPropagation();
-    this.router.navigate(['/editar', pelicula.id]);
+  /* Método para aplicar los filtros. */
+  aplicarFiltros() {
+    this.peliculas = this.peliculasOriginales.filter((p) => {
+
+      /* Filtro por título. */
+      if (
+        this.filtroTitulo.trim() !== '' &&
+        !p.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())
+      ) {
+        return false;
+      }
+
+      /* Filtro por el enum género. */
+      if (this.filtroGenero !== '' && p.genero !== this.filtroGenero) {
+        return false;
+      }
+
+      /* Filtro por el enum tono. */
+      if (this.filtroTono !== '' && p.tono !== this.filtroTono) {
+        return false;
+      }
+
+      /* Filtro por duración. */
+      if (this.filtroDuracion !== '') {
+        if (this.filtroDuracion === 'Menos de 90 min' && p.duracion >= 90)
+          return false;
+        if (
+          this.filtroDuracion === 'Entre 90 - 120 min' &&
+          (p.duracion < 90 || p.duracion > 120)
+        )
+          return false;
+        if (this.filtroDuracion === 'Más de 120 min' && p.duracion <= 120)
+          return false;
+      }
+
+      /* Filtro por el enum puntuación media. */
+      if (this.filtroPuntuacion !== '') {
+        const min = Number(this.filtroPuntuacion);
+        if (p.puntuacionMedia < min) return false;
+      }
+
+      return true;
+    });
   }
 
-  /* Método para eliminar una película, muestra una confirmación antes de proceder con la eliminación. */
-  eliminarPelicula(id: string, event: Event) {
-    event.stopPropagation();
+  /* Método para desaplicar los filtros. */
+  quitarFiltros() {
+    this.filtroTitulo = '';
+    this.filtroGenero = '';
+    this.filtroTono = '';
+    this.filtroDuracion = '';
+    this.filtroPuntuacion = '';
 
-    /* Confirmación para eliminar la película. */
-    if (confirm('¿Seguro que quieres eliminar esta película?')) {
-      this.peliculasService.eliminarPelicula(id).subscribe(() => {
-        this.peliculas = this.peliculas.filter((p) => p.id !== id);
-      });
-    }
+    this.peliculas = [...this.peliculasOriginales];
   }
 }
