@@ -18,7 +18,13 @@
     <div class="barra-acciones">
         <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">Filtro</button>
 
-        <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">Fecha</button>
+        <div class="fecha-selector">
+            <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">Fecha</button>
+
+            <span class="fecha-mini">
+                {{ fechaFormateada }}
+            </span>
+        </div>
     </div>
 
     <!-- Zona de Filtros. -->
@@ -74,6 +80,38 @@
                 Quitar filtros
             </button>
 
+        </div>
+
+        <div class="panel-fecha" *ngIf="mostrarFecha">
+            <div class="calendario">
+
+                <!-- Encabezado con mes actual y siguiente -->
+                <div class="calendario-header">
+                    <button (click)="mesAnterior()" [disabled]="!puedeIrMesAnterior">‹</button>
+                    <span>{{ nombreMesActual }} {{ anioActual }}</span>
+                    <button (click)="mesSiguiente()">›</button>
+                </div>
+
+                <!-- Días de la semana -->
+                <div class="dias-semana">
+                    <span *ngFor="let d of diasSemana">{{ d }}</span>
+                </div>
+
+                <!-- Días del calendario -->
+                <div class="dias-grid">
+                    <div *ngFor="let dia of diasCalendario" class="dia" [class.hoy]="esHoy(dia)"
+                        [class.seleccionado]="esSeleccionado(dia)" [class.desactivado]="dia && dia < hoy"
+                        (click)="dia && seleccionarDia(dia)">
+                        {{ dia.getDate() }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel derecho con la fecha seleccionada -->
+            <div class="fecha-info">
+                <h3>Mostrando horarios para:</h3>
+                <p>{{ fechaFormateada }}</p>
+            </div>
         </div>
 
         <!-- Contenedor de las tarjetas de películas. -->
