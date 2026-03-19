@@ -1,33 +1,46 @@
-<!-- Clase del contenedor. -->
-<div class="detalle-wrapper">
+<div class="detalle-wrapper" *ngIf="pelicula">
 
-    <!-- Tarjeta de detalle de película. -->
     <div class="detalle-card">
-        
-        <!-- Imagen de la película. -->
-        <img [src]="pelicula?.poster" alt="{{ pelicula?.titulo }}">
 
-        <!-- Información de la película. -->
+        <!-- Póster -->
+        <img class="poster" [src]="pelicula.poster" [alt]="pelicula.titulo">
+
+        <!-- Información -->
         <div class="info">
 
-            <p class="sub-info"><strong>Género:</strong> {{ pelicula?.genero }}</p>
-            <p class="sub-info"><strong>Director:</strong> {{ pelicula?.director }}</p>
-            <p class="sub-info"><strong>Duración:</strong> {{ pelicula?.duracion }} min</p>
+            <h1 class="titulo">{{ pelicula.titulo }}</h1>
 
+            <!-- Puntuación -->
+            <div class="puntuacion">
+                <span *ngFor="let _ of [].constructor(pelicula.puntuacionMedia)">⭐</span>
+                <span class="puntuacion-num">{{ pelicula.puntuacionMedia }}/5</span>
+            </div>
+
+            <!-- Ficha técnica -->
+            <div class="ficha">
+                <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+                <p><strong>Director:</strong> {{ pelicula.director }}</p>
+                <p><strong>Tono:</strong> {{ pelicula.tono }}</p>
+                <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
+            </div>
+
+            <!-- Sinopsis -->
             <h3>Sinopsis</h3>
-            <p class="descripcion">{{ pelicula?.sinopsis }}</p>
+            <p class="descripcion">{{ pelicula.sinopsis }}</p>
 
+            <!-- Tráiler -->
             <h3>Tráiler</h3>
-            <iframe 
-                *ngIf="pelicula?.trailer"
-                width="560" 
-                height="315" 
-                [src]="pelicula?.trailer"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
+            <a class="trailer-btn" [href]="pelicula.trailer" target="_blank">
+                Ver tráiler en YouTube
+            </a>
+
+            <!-- Botón de horarios -->
+            <button class="btn-horarios" [routerLink]="['/horarios', pelicula.id]">
+                Ver horarios disponibles
+            </button>
+
         </div>
 
     </div>
-    
+
 </div>

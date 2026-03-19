@@ -3,40 +3,33 @@ import { Injectable } from '@angular/core';
 import { Pelicula } from '../modelos/pelicula';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class PeliculasService {
   private apiUrl = 'http://localhost:3000/peliculas';
   constructor(private http: HttpClient) {}
 
-  /* GET: para obtener todas las películas. */
   getPeliculas(): Observable<Pelicula[]> {
-    return this.http.get<Pelicula[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map((peliculas) =>
+        peliculas.map((p) => ({
+          ...p,
+          id: p._id, // ← transformamos _id en id
+        })),
+      ),
+    );
   }
 
-  /* GET: sirve para obtener una película por ID. */
+  /* GET: obtener una película por ID */
   getPelicula(id: string): Observable<Pelicula> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Pelicula>(url);
-  }
-
-  /* POST: añadir una nueva película. */
-  addPelicula(pelicula: Pelicula): Observable<Pelicula> {
-    return this.http.post<Pelicula>(this.apiUrl, pelicula);
-  }
-
-  /* DELETE: eliminar una película por ID. */
-  eliminarPelicula(id: string): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<void>(url);
-  }
-
-  /* PUT: esta actualiza una película existente. */
-  actualizarPelicula(pelicula: Pelicula): Observable<Pelicula> {
-    const url = `${this.apiUrl}/${pelicula.id}`;
-    return this.http.put<Pelicula>(url, pelicula);
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map((p) => ({
+        ...p,
+        id: p._id, // ← igual aquí
+      })),
+    );
   }
 }
