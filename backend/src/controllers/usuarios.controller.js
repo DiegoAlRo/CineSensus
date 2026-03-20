@@ -22,14 +22,46 @@ export const loginUsuario = async (req, res) => {
 /* Este método creará y añadirá un usuario a la base de datos. */
 export const crearUsuario = async (req, res) => { 
     
-    try { 
+  try { 
         
-        const nuevoUsuario = new Usuario(req.body); 
-        await nuevoUsuario.save(); 
-        res.status(201).json(nuevoUsuario); 
+    const nuevoUsuario = new Usuario(req.body); 
+    await nuevoUsuario.save(); 
+    res.status(201).json(nuevoUsuario); 
     
-    } catch (error) { 
+  } catch (error) { 
         
-        res.status(500).json({ mensaje: 'Error al crear usuario', error }); 
-    } 
+    res.status(500).json({ mensaje: 'Error al crear usuario', error }); 
+  } 
+};
+
+/* Obtener usuario por ID */
+export const obtenerUsuario = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    res.json(usuario);
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener usuario', error });
+  }
+};
+
+/* Actualizar usuario */
+export const actualizarUsuario = async (req, res) => {
+  try {
+    const usuarioActualizado = await Usuario.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json(usuarioActualizado);
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al actualizar usuario', error });
+  }
 };

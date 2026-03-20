@@ -1,0 +1,79 @@
+:host {
+    display: block;
+    background: #000;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor centrado */
+.perfil-contenedor {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+/* Tarjeta principal */
+.tarjeta-perfil {
+    background: #141414;
+    width: 500px;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Título rojo */
+.titulo-seccion {
+    background: #e7000b;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+}
+
+/* Avatar */
+.avatar {
+    width: 90px;
+    height: 90px;
+    background: #e7000b;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 0 auto 25px auto;
+}
+
+/* Datos del usuario */
+.info-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo label {
+    color: #e7000b;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.campo span {
+    font-size: 1.1rem;
+}
+
+.btn-accion {
+    background: #e7000b;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-accion:hover {
+    background: #b20710;
+}
