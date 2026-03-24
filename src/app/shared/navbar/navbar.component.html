@@ -18,16 +18,11 @@
     <!-- Sección derecha de la barra de navegación. -->
     <div *ngIf="usuarioLogueado" class="usuario-grupo">
 
-      <!-- Se mostrará el nombre del usuario logueado. -->
-      <span class="usuario-nombre">{{ usuarioLogueado.username }}</span>
-
       <!-- Separador visual en forma de línea. -->
       <span class="separador"></span>
 
-      <!-- Botón para cerrar sesión. -->
-      <button class="btn-cerrar" (click)="cerrarSesion()">
-        Cerrar Sesión
-      </button>
+      <!-- Se mostrará el nombre del usuario logueado. -->
+      <span class="usuario-nombre">{{ usuarioLogueado.username }}</span>
 
     </div>
 

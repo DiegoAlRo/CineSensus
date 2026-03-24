@@ -4,7 +4,16 @@ import { obtenerReservas, crearReserva } from '../controllers/reservas.controlle
 
 const router = express.Router(); 
 
-router.get('/', obtenerReservas); 
+/**
+ * GET /reservas.
+ * Devuelve todas las reservas.
+ */
+router.get('/', obtenerReservas);
+
+/**
+ * POST /reservas.
+ * Crea una reserva.
+ */
 router.post('/', crearReserva); 
 
 export default router;

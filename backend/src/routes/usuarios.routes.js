@@ -4,11 +4,18 @@ import { crearUsuario, loginUsuario, obtenerUsuario, actualizarUsuario } from '.
 
 const router = express.Router(); 
 
-// POST /usuarios 
+/**
+ * POST /usuarios.
+ * Crea un usuario.
+ */
 router.post('/', crearUsuario); 
 
 router.post('/login', loginUsuario);
 
+/**
+ * GET /usuarios.
+ * Devuelve un usuario por su id.
+ */
 router.get('/:id', obtenerUsuario);
 
 router.put('/:id', actualizarUsuario);

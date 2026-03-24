@@ -64,16 +64,41 @@
     font-size: 1.1rem;
 }
 
+/* Contenedor de los botones */
+.botones-acciones {
+  margin-top: 20px;
+}
+
+.grupo-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* Botón general de acción */
 .btn-accion {
-    background: #e7000b;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s ease;
+  background: #e7000b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s ease;
 }
 
 .btn-accion:hover {
-    background: #b20710;
+  background: #b20710;
+}
+
+/* Botón de cerrar sesión (variante coherente) */
+.btn-cerrar {
+  background: transparent;
+  border: 2px solid #e7000b;
+  color: #e7000b;
+}
+
+.btn-cerrar:hover {
+  background: #e7000b;
+  color: white;
 }

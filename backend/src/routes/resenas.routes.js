@@ -5,14 +5,14 @@ import { obtenerResenas, crearResena } from '../controllers/resenas.controller.j
 const router = express.Router(); 
 
 /**
- * GET /reseñas
- * Devuelve Todas las reseñas
+ * GET /reseñas.
+ * Devuelve todas las reseñas.
  */
 router.get('/', obtenerResenas); 
 
 /**
- * POST /peliculas
- * 
+ * POST /resenas.
+ * Crea una reseña.
  */
 router.post('/', crearResena); 
 

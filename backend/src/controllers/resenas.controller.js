@@ -1,6 +1,7 @@
 /* Imports necesarios. */
 import Resena from '../models/Resena.js'; 
 
+/* Devuelve todas las reseñas almacenadas en la base de datos. */ 
 export const obtenerResenas = async (req, res) => { 
     
     try { 
@@ -14,6 +15,7 @@ export const obtenerResenas = async (req, res) => {
     } 
 }; 
 
+/* Este método servirá para crear una reseña. */
 export const crearResena = async (req, res) => { 
     
     try { 

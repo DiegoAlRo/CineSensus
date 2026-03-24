@@ -17,6 +17,7 @@ const ResenaSchema = new mongoose.Schema({
     timestamps: true 
 }); 
 
+/* Con este GET obtendremos el ID de una reseña. */
 ResenaSchema.virtual('id').get(function () { 
     return this._id.toHexString(); 
 }); 

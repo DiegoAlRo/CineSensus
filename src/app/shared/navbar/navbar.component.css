@@ -58,23 +58,6 @@
     border-radius: 2px;
 }
 
-/* Estilo para el botón de cerrar sesión. */
-.btn-cerrar {
-    background: transparent;
-    border: 1px solid #e7000b;
-    color: #e7000b;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-/* Efecto hover al pasar el ratón para el botón de cerrar sesión. */
-.btn-cerrar:hover {
-    background: #e50914;
-    color: white;
-}
-
 /* Estilo para el botón de volver a la página principal. */
 .btn-volver {
     background: transparent;

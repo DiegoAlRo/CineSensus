@@ -16,10 +16,12 @@ const UsuarioSchema = new mongoose.Schema({
     historialReservas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reserva' }], 
     historialResenas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resena' }] 
     
-    }, { 
-        timestamps: true 
-    }); 
+}, { 
+    timestamps: true 
+}); 
+
     
+/* Mediante este método GET obtendremos el ID de una reserva. */
 UsuarioSchema.virtual('id').get(function () { 
     return this._id.toHexString(); 
 }); 

@@ -33,12 +33,6 @@ export class NavbarComponent implements OnInit {
       this.usuarioLogueado = usuario;
     });
   }
-
-  /* Método para cerrar sesión. */
-  cerrarSesion() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
   
   /* Método para volver a la página anterior. */
   volver() {

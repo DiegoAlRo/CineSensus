@@ -34,7 +34,7 @@ export const crearUsuario = async (req, res) => {
   } 
 };
 
-/* Obtener usuario por ID */
+/* Obtener un usuario por su ID. */
 export const obtenerUsuario = async (req, res) => {
   try {
     const usuario = await Usuario.findById(req.params.id);
@@ -50,7 +50,7 @@ export const obtenerUsuario = async (req, res) => {
   }
 };
 
-/* Actualizar usuario */
+/* Este método servirá para actualizar un usuario. */
 export const actualizarUsuario = async (req, res) => {
   try {
     const usuarioActualizado = await Usuario.findByIdAndUpdate(

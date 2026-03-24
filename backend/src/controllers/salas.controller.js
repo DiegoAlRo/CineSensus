@@ -1,6 +1,7 @@
 /* imports necesarios. */
 import Sala from '../models/Sala.js'; 
 
+/* Devuelve todas las películas almacenadas en la base de datos. */ 
 export const obtenerSalas = async (req, res) => { 
     try { 
         const salas = await Sala.find(); 
@@ -11,6 +12,7 @@ export const obtenerSalas = async (req, res) => {
     } 
 }; 
 
+/* Este método servirá para crear una sala. */ 
 export const crearSala = async (req, res) => { 
     
     try { 

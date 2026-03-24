@@ -21,6 +21,7 @@ const ReservaSchema = new mongoose.Schema({
     timestamps: true 
 }); 
 
+/* Mediante este método GET obtendremos el ID de una reserva. */
 ReservaSchema.virtual('id').get(function () { return this._id.toHexString(); }); 
 
 ReservaSchema.set('toJSON', { virtuals: true }); export default mongoose.model('Reserva', ReservaSchema);

@@ -49,11 +49,23 @@ export class CarteleraComponent implements OnInit {
   }
 
   get fechaFormateada() {
-    return this.fechaSeleccionada.toLocaleDateString('es-ES', {
-      weekday: 'long',
-      day: '2-digit',
-      month: '2-digit',
-    });
+    const dias = [
+      'domingo',
+      'lunes',
+      'martes',
+      'miércoles',
+      'jueves',
+      'viernes',
+      'sábado',
+    ];
+
+    const diaSemana = dias[this.fechaSeleccionada.getDay()];
+    const dia = this.fechaSeleccionada.getDate().toString().padStart(2, '0');
+    const mes = (this.fechaSeleccionada.getMonth() + 1)
+      .toString()
+      .padStart(2, '0');
+
+    return `${diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1)} ${dia}/${mes}`;
   }
 
   get puedeIrMesAnterior() {

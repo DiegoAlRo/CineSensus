@@ -1,6 +1,7 @@
 /* Imports necesarios. */
 import Sesion from '../models/Sesion.js'; 
 
+/* Devuelve todas las películas almacenadas en la base de datos. */ 
 export const obtenerSesiones = async (req, res) => { 
     
     try { 
@@ -12,6 +13,7 @@ export const obtenerSesiones = async (req, res) => {
     } 
 }; 
 
+/* Cojn este método se creará una sesión. */ 
 export const crearSesion = async (req, res) => { 
     
     try { 

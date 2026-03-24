@@ -1,6 +1,7 @@
 /* Imports necesarios. */
 import Reserva from '../models/Reserva.js'; 
 
+/* Devuelve todas las reservas almacenadas en la base de datos. */
 export const obtenerReservas = async (req, res) => { 
     
     try { 
@@ -14,6 +15,7 @@ export const obtenerReservas = async (req, res) => {
     } 
 }; 
 
+/* Este método crea una reserva. */ 
 export const crearReserva = async (req, res) => { 
     
     try { const nuevaReserva = new Reserva(req.body); 

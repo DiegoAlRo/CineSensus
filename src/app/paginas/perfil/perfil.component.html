@@ -28,9 +28,13 @@
                 <span>{{ usuario?.email }}</span>
             </div>
 
-            <div class="campo">
-                <label>Contraseña:</label>
-                <button class="btn-accion">Cambiar contraseña</button>
+            <div class="campo botones-acciones">
+                <label>Acciones:</label>
+
+                <div class="grupo-botones">
+                    <button class="btn-accion">Cambiar contraseña</button>
+                    <button class="btn-accion btn-cerrar" (click)="cerrarSesion()">Cerrar sesión</button>
+                </div>
             </div>
 
         </div>

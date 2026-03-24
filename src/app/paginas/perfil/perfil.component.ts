@@ -32,4 +32,10 @@ export class PerfilComponent implements OnInit {
     const a = apellidos.charAt(0).toUpperCase();
     return n + a;
   }
+
+  cerrarSesion() {
+    localStorage.removeItem('usuario');
+    window.location.href = '/login';
+  }
+  
 }

@@ -23,6 +23,7 @@ const SesionSchema = new mongoose.Schema({
     timestamps: true 
 }); 
 
+/* Mediante este método GET obtendremos el ID de una reserva. */
 SesionSchema.virtual('id').get(function () { 
     return this._id.toHexString(); 
 }); 
