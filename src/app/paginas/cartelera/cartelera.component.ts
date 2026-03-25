@@ -21,7 +21,8 @@ import { Tono } from '../../enums/tono';
 
 /* Clase del componente que implementa la interfaz OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
-  /* Propiedades del componente */
+
+  /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
   usuarioLogueado: any = null;
@@ -34,10 +35,8 @@ export class CarteleraComponent implements OnInit {
   filtroPuntuacion: string = '';
   hoy: Date = new Date();
   fechaSeleccionada: Date = new Date();
-
   mesActual: number = new Date().getMonth();
   anioActual: number = new Date().getFullYear();
-
   diasCalendario: Date[] = [];
   diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
@@ -69,7 +68,6 @@ export class CarteleraComponent implements OnInit {
   }
 
   get puedeIrMesAnterior() {
-    // No permitir ir al mes anterior si es antes del mes actual real
     const hoy = new Date();
     return !(
       this.anioActual === hoy.getFullYear() && this.mesActual === hoy.getMonth()
@@ -118,11 +116,9 @@ export class CarteleraComponent implements OnInit {
 
     const dias: Date[] = [];
 
-    // Añadir huecos antes del día 1
     const offset = inicio.getDay() === 0 ? 6 : inicio.getDay() - 1;
     for (let i = 0; i < offset; i++) dias.push(null as any);
 
-    // Añadir días reales
     for (let d = 1; d <= fin.getDate(); d++) {
       dias.push(new Date(this.anioActual, this.mesActual, d));
     }

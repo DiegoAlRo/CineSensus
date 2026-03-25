@@ -6,14 +6,14 @@
     font-family: Arial, sans-serif;
 }
 
-/* Contenedor centrado */
+/* Contenedor para el perfil. */
 .perfil-contenedor {
     display: flex;
     justify-content: center;
     padding-top: 80px;
 }
 
-/* Tarjeta principal */
+/* Tarjeta principal con los datos. */
 .tarjeta-perfil {
     background: #141414;
     width: 500px;
@@ -22,7 +22,7 @@
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
-/* Título rojo */
+/* Título rojo. */
 .titulo-seccion {
     background: #e7000b;
     padding: 12px;
@@ -32,7 +32,7 @@
     margin-bottom: 25px;
 }
 
-/* Avatar */
+/* Avatar del usuario. */
 .avatar {
     width: 90px;
     height: 90px;
@@ -46,7 +46,7 @@
     margin: 0 auto 25px auto;
 }
 
-/* Datos del usuario */
+/* Estilos para los datos del usuario. */
 .info-usuario {
     display: flex;
     flex-direction: column;
@@ -64,18 +64,19 @@
     font-size: 1.1rem;
 }
 
-/* Contenedor de los botones */
+/* Contenedor de los botones interactivos. */
 .botones-acciones {
   margin-top: 20px;
 }
 
+/* Grupo que junta los botones. */
 .grupo-botones {
   display: flex;
   gap: 12px;
   margin-top: 6px;
 }
 
-/* Botón general de acción */
+/* Estilos del botón para cambiar de contraseña. */
 .btn-accion {
   background: #e7000b;
   color: white;
@@ -91,7 +92,7 @@
   background: #b20710;
 }
 
-/* Botón de cerrar sesión (variante coherente) */
+/* Botón de cerrar sesión. */
 .btn-cerrar {
   background: transparent;
   border: 2px solid #e7000b;

@@ -14,7 +14,7 @@
 
     <!-- Vista de la CARTELERA. -->
 
-    <!-- Barra de acciones. -->
+    <!-- Agrupación de botones de acciones. -->
     <div class="barra-acciones">
         <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">Filtro</button>
 
@@ -82,22 +82,23 @@
 
         </div>
 
+        <!-- Calendario desplegable para seleccionar la fecha. -->
         <div class="panel-fecha" *ngIf="mostrarFecha">
             <div class="calendario">
 
-                <!-- Encabezado con mes actual y siguiente -->
+                <!-- Encabezado con mes actual y siguiente. -->
                 <div class="calendario-header">
                     <button (click)="mesAnterior()" [disabled]="!puedeIrMesAnterior">‹</button>
                     <span>{{ nombreMesActual }} {{ anioActual }}</span>
                     <button (click)="mesSiguiente()">›</button>
                 </div>
 
-                <!-- Días de la semana -->
+                <!-- Días de la semana. -->
                 <div class="dias-semana">
                     <span *ngFor="let d of diasSemana">{{ d }}</span>
                 </div>
 
-                <!-- Días del calendario -->
+                <!-- Días del calendario. -->
                 <div class="dias-grid">
                     <div *ngFor="let dia of diasCalendario" class="dia" [class.hoy]="esHoy(dia)"
                         [class.seleccionado]="esSeleccionado(dia)" [class.desactivado]="dia && dia < hoy"

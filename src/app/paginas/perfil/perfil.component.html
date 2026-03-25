@@ -1,16 +1,21 @@
 <!-- Aquí se mostrarán los botones que alternan entre la vista de perfil y cartelera en el menú principal. -->
 <app-selectores-de-menu></app-selectores-de-menu>
 
+<!-- Esta clase contendrá la tarjeta con el perfil. -->
 <div class="perfil-contenedor">
 
+    <!-- Tarjeta de perfil de usuario. -->
     <div class="tarjeta-perfil">
 
+        <!-- Título informativo. -->
         <h2 class="titulo-seccion">Información Personal</h2>
 
+        <!-- Avatar con iniciales del usuario. -->
         <div class="avatar">
             {{ iniciales }}
         </div>
 
+        <!-- Esta clase contendrá los datos del usuario. -->
         <div class="info-usuario">
 
             <div class="campo">
@@ -28,12 +33,14 @@
                 <span>{{ usuario?.email }}</span>
             </div>
 
+            <!-- Aquí se incluye un campo con dos botones. -->
             <div class="campo botones-acciones">
                 <label>Acciones:</label>
 
+                <!-- Esta clase cuenta con el botón de cambiar contraseña y el de cerrar sesión. -->
                 <div class="grupo-botones">
                     <button class="btn-accion">Cambiar contraseña</button>
-                    <button class="btn-accion btn-cerrar" (click)="cerrarSesion()">Cerrar sesión</button>
+                    <button class="btn-accion btn-cerrar" (click)="cerrarSesion()">Cerrar Sesión</button>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-/* imports del componente. */
+/* Imports del componente. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, } from '@angular/forms';
@@ -67,6 +67,7 @@ export class RegistroComponent {
       return;
     }
 
+    /* Se crea el objeto a rellenar de usuario. */
     const usuario = {
       nombre: this.form.value.nombre,
       apellidos: this.form.value.apellidos,

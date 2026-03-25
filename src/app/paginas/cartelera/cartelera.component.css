@@ -83,7 +83,7 @@
     margin: 0;
 }
 
-/* Cinta deslizante */
+/* Cinta deslizante con poster de pel´ículas. */
 .cinta-posters {
     width: 100%;
     overflow: hidden;
@@ -111,7 +111,7 @@
     transform: scale(1.05);
 }
 
-/* Animación */
+/* Animación de la citna. */
 @keyframes deslizar {
     from {
         transform: translateX(0);
@@ -122,7 +122,7 @@
     }
 }
 
-/* Estilo para la barra de acciones */
+/* Estilo para el contenedor de los botones. */
 .barra-acciones {
     display: flex;
     gap: 20px;
@@ -144,7 +144,7 @@
     background: #b20710;
 }
 
-/* Zona con filtros + tarjetas */
+/* Zona con filtros junto a las tarjetas. */
 .zona-contenido {
     display: flex;
     align-items: flex-start;
@@ -152,7 +152,7 @@
     transition: 0.3s ease;
 }
 
-/* Panel lateral */
+/* Panel lateral. */
 .panel-filtros {
     width: 260px;
     background: #141414;

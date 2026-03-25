@@ -1,5 +1,5 @@
 
-/* Importaciones necesarias para el componente principal de la aplicación. */
+/* Imports necesarias para el componente principal de la aplicación. */
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router'; 
 import { RouterOutlet } from '@angular/router';
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
     
-       this.mostrarNavbar = event.url !== '/';
+        this.mostrarNavbar = event.url !== '/';
        
       }
     });
@@ -34,6 +34,6 @@ export class AppComponent implements OnInit {
 
   /* Al iniciar la app se eliminará el localStorege, evitando sesiones anteriores. */
   ngOnInit(): void {
-  localStorage.removeItem('usuario');
+    localStorage.removeItem('usuario');
   }
 }

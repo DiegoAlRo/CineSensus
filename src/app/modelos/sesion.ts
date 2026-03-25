@@ -1,7 +1,7 @@
 /* Define la interfaz para un horario. */
 export interface Sesion {
   id: string;
-  fecha: string; // formato YYYY-MM-DD 
+  fecha: string; // Formato YYYY-MM-DD 
   sala: string;
   pelicula: string;
   precio: number;

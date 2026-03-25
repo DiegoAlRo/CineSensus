@@ -1,22 +1,25 @@
+<!-- Envoltorio de detalles de la película. -->
 <div class="detalle-wrapper" *ngIf="pelicula">
 
+    <!-- Tarjeta con los detalles de la película. -->
     <div class="detalle-card">
 
-        <!-- Póster -->
+        <!-- Póster de película. -->
         <img class="poster" [src]="pelicula.poster" [alt]="pelicula.titulo">
 
-        <!-- Información -->
+        <!-- Información de película. -->
         <div class="info">
 
+            <!-- Título de pel´ciula. -->
             <h1 class="titulo">{{ pelicula.titulo }}</h1>
 
-            <!-- Puntuación -->
+            <!-- Puntuación de película. -->
             <div class="puntuacion">
                 <span *ngFor="let _ of [].constructor(pelicula.puntuacionMedia)">⭐</span>
                 <span class="puntuacion-num">{{ pelicula.puntuacionMedia }}/5</span>
             </div>
 
-            <!-- Ficha técnica -->
+            <!-- Ficha técnica de película. -->
             <div class="ficha">
                 <p><strong>Género:</strong> {{ pelicula.genero }}</p>
                 <p><strong>Director:</strong> {{ pelicula.director }}</p>
@@ -24,20 +27,15 @@
                 <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
             </div>
 
-            <!-- Sinopsis -->
+            <!-- Sinopsis de película. -->
             <h3>Sinopsis</h3>
             <p class="descripcion">{{ pelicula.sinopsis }}</p>
 
-            <!-- Tráiler -->
+            <!-- Enlace a tráiler de película.-->
             <h3>Tráiler</h3>
             <a class="trailer-btn" [href]="pelicula.trailer" target="_blank">
                 Ver tráiler en YouTube
             </a>
-
-            <!-- Botón de horarios -->
-            <button class="btn-horarios" [routerLink]="['/horarios', pelicula.id]">
-                Ver horarios disponibles
-            </button>
 
         </div>
 

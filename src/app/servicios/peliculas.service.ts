@@ -5,9 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
+/* Es accesible en toda la web. */
 @Injectable({
   providedIn: 'root',
 })
+
+/* El servicio de peliculas se encarga de gestionar las películas. */
 export class PeliculasService {
   private apiUrl = 'http://localhost:3000/peliculas';
   constructor(private http: HttpClient) {}
@@ -17,18 +20,18 @@ export class PeliculasService {
       map((peliculas) =>
         peliculas.map((p) => ({
           ...p,
-          id: p._id, // ← transformamos _id en id
+          id: p._id,
         })),
       ),
     );
   }
 
-  /* GET: obtener una película por ID */
+  /* Con este método get se podrán obtener una película por ID */
   getPelicula(id: string): Observable<Pelicula> {
     return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
       map((p) => ({
         ...p,
-        id: p._id, // ← igual aquí
+        id: p._id,
       })),
     );
   }

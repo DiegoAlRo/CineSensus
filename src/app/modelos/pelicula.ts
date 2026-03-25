@@ -12,7 +12,7 @@ export interface Pelicula {
   puntuacionMedia: number;
   entradasVendidas: number;
   tono: Tono;
-  duracion: number; // en minutos
+  duracion: number; // En minutos
   poster: string; // URL a la imagen
   trailer: string; // URL a YouTube
 }

@@ -12,6 +12,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './bienvenida.component.css'
 })
 
-export class BienvenidaComponent {
-
-}
+/* Clase de la bienvenida vacía. */
+export class BienvenidaComponent {}

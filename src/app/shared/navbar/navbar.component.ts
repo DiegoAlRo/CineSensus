@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   /* Se inyectan los servicios necesarios para la navegación y autenticación. */
   constructor(
     private location: Location,
-    private router: Router,
     private authService: AuthService
   ) {}
 

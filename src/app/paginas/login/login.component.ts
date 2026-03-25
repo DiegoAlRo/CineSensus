@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
-import { Usuario } from '../../modelos/usuario';
 import { AuthService } from '../../servicios/auth.service';
 
 /* Decorador del componente de login. */
