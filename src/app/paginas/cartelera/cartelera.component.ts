@@ -21,7 +21,6 @@ import { Tono } from '../../enums/tono';
 
 /* Clase del componente que implementa la interfaz OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
-
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
@@ -74,7 +73,7 @@ export class CarteleraComponent implements OnInit {
     );
   }
   generos = Object.values(Genero);
-  puntuacion = Object.values(Puntuacion).filter((v) => typeof v === 'number');
+  puntuacion = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   tonos = Object.values(Tono);
 
   /* Constructor que inyecta los servicios necesarios para obtener datos de películas y manejar la navegación. */
@@ -82,6 +81,77 @@ export class CarteleraComponent implements OnInit {
     private peliculasService: PeliculasService,
     private router: Router,
   ) {}
+
+  /* Método para obtener el número de estrellas según la puntuación(Es posible que se use en el futuro). */
+  getIconos(p: number): string[] {
+    switch (p) {
+      case 1:
+        return ['assets/EstrellaPuntuacion-Entera.png'];
+
+      case 1.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 2:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 2.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 3:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 3.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 4:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 4.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      default:
+        return [];
+    }
+  }
 
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {

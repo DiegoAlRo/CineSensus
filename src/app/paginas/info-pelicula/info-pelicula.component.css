@@ -108,3 +108,8 @@
 .btn-horarios:hover {
   background: #ff1a1a;
 }
+
+.estrella {
+  width: 24px;
+  height: 24px;
+}

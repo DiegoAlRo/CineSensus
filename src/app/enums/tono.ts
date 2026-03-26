@@ -6,4 +6,7 @@ export enum Tono {
   Intenso = 'Intenso',
   Relajado = 'Relajado',
   Oscuro = 'Oscuro',
+  Serio = 'Serio',
+  Reflexivo = 'Reflexivo',
+  Tenso = 'Tenso'
 }

@@ -6,5 +6,7 @@ export enum Genero {
   Terror = 'Terror',
   CienciaFiccion = 'Ciencia ficción',
   Romance = 'Romance',
+  ComediaRomantica = 'Comedia Romántica',
   Animacion = 'Animación',
+  Combinacion = 'Combinacion'
 }

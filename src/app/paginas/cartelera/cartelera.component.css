@@ -287,3 +287,8 @@
     font-size: 1rem;
     text-transform: capitalize;
 }
+
+.estrella {
+  width: 24px;
+  height: 24px;
+}

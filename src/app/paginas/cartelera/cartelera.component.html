@@ -65,13 +65,9 @@
             <label>Puntuación mínima</label>
             <select [(ngModel)]="filtroPuntuacion" (change)="aplicarFiltros()">
                 <option value="">Por defecto</option>
+
                 <option *ngFor="let p of puntuacion" [value]="p">
-                    {{ p }} -
-                    <span class="estrellas">
-                        <ng-container *ngFor="let _ of [].constructor(p)">
-                            ⭐
-                        </ng-container>
-                    </span>
+                    {{ p }} Estrellas
                 </option>
             </select>
 

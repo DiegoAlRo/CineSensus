@@ -11,26 +11,96 @@ import { Pelicula } from '../../modelos/pelicula';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './info-pelicula.component.html',
-  styleUrls: ['./info-pelicula.component.css']
+  styleUrls: ['./info-pelicula.component.css'],
 })
 
 /* Clase del componente de información de película. */
 export class InfoPeliculaComponent implements OnInit {
-  
   pelicula?: Pelicula;
-  
+
   /* Constructor que inyecta los servicios necesarios para obtener la información de la película. */
   constructor(
     private route: ActivatedRoute,
-    private peliculasService: PeliculasService
+    private peliculasService: PeliculasService,
   ) {}
-  
+
   /* Método que se ejecuta al inicializar el componente, obtiene el ID de la película de la ruta y llama al servicio para obtener su información. */
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
-    
-    this.peliculasService.getPelicula(id).subscribe(p => {
+
+    this.peliculasService.getPelicula(id).subscribe((p) => {
       this.pelicula = p;
     });
+  }
+
+  /* Este método mostrará la puntuación de la película con el número de estrellas adecuado. */
+  getIconos(p: number): string[] {
+    switch (p) {
+      case 1:
+        return ['assets/EstrellaPuntuacion-Entera.png'];
+
+      case 1.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 2:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 2.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 3:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 3.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 4:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      case 4.5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Media.png',
+        ];
+
+      case 5:
+        return [
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+          'assets/EstrellaPuntuacion-Entera.png',
+        ];
+
+      default:
+        return [];
+    }
   }
 }

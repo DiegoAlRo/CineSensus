@@ -15,8 +15,7 @@
 
             <!-- Puntuación de película. -->
             <div class="puntuacion">
-                <span *ngFor="let _ of [].constructor(pelicula.puntuacionMedia)">⭐</span>
-                <span class="puntuacion-num">{{ pelicula.puntuacionMedia }}/5</span>
+                <img *ngFor="let icono of getIconos(pelicula.puntuacionMedia)" [src]="icono" class="estrella">
             </div>
 
             <!-- Ficha técnica de película. -->
