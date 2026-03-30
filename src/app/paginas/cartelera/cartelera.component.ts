@@ -30,6 +30,7 @@ export class CarteleraComponent implements OnInit {
   filtroTitulo: string = '';
   filtroGenero: string = '';
   filtroTono: string = '';
+  filtroEdad: string = '';
   filtroDuracion: string = '';
   filtroPuntuacion: string = '';
   hoy: Date = new Date();
@@ -275,6 +276,11 @@ export class CarteleraComponent implements OnInit {
           return false;
       }
 
+      /* Filtro por restricción de edad. */
+      if (this.filtroEdad !== '' && p.restriccionEdad !== this.filtroEdad) {
+        return false;
+      }
+
       /* Filtro por el enum puntuación media. */
       if (this.filtroPuntuacion !== '') {
         const min = Number(this.filtroPuntuacion);
@@ -290,6 +296,7 @@ export class CarteleraComponent implements OnInit {
     this.filtroTitulo = '';
     this.filtroGenero = '';
     this.filtroTono = '';
+    this.filtroEdad = '';
     this.filtroDuracion = '';
     this.filtroPuntuacion = '';
 

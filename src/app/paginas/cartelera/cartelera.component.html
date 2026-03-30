@@ -55,10 +55,22 @@
             <!-- Filtro por duración. -->
             <label>Duración</label>
             <select [(ngModel)]="filtroDuracion" (change)="aplicarFiltros()">
-                <option>Por defecto</option>
+                <option value="">Por defecto</option>
                 <option>Menos de 90 min</option>
                 <option>Entre 90 - 120 min</option>
                 <option>Más de 120 min</option>
+            </select>
+
+            <!-- Filtro por restricción de edad. -->
+            <label>Restricción de edad</label>
+            <select [(ngModel)]="filtroEdad" (change)="aplicarFiltros()">
+                <option value="">Por defecto</option>
+                <option value="TP">TP (Todos los públicos)</option>
+                <option value="7">7 +</option>
+                <option value="12">12 +</option>
+                <option value="16">16 +</option>
+                <option value="18">18 +</option>
+                <option value="X">X</option>
             </select>
 
             <!-- Filtro por puntuación media mínima. -->
@@ -125,6 +137,10 @@
                         {{ pelicula.genero }}
 
                         <span *ngIf="pelicula.director"> • Dir. {{ pelicula.director }}</span>
+
+                        <span class="edad-badge">
+                            + {{ pelicula.restriccionEdad }}
+                        </span>
 
                     </p>
 

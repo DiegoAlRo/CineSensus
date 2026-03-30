@@ -14,6 +14,7 @@ const PeliculaSchema = new mongoose.Schema({
     puntuacionMedia: Number,
     entradasVendidas: Number,
     tono: String,
+    restriccionEdad: String,
     duracion: Number,
     poster: String,
     trailer: String,
