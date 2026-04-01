@@ -5,6 +5,7 @@ export interface Sesion {
   sala: string;
   pelicula: string;
   precio: number;
+  hora: string; // Formato HHMM
 
   /* Id de elemento que referenciará. */
   asientosOcupados: {

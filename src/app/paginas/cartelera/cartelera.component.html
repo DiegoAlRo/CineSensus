@@ -79,7 +79,7 @@
                 <option value="">Por defecto</option>
 
                 <option *ngFor="let p of puntuacion" [value]="p">
-                    {{ p }} Estrellas
+                    {{ p }} - Estrellas
                 </option>
             </select>
 
@@ -122,7 +122,7 @@
         <div class="peliculas">
 
             <!-- Tarjeta de película, se repite por cada película en la lista. -->
-            <div class="pelicula-card" *ngFor="let pelicula of peliculas" [routerLink]="['/pelicula', pelicula.id]">
+            <div class="pelicula-card" *ngFor="let pelicula of peliculas" (click)="irAPelicula(pelicula.id)">
 
                 <!-- Imagen de la película. -->
                 <img class="poster" [src]="pelicula.poster">
@@ -143,6 +143,17 @@
                         </span>
 
                     </p>
+
+                    <div class="horarios-fecha">
+                        Horarios de {{ fechaFormateada }}:
+                    </div>
+
+                    <div class="horarios">
+                        <span class="horario-chip" *ngFor="let s of pelicula.sesiones"
+                            [routerLink]="['/pelicula', pelicula.id, 'sesion', s.id]">
+                            {{ s.hora }}
+                        </span>
+                    </div>
 
                 </div>
 

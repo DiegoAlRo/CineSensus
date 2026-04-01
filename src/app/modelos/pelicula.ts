@@ -2,6 +2,7 @@
 import { Genero } from '../enums/genero';
 import { Tono } from '../enums/tono';
 import { RestriccionEdad } from '../enums/restriccionEdad';
+import { Sesion } from './sesion';
 
 /* Define la interfaz para una película. */
 export interface Pelicula {
@@ -17,4 +18,6 @@ export interface Pelicula {
   duracion: number; // En minutos
   poster: string; // URL a la imagen
   trailer: string; // URL a YouTube
+
+  sesiones?: Sesion[]; // Opcional, para incluir las sesiones disponibles en la cartelera
 }

@@ -323,3 +323,34 @@ app-selectores-de-menu {
     font-weight: bold;
     margin-left: 10px;
 }
+
+.horarios {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.horario-chip {
+    background: #1e1e1e;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: white;
+    border: 1px solid #e7000b;
+    transition: 0.2s ease;
+}
+
+.horario-chip:hover {
+    background: #e7000b;
+    cursor: pointer;
+}
+
+.horarios-fecha {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    opacity: 0.85;
+}

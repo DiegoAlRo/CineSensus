@@ -1,14 +1,14 @@
 /* imports necesarios. */
 import express from 'express'; 
-import { obtenerSesiones, crearSesion } from '../controllers/sesiones.controller.js'; 
+import { obtenerSesionesPorPeliculaYFecha, crearSesion } from '../controllers/sesiones.controller.js'; 
 
 const router = express.Router();
- 
+
 /**
  * GET /sesiones.
- * Devuelve todas las sesiones.
+ * Devuelve todas las sesiones filtradas por película y fecha.
  */
-router.get('/', obtenerSesiones); 
+router.get('/sesiones', obtenerSesionesPorPeliculaYFecha);
 
 /**
  * POST /sesiones.

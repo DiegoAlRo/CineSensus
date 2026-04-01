@@ -18,7 +18,6 @@ const PeliculaSchema = new mongoose.Schema({
     duracion: Number,
     poster: String,
     trailer: String,
-    horarios: [Number],
     resenas: [Number]
 });
 

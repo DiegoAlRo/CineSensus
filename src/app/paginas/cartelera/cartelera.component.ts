@@ -1,7 +1,6 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
 import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selectores-de-menu.component';
@@ -9,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { Genero } from '../../enums/genero';
 import { Puntuacion } from '../../enums/puntuacion';
 import { Tono } from '../../enums/tono';
+import { SesionesService } from '../../servicios/sesiones.service';
+import { Router, RouterModule } from '@angular/router';
 
 /* Decorador que define el componente. */
 @Component({
   selector: 'app-cartelera',
   standalone: true,
-  imports: [CommonModule, RouterModule, SelectoresDeMenuComponent, FormsModule],
+  imports: [CommonModule, SelectoresDeMenuComponent, FormsModule, RouterModule],
   templateUrl: './cartelera.component.html',
   styleUrls: ['./cartelera.component.css'],
 })
@@ -74,12 +75,15 @@ export class CarteleraComponent implements OnInit {
     );
   }
   generos = Object.values(Genero);
-  puntuacion = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+  puntuacion = Object.values(Puntuacion).filter(
+    (v) => typeof v === 'number',
+  ) as number[];
   tonos = Object.values(Tono);
 
   /* Constructor que inyecta los servicios necesarios para obtener datos de películas y manejar la navegación. */
   constructor(
     private peliculasService: PeliculasService,
+    private sesionesService: SesionesService,
     private router: Router,
   ) {}
 
@@ -165,6 +169,7 @@ export class CarteleraComponent implements OnInit {
     this.peliculasService.getPeliculas().subscribe((peliculas) => {
       this.peliculasOriginales = peliculas;
       this.peliculas = peliculas;
+      this.cargarSesionesParaPeliculas();
     });
 
     this.generarCalendario();
@@ -200,6 +205,7 @@ export class CarteleraComponent implements OnInit {
   seleccionarDia(dia: Date) {
     if (!dia || dia < this.hoy) return;
     this.fechaSeleccionada = dia;
+    this.cargarSesionesParaPeliculas();
   }
 
   esHoy(dia: Date) {
@@ -301,5 +307,21 @@ export class CarteleraComponent implements OnInit {
     this.filtroPuntuacion = '';
 
     this.peliculas = [...this.peliculasOriginales];
+  }
+
+  irAPelicula(id: string) {
+    this.router.navigate(['/pelicula', id]);
+  }
+
+  cargarSesionesParaPeliculas() {
+    const fechaISO = this.fechaSeleccionada.toISOString().split('T')[0];
+
+    this.peliculas.forEach((pelicula) => {
+      this.sesionesService
+        .getSesiones(pelicula.id, fechaISO)
+        .subscribe((sesiones) => {
+          pelicula.sesiones = sesiones;
+        });
+    });
   }
 }

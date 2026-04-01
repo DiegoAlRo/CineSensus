@@ -11,6 +11,7 @@ const SesionSchema = new mongoose.Schema({
     sala: { type: mongoose.Schema.Types.ObjectId, ref: 'Sala', required: true }, 
     fecha: { type: Date, required: true }, 
     precio: { type: Number, default: 7.5 },
+    hora: { type: String, required: true }, // Formato HHMM
 
     asientosOcupados: [
     {
