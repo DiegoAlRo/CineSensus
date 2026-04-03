@@ -8,7 +8,7 @@ const router = express.Router();
  * GET /sesiones.
  * Devuelve todas las sesiones filtradas por película y fecha.
  */
-router.get('/sesiones', obtenerSesionesPorPeliculaYFecha);
+router.get('/', obtenerSesionesPorPeliculaYFecha);
 
 /**
  * POST /sesiones.

@@ -1,9 +1,13 @@
+/* Imports necesarios para el modelo. */
+import { Pelicula } from "./pelicula";
+import { Sala } from "./sala";
+
 /* Define la interfaz para un horario. */
 export interface Sesion {
   id: string;
-  fecha: string; // Formato YYYY-MM-DD 
-  sala: string;
-  pelicula: string;
+  fecha: Date; // Date real
+  sala: Sala; // Objeto Sala
+  pelicula: Pelicula; // Objeto Pelicula
   precio: number;
   hora: string; // Formato HHMM
 

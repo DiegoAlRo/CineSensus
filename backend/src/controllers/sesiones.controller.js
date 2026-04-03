@@ -4,22 +4,21 @@ import Sesion from '../models/Sesion.js';
 /* Devuelve las sesiones filtradas por película y fecha. */
 export const obtenerSesionesPorPeliculaYFecha = async (req, res) => {
     try {
+
         const { pelicula, fecha } = req.query;
 
         if (!pelicula || !fecha) {
             return res.status(400).json({ mensaje: "Faltan parámetros: pelicula o fecha" });
         }
 
-        /* Convertimos la fecha a rango del día completo. */
-        const inicio = new Date(fecha);
-        inicio.setHours(0, 0, 0, 0);
+        const [year, month, day] = fecha.split('-').map(Number);
 
-        const fin = new Date(fecha);
-        fin.setHours(23, 59, 59, 999);
+        const inicio = new Date(year, month - 1, day, 0, 0, 0, 0);
+        const fin = new Date(year, month - 1, day, 23, 59, 59, 999);
 
         const sesiones = await Sesion.find({
-            pelicula,
-            fecha: { $gte: inicio, $lte: fin }
+        pelicula,
+        fecha: { $gte: inicio, $lte: fin }
         }).populate('sala pelicula');
 
         res.json(sesiones);

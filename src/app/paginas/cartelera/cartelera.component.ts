@@ -41,6 +41,7 @@ export class CarteleraComponent implements OnInit {
   diasCalendario: Date[] = [];
   diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
+  /* Este getter devuelve el nombre del mes actual. */
   get nombreMesActual() {
     return new Date(this.anioActual, this.mesActual, 1).toLocaleDateString(
       'es-ES',
@@ -48,6 +49,7 @@ export class CarteleraComponent implements OnInit {
     );
   }
 
+  /* Este getter devuelve la fecha seleccionada formateada como "DíaSemana DD/MM". */
   get fechaFormateada() {
     const dias = [
       'domingo',
@@ -68,12 +70,20 @@ export class CarteleraComponent implements OnInit {
     return `${diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1)} ${dia}/${mes}`;
   }
 
+  /* De esta forma la hora de las sesiones se mostrarán como HH:MM. */
+  formatearHora(hora: string) {
+    return hora.slice(0, 2) + ':' + hora.slice(2, 4);
+  }
+
+  /* Este getter evita poder navegar al mes anterior. */
   get puedeIrMesAnterior() {
     const hoy = new Date();
     return !(
       this.anioActual === hoy.getFullYear() && this.mesActual === hoy.getMonth()
     );
   }
+
+  /* Arrays con los valores de los enums para usarlos en los filtros. */
   generos = Object.values(Genero);
   puntuacion = Object.values(Puntuacion).filter(
     (v) => typeof v === 'number',
@@ -87,93 +97,25 @@ export class CarteleraComponent implements OnInit {
     private router: Router,
   ) {}
 
-  /* Método para obtener el número de estrellas según la puntuación(Es posible que se use en el futuro). */
-  getIconos(p: number): string[] {
-    switch (p) {
-      case 1:
-        return ['assets/EstrellaPuntuacion-Entera.png'];
-
-      case 1.5:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Media.png',
-        ];
-
-      case 2:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-        ];
-
-      case 2.5:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Media.png',
-        ];
-
-      case 3:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-        ];
-
-      case 3.5:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Media.png',
-        ];
-
-      case 4:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-        ];
-
-      case 4.5:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Media.png',
-        ];
-
-      case 5:
-        return [
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-          'assets/EstrellaPuntuacion-Entera.png',
-        ];
-
-      default:
-        return [];
-    }
-  }
-
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {
+    /* Se verifica si hay un usuario logueado y se le aportan los datos. */
     const data = localStorage.getItem('usuario');
-
     if (data) {
       this.usuarioLogueado = JSON.parse(data);
     }
 
+    /* Se obtiene la lista de películas desde el servicio y almacenan, luego se cargan las sesiones para cada película. */
     this.peliculasService.getPeliculas().subscribe((peliculas) => {
       this.peliculasOriginales = peliculas;
       this.peliculas = peliculas;
       this.cargarSesionesParaPeliculas();
     });
 
+    /* Se genera el calendario para el mes actual. */
     this.generarCalendario();
 
+    /* Se establece un intervalo para actualizar la fecha actual cada minuto, lo que permite que el calendario se actualice automáticamente al cambiar de día. */
     setInterval(() => {
       const ahora = new Date();
       if (ahora.getDate() !== this.hoy.getDate()) {
@@ -186,6 +128,7 @@ export class CarteleraComponent implements OnInit {
     }, 60000);
   }
 
+  /* Método para generar el calendario del mes actual, creando un array de fechas que se muestra en la interfaz. */
   generarCalendario() {
     const inicio = new Date(this.anioActual, this.mesActual, 1);
     const fin = new Date(this.anioActual, this.mesActual + 1, 0);
@@ -202,12 +145,32 @@ export class CarteleraComponent implements OnInit {
     this.diasCalendario = dias;
   }
 
-  seleccionarDia(dia: Date) {
-    if (!dia || dia < this.hoy) return;
-    this.fechaSeleccionada = dia;
+  /* Método para seleccionar un día del calendario, actualizando la fecha seleccionada. */
+  seleccionarDia(dia: Date | null) {
+    if (!dia) return;
+
+    const hoySinHora = new Date(
+      this.hoy.getFullYear(),
+      this.hoy.getMonth(),
+      this.hoy.getDate(),
+    );
+
+    const diaSinHora = new Date(
+      dia.getFullYear(),
+      dia.getMonth(),
+      dia.getDate(),
+    );
+
+    if (diaSinHora < hoySinHora) return;
+
+    this.fechaSeleccionada = diaSinHora;
+    this.peliculas = [...this.peliculasOriginales];
     this.cargarSesionesParaPeliculas();
+
+    this.mostrarFecha = false;
   }
 
+  /* Este método devolverá true si el día pasado como parámetro es el día actual. */
   esHoy(dia: Date) {
     if (!dia) return false;
     const h = this.hoy;
@@ -218,6 +181,7 @@ export class CarteleraComponent implements OnInit {
     );
   }
 
+  /* Este método devolverá true si el día pasado como parámetro es el mismo que la fecha seleccionada. */
   esSeleccionado(dia: Date) {
     if (!dia) return false;
     const f = this.fechaSeleccionada;
@@ -228,6 +192,7 @@ export class CarteleraComponent implements OnInit {
     );
   }
 
+  /* Método para navegar al mes anterior, actualizando el calendario y la fecha seleccionada. */
   mesAnterior() {
     if (!this.puedeIrMesAnterior) return;
 
@@ -237,8 +202,11 @@ export class CarteleraComponent implements OnInit {
       this.anioActual--;
     }
     this.generarCalendario();
+    this.fechaSeleccionada = new Date(this.anioActual, this.mesActual, 1);
+    this.cargarSesionesParaPeliculas();
   }
 
+  /* Método para navegar al mes siguiente, actualizando el calendario. */
   mesSiguiente() {
     this.mesActual++;
     if (this.mesActual > 11) {
@@ -246,6 +214,8 @@ export class CarteleraComponent implements OnInit {
       this.anioActual++;
     }
     this.generarCalendario();
+    this.fechaSeleccionada = new Date(this.anioActual, this.mesActual, 1);
+    this.cargarSesionesParaPeliculas();
   }
 
   /* Método para aplicar los filtros. */
@@ -309,12 +279,18 @@ export class CarteleraComponent implements OnInit {
     this.peliculas = [...this.peliculasOriginales];
   }
 
+  /* Método para navegar a la página de detalles de una película, usando el ID de la película de referencia. */
   irAPelicula(id: string) {
     this.router.navigate(['/pelicula', id]);
   }
 
+  /* Método para cargar las sesiones de cada película según la fecha seleccionada. */
   cargarSesionesParaPeliculas() {
-    const fechaISO = this.fechaSeleccionada.toISOString().split('T')[0];
+    const fechaISO = [
+      this.fechaSeleccionada.getFullYear(),
+      String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0'),
+      String(this.fechaSeleccionada.getDate()).padStart(2, '0'),
+    ].join('-');
 
     this.peliculas.forEach((pelicula) => {
       this.sesionesService
