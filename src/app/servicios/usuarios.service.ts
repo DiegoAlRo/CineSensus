@@ -11,6 +11,7 @@ import { Usuario } from '../modelos/usuario';
 
 /* El servicio de usuarios se encarga de gestionar los usuarios. */
 export class UsuariosService {
+  
   /* Define la URL base para las operaciones relacionadas con los usuarios. */
   private apiUrl = 'http://localhost:3000/usuarios';
 
@@ -30,12 +31,12 @@ export class UsuariosService {
     });
   }
 
-  /* Obtener un usuario por ID */
+  /* Con este GET se podrá obtener un usuario por ID. */
   getUsuario(id: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
-  /* Actualizar usuario */
+  /* Este método se encargará de actualizar los datos de un usuario existente. */
   actualizarUsuario(id: string, datos: Partial<Usuario>): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, datos);
   }

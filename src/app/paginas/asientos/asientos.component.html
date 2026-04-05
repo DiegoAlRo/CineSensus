@@ -1,1 +1,78 @@
-<p>asientos works!</p>
+
+<div class="contenedor-asientos">
+
+  <!-- ENCABEZADO -->
+  <div class="header-sesion">
+    <button class="btn-volver" routerLink="/cartelera">← Volver a cartelera</button>
+
+    <h2>{{ sesion.pelicula.titulo }}</h2>
+
+    <div class="detalles-sesion">
+      {{ sesion.fecha | date:'dd/MM' }} •
+      {{ formatearHora(sesion.hora) }} •
+      {{ sesion.pelicula.genero }}  
+      <span class="sala"> • Sala {{ sala.nombre }}</span>
+    </div>
+  </div>
+
+  <!-- PANTALLA -->
+  <div class="pantalla">Pantalla</div>
+
+  <!-- MATRIZ DE ASIENTOS -->
+  <div class="grid-asientos">
+    <div *ngFor="let fila of matrizAsientos; let i = index" class="fila-asientos">
+
+      <!-- Letra de fila -->
+      <span class="letra-fila">{{ getLetraFila(i) }}</span>
+
+      <!-- Asientos -->
+      <div class="asientos-fila">
+        <div
+          *ngFor="let asiento of fila"
+          class="asiento"
+          [class.ocupado]="asiento.ocupado"
+          [class.seleccionado]="asiento.seleccionado"
+          (click)="toggleAsiento(asiento)"
+        ></div>
+      </div>
+
+      <!-- Letra de fila -->
+      <span class="letra-fila">{{ getLetraFila(i) }}</span>
+
+    </div>
+  </div>
+
+  <!-- LEYENDA -->
+  <div class="leyenda">
+    <div><span class="cuadro disponible"></span> Disponible</div>
+    <div><span class="cuadro seleccionado"></span> Seleccionado</div>
+    <div><span class="cuadro ocupado"></span> Ocupado</div>
+  </div>
+
+  <!-- RESUMEN DE COMPRA -->
+  <div class="resumen-compra" *ngIf="asientosSeleccionados.length > 0">
+    <h3>Resumen de compra</h3>
+
+    <p>
+      Asientos seleccionados:
+      <strong>
+        {{ asientosSeleccionados | mapAsientos }}
+      </strong>
+    </p>
+
+    <p>Cantidad: <strong>{{ asientosSeleccionados.length }}</strong></p>
+
+    <p>
+      Precio por entrada:
+      <strong>{{ sesion.precio | number:'1.2-2' }} €</strong>
+    </p>
+
+    <p>
+      Total:
+      <strong>{{ (asientosSeleccionados.length * sesion.precio) | number:'1.2-2' }} €</strong>
+    </p>
+
+    <button class="btn-confirmar">Confirmar compra</button>
+  </div>
+
+</div>

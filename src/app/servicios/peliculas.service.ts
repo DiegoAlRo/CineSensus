@@ -12,9 +12,14 @@ import { map } from 'rxjs';
 
 /* El servicio de peliculas se encarga de gestionar las películas. */
 export class PeliculasService {
+
+  /* Define la URL base para las operaciones relacionadas con las películas. */
   private apiUrl = 'http://localhost:3000/peliculas';
+
+  /* El constructor inyecta el HttpClient para realizar solicitudes HTTP al backend. */
   constructor(private http: HttpClient) {}
 
+  /* Con este método get se podrán obtener todas las películas. */
   getPeliculas(): Observable<Pelicula[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
       map((peliculas) =>

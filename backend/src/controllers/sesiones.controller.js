@@ -28,6 +28,23 @@ export const obtenerSesionesPorPeliculaYFecha = async (req, res) => {
     }
 };
 
+/* Devuelve una sesión por su ID. */
+export const obtenerSesionPorId = async (req, res) => {
+  try {
+    const sesion = await Sesion.findById(req.params.id)
+      .populate('pelicula sala');
+
+    if (!sesion) {
+      return res.status(404).json({ mensaje: 'Sesión no encontrada' });
+    }
+
+    res.json(sesion);
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener sesión', error });
+  }
+};
+
 /* Cojn este método se creará una sesión. */ 
 export const crearSesion = async (req, res) => { 
     

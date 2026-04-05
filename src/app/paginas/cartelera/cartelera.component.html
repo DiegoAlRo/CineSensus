@@ -150,7 +150,7 @@
 
                     <div class="horarios">
                         <span class="horario-chip" *ngFor="let s of pelicula.sesiones"
-                            [routerLink]="['/pelicula', pelicula.id, 'sesion', s.id]">
+                            (click)="$event.stopPropagation()" [routerLink]="['/sesion', s.id, 'asientos']">
                             {{ formatearHora(s.hora) }}
                         </span>
                     </div>

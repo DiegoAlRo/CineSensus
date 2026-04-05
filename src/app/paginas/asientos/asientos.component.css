@@ -1,0 +1,166 @@
+/* CONTENEDOR GENERAL */
+.contenedor-asientos {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* BOTÓN VOLVER */
+.btn-volver {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-volver:hover {
+  text-decoration: underline;
+}
+
+/* ENCABEZADO */
+.header-sesion h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.detalles-sesion {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #666;
+}
+
+.sala {
+  font-weight: 600;
+}
+
+/* PANTALLA */
+.pantalla {
+  margin: 30px auto 20px;
+  width: 80%;
+  height: 25px;
+  background: #ddd;
+  border-radius: 0 0 20px 20px;
+  font-weight: 600;
+  line-height: 25px;
+  color: #444;
+}
+
+/* MATRIZ DE ASIENTOS */
+.grid-asientos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.fila-asientos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.letra-fila {
+  width: 20px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* ASIENTOS */
+.asientos-fila {
+  display: flex;
+  gap: 8px;
+}
+
+.asiento {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #ccc;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.asiento:hover {
+  transform: scale(1.1);
+}
+
+/* ESTADOS */
+.asiento.ocupado {
+  background: #d9534f;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.asiento.seleccionado {
+  background: #5cb85c;
+  transform: scale(1.1);
+}
+
+/* LEYENDA */
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.cuadro {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-right: 6px;
+  border-radius: 4px;
+}
+
+.cuadro.disponible {
+  background: #ccc;
+}
+
+.cuadro.seleccionado {
+  background: #5cb85c;
+}
+
+.cuadro.ocupado {
+  background: #d9534f;
+}
+
+/* RESUMEN DE COMPRA */
+.resumen-compra {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.resumen-compra h3 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn-confirmar {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #007bff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-confirmar:hover {
+  background: #0056b3;
+}
