@@ -1,56 +1,72 @@
-
+<!-- Este será el contenedor donde se contendrá la vista. -->
 <div class="contenedor-asientos">
 
-  <!-- ENCABEZADO -->
-  <div class="header-sesion">
-    <button class="btn-volver" routerLink="/cartelera">← Volver a cartelera</button>
+  <!-- Tarjeta con información de la sesión. -->
+  <div class="tarjeta-sesion">
 
-    <h2>{{ sesion.pelicula.titulo }}</h2>
-
-    <div class="detalles-sesion">
-      {{ sesion.fecha | date:'dd/MM' }} •
-      {{ formatearHora(sesion.hora) }} •
-      {{ sesion.pelicula.genero }}  
-      <span class="sala"> • Sala {{ sala.nombre }}</span>
+    <!-- La tarjeta estará dividida en dos partes: izquierda y derecha(Es prácticamente centro). -->
+    <div class="tarjeta-sesion-izquierda">
+      <button class="btn-volver-sesion" routerLink="/cartelera">
+        ← Volver a Cartelera
+      </button>
     </div>
+
+    <div class="tarjeta-sesion-centro">
+      <h2 class="titulo-pelicula-sesion">
+        {{ sesion.pelicula.titulo }} •
+
+        <span class="detalle-sala">
+          {{ sala.nombre }}
+        </span>
+
+      </h2>
+
+      <div class="detalles-sesion">
+        <span class="detalle-fecha">
+          {{ fechaLargaSesion }}
+        </span>
+
+        <span class="detalle-hora">
+          {{ formatearHora(sesion.hora) }}
+        </span>
+      </div>
+    </div>
+
   </div>
 
-  <!-- PANTALLA -->
+  <!-- Con esto se representará visualmente la pantalla. -->
   <div class="pantalla">Pantalla</div>
 
-  <!-- MATRIZ DE ASIENTOS -->
+  <!-- Aquí se generarán los asientos de la sala. -->
   <div class="grid-asientos">
     <div *ngFor="let fila of matrizAsientos; let i = index" class="fila-asientos">
 
-      <!-- Letra de fila -->
+      <!-- Letras de las filas. -->
       <span class="letra-fila">{{ getLetraFila(i) }}</span>
 
-      <!-- Asientos -->
+      <!-- Asientos. -->
       <div class="asientos-fila">
-        <div
-          *ngFor="let asiento of fila"
-          class="asiento"
-          [class.ocupado]="asiento.ocupado"
-          [class.seleccionado]="asiento.seleccionado"
-          (click)="toggleAsiento(asiento)"
-        ></div>
+        <div *ngFor="let asiento of fila" class="asiento" [class.ocupado]="asiento.ocupado"
+          [class.seleccionado]="asiento.seleccionado" (click)="toggleAsiento(asiento)"></div>
       </div>
 
-      <!-- Letra de fila -->
+      <!-- Letras de las filas. -->
       <span class="letra-fila">{{ getLetraFila(i) }}</span>
 
     </div>
   </div>
 
-  <!-- LEYENDA -->
+  <!-- Debajo se mostrará una pequeña guía respecto a los estados de los asientos. -->
   <div class="leyenda">
     <div><span class="cuadro disponible"></span> Disponible</div>
     <div><span class="cuadro seleccionado"></span> Seleccionado</div>
     <div><span class="cuadro ocupado"></span> Ocupado</div>
   </div>
 
-  <!-- RESUMEN DE COMPRA -->
+  <!-- Al seleccionar los asientos se mostrará un pequeño resumen de la reserva. -->
   <div class="resumen-compra" *ngIf="asientosSeleccionados.length > 0">
+
+    <!-- Aquí se listarán los asientos seleccionados, la cantidad, el precio por entrada y el total. -->
     <h3>Resumen de compra</h3>
 
     <p>
@@ -66,6 +82,8 @@
       Precio por entrada:
       <strong>{{ sesion.precio | number:'1.2-2' }} €</strong>
     </p>
+
+    <div class="separador"></div>
 
     <p>
       Total:

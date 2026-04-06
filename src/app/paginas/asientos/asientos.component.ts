@@ -18,6 +18,7 @@ import { MapAsientosPipe } from '../../pipes/map-asientos.pipe';
 
 /* La clase del componente, que implementa OnInit para cargar los datos al iniciar. */
 export class AsientosComponent implements OnInit {
+
   /* Se almacenan la sesión, la sala y la matriz de asientos para mostrarlas en la plantilla. */
   sesion!: Sesion;
   sala!: Sala;
@@ -37,11 +38,31 @@ export class AsientosComponent implements OnInit {
     if (!idSesion) return;
 
     this.sesionesService.getSesionPorId(idSesion).subscribe((sesion) => {
-      console.log("SESION RECIBIDA:", sesion);
+      console.log('SESION RECIBIDA:', sesion);
       this.sesion = sesion;
       this.sala = sesion.sala;
       this.generarMatrizDeAsientos();
     });
+  }
+
+  /* Getter para obtener la fecha de la sesión en formato largo, por ejemplo: "Lunes, 1 de Enero de 2024". */
+  get fechaLargaSesion(): string {
+    if (!this.sesion?.fecha) return '';
+
+    const fecha = new Date(this.sesion.fecha);
+
+    const opciones: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+
+    let texto = fecha.toLocaleDateString('es-ES', opciones);
+
+    texto = texto.charAt(0).toUpperCase() + texto.slice(1);
+
+    return texto;
   }
 
   /* Método para generar una matriz de asientos teniendo en cuenta los libres y los asientos ocupados. */
@@ -64,13 +85,17 @@ export class AsientosComponent implements OnInit {
     }
   }
 
+  /* Método para alternar la selección de un asiento, agregándolo o quitándolo de la lista de asientos seleccionados. */
   toggleAsiento(asiento: any) {
     if (asiento.ocupado) return;
 
     asiento.seleccionado = !asiento.seleccionado;
 
     if (asiento.seleccionado) {
-      this.asientosSeleccionados.push({ fila: asiento.fila, col: asiento.col });
+      this.asientosSeleccionados = [
+        ...this.asientosSeleccionados,
+        { fila: asiento.fila, col: asiento.col },
+      ];
     } else {
       this.asientosSeleccionados = this.asientosSeleccionados.filter(
         (a) => !(a.fila === asiento.fila && a.col === asiento.col),
@@ -78,21 +103,25 @@ export class AsientosComponent implements OnInit {
     }
   }
 
+  /* Método para formatear un asiento en formato "A1", "B3", etc. a partir de su fila y columna. */
   formatearAsiento(a: { fila: number; col: number }) {
     const letra = String.fromCharCode(65 + a.fila); // 65 = A
     return `${letra}${a.col + 1}`;
   }
 
+  /* Método para obtener la letra de una fila a partir de su índice, 0 -> A, 1 -> B, etc. */
   getLetraFila(i: number) {
     return String.fromCharCode(65 + i);
   }
 
+  /* Getter para obtener un texto con los asientos seleccionados formateados, por ejemplo: "A1, A2, B3". */
   get asientosSeleccionadosTexto() {
     return this.asientosSeleccionados
       .map((a) => this.formatearAsiento(a))
       .join(', ');
   }
 
+  /* Método para formatear una hora en formato "HHMM" a "HH:MM". */
   formatearHora(hora: string) {
     return hora.slice(0, 2) + ':' + hora.slice(2, 4);
   }

@@ -20,8 +20,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./cartelera.component.css'],
 })
 
-/* Clase del componente que implementa la interfaz OnInit para inicializar datos al cargar la página. */
+/* Clase la cartelera que usa OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
+
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
@@ -41,7 +42,7 @@ export class CarteleraComponent implements OnInit {
   diasCalendario: Date[] = [];
   diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
-  /* Este getter devuelve el nombre del mes actual. */
+  /* Este getter devuelve el nombre del mes actual en español. */
   get nombreMesActual() {
     return new Date(this.anioActual, this.mesActual, 1).toLocaleDateString(
       'es-ES',
@@ -163,10 +164,12 @@ export class CarteleraComponent implements OnInit {
 
     if (diaSinHora < hoySinHora) return;
 
+    /* Junto a la fecha, se actualizarán las sesiones para mostrar solo las del día seleccionado. */
     this.fechaSeleccionada = diaSinHora;
     this.peliculas = [...this.peliculasOriginales];
     this.cargarSesionesParaPeliculas();
 
+    /* Luego se cerrará el calendario. */
     this.mostrarFecha = false;
   }
 
@@ -221,11 +224,9 @@ export class CarteleraComponent implements OnInit {
   /* Método para aplicar los filtros. */
   aplicarFiltros() {
     this.peliculas = this.peliculasOriginales.filter((p) => {
+
       /* Filtro por título. */
-      if (
-        this.filtroTitulo.trim() !== '' &&
-        !p.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())
-      ) {
+      if (this.filtroTitulo.trim() !== '' && !p.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())) {
         return false;
       }
 

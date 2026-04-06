@@ -57,7 +57,7 @@
     transition: 0.2s;
 }
 
-/* Estilo para el botón rojo al pasar el mouse. */
+/* Estilo para el botón rojo al pasar el ratón. */
 .btn-rojo:hover {
     background: #b20710;
 }
@@ -104,7 +104,7 @@
     transition: 0.2s;
 }
 
-/* Estilo para el botón gris al pasar el mouse. */
+/* Estilo para el botón gris al pasar el retón. */
 .btn-gris:hover {
     background: #444;
 }
@@ -117,7 +117,7 @@
     margin-top: 10px;
 }
 
-/* Estilo para el enlace de "Entrar sin registrarse" al pasar el mouse. */
+/* Estilo para el enlace de "Entrar sin registrarse" al pasar el ratón. */
 .entrar-sin:hover {
     color: white;
 }

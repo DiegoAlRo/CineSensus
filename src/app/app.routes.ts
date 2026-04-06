@@ -6,6 +6,8 @@ export const routes: Routes = [
 
   /* Esta ruta se cargará por defecto y mostrará la página de bienvenida. */
   { path: '', loadComponent: () => import('./paginas/bienvenida/bienvenida.component') .then(m => m.BienvenidaComponent) },
+
+  /* El resto de rutas serán accesibles siguiendo un flujo basado en carteleras reales. */
   { path: 'registro', loadComponent: () => import('./paginas/registro/registro.component') .then(m => m.RegistroComponent) },
   { path: 'login', loadComponent: () => import('./paginas/login/login.component') .then(m => m.LoginComponent) },
   { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.component').then(m => m.PerfilComponent) },
