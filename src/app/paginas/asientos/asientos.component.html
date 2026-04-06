@@ -46,8 +46,9 @@
 
       <!-- Asientos. -->
       <div class="asientos-fila">
-        <div *ngFor="let asiento of fila" class="asiento" [class.ocupado]="asiento.ocupado"
-          [class.seleccionado]="asiento.seleccionado" (click)="toggleAsiento(asiento)"></div>
+        <div *ngFor="let asiento of fila; let j = index" class="asiento" [class.ocupado]="asiento.ocupado"
+          [class.seleccionado]="asiento.seleccionado" (click)="toggleAsiento(asiento, i, j)">
+        </div>
       </div>
 
       <!-- Letras de las filas. -->
@@ -90,7 +91,8 @@
       <strong>{{ (asientosSeleccionados.length * sesion.precio) | number:'1.2-2' }} €</strong>
     </p>
 
-    <button class="btn-confirmar">Confirmar compra</button>
+    <!-- Botón para continuar con la compra, que llevará a la página de pago. -->
+    <button class="btn-confirmar" (click)="irAPago()">Continuar con la compra</button>
   </div>
 
 </div>

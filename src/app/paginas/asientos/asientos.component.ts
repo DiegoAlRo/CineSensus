@@ -1,11 +1,12 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SesionesService } from '../../servicios/sesiones.service';
 import { Sesion } from '../../modelos/sesion';
 import { Sala } from '../../modelos/sala';
 import { MapAsientosPipe } from '../../pipes/map-asientos.pipe';
+import { PagoService } from '../../servicios/pago.service';
 
 /* Componente para mostrar los asientos disponibles de una sesión. */
 @Component({
@@ -18,7 +19,6 @@ import { MapAsientosPipe } from '../../pipes/map-asientos.pipe';
 
 /* La clase del componente, que implementa OnInit para cargar los datos al iniciar. */
 export class AsientosComponent implements OnInit {
-
   /* Se almacenan la sesión, la sala y la matriz de asientos para mostrarlas en la plantilla. */
   sesion!: Sesion;
   sala!: Sala;
@@ -29,6 +29,8 @@ export class AsientosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sesionesService: SesionesService,
+    private pagoService: PagoService,
+    private router: Router,
   ) {}
 
   /* Al iniciar el componente, se obtiene el ID de la sesión desde la ruta y se carga la sesión correspondiente. */
@@ -86,7 +88,7 @@ export class AsientosComponent implements OnInit {
   }
 
   /* Método para alternar la selección de un asiento, agregándolo o quitándolo de la lista de asientos seleccionados. */
-  toggleAsiento(asiento: any) {
+  toggleAsiento(asiento: any, fila: number, col: number) {
     if (asiento.ocupado) return;
 
     asiento.seleccionado = !asiento.seleccionado;
@@ -94,11 +96,11 @@ export class AsientosComponent implements OnInit {
     if (asiento.seleccionado) {
       this.asientosSeleccionados = [
         ...this.asientosSeleccionados,
-        { fila: asiento.fila, col: asiento.col },
+        { fila, col },
       ];
     } else {
       this.asientosSeleccionados = this.asientosSeleccionados.filter(
-        (a) => !(a.fila === asiento.fila && a.col === asiento.col),
+        (a) => !(a.fila === fila && a.col === col),
       );
     }
   }
@@ -124,5 +126,16 @@ export class AsientosComponent implements OnInit {
   /* Método para formatear una hora en formato "HHMM" a "HH:MM". */
   formatearHora(hora: string) {
     return hora.slice(0, 2) + ':' + hora.slice(2, 4);
+  }
+
+  /* Con este método el usuario será enviado al pago de la reserva. */
+  irAPago() {
+    this.pagoService.datosCompra = {
+      sesion: this.sesion,
+      asientos: this.asientosSeleccionados,
+      total: this.asientosSeleccionados.length * this.sesion.precio,
+    };
+
+    this.router.navigate(['/pago-entrada']);
   }
 }

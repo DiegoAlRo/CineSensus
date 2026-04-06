@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.component').then(m => m.PerfilComponent) },
   { path: 'cartelera', loadComponent: () => import('./paginas/cartelera/cartelera.component').then(m => m.CarteleraComponent) },
   { path: 'pelicula/:id', loadComponent: () => import('./paginas/info-pelicula/info-pelicula.component').then(m => m.InfoPeliculaComponent) },
-  { path: 'sesion/:idSesion/asientos', loadComponent: () => import('./paginas/asientos/asientos.component').then(m => m.AsientosComponent) }
+  { path: 'sesion/:idSesion/asientos', loadComponent: () => import('./paginas/asientos/asientos.component').then(m => m.AsientosComponent) },
+  { path: 'pago-entrada', loadComponent: () => import('./paginas/pago-entrada/pago-entrada.component').then(m => m.PagoEntradaComponent) }
 
  ];

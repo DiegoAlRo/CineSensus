@@ -1,0 +1,53 @@
+<div class="contenedor-pago">
+
+    <!-- Tarjeta superior -->
+    <div class="tarjeta-resumen">
+        <h2>{{ datos?.sesion?.pelicula?.titulo }}</h2>
+
+        <p class="info">
+            {{ datos?.sesion?.fecha | date:'fullDate':'es-ES' }} •
+            {{ datos?.sesion?.hora | slice:0:2 }}:{{ datos?.sesion?.hora | slice:2:4 }} •
+            {{ datos?.sesion?.sala?.nombre }}
+        </p>
+
+        <p class="asientos">
+            Asientos: <strong>{{ asientosFormateados.join(', ') }}</strong>
+        </p>
+
+        <p class="total">
+            Total: <strong>{{ datos?.total | number:'1.2-2' }} €</strong>
+        </p>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="formulario" class="formulario">
+
+        <label>
+            Nombre del titular
+            <input formControlName="nombre" type="text" placeholder="Ej: Carlos Pérez">
+        </label>
+
+        <label>
+            Número de tarjeta
+            <input formControlName="numero" type="text" maxlength="16" placeholder="1234123412341234">
+        </label>
+
+        <div class="fila">
+            <label>
+                Caducidad
+                <input formControlName="caducidad" type="text" placeholder="MM/YY">
+            </label>
+
+            <label>
+                CVV
+                <input formControlName="cvv" type="text" maxlength="3" placeholder="123">
+            </label>
+        </div>
+
+        <button class="btn-confirmar" (click)="confirmarPago()">
+            Confirmar compra
+        </button>
+
+    </form>
+
+</div>
