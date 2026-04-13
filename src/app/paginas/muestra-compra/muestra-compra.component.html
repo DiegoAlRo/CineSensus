@@ -1,36 +1,46 @@
 <div class="muestra-container">
 
-  <h1>¡Reserva completada!</h1>
+  <div class="tarjeta-compra">
 
-  <section class="info-pelicula">
-    <h2>{{ reserva.pelicula.titulo }}</h2>
-    <p>Duración: {{ reserva.pelicula.duracion }} min</p>
-  </section>
+    <h1 class="titulo-principal">COMPRA REALIZADA</h1>
 
-  <section class="info-sesion">
-    <p><strong>Fecha:</strong> {{ reserva.fechaReserva | date:'shortDate' }}</p>
-    <p><strong>Hora:</strong> {{ reserva.fechaReserva | date:'shortTime' }}</p>
-    <p><strong>Sala:</strong> {{ reserva.sesion }}</p>
-  </section>
+    <h2 class="subtitulo">
+      Entrada/s para: <span>{{ reserva?.pelicula?.titulo }}</span>
+    </h2>
 
-  <section class="info-asientos">
-    <h3>Asientos</h3>
-    <ul>
-      <li *ngFor="let a of reserva.asientos">
-        {{ formatearAsiento(a) }}
-      </li>
-    </ul>
-  </section>
+    <div class="poster-container">
+      <img [src]="reserva?.sesion?.pelicula?.poster" alt="Póster de la película">
+    </div>
 
-  <section class="info-total">
-    <p><strong>Total pagado:</strong> {{ reserva.total }} €</p>
-  </section>
+    <section class="info-bloque">
+      <p><strong>Duración:</strong> {{ reserva?.pelicula?.duracion }} min</p>
+      <p><strong>Fecha:</strong> {{ reserva?.sesion?.fecha | date:'shortDate' }}</p>
+      <p><strong>Hora:</strong> {{ reserva?.sesion?.hora | slice:0:2 }}:{{ reserva?.sesion?.hora | slice:2:4 }}</p>
+      <p><strong>Sala:</strong> {{ reserva?.sesion?.sala?.nombre }}</p>
+    </section>
 
-  <section class="codigo">
-    <p><strong>Código de entrada:</strong></p>
-    <div class="codigo-box">{{ reserva.codigoEntrada }}</div>
-  </section>
+    <section class="info-bloque">
+      <h3>Asientos</h3>
+      <ul>
+        <li *ngFor="let a of reserva?.asientos">
+          {{ formatearAsiento(a) }}
+        </li>
+      </ul>
+    </section>
 
-  <button routerLink="/cartelera">Volver a la cartelera</button>
+    <section class="info-bloque">
+      <p><strong>Total pagado:</strong> {{ reserva?.total }} €</p>
+    </section>
+
+    <section class="info-bloque">
+      <p><strong>Código de entrada:</strong></p>
+      <div class="codigo-box">{{ reserva?.codigoEntrada }}</div>
+    </section>
+
+    <button type="button" routerLink="/cartelera" class="btn-volver">
+      Volver a la cartelera
+    </button>
+
+  </div>
 
 </div>

@@ -9,12 +9,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 /* La clase del Pipe implementa PipeTransform, lo que obliga a definir el método transform. */
 export class MapAsientosPipe implements PipeTransform {
+  
   /* El método transform recibe un array de asientos ocupados, donde cada asiento tiene una fila y una columna. */
-  transform(asientos: { fila: number; col: number }[]): string {
+  transform(asientos: { fila: number; columna: number }[]): string {
     return asientos
       .map((a) => {
         const letra = String.fromCharCode(65 + a.fila);
-        return `${letra}${a.col + 1}`;
+        return `${letra}${a.columna + 1}`;
       })
       .join(', ');
     }

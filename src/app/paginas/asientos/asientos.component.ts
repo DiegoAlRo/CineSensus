@@ -23,7 +23,7 @@ export class AsientosComponent implements OnInit {
   sesion!: Sesion;
   sala!: Sala;
   matrizAsientos: any[][] = [];
-  asientosSeleccionados: { fila: number; col: number }[] = [];
+  asientosSeleccionados: { fila: number; columna: number }[] = [];
 
   /* Se inyectan los servicios necesarios para obtener la sesión y sus datos relacionados. */
   constructor(
@@ -68,17 +68,17 @@ export class AsientosComponent implements OnInit {
 
   /* Método para generar una matriz de asientos teniendo en cuenta los libres y los asientos ocupados. */
   generarMatrizDeAsientos() {
-    console.log(">>> RESPUESTA ENVIADA AL FRONT");
+
     this.matrizAsientos = [];
 
     for (let fila = 0; fila < this.sala.filas; fila++) {
       const filaAsientos = [];
-      for (let col = 0; col < this.sala.columnas; col++) {
+      for (let columna = 0; columna < this.sala.columnas; columna++) {
         filaAsientos.push({
           fila,
-          col,
+          columna,
           ocupado: this.sesion.asientosOcupados.some(
-            (a) => a.fila === fila && a.columna === col,
+            (a) => a.fila === fila && a.columna === columna,
           ),
           seleccionado: false,
         });
@@ -88,7 +88,7 @@ export class AsientosComponent implements OnInit {
   }
 
   /* Método para alternar la selección de un asiento, agregándolo o quitándolo de la lista de asientos seleccionados. */
-  toggleAsiento(asiento: any, fila: number, col: number) {
+  toggleAsiento(asiento: any, fila: number, columna: number) {
     if (asiento.ocupado) return;
 
     asiento.seleccionado = !asiento.seleccionado;
@@ -96,19 +96,19 @@ export class AsientosComponent implements OnInit {
     if (asiento.seleccionado) {
       this.asientosSeleccionados = [
         ...this.asientosSeleccionados,
-        { fila, col },
+        { fila, columna },
       ];
     } else {
       this.asientosSeleccionados = this.asientosSeleccionados.filter(
-        (a) => !(a.fila === fila && a.col === col),
+        (a) => !(a.fila === fila && a.columna === columna),
       );
     }
   }
 
   /* Método para formatear un asiento en formato "A1", "B3", etc. a partir de su fila y columna. */
-  formatearAsiento(a: { fila: number; col: number }) {
+  formatearAsiento(a: { fila: number; columna: number }) {
     const letra = String.fromCharCode(65 + a.fila); // 65 = A
-    return `${letra}${a.col + 1}`;
+    return `${letra}${a.columna + 1}`;
   }
 
   /* Método para obtener la letra de una fila a partir de su índice, 0 -> A, 1 -> B, etc. */
@@ -136,6 +136,7 @@ export class AsientosComponent implements OnInit {
       total: this.asientosSeleccionados.length * this.sesion.precio,
     };
 
+    /* Se navega a la página de pago. */
     this.router.navigate(['/pago-entrada']);
   }
 }

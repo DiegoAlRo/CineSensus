@@ -1,4 +1,4 @@
-/* Imports necesarios para el modelo. */
+/* Imports de modelos para el modelo. */
 import { Pelicula } from "./pelicula";
 import { Sala } from "./sala";
 

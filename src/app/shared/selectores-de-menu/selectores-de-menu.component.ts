@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-/* Constructor. */
+/* Componente para los selectores de menú. */
 @Component({
   selector: 'app-selectores-de-menu',
   imports: [RouterModule],

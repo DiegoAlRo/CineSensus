@@ -25,12 +25,14 @@ export class PagoEntradaComponent implements OnInit {
   formulario: any;
   asientosFormateados: string[] = [];
 
+  /* El constructor inyecta el servicio de reservas, el form builder para crear el formulario y el router para redirigir. */
   constructor(
     private reservasService: ReservasService,
     private fb: FormBuilder,
     private router: Router,
   ) {
 
+    /* Se crea el formulario con los campos necesarios y sus validaciones. */
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
       numero: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
@@ -42,6 +44,7 @@ export class PagoEntradaComponent implements OnInit {
     });
   }
 
+  /* Al inciar el componente, se cargan los datos de la compra desde el servicio y si no hay datos, se redirige a la cartelera. */
   ngOnInit() {
     this.datos = this.reservasService.datosCompra;
 
@@ -55,14 +58,16 @@ export class PagoEntradaComponent implements OnInit {
     );
   }
 
-  convertirAsiento(asiento: { fila: number; col: number }) {
+  /* Método para cambiar el formato de fila/columna a formato letra/número. */
+  convertirAsiento(asiento: { fila: number; columna: number }) {
     const letra = String.fromCharCode(65 + asiento.fila);
-    const numero = asiento.col + 1;
+    const numero = asiento.columna + 1;
     return `${letra}${numero}`;
   }
 
+  /* Método para confirmar el pago teniendo en cuenta los datos del formulario. */
   confirmarPago() {
-    debugger;
+
     if (this.formulario.invalid) {
       console.log('Formulario inválido');
       return;
@@ -77,23 +82,22 @@ export class PagoEntradaComponent implements OnInit {
 
     const usuarioId = usuario.id;
 
+    /* Se preparan los datos para crear la reserva. */
     const datos = {
       usuarioId,
       sesionId: this.datos!.sesion._id,
       asientos: this.datos!.asientos.map((a) => ({
         fila: a.fila,
-        columna: a.col,
+        columna: a.columna,
       })),
       total: this.datos!.total,
     };
 
-    debugger
-    console.log('Datos enviados:', datos);
+    /* Se llama al servicio para crear la reserva y se maneja la respuesta. */
     this.reservasService.crearReserva(datos).subscribe({
       next: (reserva) => {
-        this.router.navigate(['/muestra-compra'], {
-          state: { reserva },
-        });
+        this.reservasService.reservaActual = reserva;
+        this.router.navigate(['/muestra-compra']);
       },
       error: (err) => {
         console.error('Error al crear reserva:', err);

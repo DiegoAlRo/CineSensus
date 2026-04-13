@@ -1,25 +1,20 @@
-/* Define la interfaz de una reserva. */
-export interface Reserva {
-  id: string;
-  usuario: string;
-  sesion: string;
+/* Imports de modelos para formar una reserva. */
+import { Usuario } from './usuario';
+import { Sesion } from './sesion';
 
+/* Esta interfaz define la estructura de una reserva. */
+export interface Reserva {
+  _id: string;
+  usuario: Usuario;
+  sesion: Sesion;
   pelicula: {
     id: string;
     titulo: string;
     duracion: number;
   };
-
   fechaReserva: string;
-
-  asientos: {
-    fila: number;
-    columna: number;
-  }[];
-
+  asientos: { fila: number; columna: number }[];
   total: number;
-
   estado: 'pagada';
-
   codigoEntrada: string;
 }

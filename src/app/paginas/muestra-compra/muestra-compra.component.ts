@@ -1,31 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Reserva } from '../../modelos/reserva';
+import { ReservasService } from '../../servicios/reservas.service';
 
 @Component({
   selector: 'app-muestra-compra',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './muestra-compra.component.html',
-  styleUrl: './muestra-compra.component.css'
+  styleUrls: ['./muestra-compra.component.css'],
 })
-
 export class MuestraCompraComponent implements OnInit {
+  reserva: Reserva | null = null;
 
-  reserva!: Reserva;
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private reservasService: ReservasService) {}
 
   ngOnInit() {
-    const state = history.state;
+    this.reserva = this.reservasService.reservaActual;
 
-    if (!state || !state.reserva) {
+    if (!this.reserva) {
       this.router.navigate(['/cartelera']);
       return;
     }
-
-    this.reserva = state.reserva;
   }
 
   formatearAsiento(a: { fila: number; columna: number }) {

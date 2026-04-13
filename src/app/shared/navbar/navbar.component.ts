@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 
 /* Se especifica la configuración del componente. */
