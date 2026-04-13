@@ -1,0 +1,14 @@
+.muestra-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.codigo-box {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  background: #eee;
+  border-radius: 6px;
+  text-align: center;
+}

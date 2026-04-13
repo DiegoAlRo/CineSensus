@@ -110,7 +110,9 @@
                     <div *ngFor="let dia of diasCalendario" class="dia" [class.hoy]="esHoy(dia)"
                         [class.seleccionado]="esSeleccionado(dia)" [class.desactivado]="dia && dia < hoy"
                         (click)="dia && seleccionarDia(dia)">
-                        {{ dia.getDate() }}
+
+                        <!-- Si el día es null, no habrá problemas. -->
+                        {{ dia?.getDate() }}
                     </div>
                 </div>
             </div>

@@ -4,7 +4,8 @@ import { Sala } from "./sala";
 
 /* Define la interfaz para un horario. */
 export interface Sesion {
-  id: string;
+  _id: string;
+  id?: string; // Id de elemento que referenciará
   fecha: Date; // Date real
   sala: Sala; // Objeto Sala
   pelicula: Pelicula; // Objeto Pelicula

@@ -1,0 +1,36 @@
+<div class="muestra-container">
+
+  <h1>¡Reserva completada!</h1>
+
+  <section class="info-pelicula">
+    <h2>{{ reserva.pelicula.titulo }}</h2>
+    <p>Duración: {{ reserva.pelicula.duracion }} min</p>
+  </section>
+
+  <section class="info-sesion">
+    <p><strong>Fecha:</strong> {{ reserva.fechaReserva | date:'shortDate' }}</p>
+    <p><strong>Hora:</strong> {{ reserva.fechaReserva | date:'shortTime' }}</p>
+    <p><strong>Sala:</strong> {{ reserva.sesion }}</p>
+  </section>
+
+  <section class="info-asientos">
+    <h3>Asientos</h3>
+    <ul>
+      <li *ngFor="let a of reserva.asientos">
+        {{ formatearAsiento(a) }}
+      </li>
+    </ul>
+  </section>
+
+  <section class="info-total">
+    <p><strong>Total pagado:</strong> {{ reserva.total }} €</p>
+  </section>
+
+  <section class="codigo">
+    <p><strong>Código de entrada:</strong></p>
+    <div class="codigo-box">{{ reserva.codigoEntrada }}</div>
+  </section>
+
+  <button routerLink="/cartelera">Volver a la cartelera</button>
+
+</div>

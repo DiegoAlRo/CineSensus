@@ -2,18 +2,16 @@
 import express from 'express'; 
 import cors from 'cors'; 
 import dotenv from 'dotenv'; 
-import { connectDB } from './config/db.js'; 
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { connectDB } from './config/db.js';
 
-/* Rutas. */ 
-import peliculasRoutes from './routes/peliculas.routes.js'; 
-import usuariosRoutes from './routes/usuarios.routes.js'; 
-import salasRoutes from './routes/salas.routes.js'; 
-import sesionesRoutes from './routes/sesiones.routes.js'; 
-import reservasRoutes from './routes/reservas.routes.js'; 
-import resenasRoutes from './routes/resenas.routes.js'; 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-/* Variables de .env. */ 
-dotenv.config(); 
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
+/* Crear app */
 const app = express(); 
 app.use(cors()); 
 app.use(express.json()); 
@@ -25,6 +23,14 @@ connectDB();
 app.get('/', (req, res) => { 
   res.send('Backend de CineSensus funcionando'); 
 }); 
+
+/* Rutas. */ 
+import peliculasRoutes from './routes/peliculas.routes.js'; 
+import usuariosRoutes from './routes/usuarios.routes.js'; 
+import salasRoutes from './routes/salas.routes.js'; 
+import sesionesRoutes from './routes/sesiones.routes.js'; 
+import reservasRoutes from './routes/reservas.routes.js'; 
+import resenasRoutes from './routes/resenas.routes.js'; 
 
 /* Rutas del API. */ 
 app.use('/peliculas', peliculasRoutes); 

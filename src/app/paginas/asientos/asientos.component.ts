@@ -6,7 +6,7 @@ import { SesionesService } from '../../servicios/sesiones.service';
 import { Sesion } from '../../modelos/sesion';
 import { Sala } from '../../modelos/sala';
 import { MapAsientosPipe } from '../../pipes/map-asientos.pipe';
-import { PagoService } from '../../servicios/pago.service';
+import { ReservasService } from '../../servicios/reservas.service';
 
 /* Componente para mostrar los asientos disponibles de una sesión. */
 @Component({
@@ -29,7 +29,7 @@ export class AsientosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sesionesService: SesionesService,
-    private pagoService: PagoService,
+    private reservasService: ReservasService,
     private router: Router,
   ) {}
 
@@ -40,7 +40,6 @@ export class AsientosComponent implements OnInit {
     if (!idSesion) return;
 
     this.sesionesService.getSesionPorId(idSesion).subscribe((sesion) => {
-      console.log('SESION RECIBIDA:', sesion);
       this.sesion = sesion;
       this.sala = sesion.sala;
       this.generarMatrizDeAsientos();
@@ -69,6 +68,7 @@ export class AsientosComponent implements OnInit {
 
   /* Método para generar una matriz de asientos teniendo en cuenta los libres y los asientos ocupados. */
   generarMatrizDeAsientos() {
+    console.log(">>> RESPUESTA ENVIADA AL FRONT");
     this.matrizAsientos = [];
 
     for (let fila = 0; fila < this.sala.filas; fila++) {
@@ -130,7 +130,7 @@ export class AsientosComponent implements OnInit {
 
   /* Con este método el usuario será enviado al pago de la reserva. */
   irAPago() {
-    this.pagoService.datosCompra = {
+    this.reservasService.datosCompra = {
       sesion: this.sesion,
       asientos: this.asientosSeleccionados,
       total: this.asientosSeleccionados.length * this.sesion.precio,

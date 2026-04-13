@@ -13,10 +13,10 @@
 
     <div class="tarjeta-sesion-centro">
       <h2 class="titulo-pelicula-sesion">
-        {{ sesion.pelicula.titulo }} •
+        {{ sesion?.pelicula?.titulo }} •
 
         <span class="detalle-sala">
-          {{ sala.nombre }}
+          {{ sala?.nombre }}
         </span>
 
       </h2>
@@ -27,7 +27,7 @@
         </span>
 
         <span class="detalle-hora">
-          {{ formatearHora(sesion.hora) }}
+          {{ formatearHora(sesion?.hora || '') }}
         </span>
       </div>
     </div>
@@ -81,14 +81,14 @@
 
     <p>
       Precio por entrada:
-      <strong>{{ sesion.precio | number:'1.2-2' }} €</strong>
+      <strong>{{ sesion?.precio | number:'1.2-2' }} €</strong>
     </p>
 
     <div class="separador"></div>
 
     <p>
       Total:
-      <strong>{{ (asientosSeleccionados.length * sesion.precio) | number:'1.2-2' }} €</strong>
+      <strong>{{ (asientosSeleccionados.length * (sesion?.precio || 0)) | number:'1.2-2' }} €</strong>
     </p>
 
     <!-- Botón para continuar con la compra, que llevará a la página de pago. -->

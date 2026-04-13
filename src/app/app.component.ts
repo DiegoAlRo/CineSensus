@@ -32,8 +32,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  /* Al iniciar la app se eliminará el localStorege, evitando sesiones anteriores. */
-  ngOnInit(): void {
-    localStorage.removeItem('usuario');
-  }
+  /* Vacío. */
+  ngOnInit(): void {}
 }

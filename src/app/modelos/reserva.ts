@@ -3,9 +3,23 @@ export interface Reserva {
   id: string;
   usuario: string;
   sesion: string;
-  fechaReserva: string; // ISO string
+
+  pelicula: {
+    id: string;
+    titulo: string;
+    duracion: number;
+  };
+
+  fechaReserva: string;
+
   asientos: {
     fila: number;
     columna: number;
-  }[]; // Índices de asientos reservados
+  }[];
+
+  total: number;
+
+  estado: 'pagada';
+
+  codigoEntrada: string;
 }

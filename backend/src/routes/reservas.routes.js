@@ -1,19 +1,13 @@
 /* Imports necesarios. */
-import express from 'express'; 
-import { obtenerReservas, crearReserva } from '../controllers/reservas.controller.js'; 
+import express from 'express';
+import { crearReserva } from '../controllers/reservas.controller.js';
 
-const router = express.Router(); 
-
-/**
- * GET /reservas.
- * Devuelve todas las reservas.
- */
-router.get('/', obtenerReservas);
+const router = express.Router();
 
 /**
  * POST /reservas.
  * Crea una reserva.
  */
-router.post('/', crearReserva); 
-
+router.post('/', crearReserva);
+  
 export default router;

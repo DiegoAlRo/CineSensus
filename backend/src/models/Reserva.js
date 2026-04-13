@@ -5,23 +5,38 @@ import mongoose from 'mongoose';
  * Modelo de reserva para CineSensus. 
  * Representa la información básica de una reserva almacenada en MongoDB.
  */
-const ReservaSchema = new mongoose.Schema({ 
-    
-    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }, 
-    sesion: { type: mongoose.Schema.Types.ObjectId, ref: 'Sesion', required: true },  
-    fechaReserva: { type: Date, default: Date.now },
-    asientos: [
+const ReservaSchema = new mongoose.Schema({
+  usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
+  sesion: { type: mongoose.Schema.Types.ObjectId, ref: 'Sesion', required: true },
+
+  pelicula: {
+    id: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true },
+    titulo: String,
+    duracion: Number
+  },
+
+  fechaReserva: { type: Date, default: Date.now },
+
+  asientos: [
     {
       fila: Number,
       columna: Number
     }
   ],
 
-}, { 
-    timestamps: true 
-}); 
+  total: Number,
 
-/* Mediante este método GET obtendremos el ID de una reserva. */
-ReservaSchema.virtual('id').get(function () { return this._id.toHexString(); }); 
+  estado: {
+    type: String,
+    enum: ['pagada'],
+    default: 'pagada'
+  },
 
-ReservaSchema.set('toJSON', { virtuals: true }); export default mongoose.model('Reserva', ReservaSchema);
+  codigoEntrada: {
+    type: String,
+    unique: true
+  }
+
+}, { timestamps: true });
+
+export default mongoose.model('Reserva', ReservaSchema);
