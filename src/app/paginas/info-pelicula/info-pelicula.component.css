@@ -8,8 +8,10 @@
 
 .detalle-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 60px 20px;
+  gap: 40px;              
 }
 
 .detalle-card {
@@ -112,4 +114,90 @@
 .estrella {
   width: 24px;
   height: 24px;
+}
+
+.seccion-resenas {
+  width: 100%;
+  max-width: 1100px;
+  background: #141414;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
+}
+
+.estrellas-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.estrella-click {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.estrella-click:hover {
+  transform: scale(1.15);
+}
+
+.tarjeta-resena {
+  background: #1b1b1b;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.cabecera-resena {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.usuario {
+  font-weight: bold;
+  color: #e50914;
+}
+
+.fecha {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.estrellas-resena {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.estrella-resena {
+  width: 22px;
+  height: 22px;
+}
+
+.comentario {
+  color: #ddd;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+.acciones-resena {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-icono {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #e50914;
+  transition: 0.2s ease;
+}
+
+.btn-icono:hover {
+  transform: scale(1.2);
 }

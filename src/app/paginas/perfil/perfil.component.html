@@ -1,7 +1,7 @@
 <!-- Aquí se mostrarán los botones que alternan entre la vista de perfil y cartelera en el menú principal. -->
 <app-selectores-de-menu></app-selectores-de-menu>
 
-<!-- Esta clase contendrá la tarjeta con el perfil. -->
+<!-- Esta clase contendrá todo lo relacionado con el perfil. -->
 <div class="perfil-contenedor">
 
     <!-- Tarjeta de perfil de usuario. -->
@@ -33,7 +33,7 @@
                 <span>{{ usuario?.email }}</span>
             </div>
 
-            <!-- Aquí se incluye un campo con dos botones. -->
+            <!-- Aquí se incluye una sección con dos botones. -->
             <div class="campo botones-acciones">
                 <label>Acciones:</label>
 
@@ -46,6 +46,88 @@
 
         </div>
 
+    </div>
+
+    <!-- Esta clase contendrá las secciones de reservas, películas vistas y reseñas. -->
+    <div class="seccion-lista">
+        <h2 class="titulo-seccion">Historial de Reservas</h2>
+
+        <!-- Por cada reserva hecha por el usuario se generará una pequeña tarjeta con sus datos. -->
+        <div *ngIf="reservas && reservas.length > 0; else noReservas">
+            <div *ngFor="let r of reservas" class="tarjeta-item">
+                <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
+
+                <p><strong>Fecha:</strong> {{ r.sesion.fecha }}</p>
+                <p><strong>Hora:</strong> {{ r.sesion.hora }}</p>
+                <p><strong>Sala:</strong> {{ r.sesion.sala.nombre }}</p>
+
+                <p><strong>Asientos:</strong>
+                    <span *ngFor="let a of r.asientos">
+                        {{ a.fila }}{{ a.columna }}&nbsp;
+                    </span>
+                </p>
+
+                <!-- El estado de la reserva de terminará las posibilidades sobre ella. -->
+                <p><strong>Estado:</strong>
+                    <span [ngClass]="{
+                        'estado-pagada': r.estado === 'pagada',
+                        'estado-consumida': r.estado === 'consumida',
+                        'estado-cancelada': r.estado === 'cancelada'}">
+                        {{ r.estado }}
+                    </span>
+                </p>
+
+                <!-- De haberse consumido la reserva, se mostrará un botón para añadir una reseña a la película(Si no le añadió una ya). -->
+                <button *ngIf="r.estado === 'consumida' && !tieneResena(r.pelicula.id)" class="btn-accion btn-reseña"
+                    (click)="irAResena(r.pelicula.id)">
+                    Añadir reseña
+                </button>
+            </div>
+        </div>
+
+        <!-- Si no hay ninguna reserva realizada, se mostrará este mensaje. -->
+        <ng-template #noReservas>
+            <div class="mensaje-vacio">No has realizado ninguna reserva todavía.</div>
+        </ng-template>
+    </div>
+
+    <!-- Esta clase contendrá la sección de películas vistas. -->
+    <div class="seccion-lista">
+        <h2 class="titulo-seccion">Películas Vistas</h2>
+
+        <!-- Si el usuario no ha visto ninguna película, se mostrará este mensaje. -->
+        <div *ngIf="peliculasVistas.length === 0" class="mensaje-vacio">
+            Aún no has visto ninguna película.
+        </div>
+
+        <!-- De haber películas vistas, se recorrerá al lista y mostrarán su título y duración.-->
+        <ul class="lista-simple">
+            <li *ngFor="let p of peliculasVistas">
+                {{ p.pelicula.titulo }} ({{ p.pelicula.duracion }} min)
+            </li>
+        </ul>
+    </div>
+
+    <!-- Esta clase contendrá la sección de reseñas. -->
+    <div class="seccion-lista">
+        <h2 class="titulo-seccion">Mis Reseñas</h2>
+
+        <!-- Si el usuario no ha dejado ninguna reseña, se mostrará este mensaje. -->
+        <div *ngIf="resenas.length === 0" class="mensaje-vacio">
+            No has dejado ninguna reseña todavía.
+        </div>
+
+        <!-- De haber reseñas, se recorrerá la lista y mostrarán su información. -->
+        <div *ngFor="let r of resenas" class="tarjeta-item" (click)="irAResena(r.pelicula.id)">
+            <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
+            <p><strong>Puntuación:</strong> {{ r.puntuacion }}/5</p>
+            <p><strong>Comentario:</strong> {{ r.comentario }}</p>
+
+            <div class="grupo-botones">
+                <button class="btn-accion">Editar</button>
+                <button class="btn-accion btn-cerrar">Eliminar</button>
+            </div>
+        </div>
     </div>
 
 </div>

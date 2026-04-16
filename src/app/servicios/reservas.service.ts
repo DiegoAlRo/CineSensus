@@ -11,9 +11,8 @@ import { Reserva } from '../modelos/reserva';
 
 /* Servicio para almacenar los datos de la compra. */
 export class ReservasService {
-
   constructor(private http: HttpClient) {}
-  
+
   /* Datos de la reserva. */
   datosCompra: {
     sesion: Sesion;
@@ -22,6 +21,8 @@ export class ReservasService {
   } | null = null;
 
   reservaActual: Reserva | null = null;
+
+  private apiUrl = 'http://localhost:3000';
 
   /* Con este método se crea una reserva en el backend con los datos recibidos. */
   crearReserva(datos: {
@@ -37,5 +38,17 @@ export class ReservasService {
   limpiarReserva() {
     this.datosCompra = null;
     this.reservaActual = null;
+  }
+
+  /* Este método recivirá el ID del usuario para obtener sus reservas desde el backend. */
+  getReservasUsuario(usuarioId: string) {
+    return this.http.get<Reserva[]>(`${this.apiUrl}/reservas?usuario=${usuarioId}`);
+  }
+
+  /* Método para actualizar el estado de una reserva. */
+  actualizarEstado(id: string, estado: 'pagada' | 'consumida' | 'cancelada') {
+    return this.http.put<Reserva>(`${this.apiUrl}/reservas/${id}/estado`, {
+      estado,
+    });
   }
 }

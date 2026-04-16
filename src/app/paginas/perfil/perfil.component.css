@@ -1,67 +1,69 @@
 :host {
-    display: block;
-    background: #000;
-    min-height: 100vh;
-    color: white;
-    font-family: Arial, sans-serif;
+  display: block;
+  background: #000;
+  min-height: 100vh;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 /* Contenedor para el perfil. */
 .perfil-contenedor {
-    display: flex;
-    justify-content: center;
-    padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  gap: 40px;
 }
 
 /* Tarjeta principal con los datos. */
 .tarjeta-perfil {
-    background: #141414;
-    width: 500px;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  background: #141414;
+  width: 500px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
 /* Título rojo. */
 .titulo-seccion {
-    background: #e7000b;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.4rem;
-    margin-bottom: 25px;
+  background: #e7000b;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 25px;
 }
 
 /* Avatar del usuario. */
 .avatar {
-    width: 90px;
-    height: 90px;
-    background: #e7000b;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin: 0 auto 25px auto;
+  width: 90px;
+  height: 90px;
+  background: #e7000b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0 auto 25px auto;
 }
 
 /* Estilos para los datos del usuario. */
 .info-usuario {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .campo label {
-    color: #e7000b;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 4px;
+  color: #e7000b;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .campo span {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 /* Contenedor de los botones interactivos. */
@@ -102,4 +104,66 @@
 .btn-cerrar:hover {
   background: #e7000b;
   color: white;
+}
+
+/* Contenedor general de cada sección */
+.seccion-lista {
+  background: #141414;
+  width: 500px;
+  padding: 25px;
+  border-radius: 14px;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Tarjetas pequeñas dentro de las listas */
+.tarjeta-item {
+  background: #1c1c1c;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  border-left: 4px solid #e7000b;
+}
+
+/* Título de película */
+.titulo-pelicula {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Mensaje cuando no hay elementos */
+.mensaje-vacio {
+  text-align: center;
+  color: #aaa;
+  padding: 10px 0;
+}
+
+/* Lista simple */
+.lista-simple {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-simple li {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* Estados */
+.estado-pagada {
+  color: #e7c000;
+}
+
+.estado-consumida {
+  color: #00e76f;
+}
+
+.estado-cancelada {
+  color: #e7000b;
+}
+
+/* Botón de reseña */
+.btn-reseña {
+  margin-top: 10px;
+  width: 100%;
 }

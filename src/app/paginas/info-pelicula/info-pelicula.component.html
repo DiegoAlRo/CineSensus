@@ -1,4 +1,4 @@
-<!-- Envoltorio de detalles de la película. -->
+<!-- Este alrredoedor envolverá toda la página y le dará un formato vertical. -->
 <div class="detalle-wrapper" *ngIf="pelicula">
 
     <!-- Tarjeta con los detalles de la película. -->
@@ -37,6 +37,73 @@
                 Ver tráiler en YouTube
             </a>
 
+        </div>
+
+    </div>
+
+    <div class="seccion-resenas">
+        <h2>Reseñas de usuarios</h2>
+
+        <!-- Lista de reseñas -->
+        <ng-container *ngFor="let r of resenas">
+            <div *ngIf="!resenaDelUsuario || r.id !== resenaDelUsuario.id" class="tarjeta-resena">
+
+                <div class="cabecera-resena">
+                    <span class="usuario">{{ r.usuario.username }}</span>
+                    <span class="fecha">{{ r.fecha | date:'yyyy-MM-dd' }}</span>
+                </div>
+
+                <div class="estrellas-resena">
+                    <img *ngFor="let star of getIconos(r.puntuacion)" [src]="star" class="estrella-resena">
+                </div>
+
+                <p class="comentario">{{ r.comentario }}</p>
+
+            </div>
+        </ng-container>
+
+        <!-- Formulario para escribir reseña -->
+        <div *ngIf="mostrarFormularioResena && !resenaDelUsuario" class="formulario-resena">
+            <h3>Escribe tu reseña</h3>
+
+            <div class="estrellas">
+
+                <div class="estrellas-selector">
+                    <img *ngFor="let star of [1,2,3,4,5]; let i = index"
+                        [src]="i < puntuacion ? 'assets/EstrellaPuntuacion-Entera.png' : 'assets/EstrellaPuntuacion-Vacia.png'"
+                        class="estrella-click" (mouseenter)="hoverPuntuacion(i + 1)" (mouseleave)="hoverPuntuacion(0)"
+                        (click)="seleccionarPuntuacion(i + 1)" />
+                </div>
+            </div>
+
+            <textarea [(ngModel)]="comentario" placeholder="Escribe tu opinión..."></textarea>
+
+            <button class="btn-accion" (click)="enviarResena()">
+                Enviar reseña
+            </button>
+        </div>
+
+        <!-- Si SÍ tiene reseña → mostrar su reseña con botones -->
+        <div *ngIf="resenaDelUsuario" class="tarjeta-resena propia">
+            <div class="cabecera-resena">
+                <span class="usuario">Tú</span>
+                <span class="fecha">{{ resenaDelUsuario.fecha | date:'dd/MM/yyyy' }}</span>
+            </div>
+
+            <div class="estrellas-resena">
+                <img *ngFor="let star of getIconos(resenaDelUsuario.puntuacion)" [src]="star" class="estrella-resena">
+            </div>
+
+            <p class="comentario">{{ resenaDelUsuario.comentario }}</p>
+
+            <div class="acciones-resena">
+                <button class="btn-icono" (click)="activarEdicion()">
+                    ✏️
+                </button>
+                <button class="btn-icono" (click)="eliminarResena()">
+                    🗑️
+                </button>
+            </div>
         </div>
 
     </div>

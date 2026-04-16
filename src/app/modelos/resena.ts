@@ -4,9 +4,17 @@ import { Puntuacion } from '../enums/puntuacion';
 /* Define la interfaz de una reseña. */
 export interface Resena {
   id: string;
-  usuario: string;
-  pelicula: string;
+  usuario: {
+    id: string;
+    username: string;
+    email?: string;
+  };
+  pelicula: {
+    id: string;
+    titulo: string;
+    duracion: number;
+  };
   puntuacion: Puntuacion;
   comentario: string;
-  fecha: string; // ISO string
+  fecha: string;
 }

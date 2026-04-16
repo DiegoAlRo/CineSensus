@@ -22,7 +22,6 @@ import { Router, RouterModule } from '@angular/router';
 
 /* Clase la cartelera que usa OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
-
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
@@ -224,9 +223,11 @@ export class CarteleraComponent implements OnInit {
   /* Método para aplicar los filtros. */
   aplicarFiltros() {
     this.peliculas = this.peliculasOriginales.filter((p) => {
-
       /* Filtro por título. */
-      if (this.filtroTitulo.trim() !== '' && !p.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())) {
+      if (
+        this.filtroTitulo.trim() !== '' &&
+        !p.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())
+      ) {
         return false;
       }
 

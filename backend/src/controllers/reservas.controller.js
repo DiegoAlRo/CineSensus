@@ -2,20 +2,7 @@
 import Reserva from '../models/Reserva.js';
 import Sesion from '../models/Sesion.js';
 import crypto from 'crypto';
-
-/* Devuelve todas las reservas almacenadas en la base de datos. */
-export const obtenerReservas = async (req, res) => {
-    
-    try { 
-        
-        const reservas = await Reserva.find().populate('usuario sesion'); 
-        res.json(reservas); 
-    
-    } catch (error) { 
-        
-        res.status(500).json({ mensaje: 'Error al obtener reservas', error }); 
-    } 
-}; 
+import mongoose from 'mongoose';
 
 /* Este método crea una reserva. */ 
 export const crearReserva = async (req, res) => {
@@ -68,5 +55,74 @@ export const crearReserva = async (req, res) => {
     } catch (error) {
         console.error('Error al crear reserva:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+/* Devuelve todas las reservas almacenadas en la base de datos. */
+export const obtenerReservas = async (req, res) => {
+    
+    try { 
+        
+        const reservas = await Reserva.find().populate('usuario sesion'); 
+        res.json(reservas); 
+    
+    } catch (error) { 
+        
+        res.status(500).json({ mensaje: 'Error al obtener reservas', error }); 
+    } 
+};
+
+/* Devuelve las reservas de un usuario específico. */
+export const obtenerReservasUsuario = async (req, res) => {
+    try {
+        const { usuario } = req.query;
+
+        const reservas = await Reserva.find({
+            usuario: new mongoose.Types.ObjectId(usuario)
+        })
+        .populate('usuario')
+        .populate({
+            path: 'sesion',
+            populate: { path: 'sala' }
+        })
+        .populate({
+            path: 'pelicula.id',
+            model: 'Pelicula',
+            select: '_id titulo duracion'
+        });
+
+        const reservasLimpias = reservas.map(r => {
+        const obj = r.toObject();
+
+            return {
+                ...obj,
+                pelicula: {
+                    id: obj.pelicula.id._id,
+                    titulo: obj.pelicula.id.titulo,
+                    duracion: obj.pelicula.id.duracion
+                }
+            };
+        });
+
+        res.json(reservasLimpias );
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener reservas del usuario' });
+    }
+};
+
+/* Este método actualiza el estado de una reserva. */
+export const actualizarEstado = async (req, res) => {
+    try {
+        const { estado } = req.body;
+
+        const reserva = await Reserva.findByIdAndUpdate(
+            req.params.id,
+            { estado },
+            { new: true }
+        );
+
+        res.json(reserva);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar estado de la reserva' });
     }
 };

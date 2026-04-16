@@ -6,7 +6,7 @@ import { Sala } from "./sala";
 export interface Sesion {
   _id: string;
   id?: string; // Id de elemento que referenciará
-  fecha: Date; // Date real
+  fecha: string; // Date real
   sala: Sala; // Objeto Sala
   pelicula: Pelicula; // Objeto Pelicula
   precio: number;

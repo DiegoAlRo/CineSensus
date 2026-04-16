@@ -15,6 +15,6 @@ export interface Reserva {
   fechaReserva: string;
   asientos: { fila: number; columna: number }[];
   total: number;
-  estado: 'pagada';
+  estado: 'pagada' | 'consumida' | 'cancelada';
   codigoEntrada: string;
 }

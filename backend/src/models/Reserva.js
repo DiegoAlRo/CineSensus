@@ -28,7 +28,7 @@ const ReservaSchema = new mongoose.Schema({
 
   estado: {
     type: String,
-    enum: ['pagada'],
+    enum: ['pagada', 'consumida', 'cancelada'],
     default: 'pagada'
   },
 
