@@ -1,9 +1,11 @@
 /* Imports del componente. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { ToastService } from '../../servicios/toast.service';
+import { ErroresService } from '../../servicios/errores.service';
 
 /* Decorador del componente con su configuración. */
 @Component({
@@ -16,52 +18,56 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 
 /* Clase del componente de registro. */
 export class RegistroComponent {
-
   /* Declaración del formulario reactivo. */
   form: FormGroup;
 
   /* Constructor del componente con la inyección de dependencias. */
   constructor(
-
     private fb: FormBuilder,
     private usuariosService: UsuariosService,
     private router: Router,
-
+    private toastService: ToastService,
+    private erroresService: ErroresService,
   ) {
-
     /* Formulario con validaciones. */
-    this.form = this.fb.group( {
-
+    this.form = this.fb.group(
+      {
         nombre: ['', Validators.required],
         apellidos: ['', Validators.required],
         username: ['', [Validators.required, Validators.minLength(4)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(4)]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
         confirmarPassword: ['', Validators.required],
-
-      },{ validators: this.passwordsIguales('password', 'confirmarPassword'), },
+      },
+      { validators: this.passwordsIguales('password', 'confirmarPassword') },
     );
   }
 
   /* Se comprueba que las contraseñas coincidan. */
   passwordsIguales(pass1: string, pass2: string) {
-
     return (formGroup: FormGroup) => {
-
       const p1 = formGroup.get(pass1);
       const p2 = formGroup.get(pass2);
 
-      if (p1?.value !== p2?.value) { p2?.setErrors({ noCoincide: true }); } else {
-
-        if (p2?.hasError('noCoincide')) { p2.setErrors(null); }
-
+      if (p1?.value !== p2?.value) {
+        p2?.setErrors({ noCoincide: true });
+      } else {
+        if (p2?.hasError('noCoincide')) {
+          p2.setErrors(null);
+        }
       }
     };
   }
 
+  /* Método para verificar si un campo tiene un error específico. */
+  tieneError(campo: string, error: string) {
+    return (
+      this.form.get(campo)?.hasError(error) && this.form.get(campo)?.touched
+    );
+  }
+
   /* Método para registrar un nuevo usuario. */
   registrar() {
-
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -69,16 +75,30 @@ export class RegistroComponent {
 
     /* Se crea el objeto a rellenar de usuario. */
     const usuario = {
-      nombre: this.form.value.nombre,
-      apellidos: this.form.value.apellidos,
-      username: this.form.value.username,
-      email: this.form.value.email,
+      nombre: this.form.value.nombre.trim(),
+      apellidos: this.form.value.apellidos.trim(),
+      username: this.form.value.username.trim(),
+      email: this.form.value.email.trim().toLowerCase(),
       password: this.form.value.password,
     };
 
-    /* El usuario se añadirá a la BDD y se le enviará al login. */
-    this.usuariosService.addUsuario(usuario).subscribe(() => {
-      this.router.navigate(['/login']);
+    /* Se llama al servicio para agregar el usuario a la base de datos. */
+    this.usuariosService.addUsuario(usuario).subscribe({
+      next: () => {
+        /* Si el registro es exitoso, se muestra un mensaje y se redirige al login. */
+        this.toastService.show('Usuario registrado correctamente');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        /* Si ocurre un error, se muestra el mensaje correspondiente. */
+        if (err.error?.mensaje === 'EMAIL_DUPLICADO') {
+          this.toastService.show(this.erroresService.get('emailDuplicado'));
+        } else if (err.error?.mensaje === 'USERNAME_DUPLICADO') {
+          this.toastService.show(this.erroresService.get('usernameDuplicado'));
+        } else {
+          this.toastService.show(this.erroresService.get('errorGenerico'));
+        }
+      },
     });
   }
 }

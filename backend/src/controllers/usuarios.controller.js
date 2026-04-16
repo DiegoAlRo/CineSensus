@@ -1,6 +1,36 @@
 /* Imports necesarios. */
 import Usuario from '../models/Usuario.js';
 
+/* Este método creará y añadirá un usuario a la base de datos. */
+export const crearUsuario = async (req, res) => { 
+    
+  try { 
+        
+    const nuevoUsuario = new Usuario(req.body); 
+    await nuevoUsuario.save(); 
+    res.status(201).json(nuevoUsuario); 
+    
+  } catch (error) { 
+        
+    /* Si el error es por un email duplicado, se devuelve un mensaje para ser mostrado por el errores.service. */
+    if (error.code === 11000) {
+
+      /* Email duplicado. */
+      if (error.keyPattern?.email || error.keyValue?.email) {
+        return res.status(400).json({ mensaje: 'EMAIL_DUPLICADO' });
+      }
+
+      /* Nombre de usuario duplicado. */
+      if (error.keyPattern?.username || error.keyValue?.username) {
+        return res.status(400).json({ mensaje: 'USERNAME_DUPLICADO' });
+      }
+    }
+
+    console.error('ERROR AL CREAR USUARIO:', error);
+    res.status(500).json({ mensaje: 'Error al crear usuario' });
+  } 
+};
+
 /* Este método comprobará coincidencias en la base de datos e identificará al usuario. */ 
 export const loginUsuario = async (req, res) => {
   const { email, password } = req.body;
@@ -17,21 +47,6 @@ export const loginUsuario = async (req, res) => {
   } catch (error) {
     res.status(500).json({ mensaje: 'Error en el login', error });
   }
-};
-
-/* Este método creará y añadirá un usuario a la base de datos. */
-export const crearUsuario = async (req, res) => { 
-    
-  try { 
-        
-    const nuevoUsuario = new Usuario(req.body); 
-    await nuevoUsuario.save(); 
-    res.status(201).json(nuevoUsuario); 
-    
-  } catch (error) { 
-        
-    res.status(500).json({ mensaje: 'Error al crear usuario', error }); 
-  } 
 };
 
 /* Obtener un usuario por su ID. */
@@ -62,6 +77,21 @@ export const actualizarUsuario = async (req, res) => {
     res.json(usuarioActualizado);
 
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error al actualizar usuario', error });
+
+    /* Si el error es por un email o username duplicado, se devuelve un mensaje para ser mostrado por el errores.service. */
+    if (error.code === 11000) {
+
+      /* Email duplicado. */
+      if (error.keyPattern?.email || error.keyValue?.email) {
+        return res.status(400).json({ mensaje: 'EMAIL_DUPLICADO' });
+      }
+
+      /* Nombre de usuario duplicado. */
+      if (error.keyPattern?.username || error.keyValue?.username) {
+        return res.status(400).json({ mensaje: 'USERNAME_DUPLICADO' });
+      }
+    }
   }
+
+  res.status(500).json({ mensaje: 'Error al actualizar usuario' });
 };
