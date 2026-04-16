@@ -1,23 +1,29 @@
-/* Servicio de autenticación para gestionar el estado del usuario en la aplicación. */
+/* Imports para el servicio de autenticación. */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Usuario } from '../modelos/usuario';
 
 /* El AuthService utiliza un BehaviorSubject para mantener el estado del usuario autenticado. */
 @Injectable({
   providedIn: 'root',
 })
 
-/* El servicio posee métodos para iniciar sesión, cerrar sesión y obtener el estado actual del usuario. */
+/* Este servicio se encargará de gestionar el estado del usuario en la aplicación. */
 export class AuthService {
 
-  private usuarioSubject = new BehaviorSubject<any>(null);
+  /* El usuarioSubject almacena la información del usuario autenticado. */
+  private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
 
+  /* El usuario$ se podrá usar para obtener la información del usuario autenticado. */
   usuario$ = this.usuarioSubject.asObservable();
 
+  /* Constructor del serviciio. */
   constructor() {
 
+    /* Se busca en el localStorage si hay un usuario autenticado. */
     const data = localStorage.getItem('usuario');
 
+    /* Si hay datos en el localStorage, se parsean y se actualiza el estado del usuario en el BehaviorSubject. */
     if (data) {
       this.usuarioSubject.next(JSON.parse(data));
     }

@@ -5,21 +5,31 @@
     <h2 class="titulo-form">Iniciar Sesión</h2>
     <p class="subtitulo-form">Bienvenido de nuevo a CineSensus</p>
 
-    <!-- Formulario de login con enlace al método login. -->
-    <form (ngSubmit)="login()" class="form-card">
-        
+    <!-- Formulario de login reactivo. -->
+    <form [formGroup]="form" (ngSubmit)="login()" class="form-card">
+
         <!-- Se pedirá el correo del usuario. -->
         <label>Correo electrónico</label>
-        <input type="email" [(ngModel)]="email" name="email" placeholder="Tu @email.com" required>
-        
+        <input type="email" formControlName="email" placeholder="Tu @email.com">
+
+        <p class="mensaje-error" *ngIf="tieneError('email', 'required')">
+            El correo es obligatorio.
+        </p>
+
+        <p class="mensaje-error" *ngIf="tieneError('email', 'email')">
+            Debe ser un correo válido.
+        </p>
+
         <!-- Se solicitará la contraseña. -->
         <label>Contraseña</label>
-        <input type="password" [(ngModel)]="password" name="password" placeholder="********" required>
-        
+        <input type="password" formControlName="password" placeholder="********">
+
+        <p class="mensaje-error" *ngIf="tieneError('password', 'required')">
+            La contraseña es obligatoria.
+        </p>
+
         <!-- botón de iniciar sesión. -->
         <button type="submit" class="btn-rojo">Entrar</button>
-
-        <p class="mensaje-error" *ngIf="error">{{ error }}</p>
 
     </form>
 
