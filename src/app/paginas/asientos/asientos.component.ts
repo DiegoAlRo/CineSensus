@@ -1,7 +1,7 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SesionesService } from '../../servicios/sesiones.service';
 import { Sesion } from '../../modelos/sesion';
 import { Sala } from '../../modelos/sala';
@@ -12,7 +12,7 @@ import { ReservasService } from '../../servicios/reservas.service';
 @Component({
   selector: 'app-asientos',
   standalone: true,
-  imports: [CommonModule, MapAsientosPipe],
+  imports: [CommonModule, MapAsientosPipe, RouterModule],
   templateUrl: './asientos.component.html',
   styleUrls: ['./asientos.component.css'],
 })
@@ -42,6 +42,7 @@ export class AsientosComponent implements OnInit {
     this.sesionesService.getSesionPorId(idSesion).subscribe((sesion) => {
       this.sesion = sesion;
       this.sala = sesion.sala;
+      debugger
       this.generarMatrizDeAsientos();
     });
   }
@@ -68,7 +69,6 @@ export class AsientosComponent implements OnInit {
 
   /* Método para generar una matriz de asientos teniendo en cuenta los libres y los asientos ocupados. */
   generarMatrizDeAsientos() {
-
     this.matrizAsientos = [];
 
     for (let fila = 0; fila < this.sala.filas; fila++) {
@@ -130,6 +130,13 @@ export class AsientosComponent implements OnInit {
 
   /* Con este método el usuario será enviado al pago de la reserva. */
   irAPago() {
+    const data = localStorage.getItem('usuario');
+    if (!data) {
+      // Mostrar toast o redirigir
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.reservasService.datosCompra = {
       sesion: this.sesion,
       asientos: this.asientosSeleccionados,

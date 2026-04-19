@@ -1,5 +1,5 @@
 /* Imports necesarios. */
-import Sesion from '../models/Sesion.js'; 
+import Sesion from '../models/Sesion.js';
 
 /* Devuelve las sesiones filtradas por película y fecha. */
 export const obtenerSesionesPorPeliculaYFecha = async (req, res) => {

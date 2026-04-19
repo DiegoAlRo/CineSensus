@@ -1,15 +1,15 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
 import { SelectoresDeMenuComponent } from '../../shared/selectores-de-menu/selectores-de-menu.component';
 import { FormsModule } from '@angular/forms';
 import { Genero } from '../../enums/genero';
 import { Puntuacion } from '../../enums/puntuacion';
 import { Tono } from '../../enums/tono';
-import { SesionesService } from '../../servicios/sesiones.service';
 import { Router, RouterModule } from '@angular/router';
+import { Usuario } from '../../modelos/usuario';
+import { CarteleraService } from '../../servicios/cartelera.service';
 
 /* Decorador que define el componente. */
 @Component({
@@ -22,10 +22,11 @@ import { Router, RouterModule } from '@angular/router';
 
 /* Clase la cartelera que usa OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
+
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
-  usuarioLogueado: any = null;
+  usuarioLogueado: Usuario | null = null;
   mostrarFiltro: boolean = false;
   mostrarFecha: boolean = false;
   filtroTitulo: string = '';
@@ -92,30 +93,22 @@ export class CarteleraComponent implements OnInit {
 
   /* Constructor que inyecta los servicios necesarios para obtener datos de películas y manejar la navegación. */
   constructor(
-    private peliculasService: PeliculasService,
-    private sesionesService: SesionesService,
+    private carteleraService: CarteleraService,
     private router: Router,
   ) {}
 
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {
+
     /* Se verifica si hay un usuario logueado y se le aportan los datos. */
     const data = localStorage.getItem('usuario');
-    if (data) {
-      this.usuarioLogueado = JSON.parse(data);
-    }
+    if (data) this.usuarioLogueado = JSON.parse(data);
 
-    /* Se obtiene la lista de películas desde el servicio y almacenan, luego se cargan las sesiones para cada película. */
-    this.peliculasService.getPeliculas().subscribe((peliculas) => {
-      this.peliculasOriginales = peliculas;
-      this.peliculas = peliculas;
-      this.cargarSesionesParaPeliculas();
-    });
-
-    /* Se genera el calendario para el mes actual. */
+    /* Se carga la cartelera del día actual y se genera el calendario. */
+    this.cargarCartelera();
     this.generarCalendario();
 
-    /* Se establece un intervalo para actualizar la fecha actual cada minuto, lo que permite que el calendario se actualice automáticamente al cambiar de día. */
+    /* Se establece un intervalo para comprobar cada minuto si ha cambiado el día y se actualiza la cartelera y el calendario. */
     setInterval(() => {
       const ahora = new Date();
       if (ahora.getDate() !== this.hoy.getDate()) {
@@ -124,8 +117,28 @@ export class CarteleraComponent implements OnInit {
         this.mesActual = ahora.getMonth();
         this.anioActual = ahora.getFullYear();
         this.generarCalendario();
+        this.cargarCartelera();
       }
     }, 60000);
+  }
+
+  /* Método para cargar la cartelera de películas del día seleccionado. */
+  cargarCartelera() {
+    const fechaISO = [
+      this.fechaSeleccionada.getFullYear(),
+      String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0'),
+      String(this.fechaSeleccionada.getDate()).padStart(2, '0'),
+    ].join('-');
+
+    this.carteleraService.getCartelera(fechaISO).subscribe({
+      next: (peliculas) => {
+        this.peliculasOriginales = peliculas;
+        this.peliculas = peliculas;
+      },
+      error: () => {
+        this.peliculas = [];
+      },
+    });
   }
 
   /* Método para generar el calendario del mes actual, creando un array de fechas que se muestra en la interfaz. */
@@ -165,8 +178,7 @@ export class CarteleraComponent implements OnInit {
 
     /* Junto a la fecha, se actualizarán las sesiones para mostrar solo las del día seleccionado. */
     this.fechaSeleccionada = diaSinHora;
-    this.peliculas = [...this.peliculasOriginales];
-    this.cargarSesionesParaPeliculas();
+    this.cargarCartelera();
 
     /* Luego se cerrará el calendario. */
     this.mostrarFecha = false;
@@ -205,7 +217,7 @@ export class CarteleraComponent implements OnInit {
     }
     this.generarCalendario();
     this.fechaSeleccionada = new Date(this.anioActual, this.mesActual, 1);
-    this.cargarSesionesParaPeliculas();
+    this.cargarCartelera();
   }
 
   /* Método para navegar al mes siguiente, actualizando el calendario. */
@@ -217,7 +229,7 @@ export class CarteleraComponent implements OnInit {
     }
     this.generarCalendario();
     this.fechaSeleccionada = new Date(this.anioActual, this.mesActual, 1);
-    this.cargarSesionesParaPeliculas();
+    this.cargarCartelera();
   }
 
   /* Método para aplicar los filtros. */
@@ -284,22 +296,5 @@ export class CarteleraComponent implements OnInit {
   /* Método para navegar a la página de detalles de una película, usando el ID de la película de referencia. */
   irAPelicula(id: string) {
     this.router.navigate(['/pelicula', id]);
-  }
-
-  /* Método para cargar las sesiones de cada película según la fecha seleccionada. */
-  cargarSesionesParaPeliculas() {
-    const fechaISO = [
-      this.fechaSeleccionada.getFullYear(),
-      String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0'),
-      String(this.fechaSeleccionada.getDate()).padStart(2, '0'),
-    ].join('-');
-
-    this.peliculas.forEach((pelicula) => {
-      this.sesionesService
-        .getSesiones(pelicula.id, fechaISO)
-        .subscribe((sesiones) => {
-          pelicula.sesiones = sesiones;
-        });
-    });
   }
 }

@@ -354,3 +354,14 @@ app-selectores-de-menu {
     color: #ffffff;
     opacity: 0.85;
 }
+
+.sin-sesiones {
+    text-align: center;
+    padding: 2rem;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+.sin-sesiones .sub {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}

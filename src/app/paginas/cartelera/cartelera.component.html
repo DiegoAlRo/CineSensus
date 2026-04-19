@@ -122,6 +122,11 @@
         <!-- Contenedor de las tarjetas de películas. -->
         <div class="peliculas">
 
+            <!-- Este mensaje aparecerá cuando no hay sesiones disponibles. -->
+            <div *ngIf="peliculas.length === 0" class="sin-sesiones">
+                No hay sesiones disponibles para esta fecha.
+            </div>
+
             <!-- Tarjeta de película, se repite por cada película en la lista. -->
             <div class="pelicula-card" *ngFor="let pelicula of peliculas" (click)="irAPelicula(pelicula.id)">
 
@@ -152,7 +157,7 @@
                     <!-- Horarios de las sesiones, se repiten por cada sesión de la película. -->
                     <div class="horarios">
                         <span class="horario-chip" *ngFor="let s of pelicula.sesiones"
-                            (click)="$event.stopPropagation()" [routerLink]="['/sesion', s.id, 'asientos']">
+                            (click)="$event.stopPropagation()" [routerLink]="['/sesion', s._id, 'asientos']">
                             {{ formatearHora(s.hora) }}
                         </span>
                     </div>

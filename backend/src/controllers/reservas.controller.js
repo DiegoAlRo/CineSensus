@@ -115,13 +115,31 @@ export const actualizarEstado = async (req, res) => {
     try {
         const { estado } = req.body;
 
-        const reserva = await Reserva.findByIdAndUpdate(
-            req.params.id,
-            { estado },
-            { new: true }
-        );
+        const reserva = await Reserva.findById(req.params.id);
+        if (!reserva) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+
+        if (estado === 'cancelada') {
+            const sesion = await Sesion.findById(reserva.sesion);
+
+            if (sesion) {
+                sesion.asientosOcupados = sesion.asientosOcupados.filter(
+                    (a) =>
+                        !reserva.asientos.some(
+                            (r) => r.fila === a.fila && r.columna === a.columna
+                        )
+                );
+
+                await sesion.save();
+            }
+        }
+
+        reserva.estado = estado;
+        await reserva.save();
 
         res.json(reserva);
+
     } catch (error) {
         res.status(500).json({ error: 'Error al actualizar estado de la reserva' });
     }
