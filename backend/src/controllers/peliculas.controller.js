@@ -1,5 +1,6 @@
 /* Imports necesarios. */
 import Pelicula from '../models/Pelicula.js'; 
+import Resena from '../models/Resena.js';
 
 /* Devuelve todas las películas almacenadas en la base de datos. */ 
 export const obtenerPeliculas = async (req, res) => {
@@ -18,11 +19,14 @@ export const obtenerPeliculas = async (req, res) => {
 /* Este método podrá obtener una película por su ID. */
 export const obtenerPeliculaPorId = async (req, res) => {
   try {
-    const pelicula = await Pelicula.findById(req.params.id);
+    const pelicula = await Pelicula.findById(req.params.id).lean();
 
     if (!pelicula) {
       return res.status(404).json({ mensaje: 'Película no encontrada' });
     }
+
+    const resenas = await Resena.find({ pelicula: pelicula._id });
+    pelicula.resenas = resenas;;
 
     res.json(pelicula);
 

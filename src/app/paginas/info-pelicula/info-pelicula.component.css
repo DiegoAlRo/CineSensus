@@ -201,3 +201,11 @@
 .btn-icono:hover {
   transform: scale(1.2);
 }
+
+.estrella-pelicula {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 30px;    
+}

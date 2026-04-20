@@ -15,7 +15,7 @@
 
             <!-- Puntuación de película. -->
             <div class="puntuacion">
-                <img *ngFor="let icono of getIconos(pelicula.puntuacionMedia)" [src]="icono" class="estrella">
+                <img *ngFor="let icono of getIconos(pelicula.puntuacionMedia)" [src]="icono" class="estrella-pelicula">
             </div>
 
             <!-- Ficha técnica de película. -->
@@ -63,7 +63,7 @@
         </ng-container>
 
         <!-- Formulario para escribir reseña -->
-        <div *ngIf="mostrarFormularioResena && !resenaDelUsuario" class="formulario-resena">
+        <div *ngIf="mostrarFormularioResena" class="formulario-resena">
             <h3>Escribe tu reseña</h3>
 
             <div class="estrellas">
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Si SÍ tiene reseña → mostrar su reseña con botones -->
-        <div *ngIf="resenaDelUsuario" class="tarjeta-resena propia">
+        <div *ngIf="resenaDelUsuario && !mostrarFormularioResena" class="tarjeta-resena propia">
             <div class="cabecera-resena">
                 <span class="usuario">Tú</span>
                 <span class="fecha">{{ resenaDelUsuario.fecha | date:'dd/MM/yyyy' }}</span>
@@ -96,14 +96,6 @@
 
             <p class="comentario">{{ resenaDelUsuario.comentario }}</p>
 
-            <div class="acciones-resena">
-                <button class="btn-icono" (click)="activarEdicion()">
-                    ✏️
-                </button>
-                <button class="btn-icono" (click)="eliminarResena()">
-                    🗑️
-                </button>
-            </div>
         </div>
 
     </div>

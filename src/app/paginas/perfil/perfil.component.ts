@@ -76,6 +76,7 @@ export class PerfilComponent implements OnInit {
       });
 
     this.resenasService.getResenasUsuario(this.usuario!.id).subscribe((res) => {
+      debugger
       this.resenas = res.sort(
         (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
       );
@@ -92,7 +93,7 @@ export class PerfilComponent implements OnInit {
   /* Este método será para cerrar la sesión del usuario y devolverlo al login. */
   cerrarSesion() {
     localStorage.removeItem('usuario');
-    window.location.href = '/login';
+    this.router.navigate(['/login']);
   }
 
   /* Este método se encargará de actualizar el estado de las reservas si la fecha de la sesión ya ha pasado. */
@@ -137,10 +138,30 @@ export class PerfilComponent implements OnInit {
   }
 
   /* Este método mandará al usuario a info-pelicula para escribir una reseña, indicando la intención del mismo. */
-  irAResena(peliculaId: string) {
-    debugger
+  irAResenas(peliculaId: string) {
+    this.router.navigate(['/pelicula', peliculaId]);
+  }
+
+  anadirResena(peliculaId: string) {
     this.router.navigate(['/pelicula', peliculaId], {
-      queryParams: { escribirResena: true },
+      queryParams: { escribirResena: 'true' },
     });
+  }
+
+  editarResena(resena: Resena) {
+    debugger
+    this.router.navigate(['/pelicula', resena.pelicula.id], {
+      queryParams: { editarResena: resena.id },
+    });
+  }
+
+  eliminarResena(resena: Resena) {
+    this.resenasService.eliminarResena(resena.id).subscribe(() => {
+      this.resenas = this.resenas.filter((r) => r.id !== resena.id);
+    });
+    if (this.router.url.includes('/pelicula/')) {
+      const id = resena.pelicula.id;
+      this.router.navigate(['/pelicula', id]);
+    }
   }
 }

@@ -79,7 +79,7 @@
 
                 <!-- De haberse consumido la reserva, se mostrará un botón para añadir una reseña a la película(Si no le añadió una ya). -->
                 <button *ngIf="r.estado === 'consumida' && !tieneResena(r.pelicula.id)" class="btn-accion btn-reseña"
-                    (click)="irAResena(r.pelicula.id)">
+                    (click)="anadirResena(r.pelicula.id)">
                     Añadir reseña
                 </button>
             </div>
@@ -118,14 +118,15 @@
         </div>
 
         <!-- De haber reseñas, se recorrerá la lista y mostrarán su información. -->
-        <div *ngFor="let r of resenas" class="tarjeta-item" (click)="irAResena(r.pelicula.id)">
+        <div *ngFor="let r of resenas" class="tarjeta-item">
             <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
             <p><strong>Puntuación:</strong> {{ r.puntuacion }}/5</p>
             <p><strong>Comentario:</strong> {{ r.comentario }}</p>
 
             <div class="grupo-botones">
-                <button class="btn-accion">Editar</button>
-                <button class="btn-accion btn-cerrar">Eliminar</button>
+                <button class="btn-accion" (click)="irAResenas(r.pelicula.id)">Ver reseñas de la película</button>
+                <button class="btn-accion" (click)="editarResena(r)">Editar</button>
+                <button class="btn-accion btn-cerrar" (click)="eliminarResena(r)">Eliminar</button>
             </div>
         </div>
     </div>

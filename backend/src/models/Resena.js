@@ -18,10 +18,17 @@ const ResenaSchema = new mongoose.Schema({
 }); 
 
 /* Con este GET obtendremos el ID de una reseña. */
-ResenaSchema.virtual('id').get(function () { 
-    return this._id.toHexString(); 
-}); 
+ResenaSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
 
-ResenaSchema.set('toJSON', { virtuals: true }); 
+ResenaSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: (_, ret) => {
+        ret.id = ret.id;
+        delete ret._id;
+    }
+});
 
 export default mongoose.model('Resena', ResenaSchema);
