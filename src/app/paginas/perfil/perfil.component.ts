@@ -8,6 +8,7 @@ import { ReservasService } from '../../servicios/reservas.service';
 import { ResenasService } from '../../servicios/resenas.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../servicios/auth.service';
 
 /* Constructor de la clase. */
 @Component({
@@ -29,6 +30,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     private reservasService: ReservasService,
     private resenasService: ResenasService,
+    private authService: AuthService,
     private router: Router,
   ) {}
 
@@ -76,7 +78,6 @@ export class PerfilComponent implements OnInit {
       });
 
     this.resenasService.getResenasUsuario(this.usuario!.id).subscribe((res) => {
-      debugger
       this.resenas = res.sort(
         (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
       );
@@ -92,7 +93,7 @@ export class PerfilComponent implements OnInit {
 
   /* Este método será para cerrar la sesión del usuario y devolverlo al login. */
   cerrarSesion() {
-    localStorage.removeItem('usuario');
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
@@ -149,7 +150,6 @@ export class PerfilComponent implements OnInit {
   }
 
   editarResena(resena: Resena) {
-    debugger
     this.router.navigate(['/pelicula', resena.pelicula.id], {
       queryParams: { editarResena: resena.id },
     });

@@ -11,7 +11,6 @@ import { Usuario } from '../modelos/usuario';
 
 /* El servicio de usuarios se encarga de gestionar los usuarios. */
 export class UsuariosService {
-  
   /* Define la URL base para las operaciones relacionadas con los usuarios. */
   private apiUrl = 'http://localhost:3000/usuarios';
 
@@ -19,13 +18,19 @@ export class UsuariosService {
   constructor(private http: HttpClient) {}
 
   /* El método addUsuario envía una solicitud POST al backend para agregar un nuevo usuario a la base de datos. */
-  addUsuario(usuario: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, usuario);
+  addUsuario(
+    usuario: Partial<Usuario> & { password: string },
+  ): Observable<Usuario> {
+    return this.http.post<Usuario>(this.apiUrl, usuario);
   }
 
   /* Este método se encaargará de enviar los datos de inicio del usuario al backend para buscar coincidencias. */
-  login(email: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:3000/usuarios/login', {
+  login(
+    email: string,
+    password: string,
+    
+  ): Observable<{ usuario: Usuario; token: string }> { const url = `${this.apiUrl}/login`;
+    return this.http.post<{ usuario: Usuario; token: string }>(url, {
       email,
       password,
     });

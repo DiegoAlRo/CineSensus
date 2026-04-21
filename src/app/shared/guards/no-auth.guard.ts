@@ -1,0 +1,15 @@
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../../servicios/auth.service';
+
+export const noAuthGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (!auth.estaLogueado()) {
+    return true;
+  }
+
+  router.navigate(['/cartelera']);
+  return false;
+};

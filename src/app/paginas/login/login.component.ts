@@ -65,8 +65,8 @@ export class LoginComponent {
 
     /* Se llama al método login del servicio de usuarios para buscar coincidencias en la BDD. */
     this.usuariosService.login(email, password).subscribe({
-      next: (usuario) => {
-        this.authService.login(usuario);
+      next: (res) => {
+        this.authService.login(res.usuario, res.token);
         this.toastService.show('Bienvenido de nuevo');
         this.router.navigate(['/cartelera']);
       },
