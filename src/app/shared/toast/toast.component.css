@@ -4,13 +4,23 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #e63946;
-  color: white;
   padding: 12px 20px;
-  border-radius: 6px;
+  border-radius: 25px;
   font-size: 15px;
+  color: white;
   animation: fadeInOut 2.5s ease;
   z-index: 9999;
+  font-weight: 600;
+}
+
+/* Estilo para mensaje de éxito/informativo. */
+.toast.exito {
+  background: #1e3a8a;
+}
+
+/* Estilo para mensaje de error. */
+.toast.error {
+  background: #c62828;
 }
 
 /* Animación para que el toast aparezca y desaparezca. */

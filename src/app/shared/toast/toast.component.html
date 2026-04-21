@@ -1,4 +1,4 @@
-<!-- Este html muestra el mensaje del toast. -->
-<div class="toast" *ngIf="mensaje">
-  {{ mensaje }}
+<!-- Este html muestra el mensaje del toast, que variará en aspecto según su tipo. -->
+<div *ngIf="mensaje as data" class="toast" [ngClass]="data.tipo">
+  {{ data.mensaje }}
 </div>

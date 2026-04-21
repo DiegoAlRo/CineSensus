@@ -14,7 +14,7 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* Clase del componente de toast. */
 export class ToastComponent {
-  mensaje: string | null = null;
+  mensaje: { mensaje: string; tipo: 'exito' | 'error' } | null = null;
 
   constructor(private toastService: ToastService) {
     this.toastService.mensaje$.subscribe((msg) => {

@@ -1,6 +1,9 @@
 <!-- De esta manera se muestra el navbar solo si mostrarNavbar es true. -->
 <app-navbar *ngIf="mostrarNavbar" class="navbar"></app-navbar>
 
+<!-- Este será el loading que se mostrará mientras cargan las peticiones http. -->
+<app-loading></app-loading>
+
 <!-- Aquí se mostrarán los componentes dependiendo de la ruta. -->
 <router-outlet></router-outlet>
 

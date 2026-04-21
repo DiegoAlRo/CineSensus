@@ -6,12 +6,13 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ToastComponent } from "./shared/toast/toast.component";
+import { LoadingComponent } from "./shared/loading/loading/loading.component";
 
 /* Especifica la configuración del componente principal de la aplicación. */
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, RouterOutlet, CommonModule, ToastComponent],
+  imports: [NavbarComponent, RouterOutlet, CommonModule, ToastComponent, LoadingComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
