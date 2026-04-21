@@ -42,7 +42,6 @@ export class AsientosComponent implements OnInit {
     this.sesionesService.getSesionPorId(idSesion).subscribe((sesion) => {
       this.sesion = sesion;
       this.sala = sesion.sala;
-      debugger
       this.generarMatrizDeAsientos();
     });
   }

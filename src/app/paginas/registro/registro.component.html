@@ -10,21 +10,21 @@
 
         <!-- Se pide el nombre real del usuario. -->
         <label>Nombre</label>
-        <input type="text" formControlName="nombre" placeholder="Tu nombre">
+        <input type="text" formControlName="nombre" placeholder="Nombre" autocomplete="off">
         <p class="mensaje-error" *ngIf="tieneError('nombre', 'required')">
             El nombre es obligatorio.
         </p>
 
         <!-- Se piden los apellidos también. -->
         <label>Apellidos</label>
-        <input type="text" formControlName="apellidos" placeholder="Tus apellidos">
+        <input type="text" formControlName="apellidos" placeholder="Apellidos" autocomplete="off">
         <p class="mensaje-error" *ngIf="tieneError('apellidos', 'required')">
             Los apellidos son obligatorios.
         </p>
 
         <!-- Se solicitará un nombre de usuario. -->
         <label>Nombre de usuario</label>
-        <input type="text" formControlName="username" placeholder="Tu nombre de usuario">
+        <input type="text" formControlName="username" placeholder="Nombre de usuario" autocomplete="off">
         <p class="mensaje-error" *ngIf="tieneError('username', 'required')">
             El nombre de usuario es obligatorio.
         </p>
@@ -34,7 +34,7 @@
 
         <!-- También será obligatorio el email. -->
         <label>Correo electrónico</label>
-        <input type="email" formControlName="email" placeholder="Tu @email.com">
+        <input type="email" formControlName="email" placeholder="@email.com" autocomplete="email">
         <p class="mensaje-error" *ngIf="tieneError('email', 'required')">
             El correo es obligatorio.
         </p>
@@ -45,7 +45,7 @@
 
         <!-- Y se pedirá una contraseña dos veces que deberán coincidir. -->
         <label>Contraseña</label>
-        <input type="password" formControlName="password" placeholder="********">
+        <input type="password" formControlName="password" placeholder="********" autocomplete="new-password">
         <p class="mensaje-error" *ngIf="tieneError('password', 'required')">
             La contraseña es obligatoria.
         </p>
@@ -55,7 +55,7 @@
         </p>
 
         <label>Confirmar contraseña</label>
-        <input type="password" formControlName="confirmarPassword" placeholder="********">
+        <input type="password" formControlName="confirmarPassword" placeholder="********" autocomplete="new-password">
 
         <p class="mensaje-error" *ngIf="tieneError('confirmarPassword', 'required')">
             Debes confirmar la contraseña.
@@ -65,9 +65,32 @@
             Las contraseñas no coinciden.
         </p>
 
+        <!-- Antes del botón, habrá una casilla obligatoria con los términos y condiciones.-->
+        <label class="checkbox-terminos">
+            <input type="checkbox" formControlName="aceptaTerminos">
+            Acepto <button type="button" class="btn-link" (click)="mostrarTerminos()">términos y condiciones</button>
+        </label>
+
+        <p class="mensaje-error" *ngIf="tieneError('aceptaTerminos', 'required')">
+            Debes aceptar los términos y condiciones.
+        </p>
+
         <!-- El botón de registrarse, estilo submit. -->
         <button type="submit" class="btn-rojo">Registrarse</button>
 
     </form>
+
+    <!-- Pop up de términos y condiciones. -->
+    <div class="modal-fondo" *ngIf="abrirTerminos">
+        <div class="modal-contenido">
+            <h3>Términos y Condiciones</h3>
+
+            <p>
+                *Terminos*
+            </p>
+
+            <button class="btn-rojo" type="button" (click)="cerrarTerminos()">Cerrar</button>
+        </div>
+    </div>
 
 </div>

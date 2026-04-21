@@ -1,10 +1,17 @@
 /* Imports necesarios. */
 import Usuario from '../models/Usuario.js';
+import jwt from 'jsonwebtoken';
 
 /* Este método creará y añadirá un usuario a la base de datos. */
 export const crearUsuario = async (req, res) => { 
     
-  try { 
+  try {
+
+    /* Aseguramos el correcto registro. */
+    if (req.body.nombre) req.body.nombre = req.body.nombre.trim();
+    if (req.body.apellidos) req.body.apellidos = req.body.apellidos.trim();
+    if (req.body.username) req.body.username = req.body.username.trim();
+    if (req.body.email) req.body.email = req.body.email.trim().toLowerCase();
         
     const nuevoUsuario = new Usuario(req.body); 
     await nuevoUsuario.save(); 
@@ -42,7 +49,16 @@ export const loginUsuario = async (req, res) => {
       return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     }
 
-    res.json(usuario);
+    const token = jwt.sign(
+      { id: usuario._id },
+      process.env.JWT_SECRET || 'secreto',
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      usuario,
+      token
+    });
 
   } catch (error) {
     res.status(500).json({ mensaje: 'Error en el login', error });
@@ -68,6 +84,13 @@ export const obtenerUsuario = async (req, res) => {
 /* Este método servirá para actualizar un usuario. */
 export const actualizarUsuario = async (req, res) => {
   try {
+
+    /* Nos aseguraremos que de que el usuario se actualice sin fallos. */
+    if (req.body.nombre) req.body.nombre = req.body.nombre.trim();
+    if (req.body.apellidos) req.body.apellidos = req.body.apellidos.trim();
+    if (req.body.username) req.body.username = req.body.username.trim();
+    if (req.body.email) req.body.email = req.body.email.trim().toLowerCase();
+
     const usuarioActualizado = await Usuario.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -91,7 +114,9 @@ export const actualizarUsuario = async (req, res) => {
         return res.status(400).json({ mensaje: 'USERNAME_DUPLICADO' });
       }
     }
+
+    console.error('ERROR AL ACTUALIZAR USUARIO:', error);
+    res.status(500).json({ mensaje: 'Error al actualizar usuario' });
   }
 
-  res.status(500).json({ mensaje: 'Error al actualizar usuario' });
 };
