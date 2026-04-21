@@ -1,13 +1,7 @@
 /* Imports para el componente de login. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { AuthService } from '../../servicios/auth.service';
@@ -54,6 +48,8 @@ export class LoginComponent {
 
   /* Método para manejar el proceso de inicio de sesión. */
   login() {
+
+    /* De estar mal el formulario, se retrocederá. */
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -67,18 +63,20 @@ export class LoginComponent {
     this.usuariosService.login(email, password).subscribe({
       next: (res) => {
         this.authService.login(res.usuario, res.token);
-        this.toastService.show('Bienvenido de nuevo');
+        this.toastService.show('Bienvenido de nuevo', 'exito');
         this.router.navigate(['/cartelera']);
       },
 
       /* Si ocurre un error, se muestra un mensaje. */
       error: (err) => {
-        if (err.error?.mensaje === 'Credenciales incorrectas') {
+        const mensaje = err.error?.mensaje;
+
+        if (mensaje === 'Credenciales incorrectas') {
           this.toastService.show(
-            this.erroresService.get('credencialesIncorrectas'),
+            this.erroresService.get('credencialesIncorrectas'), 'error'
           );
         } else {
-          this.toastService.show(this.erroresService.get('errorGenerico'));
+          this.toastService.show(this.erroresService.get('errorGenerico'), 'error');
         }
       },
     });

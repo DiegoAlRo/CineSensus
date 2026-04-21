@@ -14,7 +14,7 @@ export class ErroresService {
         usernameDuplicado: 'Ese nombre de usuario ya está registrado',
         usuarioNoEncontrado: 'No existe ningún usuario con ese email',
         contrasenaIncorrecta: 'La contraseña no es correcta',
-        credencialesIncorrectas: 'Correo o contraseña incorrectos',
+        credencialesIncorrectas: 'Correo o Contraseña incorrectos',
         reseñaDuplicada: 'Ya has dejado una reseña para esta película',
         errorGenerico: 'Ha ocurrido un error inesperado'
     };

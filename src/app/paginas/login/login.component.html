@@ -9,8 +9,8 @@
     <form [formGroup]="form" (ngSubmit)="login()" class="form-card">
 
         <!-- Se pedirá el correo del usuario. -->
-        <label>Correo electrónico</label>
-        <input type="email" formControlName="email" placeholder="Tu @email.com">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" formControlName="email" placeholder="Tu @email.com">
 
         <p class="mensaje-error" *ngIf="tieneError('email', 'required')">
             El correo es obligatorio.
@@ -21,8 +21,8 @@
         </p>
 
         <!-- Se solicitará la contraseña. -->
-        <label>Contraseña</label>
-        <input type="password" formControlName="password" placeholder="********">
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" formControlName="password" placeholder="********">
 
         <p class="mensaje-error" *ngIf="tieneError('password', 'required')">
             La contraseña es obligatoria.

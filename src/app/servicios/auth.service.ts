@@ -18,11 +18,17 @@ export class AuthService {
 
   /* Constructor del serviciio. */
   constructor() {
+    
     /* Se busca en el localStorage si hay un usuario autenticado. */
     const usuario = localStorage.getItem('usuario');
 
     if (usuario) {
-      this.usuarioSubject.next(JSON.parse(usuario));
+      try {
+        this.usuarioSubject.next(JSON.parse(usuario));
+      } catch {
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('token');
+      }
     }
   }
 
