@@ -22,7 +22,7 @@ export const obtenerCartelera = async (req, res) => {
     const fin = new Date(year, month - 1, day, 23, 59, 59, 999);
 
     /* Se obtienen todas las películas */
-    const peliculas = await Pelicula.find().lean();
+    const peliculas = await Pelicula.find();
 
     /* Se obtienen todas las sesiones del día */
     const sesiones = await Sesion.find({
@@ -30,7 +30,7 @@ export const obtenerCartelera = async (req, res) => {
     })
     .populate('sala pelicula');
 
-    /* 3. Se agrupan las sesiones por película */
+    /* Se agrupan las sesiones por película */
     const sesionesPorPelicula = {};
 
     sesiones.forEach(s => {
