@@ -10,6 +10,7 @@ import { Tono } from '../../enums/tono';
 import { Router, RouterModule } from '@angular/router';
 import { Usuario } from '../../modelos/usuario';
 import { CarteleraService } from '../../servicios/cartelera.service';
+import { ToastService } from '../../servicios/toast.service';
 
 /* Decorador que define el componente. */
 @Component({
@@ -22,7 +23,6 @@ import { CarteleraService } from '../../servicios/cartelera.service';
 
 /* Clase la cartelera que usa OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
-
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
@@ -41,6 +41,7 @@ export class CarteleraComponent implements OnInit {
   anioActual: number = new Date().getFullYear();
   diasCalendario: Date[] = [];
   diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  private intervaloCambioDia: any;
 
   /* Este getter devuelve el nombre del mes actual en español. */
   get nombreMesActual() {
@@ -95,11 +96,11 @@ export class CarteleraComponent implements OnInit {
   constructor(
     private carteleraService: CarteleraService,
     private router: Router,
+    private toastService: ToastService,
   ) {}
 
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {
-
     /* Se verifica si hay un usuario logueado y se le aportan los datos. */
     const data = localStorage.getItem('usuario');
     if (data) this.usuarioLogueado = JSON.parse(data);
@@ -109,7 +110,7 @@ export class CarteleraComponent implements OnInit {
     this.generarCalendario();
 
     /* Se establece un intervalo para comprobar cada minuto si ha cambiado el día y se actualiza la cartelera y el calendario. */
-    setInterval(() => {
+    this.intervaloCambioDia = setInterval(() => {
       const ahora = new Date();
       if (ahora.getDate() !== this.hoy.getDate()) {
         this.hoy = ahora;
@@ -122,6 +123,12 @@ export class CarteleraComponent implements OnInit {
     }, 60000);
   }
 
+  ngOnDestroy(): void {
+    if (this.intervaloCambioDia) {
+      clearInterval(this.intervaloCambioDia);
+    }
+  }
+
   /* Método para cargar la cartelera de películas del día seleccionado. */
   cargarCartelera() {
     const fechaISO = [
@@ -132,11 +139,34 @@ export class CarteleraComponent implements OnInit {
 
     this.carteleraService.getCartelera(fechaISO).subscribe({
       next: (peliculas) => {
+        const ahora = new Date();
+
+        peliculas.forEach((p) => {
+          p.sesiones = p.sesiones.filter((s) => {
+            const fechaSesion = new Date(s.fecha);
+            const hora = Number(s.hora.slice(0, 2));
+            const minuto = Number(s.hora.slice(2, 4));
+
+            fechaSesion.setHours(hora, minuto, 0, 0);
+
+            return fechaSesion > ahora;
+          });
+        });
+
         this.peliculasOriginales = peliculas;
         this.peliculas = peliculas;
+
+        if (peliculas.length > 0) {
+          this.toastService.show('Mostrando Cartelera', 'exito');
+        } else {
+          this.toastService.show('No hay sesiones que coincidan con la búsqueda', 'error');
+        }
+
+        this.aplicarFiltros();
       },
       error: () => {
         this.peliculas = [];
+        this.toastService.show('No se pudo cargar la cartelera', 'error');
       },
     });
   }

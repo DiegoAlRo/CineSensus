@@ -19,5 +19,5 @@ export interface Pelicula {
   poster: string; // URL a la imagen
   trailer: string; // URL a YouTube
 
-  sesiones?: Sesion[]; // Opcional, para incluir las sesiones disponibles en la cartelera
+  sesiones: Sesion[];
 }
