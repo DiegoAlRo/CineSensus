@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../servicios/auth.service';
+import { Router } from '@angular/router';
 
 /* Se especifica la configuración del componente. */
 @Component({
@@ -15,23 +16,34 @@ import { AuthService } from '../../servicios/auth.service';
 
 /* Clase principal del componente de la barra de navegación. */
 export class NavbarComponent implements OnInit {
-
   /* Se tendrá en cuenta si el usuario está logueado o no para mostrar su nombre y el botón de cerrar sesión. */
   usuarioLogueado: any = null;
+
+  /* Este boolean determinará si el botón de volver será visible. */
+  mostrarVolver = false;
 
   /* Se inyectan los servicios necesarios para la navegación y autenticación. */
   constructor(
     private location: Location,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   /* Al iniciar el componente se suscribe al observable del usuario para actualizar la información del usuario logueado en la barra de navegación. */
   ngOnInit(): void {
-    this.authService.usuario$.subscribe(usuario => {
+    this.authService.usuario$.subscribe((usuario) => {
       this.usuarioLogueado = usuario;
     });
+
+    this.router.events.subscribe(() => {
+      const ruta = this.router.url;
+
+      this.mostrarVolver = !['/', '/login', '/registro', '/cartelera', '/perfil'].includes(
+        ruta,
+      );
+    });
   }
-  
+
   /* Método para volver a la página anterior. */
   volver() {
     this.location.back();

@@ -19,14 +19,18 @@ export const obtenerPeliculas = async (req, res) => {
 /* Este método podrá obtener una película por su ID. */
 export const obtenerPeliculaPorId = async (req, res) => {
   try {
-    const pelicula = await Pelicula.findById(req.params.id).lean();
+    const pelicula = await Pelicula.findById(req.params.id);
 
     if (!pelicula) {
       return res.status(404).json({ mensaje: 'Película no encontrada' });
     }
 
-    const resenas = await Resena.find({ pelicula: pelicula._id });
-    pelicula.resenas = resenas;;
+    const resenas = await Resena.find({ pelicula: pelicula._id })
+    .populate('usuario')
+    .populate('pelicula');
+
+    pelicula.resenas = resenas;
+
 
     res.json(pelicula);
 

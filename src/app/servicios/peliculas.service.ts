@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Pelicula } from '../modelos/pelicula';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs';
 
 /* Es accesible en toda la web. */
 @Injectable({
@@ -21,23 +20,11 @@ export class PeliculasService {
 
   /* Con este método get se podrán obtener todas las películas. */
   getPeliculas(): Observable<Pelicula[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      map((peliculas) =>
-        peliculas.map((p) => ({
-          ...p,
-          id: p._id,
-        })),
-      ),
-    );
+    return this.http.get<Pelicula[]>(this.apiUrl);
   }
 
   /* Con este método get se podrán obtener una película por ID */
   getPelicula(id: string): Observable<Pelicula> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
-      map((p) => ({
-        ...p,
-        id: p._id,
-      })),
-    );
+    return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
   }
 }

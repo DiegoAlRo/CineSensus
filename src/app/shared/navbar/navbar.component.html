@@ -29,7 +29,7 @@
   </div>
   
   <!-- Botón para volver a la página principal. -->
-  <button class="btn-volver" (click)="volver()">
+  <button class="btn-volver" *ngIf="mostrarVolver" (click)="volver()">
     ← Volver 
   </button>
 

@@ -13,10 +13,12 @@ export const routes: Routes = [
   { path: 'registro', loadComponent: () => import('./paginas/registro/registro.component') .then(m => m.RegistroComponent), canActivate: [noAuthGuard] },
   { path: 'login', loadComponent: () => import('./paginas/login/login.component') .then(m => m.LoginComponent), canActivate: [noAuthGuard] },
   { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.component').then(m => m.PerfilComponent), canActivate: [authGuard] },
+  { path: 'cambiar-contrasena', loadComponent: () => import('./paginas/cambiar-contrasena/cambiar-contrasena.component').then(m => m.CambiarContrasenaComponent), canActivate: [authGuard] },
   { path: 'cartelera', loadComponent: () => import('./paginas/cartelera/cartelera.component').then(m => m.CarteleraComponent) },
   { path: 'pelicula/:id', loadComponent: () => import('./paginas/info-pelicula/info-pelicula.component').then(m => m.InfoPeliculaComponent) },
   { path: 'sesion/:idSesion/asientos', loadComponent: () => import('./paginas/asientos/asientos.component').then(m => m.AsientosComponent), canActivate: [authGuard] },
   { path: 'pago-entrada', loadComponent: () => import('./paginas/pago-entrada/pago-entrada.component').then(m => m.PagoEntradaComponent), canActivate: [authGuard] },
   { path: 'muestra-compra', loadComponent: () => import('./paginas/muestra-compra/muestra-compra.component').then(m => m.MuestraCompraComponent), canActivate: [authGuard] },
+  { path: 'entrada/:id', loadComponent: () => import('./paginas/entrada/entrada.component').then(m => m.EntradaComponent), canActivate: [authGuard] },
 
  ];

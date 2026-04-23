@@ -46,7 +46,6 @@ export class AuthService {
 
   /* El método logout elimina la información del usuario del localStorage y actualiza el estado del usuario a null en el BehaviorSubject. */
   logout() {
-    debugger
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     this.usuarioSubject.next(null);

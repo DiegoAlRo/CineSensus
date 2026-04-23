@@ -81,6 +81,31 @@ export const obtenerUsuario = async (req, res) => {
   }
 };
 
+export const cambiarContrasena = async (req, res) => {
+  try {
+    const usuarioId = req.usuarioId;
+    const { contrasenaActual, nuevaContrasena } = req.body;
+
+    const usuario = await Usuario.findById(usuarioId);
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'USUARIO_NO_ENCONTRADO' });
+    }
+
+    const coincide = usuario.password === contrasenaActual;
+    if (!coincide) {
+      return res.status(400).json({ mensaje: 'CONTRASENA_INCORRECTA' });
+    }
+
+    usuario.password = nuevaContrasena;
+    await usuario.save();
+
+    res.json({ mensaje: 'OK' });
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'ERROR_SERVIDOR' });
+  }
+};
+
 /* Este método servirá para actualizar un usuario. */
 export const actualizarUsuario = async (req, res) => {
   try {

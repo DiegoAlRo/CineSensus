@@ -157,7 +157,7 @@
                     <!-- Horarios de las sesiones, se repiten por cada sesión de la película. -->
                     <div class="horarios">
                         <span class="horario-chip" *ngFor="let s of pelicula.sesiones"
-                            (click)="$event.stopPropagation()" [routerLink]="['/sesion', s._id, 'asientos']">
+                            (click)="$event.stopPropagation()" [routerLink]="['/sesion', s.id, 'asientos']">
                             {{ formatearHora(s.hora) }}
                         </span>
                     </div>

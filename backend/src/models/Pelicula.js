@@ -21,4 +21,16 @@ const PeliculaSchema = new mongoose.Schema({
     resenas: [Number]
 });
 
+PeliculaSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+PeliculaSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (_, ret) => {
+    delete ret._id;
+  }
+});
+
 export default mongoose.model('Pelicula', PeliculaSchema);

@@ -149,6 +149,12 @@
   border-bottom: 1px solid #333;
 }
 
+.lista-scroll {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
 /* Estados */
 .estado-pagada {
   color: #e7c000;
@@ -166,4 +172,14 @@
 .btn-reseña {
   margin-top: 10px;
   width: 100%;
+}
+
+.grupo-botones-doble {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.grupo-botones-doble button {
+  flex: 1;
 }

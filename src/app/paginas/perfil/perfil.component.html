@@ -39,7 +39,7 @@
 
                 <!-- Esta clase cuenta con el botón de cambiar contraseña y el de cerrar sesión. -->
                 <div class="grupo-botones">
-                    <button class="btn-accion">Cambiar contraseña</button>
+                    <button class="btn-accion" (click)="cambiarContrasena()">Cambiar contraseña</button>
                     <button class="btn-accion btn-cerrar" (click)="cerrarSesion()">Cerrar Sesión</button>
                 </div>
             </div>
@@ -52,83 +52,102 @@
     <div class="seccion-lista">
         <h2 class="titulo-seccion">Historial de Reservas</h2>
 
-        <!-- Por cada reserva hecha por el usuario se generará una pequeña tarjeta con sus datos. -->
-        <div *ngIf="reservas && reservas.length > 0; else noReservas">
-            <div *ngFor="let r of reservas" class="tarjeta-item">
-                <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
+        <div *ngIf="cargandoReservas" class="mensaje-vacio">Cargando reservas...</div>
 
-                <p><strong>Fecha:</strong> {{ r.sesion.fecha }}</p>
-                <p><strong>Hora:</strong> {{ r.sesion.hora }}</p>
-                <p><strong>Sala:</strong> {{ r.sesion.sala.nombre }}</p>
+        <ng-container *ngIf="!cargandoReservas">
 
-                <p><strong>Asientos:</strong>
-                    <span *ngFor="let a of r.asientos">
-                        {{ a.fila }}{{ a.columna }}&nbsp;
-                    </span>
-                </p>
+            <div class="lista-scroll">
 
-                <!-- El estado de la reserva de terminará las posibilidades sobre ella. -->
-                <p><strong>Estado:</strong>
-                    <span [ngClass]="{
-                        'estado-pagada': r.estado === 'pagada',
-                        'estado-consumida': r.estado === 'consumida',
-                        'estado-cancelada': r.estado === 'cancelada'}">
-                        {{ r.estado }}
-                    </span>
-                </p>
+                <!-- Por cada reserva hecha por el usuario se generará una pequeña tarjeta con sus datos. -->
+                <div *ngIf="reservas.length > 0; else noReservas">
+                    <div *ngFor="let r of reservas" class="tarjeta-item">
 
-                <!-- De haberse consumido la reserva, se mostrará un botón para añadir una reseña a la película(Si no le añadió una ya). -->
-                <button *ngIf="r.estado === 'consumida' && !tieneResena(r.pelicula.id)" class="btn-accion btn-reseña"
-                    (click)="anadirResena(r.pelicula.id)">
-                    Añadir reseña
-                </button>
+                        <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
+
+                        <p><strong>Fecha:</strong> {{ r.sesion.fecha | date:'dd/MM/yyyy' }}</p>
+                        <p><strong>Hora:</strong> {{ r.sesion.hora | slice:0:2 }}:{{ r.sesion.hora | slice:2:4 }}</p>
+
+                        <p><strong>Estado:</strong>
+                            <span [ngClass]="{
+                                'estado-pagada': r.estado === 'pagada',
+                                'estado-consumida': r.estado === 'consumida',
+                                'estado-cancelada': r.estado === 'cancelada'
+                                }">
+                                {{ r.estado }}
+                            </span>
+                        </p>
+
+                        <button class="btn-accion" (click)="verEntrada(r)">Ver Entrada</button>
+                            
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-        <!-- Si no hay ninguna reserva realizada, se mostrará este mensaje. -->
-        <ng-template #noReservas>
-            <div class="mensaje-vacio">No has realizado ninguna reserva todavía.</div>
-        </ng-template>
+            <!-- Si no hay ninguna reserva realizada, se mostrará este mensaje. -->
+            <ng-template #noReservas>
+                <div class="mensaje-vacio">No has realizado ninguna reserva todavía.</div>
+            </ng-template>
+        </ng-container>
     </div>
 
     <!-- Esta clase contendrá la sección de películas vistas. -->
     <div class="seccion-lista">
         <h2 class="titulo-seccion">Películas Vistas</h2>
 
-        <!-- Si el usuario no ha visto ninguna película, se mostrará este mensaje. -->
-        <div *ngIf="peliculasVistas.length === 0" class="mensaje-vacio">
-            Aún no has visto ninguna película.
-        </div>
+        <div *ngIf="cargandoPeliculasVistas" class="mensaje-vacio">Cargando...</div>
 
-        <!-- De haber películas vistas, se recorrerá al lista y mostrarán su título y duración.-->
-        <ul class="lista-simple">
-            <li *ngFor="let p of peliculasVistas">
-                {{ p.pelicula.titulo }} ({{ p.pelicula.duracion }} min)
-            </li>
-        </ul>
+        <ng-container *ngIf="!cargandoPeliculasVistas">
+
+            <div class="lista-scroll">
+
+                <!-- Si el usuario no ha visto ninguna película, se mostrará este mensaje. -->
+                <div *ngIf="peliculasVistas.length === 0" class="mensaje-vacio">
+                    Aún no has visto ninguna película.
+                </div>
+
+                <!-- De haber películas vistas, se recorrerá al lista y mostrarán su título y duración.-->
+                <ul class="lista-simple">
+                    <li *ngFor="let p of peliculasVistas">
+                        {{ p.pelicula.titulo }} ({{ p.pelicula.duracion }} min)
+                    </li>
+                </ul>
+
+            </div>
+        </ng-container>
     </div>
 
     <!-- Esta clase contendrá la sección de reseñas. -->
     <div class="seccion-lista">
         <h2 class="titulo-seccion">Mis Reseñas</h2>
 
-        <!-- Si el usuario no ha dejado ninguna reseña, se mostrará este mensaje. -->
-        <div *ngIf="resenas.length === 0" class="mensaje-vacio">
-            No has dejado ninguna reseña todavía.
-        </div>
+        <div *ngIf="cargandoResenas" class="mensaje-vacio">Cargando reseñas...</div>
 
-        <!-- De haber reseñas, se recorrerá la lista y mostrarán su información. -->
-        <div *ngFor="let r of resenas" class="tarjeta-item">
-            <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
-            <p><strong>Puntuación:</strong> {{ r.puntuacion }}/5</p>
-            <p><strong>Comentario:</strong> {{ r.comentario }}</p>
+        <ng-container *ngIf="!cargandoResenas">
 
-            <div class="grupo-botones">
-                <button class="btn-accion" (click)="irAResenas(r.pelicula.id)">Ver reseñas de la película</button>
-                <button class="btn-accion" (click)="editarResena(r)">Editar</button>
-                <button class="btn-accion btn-cerrar" (click)="eliminarResena(r)">Eliminar</button>
+            <div class="lista-scroll">
+
+                <!-- Si el usuario no ha dejado ninguna reseña, se mostrará este mensaje. -->
+                <div *ngIf="resenas.length === 0" class="mensaje-vacio">
+                    No has dejado ninguna reseña todavía.
+                </div>
+
+                <!-- De haber reseñas, se recorrerá la lista y mostrarán su información. -->
+                <div *ngFor="let r of resenas" class="tarjeta-item">
+                    <h3 class="titulo-pelicula">{{ r.pelicula.titulo }}</h3>
+                    <p><strong>Puntuación:</strong> {{ r.puntuacion }}/5</p>
+                    <p><strong>Comentario:</strong> {{ r.comentario }}</p>
+
+                    <div class="grupo-botones">
+                        <button class="btn-accion" (click)="irAResenas(r.pelicula.id)">Ver reseñas de la
+                            película</button>
+                        <button class="btn-accion" (click)="editarResena(r)">Editar</button>
+                        <button class="btn-accion btn-cerrar" (click)="eliminarResena(r)">Eliminar</button>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </ng-container>
     </div>
 
 </div>

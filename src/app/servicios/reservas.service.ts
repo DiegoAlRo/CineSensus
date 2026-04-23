@@ -31,7 +31,7 @@ export class ReservasService {
     asientos: { fila: number; columna: number }[];
     total: number;
   }) {
-    return this.http.post<Reserva>('http://localhost:3000/reservas', datos);
+    return this.http.post<Reserva>(`${this.apiUrl}/reservas`, datos);
   }
 
   /* Método para limpiar los datos de la reserva después de mostrar la compra. */
@@ -43,6 +43,10 @@ export class ReservasService {
   /* Este método recivirá el ID del usuario para obtener sus reservas desde el backend. */
   getReservasUsuario(usuarioId: string) {
     return this.http.get<Reserva[]>(`${this.apiUrl}/reservas?usuario=${usuarioId}`);
+  }
+
+  getReservaPorId(id: string) {
+    return this.http.get<Reserva>(`${this.apiUrl}/reservas/${id}`);
   }
 
   /* Método para actualizar el estado de una reserva. */

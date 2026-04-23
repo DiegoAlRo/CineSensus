@@ -1,0 +1,42 @@
+<div class="muestra-container" *ngIf="!cargando && reserva">
+
+    <div class="tarjeta-compra">
+
+        <h1 class="titulo-principal">ENTRADA</h1>
+
+        <h2 class="subtitulo">
+            Para: <span>{{ reserva.pelicula.titulo }}</span>
+        </h2>
+
+        <div class="poster-container">
+            <img [src]="reserva.sesion.pelicula.poster" alt="Póster de la película">
+        </div>
+
+        <section class="info-bloque">
+            <p><strong>Duración:</strong> {{ reserva.pelicula.duracion }} min</p>
+            <p><strong>Fecha:</strong> {{ reserva.sesion.fecha | date:'shortDate' }}</p>
+            <p><strong>Hora:</strong> {{ reserva.sesion.hora | slice:0:2 }}:{{ reserva.sesion.hora | slice:2:4 }}</p>
+            <p><strong>Sala:</strong> {{ reserva.sesion.sala.nombre }}</p>
+        </section>
+
+        <section class="info-bloque">
+            <h3>Asientos</h3>
+            <ul>
+                <li *ngFor="let a of reserva.asientos">
+                    {{ formatearAsiento(a) }}
+                </li>
+            </ul>
+        </section>
+
+        <section class="info-bloque">
+            <p><strong>Código de entrada:</strong></p>
+            <div class="codigo-box">{{ reserva.codigoEntrada }}</div>
+        </section>
+
+    </div>
+
+</div>
+
+<div *ngIf="cargando" class="muestra-container">
+    <p>Cargando entrada...</p>
+</div>

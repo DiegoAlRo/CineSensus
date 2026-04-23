@@ -26,7 +26,6 @@ ResenaSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: (_, ret) => {
-        ret.id = ret.id;
         delete ret._id;
     }
 });

@@ -1,0 +1,36 @@
+<div class="contenedor-form">
+
+    <h2 class="titulo-form">Cambiar contraseña</h2>
+    <p class="subtitulo-form">Actualiza la contraseña de tu cuenta</p>
+
+    <form [formGroup]="form" (ngSubmit)="cambiar()" class="form-card">
+
+        <label>Contraseña actual</label>
+        <input type="password" formControlName="contrasenaActual" placeholder="********">
+        <p class="mensaje-error" *ngIf="tieneError('contrasenaActual', 'required')">
+            La contraseña actual es obligatoria.
+        </p>
+
+        <label>Nueva contraseña</label>
+        <input type="password" formControlName="nuevaContrasena" placeholder="********">
+        <p class="mensaje-error" *ngIf="tieneError('nuevaContrasena', 'required')">
+            La nueva contraseña es obligatoria.
+        </p>
+        <p class="mensaje-error" *ngIf="tieneError('nuevaContrasena', 'minlength')">
+            Debe tener al menos 8 caracteres.
+        </p>
+
+        <label>Confirmar nueva contraseña</label>
+        <input type="password" formControlName="confirmarContrasena" placeholder="********">
+        <p class="mensaje-error" *ngIf="tieneError('confirmarContrasena', 'required')">
+            Debes confirmar la contraseña.
+        </p>
+        <p class="mensaje-error" *ngIf="tieneError('confirmarContrasena', 'noCoincide')">
+            Las contraseñas no coinciden.
+        </p>
+
+        <button type="submit" class="btn-rojo">Guardar cambios</button>
+
+    </form>
+
+</div>

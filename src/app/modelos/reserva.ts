@@ -4,7 +4,7 @@ import { Sesion } from './sesion';
 
 /* Esta interfaz define la estructura de una reserva. */
 export interface Reserva {
-  _id: string;
+  id: string;
   usuario: Usuario;
   sesion: Sesion;
   pelicula: {

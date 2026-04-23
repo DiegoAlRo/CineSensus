@@ -10,7 +10,7 @@ const ReservaSchema = new mongoose.Schema({
   sesion: { type: mongoose.Schema.Types.ObjectId, ref: 'Sesion', required: true },
 
   pelicula: {
-    id: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true },
+    id: String,
     titulo: String,
     duracion: Number
   },
@@ -38,5 +38,17 @@ const ReservaSchema = new mongoose.Schema({
   }
 
 }, { timestamps: true });
+
+ReservaSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+ReservaSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (_, ret) => {
+    delete ret._id;
+  }
+});
 
 export default mongoose.model('Reserva', ReservaSchema);

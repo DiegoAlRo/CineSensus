@@ -23,16 +23,9 @@ export const crearResena = async (req, res) => {
 
         const completa = await Resena.findById(nueva._id)
             .populate('usuario')
-            .populate('pelicula', '_id titulo duracion');
+            .populate('pelicula');
 
-        const obj = completa.toJSON();
-        obj.pelicula = {
-            id: completa.pelicula._id.toString(),
-            titulo: completa.pelicula.titulo,
-            duracion: completa.pelicula.duracion
-        };
-
-        res.status(201).json(obj);
+        res.status(201).json(completa);
 
     } catch (error) {
         res.status(500).json({ error: 'Error al crear reseña' });
@@ -50,19 +43,10 @@ export const obtenerResenas = async (req, res) => {
 
         const resenas = await Resena.find(filtro)
             .populate('usuario')
-            .populate('pelicula', '_id titulo duracion');
+            .populate('pelicula');
 
-        const resenasLimpias = resenas.map(r => {
-            const obj = r.toJSON();
-            obj.pelicula = {
-                id: r.pelicula._id.toString(),
-                titulo: r.pelicula.titulo,
-                duracion: r.pelicula.duracion
-            };
-            return obj;
-        });
+        res.json(resenas);
 
-        res.json(resenasLimpias);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener reseñas' });
     }
@@ -83,22 +67,13 @@ export const editarResena = async (req, res) => {
             return res.status(404).json({ error: 'Reseña no encontrada' });
         }
 
-        // Recalcular puntuación media
         await actualizarPuntuacionMedia(actualizada.pelicula);
 
-        // Devolver reseña completa con populate
         const completa = await Resena.findById(actualizada._id)
             .populate('usuario')
-            .populate('pelicula', '_id titulo duracion');
+            .populate('pelicula');
 
-        const obj = completa.toJSON();
-        obj.pelicula = {
-            id: completa.pelicula._id.toString(),
-            titulo: completa.pelicula.titulo,
-            duracion: completa.pelicula.duracion
-        };
-
-        res.json(obj);
+        res.json(completa);
 
     } catch (error) {
         res.status(500).json({ error: 'Error al editar reseña' });
@@ -118,7 +93,6 @@ export const eliminarResena = async (req, res) => {
 
         await Resena.findByIdAndDelete(req.params.id);
 
-        // Recalcular puntuación media
         await actualizarPuntuacionMedia(peliculaId);
 
         res.json({ mensaje: 'Reseña eliminada' });

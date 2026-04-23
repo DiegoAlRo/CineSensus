@@ -85,7 +85,7 @@ export class PagoEntradaComponent implements OnInit {
     /* Se preparan los datos para crear la reserva. */
     const datos = {
       usuarioId,
-      sesionId: this.datos!.sesion._id,
+      sesionId: this.datos!.sesion.id,
       asientos: this.datos!.asientos.map((a) => ({
         fila: a.fila,
         columna: a.columna,

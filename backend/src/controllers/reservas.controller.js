@@ -25,7 +25,7 @@ export const crearReserva = async (req, res) => {
         usuario: usuarioId,
         sesion: sesionId,
         pelicula: {
-            id: sesion.pelicula._id.toString(),
+            id: sesion.pelicula.id,
             titulo: sesion.pelicula.titulo,
             duracion: sesion.pelicula.duracion
         },
@@ -45,10 +45,6 @@ export const crearReserva = async (req, res) => {
             path: 'sesion',
             populate: { path: 'sala' }
         })
-        .populate({
-            path: 'pelicula.id',
-            model: 'Pelicula'
-        });
 
     res.status(201).json(reservaCompleta);
 
@@ -85,29 +81,36 @@ export const obtenerReservasUsuario = async (req, res) => {
             path: 'sesion',
             populate: { path: 'sala' }
         })
-        .populate({
-            path: 'pelicula.id',
-            model: 'Pelicula',
-            select: '_id titulo duracion'
-        });
 
-        const reservasLimpias = reservas.map(r => {
-        const obj = r.toObject();
-
-            return {
-                ...obj,
-                pelicula: {
-                    id: obj.pelicula.id._id,
-                    titulo: obj.pelicula.id.titulo,
-                    duracion: obj.pelicula.id.duracion
-                }
-            };
-        });
-
-        res.json(reservasLimpias );
+        res.json(reservas);
+        
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener reservas del usuario' });
     }
+};
+
+export const obtenerReservaPorId = async (req, res) => {
+  try {
+    const reserva = await Reserva.findById(req.params.id)
+      .populate('usuario')
+      .populate({
+        path: 'sesion',
+        populate: { path: 'sala' }
+      })
+      .populate({
+        path: 'pelicula.id',
+        model: 'Pelicula'
+      });
+
+    if (!reserva) {
+      return res.status(404).json({ error: 'Reserva no encontrada' });
+    }
+
+    res.json(reserva);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener la reserva' });
+  }
 };
 
 /* Este método actualiza el estado de una reserva. */

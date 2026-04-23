@@ -28,8 +28,8 @@ export class UsuariosService {
   login(
     email: string,
     password: string,
-    
-  ): Observable<{ usuario: Usuario; token: string }> { const url = `${this.apiUrl}/login`;
+  ): Observable<{ usuario: Usuario; token: string }> {
+    const url = `${this.apiUrl}/login`;
     return this.http.post<{ usuario: Usuario; token: string }>(url, {
       email,
       password,
@@ -44,5 +44,13 @@ export class UsuariosService {
   /* Este método se encargará de actualizar los datos de un usuario existente. */
   actualizarUsuario(id: string, datos: Partial<Usuario>): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, datos);
+  }
+
+  cambiarContrasena(datos: { contrasenaActual: string; nuevaContrasena: string }) {
+    const token = localStorage.getItem('token');
+
+    return this.http.put(`${this.apiUrl}/cambiar-contrasena`, datos, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}
+    });
   }
 }
