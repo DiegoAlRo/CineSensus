@@ -18,6 +18,6 @@ export interface Pelicula {
   duracion: number; // En minutos
   poster: string; // URL a la imagen
   trailer: string; // URL a YouTube
-
   sesiones: Sesion[];
+  resenas: Number[];
 }

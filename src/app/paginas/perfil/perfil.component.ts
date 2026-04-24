@@ -140,7 +140,7 @@ export class PerfilComponent implements OnInit {
   cerrarSesion() {
     this.authService.logout();
     this.toastService.show('Sesión cerrada correctamente', 'exito');
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 
   /* Este método se encargará de actualizar el estado de las reservas si la fecha de la sesión ya ha pasado. */

@@ -16,6 +16,7 @@
             <!-- Puntuación de película. -->
             <div class="puntuacion">
                 <img *ngFor="let icono of getIconos(pelicula.puntuacionMedia)" [src]="icono" class="estrella-pelicula">
+                <span class="fraccion">{{ pelicula.puntuacionMedia }}/5</span>
             </div>
 
             <!-- Ficha técnica de película. -->
@@ -46,7 +47,7 @@
 
         <!-- Lista de reseñas -->
         <ng-container *ngFor="let r of resenas">
-            <div *ngIf="!resenaDelUsuario || r.id !== resenaDelUsuario.id" class="tarjeta-resena">
+            <div class="tarjeta-resena">
 
                 <div class="cabecera-resena">
                     <span class="usuario">{{ r.usuario.username }}</span>
@@ -66,36 +67,16 @@
         <div *ngIf="mostrarFormularioResena" class="formulario-resena">
             <h3>Escribe tu reseña</h3>
 
-            <div class="estrellas">
-
-                <div class="estrellas-selector">
-                    <img *ngFor="let star of [1,2,3,4,5]; let i = index"
-                        [src]="i < puntuacion ? 'assets/EstrellaPuntuacion-Entera.png' : 'assets/EstrellaPuntuacion-Vacia.png'"
-                        class="estrella-click" (mouseenter)="hoverPuntuacion(i + 1)" (mouseleave)="hoverPuntuacion(0)"
-                        (click)="seleccionarPuntuacion(i + 1)" />
-                </div>
-            </div>
+            <select [(ngModel)]="puntuacion">
+                <option value="" disabled selected>Selecciona puntuación</option>
+                <option *ngFor="let p of puntuaciones" [value]="p">{{ p }} estrellas</option>
+            </select>
 
             <textarea [(ngModel)]="comentario" placeholder="Escribe tu opinión..."></textarea>
 
             <button class="btn-accion" (click)="enviarResena()">
                 Enviar reseña
             </button>
-        </div>
-
-        <!-- Si SÍ tiene reseña → mostrar su reseña con botones -->
-        <div *ngIf="resenaDelUsuario && !mostrarFormularioResena" class="tarjeta-resena propia">
-            <div class="cabecera-resena">
-                <span class="usuario">Tú</span>
-                <span class="fecha">{{ resenaDelUsuario.fecha | date:'dd/MM/yyyy' }}</span>
-            </div>
-
-            <div class="estrellas-resena">
-                <img *ngFor="let star of getIconos(resenaDelUsuario.puntuacion)" [src]="star" class="estrella-resena">
-            </div>
-
-            <p class="comentario">{{ resenaDelUsuario.comentario }}</p>
-
         </div>
 
     </div>

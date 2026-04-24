@@ -7,21 +7,21 @@ import mongoose from 'mongoose';
  */
 const SesionSchema = new mongoose.Schema({ 
     
-    pelicula: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true }, 
-    sala: { type: mongoose.Schema.Types.ObjectId, ref: 'Sala', required: true }, 
-    fecha: { type: Date, required: true }, 
-    precio: { type: Number, default: 7.5 },
-    hora: { type: String, required: true }, // Formato HHMM
+  pelicula: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true }, 
+  sala: { type: mongoose.Schema.Types.ObjectId, ref: 'Sala', required: true }, 
+  fecha: { type: Date, required: true }, 
+  precio: { type: Number, default: 7.5 },
+  hora: { type: String, required: true }, // Formato HHMM
 
-    asientosOcupados: [
+  asientosOcupados: [
     {
       fila: Number,
       columna: Number
     }
-    ]
+  ]
 
 }, { 
-    timestamps: true 
+  timestamps: true 
 }); 
 
 /* Mediante este método GET obtendremos el ID de una reserva. */

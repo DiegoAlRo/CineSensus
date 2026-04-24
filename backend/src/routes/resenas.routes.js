@@ -1,7 +1,6 @@
 /* Imports necesarios. */
 import express from 'express'; 
 import { obtenerResenas, crearResena, editarResena, eliminarResena } from '../controllers/resenas.controller.js';
-import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router(); 
 
@@ -15,18 +14,18 @@ router.get('/', obtenerResenas);
  * POST /resenas.
  * Crea una reseña.
  */
-router.post('/', authMiddleware, crearResena); 
+router.post('/', crearResena); 
 
 /**
  * PUT /resenas/:id.
  * Edita una reseña.
  */
-router.put('/:id', authMiddleware, editarResena); 
+router.put('/:id', editarResena); 
 
 /**
  * DELETE /resenas/:id.
  * Elimina una reseña.
  */
-router.delete('/:id', authMiddleware, eliminarResena); 
+router.delete('/:id', eliminarResena); 
 
 export default router;

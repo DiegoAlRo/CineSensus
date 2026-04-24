@@ -38,16 +38,14 @@ export const obtenerCartelera = async (req, res) => {
       if (!sesionesPorPelicula[id]) sesionesPorPelicula[id] = [];
       sesionesPorPelicula[id].push(s);
     });
-
+    
     /* Insertar sesiones en cada película. */
-    const resultado = peliculas.map(p => ({
-      ...p,
-      id: p._id,
-      sesiones: sesionesPorPelicula[p._id.toString()] || []
-    }));
+    peliculas.forEach(x=>{
+      x.sesiones=sesionesPorPelicula[x.id.toString()] || []
+    })
 
     /* Se devuelve la cartelera con las sesiones correspondientes. */
-    res.json(resultado);
+    res.json(peliculas);
 
   } catch (error) {
 

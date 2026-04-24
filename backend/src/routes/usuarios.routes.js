@@ -1,7 +1,6 @@
 /* Imports y rutas necesarias para la gestión de usuarios. */
 import express from 'express'; 
 import { crearUsuario, loginUsuario, obtenerUsuario, actualizarUsuario, cambiarContrasena } from '../controllers/usuarios.controller.js';
-import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router(); 
 
@@ -21,18 +20,18 @@ router.post('/login', loginUsuario);
  * PUT /cambiar-contrasena
  * Actualiza la contraseña de un usuario existente.
  */
-router.put('/cambiar-contrasena', authMiddleware, cambiarContrasena);
+router.put('/cambiar-contrasena', cambiarContrasena);
 
 /**
  * GET /:id
  * Obtiene los datos de un usuario por su ID.
  */
-router.get('/:id', authMiddleware, obtenerUsuario);
+router.get('/:id', obtenerUsuario);
 
 /**
  * PUT /:id
  * Actualiza los datos de un usuario existente.
  */
-router.put('/:id', authMiddleware, actualizarUsuario);
+router.put('/:id', actualizarUsuario);
 
 export default router;
