@@ -28,7 +28,13 @@ const UsuarioSchema = new mongoose.Schema({
 
     password: { 
         type: String, required: true, minlength: 8
-    }, 
+    },
+
+    rol: {
+        type: String,
+        enum: ['usuario', 'admin'],
+        default: 'usuario'
+    },
         
     historialPeliculas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula' }], 
     historialReservas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reserva' }], 

@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './shared/guards/auth.guard';
 import { noAuthGuard } from './shared/guards/no-auth.guard';
+import { adminAuthGuard } from './shared/guards/admin-auth.guard';
 
 /* Se definen las rutas de la aplicación, para lo que se usará Lazy loading. */
 export const routes: Routes = [
@@ -20,5 +21,16 @@ export const routes: Routes = [
   { path: 'pago-entrada', loadComponent: () => import('./paginas/pago-entrada/pago-entrada.component').then(m => m.PagoEntradaComponent), canActivate: [authGuard] },
   { path: 'muestra-compra', loadComponent: () => import('./paginas/muestra-compra/muestra-compra.component').then(m => m.MuestraCompraComponent), canActivate: [authGuard] },
   { path: 'entrada/:id', loadComponent: () => import('./paginas/entrada/entrada.component').then(m => m.EntradaComponent), canActivate: [authGuard] },
+  { path: 'admin', canActivate: [adminAuthGuard], loadComponent: () => import('./paginas/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent),
+    children: [
+      { path: 'peliculas', loadComponent: () => import('./paginas/admin/peliculas/peliculas.component').then(m => m.PeliculasComponent) },
+      { path: 'salas', loadComponent: () => import('./paginas/admin/salas/salas.component').then(m => m.SalasComponent) },
+      { path: 'sesiones', loadComponent: () => import('./paginas/admin/sesiones/sesiones.component').then(m => m.SesionesComponent) },
+      { path: 'reservas', loadComponent: () => import('./paginas/admin/reservas/reservas.component').then(m => m.ReservasComponent) },
+      { path: 'usuarios', loadComponent: () => import('./paginas/admin/usuarios/usuarios.component').then(m => m.UsuariosComponent) },
+      { path: 'resenas', loadComponent: () => import('./paginas/admin/resenas/resenas.component').then(m => m.ResenasComponent) },
+      { path: '', redirectTo: 'peliculas', pathMatch: 'full' }
+    ]
+  }
 
- ];
+];

@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
     
-        this.mostrarNavbar = event.url !== '/';
+        this.mostrarNavbar = !event.url.startsWith('/admin');
        
       }
     });

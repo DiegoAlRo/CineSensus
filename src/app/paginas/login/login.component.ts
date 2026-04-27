@@ -1,7 +1,13 @@
 /* Imports para el componente de login. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { AuthService } from '../../servicios/auth.service';
@@ -31,7 +37,6 @@ export class LoginComponent {
     private toastService: ToastService,
     private erroresService: ErroresService,
   ) {
-
     /* Método para manejar el proceso de inicio de sesión. */
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,7 +53,6 @@ export class LoginComponent {
 
   /* Método para manejar el proceso de inicio de sesión. */
   login() {
-
     /* De estar mal el formulario, se retrocederá. */
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -64,7 +68,11 @@ export class LoginComponent {
       next: (res) => {
         this.authService.login(res.usuario, res.token);
         this.toastService.show('Bienvenido de nuevo', 'exito');
-        this.router.navigate(['/cartelera']);
+        if (res.usuario.rol === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/cartelera']);
+        }
       },
 
       /* Si ocurre un error, se muestra un mensaje. */
@@ -73,10 +81,14 @@ export class LoginComponent {
 
         if (mensaje === 'Credenciales incorrectas') {
           this.toastService.show(
-            this.erroresService.get('credencialesIncorrectas'), 'error'
+            this.erroresService.get('credencialesIncorrectas'),
+            'error',
           );
         } else {
-          this.toastService.show(this.erroresService.get('errorGenerico'), 'error');
+          this.toastService.show(
+            this.erroresService.get('errorGenerico'),
+            'error',
+          );
         }
       },
     });

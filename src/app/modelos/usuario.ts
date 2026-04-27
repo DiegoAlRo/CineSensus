@@ -5,6 +5,8 @@ export interface Usuario {
   nombre: string;
   apellidos: string;
   email: string;
+
+  rol?: string;
   
   /* Los IDs de elementos que referenciará. */
   historialPeliculas?: string[];
