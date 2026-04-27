@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
     this.router.events.subscribe(() => {
       const ruta = this.router.url;
 
-      this.mostrarVolver = !['/', '/login', '/registro', '/cartelera', '/perfil'].includes(
+      this.mostrarVolver = !['/', '/login', '/cartelera', '/perfil', '/muestra-compra'].includes(
         ruta,
       );
     });

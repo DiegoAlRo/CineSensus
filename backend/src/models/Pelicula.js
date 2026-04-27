@@ -1,6 +1,6 @@
 /* Imports necesarios. */
 import mongoose from 'mongoose'; 
-import Sesion from './Sesion';
+import Sesion from './Sesion.js';
 
 /** 
  * Modelo de Película para CineSensus. 
@@ -19,7 +19,7 @@ const PeliculaSchema = new mongoose.Schema({
   duracion: Number,
   poster: String,
   trailer: String,
-  sesiones: [Sesion],
+  sesiones: [],
   resenas: [Number]
 });
 

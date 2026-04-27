@@ -1,14 +1,10 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ReservasService } from '../../servicios/reservas.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../servicios/toast.service';
 
 /* Componente para mostrar el formulario de pago de la entrada. */
 @Component({
@@ -30,6 +26,7 @@ export class PagoEntradaComponent implements OnInit {
     private reservasService: ReservasService,
     private fb: FormBuilder,
     private router: Router,
+    private toastService: ToastService
   ) {
 
     /* Se crea el formulario con los campos necesarios y sus validaciones. */
@@ -68,17 +65,21 @@ export class PagoEntradaComponent implements OnInit {
   /* Método para confirmar el pago teniendo en cuenta los datos del formulario. */
   confirmarPago() {
 
+    const data = localStorage.getItem('usuario');
+
+    if (!data) {
+      this.toastService.show('Debes iniciar sesión para completar la compra', 'error');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     if (this.formulario.invalid) {
       console.log('Formulario inválido');
+      this.toastService.show('Formulario inválido', 'error');
       return;
     }
 
-    const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
-
-    if (!usuario) {
-      console.error('No hay usuario logueado');
-      return;
-    }
+    const usuario = JSON.parse(data);
 
     const usuarioId = usuario.id;
 
@@ -98,9 +99,11 @@ export class PagoEntradaComponent implements OnInit {
       next: (reserva) => {
         this.reservasService.reservaActual = reserva;
         this.router.navigate(['/muestra-compra']);
+        this.toastService.show('Compra exitosa, disfruta de la película', 'exito');
       },
       error: (err) => {
         console.error('Error al crear reserva:', err);
+        this.toastService.show('Error al procesar el pago', 'error');
       },
     });
   }

@@ -7,6 +7,7 @@ import { Sesion } from '../../modelos/sesion';
 import { Sala } from '../../modelos/sala';
 import { MapAsientosPipe } from '../../pipes/map-asientos.pipe';
 import { ReservasService } from '../../servicios/reservas.service';
+import { ToastService } from '../../servicios/toast.service';
 
 /* Componente para mostrar los asientos disponibles de una sesión. */
 @Component({
@@ -31,6 +32,7 @@ export class AsientosComponent implements OnInit {
     private sesionesService: SesionesService,
     private reservasService: ReservasService,
     private router: Router,
+    private toastService: ToastService,
   ) {}
 
   /* Al iniciar el componente, se obtiene el ID de la sesión desde la ruta y se carga la sesión correspondiente. */
@@ -43,6 +45,12 @@ export class AsientosComponent implements OnInit {
       this.sesion = sesion;
       this.sala = sesion.sala;
       this.generarMatrizDeAsientos();
+
+      if (!sesion) {
+        this.toastService.show('Ha ocurrido un error con la sesión', 'error');
+        this.router.navigate(['/cartelera']);
+        return;
+      }
     });
   }
 
@@ -106,7 +114,7 @@ export class AsientosComponent implements OnInit {
 
   /* Método para formatear un asiento en formato "A1", "B3", etc. a partir de su fila y columna. */
   formatearAsiento(a: { fila: number; columna: number }) {
-    const letra = String.fromCharCode(65 + a.fila); // 65 = A
+    const letra = String.fromCharCode(65 + a.fila);
     return `${letra}${a.columna + 1}`;
   }
 
@@ -131,7 +139,8 @@ export class AsientosComponent implements OnInit {
   irAPago() {
     const data = localStorage.getItem('usuario');
     if (!data) {
-      // Mostrar toast o redirigir
+      
+      this.toastService.show('Inicia Sesión para continuar', 'exito');
       this.router.navigate(['/login']);
       return;
     }

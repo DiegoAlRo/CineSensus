@@ -18,6 +18,21 @@ export const crearReserva = async (req, res) => {
         return res.status(404).json({ error: 'Sesión no encontrada' });
     }
 
+    const ocupados = sesion.asientosOcupados || [];
+
+    const conflicto = asientos.some(a =>
+    ocupados.some(o => o.fila === a.fila && o.columna === a.columna)
+    );
+
+    if (conflicto) {
+        return res.status(409).json({ error: 'Asiento ya ocupado' });
+    }
+
+    const totalReal = asientos.length * sesion.precio;
+    if (total !== totalReal) {
+      return res.status(400).json({ error: 'Total inválido' });
+    }
+
     const codigoEntrada = crypto.randomUUID();
 
     /* Se crea la reserva con los datos recibidos. */
@@ -97,10 +112,6 @@ export const obtenerReservaPorId = async (req, res) => {
         path: 'sesion',
         populate: { path: 'sala' }
       })
-      .populate({
-        path: 'pelicula.id',
-        model: 'Pelicula'
-      });
 
     if (!reserva) {
       return res.status(404).json({ error: 'Reserva no encontrada' });

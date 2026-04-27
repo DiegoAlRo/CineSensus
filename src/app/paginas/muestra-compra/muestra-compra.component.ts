@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Reserva } from '../../modelos/reserva';
 import { ReservasService } from '../../servicios/reservas.service';
+import { ToastService } from '../../servicios/toast.service';
 
 @Component({
   selector: 'app-muestra-compra',
@@ -14,12 +15,18 @@ import { ReservasService } from '../../servicios/reservas.service';
 export class MuestraCompraComponent implements OnInit {
   reserva: Reserva | null = null;
 
-  constructor(private router: Router, private reservasService: ReservasService) {}
+  constructor(
+    private router: Router,
+    private reservasService: ReservasService,
+    private toastService: ToastService,
+  ) {}
 
   ngOnInit() {
     this.reserva = this.reservasService.reservaActual;
+    this.reservasService.datosCompra = null;
 
     if (!this.reserva) {
+      this.toastService.show('No hay ninguna compra reciente', 'exito');
       this.router.navigate(['/cartelera']);
       return;
     }
