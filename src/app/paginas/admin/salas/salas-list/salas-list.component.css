@@ -1,0 +1,32 @@
+.salas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.btn-crear {
+  background: #e7000b;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tabla-salas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-salas th,
+.tabla-salas td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.btn-editar,
+.btn-borrar {
+  margin-right: 8px;
+  cursor: pointer;
+}

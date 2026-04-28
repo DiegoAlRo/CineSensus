@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-selectores-de-menu',
   imports: [RouterModule],
   templateUrl: './selectores-de-menu.component.html',
-  styleUrl: './selectores-de-menu.component.css'
+  styleUrls: ['./selectores-de-menu.component.css']
 })
 
 /* Clase de los botones que determinan el menú visible(Actualmente vacía). */

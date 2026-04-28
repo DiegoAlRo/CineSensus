@@ -9,7 +9,7 @@ import { ToastService } from '../../servicios/toast.service';
   selector: 'app-cambiar-contrasena',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cambiar-contrasena.component.html',
-  styleUrl: './cambiar-contrasena.component.css',
+  styleUrls: ['./cambiar-contrasena.component.css'],
 })
 export class CambiarContrasenaComponent {
   form: FormGroup;

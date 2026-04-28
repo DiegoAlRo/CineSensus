@@ -14,7 +14,7 @@ import { ToastService } from '../../../../servicios/toast.service';
   imports: [CommonModule, ReactiveFormsModule],
   standalone: true,
   templateUrl: './peliculas-form.component.html',
-  styleUrl: './peliculas-form.component.css',
+  styleUrls: ['./peliculas-form.component.css'],
 })
 export class PeliculasFormComponent implements OnInit {
   form!: FormGroup;

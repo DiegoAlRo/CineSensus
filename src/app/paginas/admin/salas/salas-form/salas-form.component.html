@@ -1,1 +1,19 @@
-<p>salas-form works!</p>
+<h1>{{ modoEdicion ? 'Editar Sala' : 'Crear Sala' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+
+  <label>Nombre</label>
+  <input type="text" formControlName="nombre">
+
+  <label>Filas</label>
+  <input type="number" formControlName="filas">
+
+  <label>Columnas</label>
+  <input type="number" formControlName="columnas">
+
+  <div class="botones">
+    <button type="submit" class="btn-guardar">Guardar</button>
+    <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</form>

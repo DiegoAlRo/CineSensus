@@ -7,9 +7,10 @@ import { ToastService } from '../../../../servicios/toast.service';
 
 @Component({
   selector: 'app-pelicula-list',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './peliculas-list.component.html',
-  styleUrl: './peliculas-list.component.css',
+  styleUrls: ['./peliculas-list.component.css'],
 })
 export class PeliculasListComponent implements OnInit {
   peliculas: Pelicula[] = [];

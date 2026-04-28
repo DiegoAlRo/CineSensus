@@ -17,7 +17,7 @@ import { ToastService } from '../../servicios/toast.service';
   selector: 'app-perfil',
   imports: [SelectoresDeMenuComponent, CommonModule, RouterModule],
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css',
+  styleUrls: ['./perfil.component.css'],
 })
 
 /* Clase del menú de perfil del usuario. */

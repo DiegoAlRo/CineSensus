@@ -1,6 +1,6 @@
 /* Imports necesarios. */
 import express from 'express'; 
-import { obtenerSalas, crearSala } from '../controllers/salas.controller.js'; 
+import { obtenerSalas, obtenerSalaPorId, crearSala, actualizarSala, eliminarSala } from '../controllers/salas.controller.js'; 
 
 const router = express.Router(); 
 
@@ -10,10 +10,16 @@ const router = express.Router();
  */
 router.get('/', obtenerSalas);
 
+router.get('/:id', obtenerSalaPorId);
+
 /**
  * POST /salas
  * Crea una sala.
  */
-router.post('/', crearSala); 
+router.post('/', crearSala);
+
+router.put('/:id', actualizarSala);
+
+router.delete('/:id', eliminarSala);
 
 export default router;

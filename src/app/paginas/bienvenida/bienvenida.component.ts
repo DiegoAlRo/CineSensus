@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './bienvenida.component.html',
-  styleUrl: './bienvenida.component.css'
+  styleUrls: ['./bienvenida.component.css']
 })
 
 /* Clase de la bienvenida vacía. */

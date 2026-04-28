@@ -1,1 +1,27 @@
-<p>salas-list works!</p>
+<div class="salas-header">
+  <h1>Salas</h1>
+  <button class="btn-crear" (click)="crearSala()">+ Crear</button>
+</div>
+
+<table class="tabla-salas">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Filas</th>
+      <th>Columnas</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let s of salas">
+      <td>{{ s.nombre }}</td>
+      <td>{{ s.filas }}</td>
+      <td>{{ s.columnas }}</td>
+      <td>
+        <button class="btn-editar" (click)="editarSala(s.id)">✏️</button>
+        <button class="btn-borrar" (click)="eliminarSala(s.id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
