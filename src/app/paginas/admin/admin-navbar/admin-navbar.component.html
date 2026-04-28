@@ -1,4 +1,37 @@
-<div class="admin-header">
-  <div class="logo">CineSensus Admin</div>
-  <div class="admin-user">Admin</div>
-</div>
+<!-- Estilo para la barra de navegación. -->
+<nav class="navbar">
+
+  <!-- Sección izquierda de la barra de navegación. -->
+  <div class="nav-izquierda">
+
+    <!-- Enlace al inicio con el logo y el título del sitio. -->
+    <a routerLink="/admin" class="logo">
+
+      <!-- Logo de CineSensus. -->
+      <img src="assets/Icono-CineSensus-Corto.png" alt="logo" class="logo-img">
+
+      <!-- Título de la web. -->
+      <span class="titulo">CineSensus</span>
+
+    </a>
+
+    <div *ngIf="usuarioLogueado" class="usuario-grupo">
+
+      <!-- Separador visual en forma de línea. -->
+      <span class="separador"></span>
+
+      <!-- Se mostrará el nombre del usuario logueado. -->
+      <span class="usuario-nombre">{{ usuarioLogueado.username }}</span>
+
+    </div>
+  </div>
+
+  <div class="nav-derecha">
+
+    <button class="btn-cerrar" (click)="cerrarSesion()">
+      Cerrar sesión
+    </button>
+    
+  </div>
+
+</nav>

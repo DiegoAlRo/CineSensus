@@ -1,0 +1,49 @@
+/* Contenedor del sidebar. */
+.admin-sidebar {
+    width: 240px;
+    background: #0d0d0d;
+    padding: 25px 0;
+    height: 100vh;
+    border-right: 2px solid #1a1a1a;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Lista del menú. */
+.admin-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Elementos del menú. */
+.admin-sidebar li {
+    margin: 0;
+}
+
+/* Enlaces del menú. */
+.admin-sidebar a {
+    display: block;
+    padding: 14px 25px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+/* Hover. */
+.admin-sidebar a:hover {
+    background: rgba(231, 0, 11, 0.15);
+    color: #e7000b;
+    border-left: 4px solid #e7000b;
+}
+
+/* Enlace activo. */
+.admin-sidebar a.activo {
+    background: rgba(231, 0, 11, 0.25);
+    color: #e7000b;
+    border-left: 4px solid #e7000b;
+    font-weight: bold;
+}
