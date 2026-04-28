@@ -28,7 +28,6 @@ export class SalasListComponent {
   }
 
   cargarSalas() {
-    debugger
     this.salasService.getSalas().subscribe({
       next: (data) => this.salas = data,
       error: () => this.toastService.show('Error al cargar salas', 'error')

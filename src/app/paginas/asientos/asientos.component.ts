@@ -41,7 +41,7 @@ export class AsientosComponent implements OnInit {
 
     if (!idSesion) return;
 
-    this.sesionesService.getSesionPorId(idSesion).subscribe((sesion) => {
+    this.sesionesService.getSesion(idSesion).subscribe((sesion) => {
       this.sesion = sesion;
       this.sala = sesion.sala;
       this.generarMatrizDeAsientos();

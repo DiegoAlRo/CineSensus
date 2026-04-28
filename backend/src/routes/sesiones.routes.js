@@ -1,14 +1,16 @@
 /* imports necesarios. */
 import express from 'express'; 
-import { obtenerSesionesPorPeliculaYFecha, obtenerSesionPorId, crearSesion } from '../controllers/sesiones.controller.js'; 
+import { obtenerTodasLasSesiones, obtenerSesionesPorPeliculaYFecha, obtenerSesionPorId, crearSesion, actualizarSesion, eliminarSesion } from '../controllers/sesiones.controller.js'; 
 
 const router = express.Router();
+
+router.get('/', obtenerTodasLasSesiones);
 
 /**
  * GET /sesiones.
  * Devuelve todas las sesiones filtradas por película y fecha.
  */
-router.get('/', obtenerSesionesPorPeliculaYFecha);
+router.get('/filtrar', obtenerSesionesPorPeliculaYFecha);
 
 /**
  * GET /sesiones/:id.
@@ -20,6 +22,10 @@ router.get('/:id', obtenerSesionPorId);
  * POST /sesiones.
  * Crea una sesión.
  */
-router.post('/', crearSesion); 
+router.post('/', crearSesion);
+
+router.put('/:id', actualizarSesion);
+
+router.delete('/:id', eliminarSesion);
 
 export default router;

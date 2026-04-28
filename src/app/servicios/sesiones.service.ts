@@ -12,20 +12,36 @@ import { Sesion } from '../modelos/sesion';
 export class SesionesService {
 
   /* URL base para el backend. */
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/sesiones';
 
   /* Se inyecta el HttpClient para realizar las peticiones al backend. */
   constructor(private http: HttpClient) {}
 
-  /* Método para obtener las sesiones de una película en una fecha específica. */
-  getSesiones(peliculaId: string, fecha: string): Observable<Sesion[]> {
-    return this.http.get<Sesion[]>(
-      `${this.apiUrl}/sesiones?pelicula=${peliculaId}&fecha=${fecha}`,
-    );
+  crearSesion(datos: any): Observable<Sesion> {
+    return this.http.post<Sesion>(this.apiUrl, datos);
+  }
+
+  editarSesion(id: string, datos: any): Observable<Sesion> {
+    return this.http.put<Sesion>(`${this.apiUrl}/${id}`, datos);
+  }
+
+  eliminarSesion(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getTodas(): Observable<Sesion[]> {
+    return this.http.get<Sesion[]>(this.apiUrl);
   }
 
   /* Método para obtener una sesión por su ID. */
-  getSesionPorId(id: string) {
-    return this.http.get<Sesion>(`${this.apiUrl}/sesiones/${id}`);
+  getSesion(id: string): Observable<Sesion> {
+    return this.http.get<Sesion>(`${this.apiUrl}/${id}`);
+  }
+
+  /* Método para obtener las sesiones de una película en una fecha específica. */
+  getSesionesFiltradas(peliculaId: string, fecha: string): Observable<Sesion[]> {
+    return this.http.get<Sesion[]>(
+      `http://localhost:3000/sesiones/filtrar?pelicula=${peliculaId}&fecha=${fecha}`,
+    );
   }
 }

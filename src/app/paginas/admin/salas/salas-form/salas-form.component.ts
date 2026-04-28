@@ -42,7 +42,6 @@ export class SalasFormComponent {
   }
 
   cargarSala() {
-    debugger
     this.salasService.getSala(this.salaId).subscribe({
       next: (sala) => this.form.patchValue(sala),
       error: () => this.toastService.show('Error al cargar la sala', 'error'),

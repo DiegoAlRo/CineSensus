@@ -1,6 +1,17 @@
 /* Imports necesarios. */
 import Sesion from '../models/Sesion.js';
 
+export const obtenerTodasLasSesiones = async (req, res) => {
+  try {
+    const sesiones = await Sesion.find()
+      .populate('pelicula sala');
+
+    res.json(sesiones);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener sesiones', error });
+  }
+};
+
 /* Devuelve las sesiones filtradas por película y fecha. */
 export const obtenerSesionesPorPeliculaYFecha = async (req, res) => {
     try {
@@ -56,4 +67,31 @@ export const crearSesion = async (req, res) => {
     } catch (error) { 
         res.status(500).json({ mensaje: 'Error al crear sesión', error }); 
     } 
+};
+
+export const actualizarSesion = async (req, res) => {
+  try {
+    const sesionActualizada = await Sesion.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!sesionActualizada) {
+      return res.status(404).json({ mensaje: 'Sesión no encontrada' });
+    }
+
+    res.json(sesionActualizada);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al actualizar sesión', error });
+  }
+};
+
+export const eliminarSesion = async (req, res) => {
+  try {
+    await Sesion.findByIdAndDelete(req.params.id);
+    res.json({ mensaje: 'Sesión eliminada' });
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al eliminar sesión', error });
+  }
 };

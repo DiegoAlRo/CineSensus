@@ -1,1 +1,31 @@
-<p>sesiones-list works!</p>
+<div class="sesiones-header">
+  <h1>Sesiones</h1>
+  <button class="btn-crear" (click)="crearSesion()">+ Crear</button>
+</div>
+
+<table class="tabla-sesiones">
+  <thead>
+    <tr>
+      <th>Película</th>
+      <th>Sala</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let s of sesiones">
+      <td>{{ s.pelicula?.titulo }}</td>
+      <td>{{ s.sala?.nombre }}</td>
+      <td>{{ s.fecha | date:'yyyy-MM-dd' }}</td>
+      <td>{{ s.hora.slice(0,2) }}:{{ s.hora.slice(2,4) }}</td>
+      <td>{{ s.precio }}€</td>
+      <td>
+        <button class="btn-editar" (click)="editarSesion(s.id)">✏️</button>
+        <button class="btn-borrar" (click)="eliminarSesion(s.id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

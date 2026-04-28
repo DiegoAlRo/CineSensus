@@ -1,1 +1,31 @@
-<p>sesiones-form works!</p>
+<h1>{{ modoEdicion ? 'Editar Sesión' : 'Crear Sesión' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+
+  <label>Película</label>
+  <select formControlName="pelicula">
+    <option value="">Seleccione una película</option>
+    <option *ngFor="let p of peliculas" [value]="p.id">{{ p.titulo }}</option>
+  </select>
+
+  <label>Sala</label>
+  <select formControlName="sala">
+    <option value="">Seleccione una sala</option>
+    <option *ngFor="let s of salas" [value]="s.id">{{ s.nombre }}</option>
+  </select>
+
+  <label>Fecha</label>
+  <input type="date" formControlName="fecha">
+
+  <label>Hora</label>
+  <input type="time" formControlName="hora">
+
+  <label>Precio (€)</label>
+  <input type="number" formControlName="precio" min="0" step="0.1">
+
+  <div class="botones">
+    <button type="submit" class="btn-guardar">Guardar</button>
+    <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</form>
