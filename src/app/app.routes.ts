@@ -23,9 +23,27 @@ export const routes: Routes = [
   { path: 'entrada/:id', loadComponent: () => import('./paginas/entrada/entrada.component').then(m => m.EntradaComponent), canActivate: [authGuard] },
   { path: 'admin', canActivate: [adminAuthGuard], loadComponent: () => import('./paginas/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent),
     children: [
-      { path: 'peliculas', loadComponent: () => import('./paginas/admin/peliculas/peliculas.component').then(m => m.PeliculasComponent) },
-      { path: 'salas', loadComponent: () => import('./paginas/admin/salas/salas.component').then(m => m.SalasComponent) },
-      { path: 'sesiones', loadComponent: () => import('./paginas/admin/sesiones/sesiones.component').then(m => m.SesionesComponent) },
+      { path: 'peliculas',
+        children: [
+          { path: '', loadComponent: () => import('./paginas/admin/peliculas/peliculas-list/peliculas-list.component').then(m => m.PeliculasListComponent) },
+          { path: 'crear', loadComponent: () => import('./paginas/admin/peliculas/peliculas-form/peliculas-form.component').then(m => m.PeliculasFormComponent) },
+          { path: 'editar/:id', loadComponent: () => import('./paginas/admin/peliculas/peliculas-form/peliculas-form.component').then(m => m.PeliculasFormComponent) }
+        ]
+      },
+      { path: 'salas',
+        children: [
+          { path: '', loadComponent: () => import('./paginas/admin/salas/salas-list/salas-list.component').then(m => m.SalasListComponent) },
+          { path: 'crear', loadComponent: () => import('./paginas/admin/salas/salas-form/salas-form.component').then(m => m.SalasFormComponent) },
+          { path: 'editar/:id', loadComponent: () => import('./paginas/admin/salas/salas-form/salas-form.component').then(m => m.SalasFormComponent) }
+        ]
+      },
+      { path: 'sesiones',
+        children: [
+          { path: '', loadComponent: () => import('./paginas/admin/sesiones/sesiones-list/sesiones-list.component').then(m => m.SesionesListComponent) },
+          { path: 'crear', loadComponent: () => import('./paginas/admin/sesiones/sesiones-form/sesiones-form.component').then(m => m.SesionesFormComponent) },
+          { path: 'editar/:id', loadComponent: () => import('./paginas/admin/sesiones/sesiones-form/sesiones-form.component').then(m => m.SesionesFormComponent) }
+        ]
+      },
       { path: 'reservas', loadComponent: () => import('./paginas/admin/reservas/reservas.component').then(m => m.ReservasComponent) },
       { path: 'usuarios', loadComponent: () => import('./paginas/admin/usuarios/usuarios.component').then(m => m.UsuariosComponent) },
       { path: 'resenas', loadComponent: () => import('./paginas/admin/resenas/resenas.component').then(m => m.ResenasComponent) },

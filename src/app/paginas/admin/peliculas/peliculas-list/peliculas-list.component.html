@@ -1,0 +1,31 @@
+<div class="peliculas-header">
+  <h1>Películas</h1>
+  <button class="btn-crear" (click)="crearPelicula()">+ Crear</button>
+</div>
+
+<table class="tabla-peliculas">
+  <thead>
+    <tr>
+      <th>Poster</th>
+      <th>Título</th>
+      <th>Género</th>
+      <th>Duración</th>
+      <th>Restricción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let p of peliculas">
+      <td><img [src]="p.poster" class="poster"></td>
+      <td>{{ p.titulo }}</td>
+      <td>{{ p.genero }}</td>
+      <td>{{ p.duracion }} min</td>
+      <td>+{{ p.restriccionEdad }}</td>
+      <td>
+        <button class="btn-editar" (click)="editarPelicula(p.id)">✏️</button>
+        <button class="btn-borrar" (click)="eliminarPelicula(p.id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

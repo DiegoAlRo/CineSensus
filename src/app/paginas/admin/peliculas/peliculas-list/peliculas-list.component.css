@@ -1,0 +1,38 @@
+.peliculas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.btn-crear {
+  background: #e7000b;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tabla-peliculas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-peliculas th,
+.tabla-peliculas td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.poster {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.btn-editar,
+.btn-borrar {
+  margin-right: 8px;
+  cursor: pointer;
+}

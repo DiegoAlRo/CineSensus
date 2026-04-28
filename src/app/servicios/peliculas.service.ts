@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 
 /* El servicio de peliculas se encarga de gestionar las películas. */
 export class PeliculasService {
-
   /* Define la URL base para las operaciones relacionadas con las películas. */
   private apiUrl = 'http://localhost:3000/peliculas';
 
@@ -26,5 +25,17 @@ export class PeliculasService {
   /* Con este método get se podrán obtener una película por ID */
   getPelicula(id: string): Observable<Pelicula> {
     return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
+  }
+
+  crearPelicula(datos: any): Observable<Pelicula> {
+    return this.http.post<Pelicula>(this.apiUrl, datos);
+  }
+
+  editarPelicula(id: string, datos: any): Observable<Pelicula> {
+    return this.http.put<Pelicula>(`${this.apiUrl}/${id}`, datos);
+  }
+
+  eliminarPelicula(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

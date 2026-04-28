@@ -1,0 +1,43 @@
+<h1>{{ modoEdicion ? 'Editar Película' : 'Crear Película' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+
+  <label>Título</label>
+  <input type="text" formControlName="titulo">
+
+  <label>Director</label>
+  <input type="text" formControlName="director">
+
+  <label>Género</label>
+  <select formControlName="genero">
+    <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+  </select>
+
+  <label>Tono</label>
+  <select formControlName="tono">
+    <option *ngFor="let t of tonos" [value]="t">{{ t }}</option>
+  </select>
+
+  <label>Restricción de Edad</label>
+  <select formControlName="restriccionEdad">
+    <option *ngFor="let r of restricciones" [value]="r">{{ r }}</option>
+  </select>
+
+  <label>Duración (minutos)</label>
+  <input type="number" formControlName="duracion">
+
+  <label>Poster (URL)</label>
+  <input type="text" formControlName="poster">
+
+  <label>Trailer (URL)</label>
+  <input type="text" formControlName="trailer">
+
+  <label>Sinopsis</label>
+  <textarea formControlName="sinopsis"></textarea>
+
+  <div class="botones">
+    <button type="submit" class="btn-guardar">Guardar</button>
+    <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</form>
