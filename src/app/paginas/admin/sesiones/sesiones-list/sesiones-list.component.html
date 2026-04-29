@@ -1,5 +1,28 @@
 <div class="sesiones-header">
   <h1>Sesiones</h1>
+  <div class="filtros-header">
+    <span class="titulo-filtros">Mostrando:</span>
+
+    <div class="filtros-inputs">
+      <input type="text" placeholder="Buscar..." [(ngModel)]="filtroTexto" (input)="aplicarFiltros()">
+
+      <select [(ngModel)]="filtroPelicula" (change)="aplicarFiltros()">
+        <option value="">Película</option>
+        <option *ngFor="let s of sesiones" [value]="s.pelicula.id">
+          {{ s.pelicula.titulo }}
+        </option>
+      </select>
+
+      <select [(ngModel)]="filtroSala" (change)="aplicarFiltros()">
+        <option value="">Sala</option>
+        <option *ngFor="let s of sesiones" [value]="s.sala.id">
+          {{ s.sala.nombre }}
+        </option>
+      </select>
+
+      <input type="date" [(ngModel)]="filtroFecha" (change)="aplicarFiltros()">
+    </div>
+  </div>
   <button class="btn-crear" (click)="crearSesion()">+ Crear</button>
 </div>
 
@@ -16,7 +39,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let s of sesiones">
+    <tr *ngFor="let s of sesionesFiltradas">
       <td>{{ s.pelicula?.titulo }}</td>
       <td>{{ s.sala?.nombre }}</td>
       <td>{{ s.fecha | date:'yyyy-MM-dd' }}</td>

@@ -74,7 +74,11 @@ export const obtenerReservas = async (req, res) => {
     
     try { 
         
-        const reservas = await Reserva.find().populate('usuario sesion'); 
+        const reservas = await Reserva.find().populate('usuario')
+            .populate({
+                path: 'sesion',
+                populate: { path: 'sala' }
+            }); 
         res.json(reservas); 
     
     } catch (error) { 

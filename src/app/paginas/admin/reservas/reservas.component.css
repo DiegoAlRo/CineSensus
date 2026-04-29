@@ -1,0 +1,55 @@
+.reservas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.filtros-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titulo-filtros {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.filtros-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.filtros-inputs input,
+.filtros-inputs select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #222;
+  color: white;
+}
+
+.tabla-reservas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-reservas th,
+.tabla-reservas td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.tabla-reservas td:nth-child(7),
+.tabla-reservas td:nth-child(8) {
+  text-align: center;
+}
+
+select {
+  background: #222;
+  color: white;
+  border: 1px solid #444;
+  padding: 5px;
+  border-radius: 6px;
+}

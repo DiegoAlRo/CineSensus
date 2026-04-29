@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { PeliculasService } from '../../../../servicios/peliculas.service';
 import { Pelicula } from '../../../../modelos/pelicula';
 import { ToastService } from '../../../../servicios/toast.service';
@@ -8,12 +10,16 @@ import { ToastService } from '../../../../servicios/toast.service';
 @Component({
   selector: 'app-pelicula-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './peliculas-list.component.html',
   styleUrls: ['./peliculas-list.component.css'],
 })
 export class PeliculasListComponent implements OnInit {
+
   peliculas: Pelicula[] = [];
+  peliculasFiltradas: Pelicula[] = [];
+
+  filtroTexto = '';
 
   constructor(
     private peliculasService: PeliculasService,
@@ -27,9 +33,20 @@ export class PeliculasListComponent implements OnInit {
 
   cargarPeliculas() {
     this.peliculasService.getPeliculas().subscribe({
-      next: (data) => (this.peliculas = data),
+      next: (data) => {
+        this.peliculas = data;
+        this.peliculasFiltradas = data;
+      },
       error: (err) => console.error('Error cargando películas', err),
     });
+  }
+
+  aplicarFiltros() {
+    const texto = this.filtroTexto.toLowerCase();
+
+    this.peliculasFiltradas = this.peliculas.filter(p =>
+      p.titulo.toLowerCase().includes(texto)
+    );
   }
 
   crearPelicula() {

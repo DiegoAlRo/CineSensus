@@ -42,7 +42,13 @@ export class ReservasService {
 
   /* Este método recivirá el ID del usuario para obtener sus reservas desde el backend. */
   getReservasUsuario(usuarioId: string) {
-    return this.http.get<Reserva[]>(`${this.apiUrl}/reservas?usuario=${usuarioId}`);
+    return this.http.get<Reserva[]>(
+      `${this.apiUrl}/reservas?usuario=${usuarioId}`,
+    );
+  }
+
+  getTodasReservas() {
+    return this.http.get<Reserva[]>(`${this.apiUrl}/reservas/todas`);
   }
 
   getReservaPorId(id: string) {

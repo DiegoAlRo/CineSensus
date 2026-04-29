@@ -1,6 +1,6 @@
 /* Imports necesarios. */
 import express from 'express';
-import { crearReserva, actualizarEstado, obtenerReservasUsuario, obtenerReservaPorId } from '../controllers/reservas.controller.js';
+import { crearReserva, actualizarEstado, obtenerReservasUsuario, obtenerReservas, obtenerReservaPorId } from '../controllers/reservas.controller.js';
 
 const router = express.Router();
 
@@ -21,6 +21,8 @@ router.put('/:id/estado', actualizarEstado);
  * Obtiene las reservas de un usuario.
  */
 router.get('/', obtenerReservasUsuario);
+
+router.get('/todas', obtenerReservas);
 
 /**
  * GET /:id
