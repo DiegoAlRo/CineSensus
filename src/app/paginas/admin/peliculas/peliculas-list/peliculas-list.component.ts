@@ -21,6 +21,9 @@ export class PeliculasListComponent implements OnInit {
 
   filtroTexto = '';
 
+  paginaActual = 1;
+  elementosPorPagina = 10;
+
   constructor(
     private peliculasService: PeliculasService,
     private router: Router,
@@ -36,6 +39,7 @@ export class PeliculasListComponent implements OnInit {
       next: (data) => {
         this.peliculas = data;
         this.peliculasFiltradas = data;
+        this.paginaActual = 1;
       },
       error: (err) => console.error('Error cargando películas', err),
     });
@@ -47,6 +51,17 @@ export class PeliculasListComponent implements OnInit {
     this.peliculasFiltradas = this.peliculas.filter(p =>
       p.titulo.toLowerCase().includes(texto)
     );
+    this.paginaActual = 1; 
+  }
+
+  get peliculasPaginadas() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+    return this.peliculasFiltradas.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.peliculasFiltradas.length / this.elementosPorPagina);
   }
 
   crearPelicula() {

@@ -26,7 +26,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let u of usuariosFiltrados">
+    <tr *ngFor="let u of usuariosPaginados">
       <td>{{ u.nombre }} {{ u.apellidos }}</td>
       <td>{{ u.email }}</td>
       <td>{{ u.username }}</td>
@@ -36,3 +36,15 @@
     </tr>
   </tbody>
 </table>
+
+<div class="paginacion">
+  <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">
+    ◀ Anterior
+  </button>
+
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+  <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas">
+    Siguiente ▶
+  </button>
+</div>

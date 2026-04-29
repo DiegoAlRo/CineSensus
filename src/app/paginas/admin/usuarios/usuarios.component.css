@@ -47,3 +47,29 @@
   color: #e7000b;
   font-size: 18px;
 }
+
+.paginacion {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.paginacion button {
+  background: #e7000b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paginacion button[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.paginacion span {
+  color: #ccc;
+}

@@ -1,1 +1,57 @@
-<p>resenas works!</p>
+<div class="resenas-header">
+    <h1>Reseñas</h1>
+
+    <div class="filtros-header">
+        <span class="titulo-filtros">Mostrando:</span>
+
+        <div class="filtros-inputs">
+            <input type="text" placeholder="Buscar email..." [(ngModel)]="filtroEmail" (input)="aplicarFiltros()">
+
+            <select [(ngModel)]="filtroPelicula" (change)="aplicarFiltros()">
+                <option value="">Película</option>
+                <option *ngFor="let p of peliculasUnicas" [value]="p.id">
+                    {{ p.titulo }}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<table class="tabla-resenas">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Película</th>
+            <th>Puntuación</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let r of resenasPaginadas">
+            <td>{{ r.usuario.email }}</td>
+            <td>{{ r.pelicula.titulo }}</td>
+            <td>{{ r.puntuacion }}</td>
+            <td>{{ r.comentario }}</td>
+            <td>{{ r.fecha | date:'yyyy-MM-dd' }}</td>
+
+            <td>
+                <button class="btn-borrar" (click)="eliminarResena(r.id)">🗑️</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="paginacion">
+  <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">
+    ◀ Anterior
+  </button>
+
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+  <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas">
+    Siguiente ▶
+  </button>
+</div>

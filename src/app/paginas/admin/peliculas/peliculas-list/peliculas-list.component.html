@@ -29,7 +29,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let p of peliculasFiltradas">
+    <tr *ngFor="let p of peliculasPaginadas">
       <td><img [src]="p.poster" class="poster"></td>
       <td>{{ p.titulo }}</td>
       <td>{{ p.genero }}</td>
@@ -42,3 +42,19 @@
     </tr>
   </tbody>
 </table>
+
+<div class="paginacion">
+  <button 
+    (click)="paginaActual = paginaActual - 1" 
+    [disabled]="paginaActual === 1">
+    ◀ Anterior
+  </button>
+
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+  <button 
+    (click)="paginaActual = paginaActual + 1" 
+    [disabled]="paginaActual === totalPaginas">
+    Siguiente ▶
+  </button>
+</div>

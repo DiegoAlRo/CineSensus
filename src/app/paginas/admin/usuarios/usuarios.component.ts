@@ -19,6 +19,9 @@ export class UsuariosComponent implements OnInit {
 
   filtroEmail = '';
 
+  paginaActual = 1;
+  elementosPorPagina = 10;
+
   constructor(
     private usuariosService: UsuariosService,
     private toastService: ToastService
@@ -33,6 +36,7 @@ export class UsuariosComponent implements OnInit {
       next: (data) => {
         this.usuarios = data;
         this.usuariosFiltrados = data;
+        this.paginaActual = 1;
       },
       error: () => this.toastService.show('Error al cargar usuarios', 'error')
     });
@@ -44,6 +48,25 @@ export class UsuariosComponent implements OnInit {
     this.usuariosFiltrados = this.usuarios.filter(u =>
       u.email.toLowerCase().includes(email)
     );
+    this.paginaActual = 1;
+  }
+
+  get usuariosPaginados() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+    return this.usuariosFiltrados.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.usuariosFiltrados.length / this.elementosPorPagina);
+  }
+
+  paginaAnterior() {
+    if (this.paginaActual > 1) this.paginaActual--;
+  }
+
+  paginaSiguiente() {
+    if (this.paginaActual < this.totalPaginas) this.paginaActual++;
   }
 
   eliminarUsuario(id: string) {

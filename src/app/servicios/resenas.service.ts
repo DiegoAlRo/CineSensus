@@ -11,6 +11,10 @@ export class ResenasService {
 
   constructor(private http: HttpClient) {}
 
+  getTodasResenas() {
+    return this.http.get<Resena[]>(`${this.apiUrl}/resenas`);
+  }
+
   /* Método para obtener reseñas de un usuario. */
   getResenasUsuario(usuarioId: string) {
     return this.http.get<Resena[]>(`${this.apiUrl}/resenas?usuario=${usuarioId}`);

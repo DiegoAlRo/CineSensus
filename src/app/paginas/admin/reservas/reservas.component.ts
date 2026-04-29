@@ -16,10 +16,14 @@ import { ToastService } from '../../../servicios/toast.service';
 export class ReservasComponent implements OnInit {
   reservas: Reserva[] = [];
   reservasFiltradas: Reserva[] = [];
+  peliculasUnicas: { id: string; titulo: string }[] = [];
 
   filtroEmail = '';
   filtroPelicula = '';
   filtroFecha = '';
+
+  paginaActual = 1;
+  elementosPorPagina = 10;
 
   constructor(
     private reservasService: ReservasService,
@@ -31,14 +35,26 @@ export class ReservasComponent implements OnInit {
   }
 
   cargarReservas() {
-    debugger
     this.reservasService.getTodasReservas().subscribe({
       next: (data) => {
         this.reservas = data;
         this.reservasFiltradas = data;
+
+        this.generarPeliculasUnicas();
+        this.paginaActual = 1; 
       },
       error: () => this.toastService.show('Error al cargar reservas', 'error'),
     });
+  }
+
+  generarPeliculasUnicas() {
+    const mapa = new Map<string, string>();
+
+    for (const r of this.reservas) {
+      mapa.set(r.pelicula.id, r.pelicula.titulo);
+    }
+
+    this.peliculasUnicas = Array.from(mapa, ([id, titulo]) => ({ id, titulo }));
   }
 
   aplicarFiltros() {
@@ -53,6 +69,25 @@ export class ReservasComponent implements OnInit {
 
       return coincideEmail && coincidePelicula && coincideFecha;
     });
+    this.paginaActual = 1;
+  }
+
+  get reservasPaginadas() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+    return this.reservasFiltradas.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.reservasFiltradas.length / this.elementosPorPagina);
+  }
+
+  paginaAnterior() {
+    if (this.paginaActual > 1) this.paginaActual--;
+  }
+
+  paginaSiguiente() {
+    if (this.paginaActual < this.totalPaginas) this.paginaActual++;
   }
 
   cambiarEstado(reserva: Reserva, nuevoEstado: string) {
