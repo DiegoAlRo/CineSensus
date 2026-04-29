@@ -1,6 +1,6 @@
 /* Imports y rutas necesarias para la gestión de usuarios. */
 import express from 'express'; 
-import { crearUsuario, loginUsuario, obtenerUsuario, actualizarUsuario, cambiarContrasena } from '../controllers/usuarios.controller.js';
+import { crearUsuario, loginUsuario, obtenerUsuario, obtenerUsuarios, actualizarUsuario, cambiarContrasena } from '../controllers/usuarios.controller.js';
 
 const router = express.Router(); 
 
@@ -21,6 +21,8 @@ router.post('/login', loginUsuario);
  * Actualiza la contraseña de un usuario existente.
  */
 router.put('/cambiar-contrasena', cambiarContrasena);
+
+router.get('/', obtenerUsuarios);
 
 /**
  * GET /:id

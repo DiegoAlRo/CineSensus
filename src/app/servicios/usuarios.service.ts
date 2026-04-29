@@ -36,6 +36,10 @@ export class UsuariosService {
     });
   }
 
+  getUsuarios() {
+    return this.http.get<Usuario[]>(this.apiUrl);
+  }
+
   /* Con este GET se podrá obtener un usuario por ID. */
   getUsuario(id: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);

@@ -1,0 +1,49 @@
+.usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.filtros-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titulo-filtros {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.filtros-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.filtros-inputs input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #222;
+  color: white;
+}
+
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.btn-borrar {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #e7000b;
+  font-size: 18px;
+}
