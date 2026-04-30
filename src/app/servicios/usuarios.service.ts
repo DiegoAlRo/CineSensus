@@ -51,7 +51,7 @@ export class UsuariosService {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, datos);
   }
 
-  cambiarContrasena(datos: { contrasenaActual: string; nuevaContrasena: string }) {
+  cambiarContrasena(datos: { id: string; contrasenaActual: string; nuevaContrasena: string }) {
     const token = localStorage.getItem('token');
 
     return this.http.put(`${this.apiUrl}/cambiar-contrasena`, datos, {

@@ -92,7 +92,7 @@ export const obtenerUsuario = async (req, res) => {
 
 export const cambiarContrasena = async (req, res) => {
   try {
-    const usuarioId = req.usuarioId;
+    const usuarioId = req.body.id;
     const { contrasenaActual, nuevaContrasena } = req.body;
 
     const usuario = await Usuario.findById(usuarioId);

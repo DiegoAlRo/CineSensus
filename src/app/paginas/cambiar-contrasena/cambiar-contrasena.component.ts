@@ -62,7 +62,10 @@ export class CambiarContrasenaComponent {
       return;
     }
     
+    const usuario = JSON.parse(localStorage.getItem('usuario')!);
+
     const datos = {
+      id: usuario.id,
       contrasenaActual: this.form.value.contrasenaActual,
       nuevaContrasena: this.form.value.nuevaContrasena,
     };

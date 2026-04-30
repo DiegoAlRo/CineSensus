@@ -1,3 +1,3 @@
 export const environment={
-    api:"https://cinesensus-backend.onrender.com"
+    api: "http://localhost:3000"
 }
