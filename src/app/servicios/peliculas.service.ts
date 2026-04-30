@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Pelicula } from '../modelos/pelicula';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 /* Es accesible en toda la web. */
 @Injectable({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 /* El servicio de peliculas se encarga de gestionar las películas. */
 export class PeliculasService {
   /* Define la URL base para las operaciones relacionadas con las películas. */
-  private apiUrl = 'http://localhost:3000/peliculas';
+  private apiUrl = environment.api + '/peliculas';
 
   /* El constructor inyecta el HttpClient para realizar solicitudes HTTP al backend. */
   constructor(private http: HttpClient) {}

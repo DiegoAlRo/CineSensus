@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Sesion } from '../modelos/sesion';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { Sesion } from '../modelos/sesion';
 export class SesionesService {
 
   /* URL base para el backend. */
-  private apiUrl = 'http://localhost:3000/sesiones';
+  private apiUrl = environment.api + '/sesiones';
 
   /* Se inyecta el HttpClient para realizar las peticiones al backend. */
   constructor(private http: HttpClient) {}
@@ -41,7 +42,7 @@ export class SesionesService {
   /* Método para obtener las sesiones de una película en una fecha específica. */
   getSesionesFiltradas(peliculaId: string, fecha: string): Observable<Sesion[]> {
     return this.http.get<Sesion[]>(
-      `http://localhost:3000/sesiones/filtrar?pelicula=${peliculaId}&fecha=${fecha}`,
+      `${this.apiUrl}/filtrar?pelicula=${peliculaId}&fecha=${fecha}`,
     );
   }
 }

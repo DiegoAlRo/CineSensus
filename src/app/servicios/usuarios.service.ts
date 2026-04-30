@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../modelos/usuario';
+import { environment } from '../../enviroments/environment';
 
 /* Se indica su accesibilidad en toda la web. */
 @Injectable({
@@ -12,7 +13,7 @@ import { Usuario } from '../modelos/usuario';
 /* El servicio de usuarios se encarga de gestionar los usuarios. */
 export class UsuariosService {
   /* Define la URL base para las operaciones relacionadas con los usuarios. */
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl = environment.api + '/usuarios';
 
   /* El constructor inyecta el HttpClient para realizar solicitudes HTTP al backend. */
   constructor(private http: HttpClient) {}

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pelicula } from '../modelos/pelicula';
+import { environment } from '../../enviroments/environment';
 
 /* Decorador que define el servicio. */
 @Injectable({
@@ -13,7 +14,7 @@ import { Pelicula } from '../modelos/pelicula';
 export class CarteleraService {
 
   /* URL base del backend para obtener la cartelera. */
-  private apiUrl = 'http://localhost:3000/cartelera';
+  private apiUrl = environment.api + '/cartelera';
 
   /* Constructor que inyecta el HttpClient para realizar peticiones HTTP. */
   constructor(private http: HttpClient) {}

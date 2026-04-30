@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Sesion } from '../modelos/sesion';
 import { HttpClient } from '@angular/common/http';
 import { Reserva } from '../modelos/reserva';
+import { environment } from '../../enviroments/environment';
 
 /* Este servicio puede ser inyectado en otros componentes. */
 @Injectable({
@@ -22,7 +23,7 @@ export class ReservasService {
 
   reservaActual: Reserva | null = null;
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.api + '/reservas';
 
   /* Con este método se crea una reserva en el backend con los datos recibidos. */
   crearReserva(datos: {
@@ -31,7 +32,7 @@ export class ReservasService {
     asientos: { fila: number; columna: number }[];
     total: number;
   }) {
-    return this.http.post<Reserva>(`${this.apiUrl}/reservas`, datos);
+    return this.http.post<Reserva>(`${this.apiUrl}`, datos);
   }
 
   /* Método para limpiar los datos de la reserva después de mostrar la compra. */
@@ -43,21 +44,21 @@ export class ReservasService {
   /* Este método recivirá el ID del usuario para obtener sus reservas desde el backend. */
   getReservasUsuario(usuarioId: string) {
     return this.http.get<Reserva[]>(
-      `${this.apiUrl}/reservas?usuario=${usuarioId}`,
+      `${this.apiUrl}?usuario=${usuarioId}`,
     );
   }
 
   getTodasReservas() {
-    return this.http.get<Reserva[]>(`${this.apiUrl}/reservas/todas`);
+    return this.http.get<Reserva[]>(`${this.apiUrl}/todas`);
   }
 
   getReservaPorId(id: string) {
-    return this.http.get<Reserva>(`${this.apiUrl}/reservas/${id}`);
+    return this.http.get<Reserva>(`${this.apiUrl}/${id}`);
   }
 
   /* Método para actualizar el estado de una reserva. */
   actualizarEstado(id: string, estado: 'pagada' | 'consumida' | 'cancelada') {
-    return this.http.put<Reserva>(`${this.apiUrl}/reservas/${id}/estado`, {
+    return this.http.put<Reserva>(`${this.apiUrl}/${id}/estado`, {
       estado,
     });
   }
