@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Pelicula } from '../modelos/pelicula';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 /* Es accesible en toda la web. */
 @Injectable({

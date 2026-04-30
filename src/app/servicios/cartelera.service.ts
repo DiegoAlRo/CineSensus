@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pelicula } from '../modelos/pelicula';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 /* Decorador que define el servicio. */
 @Injectable({

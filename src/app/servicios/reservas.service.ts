@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Sesion } from '../modelos/sesion';
 import { HttpClient } from '@angular/common/http';
 import { Reserva } from '../modelos/reserva';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 /* Este servicio puede ser inyectado en otros componentes. */
 @Injectable({
