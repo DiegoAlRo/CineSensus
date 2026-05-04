@@ -323,6 +323,11 @@ export class CarteleraComponent implements OnInit {
     this.peliculas = [...this.peliculasOriginales];
   }
 
+  /* Método para navegar a la página del recomendador. */
+  irARecomendador() {
+    this.router.navigate(['/recomendador']);
+  }
+
   /* Método para navegar a la página de detalles de una película, usando el ID de la película de referencia. */
   irAPelicula(id: string) {
     this.router.navigate(['/pelicula', id]);

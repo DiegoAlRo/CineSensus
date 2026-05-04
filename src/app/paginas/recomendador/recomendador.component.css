@@ -1,0 +1,198 @@
+.recomendacion-contenedor {
+  margin-top: 24px;
+}
+
+.pelicula-card.recomendada {
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+:host {
+    display: block;
+    background: #000;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal del formulario. */
+.contenedor-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+/* Título del formulario. */
+.titulo-form {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Subtítulo del formulario */
+.subtitulo-form {
+    color: #b3b3b3;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Tarjeta del formulario. */
+.form-card {
+    background: #141414;
+    padding: 30px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
+}
+
+/* Estilo para las etiquetas de los campos del formulario. */
+label {
+    font-size: 1rem;
+    color: #e7000b;
+    font-weight: bold;
+}
+
+/* Estilo para los campos de entrada y textarea. */
+input {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+/* Estilo para los campos de entrada y textarea cuando están enfocados. */
+input:focus {
+    border-color: #e7000b;
+}
+
+/* Estilo para el botón de registro. */
+.btn-rojo {
+    width: 100%;
+    padding: 14px;
+    background: #e7000b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+/* Estilo del botón de registro cuando se pasa el cursor por encima. */
+.btn-rojo:hover {
+    background: #b20710;
+}
+
+/* Estilos del pop up con los términos. */
+.modal-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-contenido {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 85%;
+  max-width: 400px;
+  text-align: center;
+  color: white;
+  border: 1px solid #c62828;
+}
+
+/* Estilo del botón de enlace para los términos. */
+.btn-link {
+  background: none;
+  border: none;
+  color: #c62828;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+peliculas {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+    padding: 0 10px;
+}
+
+.pelicula-card {
+    display: flex;
+    align-items: flex-start;
+    background: #141414;
+    border-radius: 14px;
+    padding: 20px;
+    gap: 22px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.pelicula-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.10);
+}
+
+.poster {
+    width: 140px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5px;
+}
+
+.pelicula-titulo {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin: 0 0 6px 0;
+    font-weight: bold;
+}
+
+.pelicula-detalles {
+    color: #e7000b;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.edad-badge {
+    display: inline-block;
+    background: #1e2939;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-left: 10px;
+}

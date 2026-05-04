@@ -5,5 +5,4 @@ export enum RestriccionEdad {
   Doce = "12",
   Dieciseis = "16",
   Dieciocho = "18",
-  X = "X"
 }

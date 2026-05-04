@@ -14,6 +14,7 @@ export const routes: Routes = [
   { path: 'registro', loadComponent: () => import('./paginas/registro/registro.component') .then(m => m.RegistroComponent), canActivate: [noAuthGuard] },
   { path: 'login', loadComponent: () => import('./paginas/login/login.component') .then(m => m.LoginComponent), canActivate: [noAuthGuard] },
   { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.component').then(m => m.PerfilComponent), canActivate: [authGuard] },
+  { path: 'recomendador', loadComponent: () => import('./paginas/recomendador/recomendador.component').then(m => m.RecomendadorComponent), canActivate: [authGuard] },
   { path: 'cambiar-contrasena', loadComponent: () => import('./paginas/cambiar-contrasena/cambiar-contrasena.component').then(m => m.CambiarContrasenaComponent), canActivate: [authGuard] },
   { path: 'cartelera', loadComponent: () => import('./paginas/cartelera/cartelera.component').then(m => m.CarteleraComponent) },
   { path: 'pelicula/:id', loadComponent: () => import('./paginas/info-pelicula/info-pelicula.component').then(m => m.InfoPeliculaComponent) },

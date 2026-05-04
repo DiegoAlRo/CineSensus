@@ -1,1 +1,80 @@
-<p>recomendador works!</p>
+<div class="contenedor-form">
+
+  <h2 class="titulo-form">Recomendador de Películas</h2>
+  <p class="subtitulo-form">
+    Cuéntanos qué te apetece ver y te recomendaremos la mejor opción disponible
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="recomendar()" class="form-card">
+
+    <label>¿Qué género prefieres?</label>
+    <select formControlName="genero">
+      <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+    </select>
+
+    <label>¿Qué tono buscas?</label>
+    <select formControlName="tono">
+      <option *ngFor="let t of tonos" [value]="t">{{ t }}</option>
+    </select>
+
+    <label>¿Cuánto tiempo tienes?</label>
+    <select formControlName="duracion">
+      <option *ngFor="let d of duraciones" [value]="d">{{ d }}</option>
+    </select>
+
+    <label>Restricción de edad máxima</label>
+    <select formControlName="edad">
+      <option *ngFor="let e of edades" [value]="e">
+        {{ e === 'TP' ? 'TP (Todos los públicos)' : '+' + e }}
+      </option>
+    </select>
+
+    <label>Puntuación mínima</label>
+    <select formControlName="puntuacion">
+      <option *ngFor="let p of puntuaciones" [value]="p">
+        {{ p }} - Estrellas
+      </option>
+    </select>
+
+    <button type="submit" class="btn-rojo" [disabled]="buscando">
+      {{ buscando ? 'Buscando...' : 'Recomendar película' }}
+    </button>
+
+  </form>
+
+  <div *ngIf="peliculaRecomendada" class="recomendacion-contenedor">
+
+    <div class="peliculas">
+
+      <div class="pelicula-card recomendada" (click)="irAPelicula(peliculaRecomendada!.id)">
+
+        <img class="poster" [src]="peliculaRecomendada!.poster">
+
+        <div class="info">
+          <h3 class="pelicula-titulo">{{ peliculaRecomendada!.titulo }}</h3>
+
+          <p class="pelicula-detalles">
+            {{ peliculaRecomendada!.genero }}
+            <span *ngIf="peliculaRecomendada!.director">
+              • Dir. {{ peliculaRecomendada!.director }}
+            </span>
+            <span class="edad-badge">
+              + {{ peliculaRecomendada!.restriccionEdad }}
+            </span>
+          </p>
+
+          <p class="pelicula-detalles">
+            {{ peliculaRecomendada!.duracion }} min
+            <span *ngIf="peliculaRecomendada!.tono"> • {{ peliculaRecomendada!.tono }}</span>
+          </p>
+
+          <p class="pelicula-detalles" *ngIf="peliculaRecomendada!.puntuacionMedia !== undefined">
+            Puntuación media: {{ peliculaRecomendada!.puntuacionMedia }} - Estrellas
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>

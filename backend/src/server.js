@@ -32,6 +32,7 @@ import sesionesRoutes from './routes/sesiones.routes.js';
 import reservasRoutes from './routes/reservas.routes.js';
 import resenasRoutes from './routes/resenas.routes.js';
 import carteleraRoutes from './routes/cartelera.routes.js';
+import recomendadorRoutes from './routes/recomendador.routes.js';
 
 /* Rutas del API. */ 
 app.use('/peliculas', peliculasRoutes);
@@ -41,6 +42,7 @@ app.use('/sesiones', sesionesRoutes);
 app.use('/reservas', reservasRoutes);
 app.use('/resenas', resenasRoutes);
 app.use('/cartelera', carteleraRoutes);
+app.use('/recomendador', recomendadorRoutes);
 
 /* Inicia el Servidor. */
 app.listen(process.env.PORT, () => {
