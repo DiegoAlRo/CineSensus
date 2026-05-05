@@ -2,8 +2,8 @@
 <div class="contenedor-form">
 
     <!-- Título del formulario de login. -->
-    <h2 class="titulo-form">Iniciar Sesión</h2>
-    <p class="subtitulo-form">Bienvenido de nuevo a CineSensus</p>
+    <h2 class="titulo-form">Inicia Sesión</h2>
+    <p class="subtitulo-form">Identifícate y entra de nuevo en CineSensus</p>
 
     <!-- Formulario de login reactivo. -->
     <form [formGroup]="form" (ngSubmit)="login()" class="form-card">
@@ -29,8 +29,14 @@
         </p>
 
         <!-- botón de iniciar sesión. -->
-        <button type="submit" class="btn-rojo">Entrar</button>
+        <button type="submit" class="btn-rojo">Entrar en CineSensus</button>
 
     </form>
+
+    <!-- Este botón llevará al usuario al formulario de registro. -->
+    <p class="cambio-form">
+        ¿No tienes una cuenta?
+        <a routerLink="/registro" class="cambio-link">Regístrate</a>
+    </p>
 
 </div>

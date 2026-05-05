@@ -1,13 +1,8 @@
 /* Imports del componente. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { ToastService } from '../../servicios/toast.service';
 import { ErroresService } from '../../servicios/errores.service';
@@ -16,7 +11,7 @@ import { ErroresService } from '../../servicios/errores.service';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })

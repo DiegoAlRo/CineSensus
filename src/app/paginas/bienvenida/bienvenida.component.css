@@ -25,22 +25,34 @@
 .logo-img {
     width: 340px;
     height: auto;
+    margin-top: 5px;
     margin-bottom: 0px;
 }
 
 /* Estilo para el título del logo. */
 .logo-title {
-    font-size: 3.3rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.8rem;
     margin-top: 1px;
-    margin-bottom: 5px; 
+    margin-bottom: 1px; 
+    letter-spacing: 2.5px;
+    color: #000;
+
+    /* Contorno rojo */
+    -webkit-text-stroke: 1.5px #e7000b;
+
+    /* Opcional: un pelín de sombra para darle volumen */
+    text-shadow: 0 0 6px rgba(231, 0, 11, 0.25);
 }
 
 /* Estilo para el eslogan. */
 .eslogan {
-    color: #b3b3b3;
-    margin-top: 8px;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
+    font-family: 'Caveat', cursive;
+    color: #cacaca;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    font-size: 2.1rem;
+    font-weight: 800;
 }
 
 /* Estilo para los botones. */
@@ -49,6 +61,7 @@
     padding: 14px;
     background: #e7000b;
     color: white;
+    font-weight: 600;
     border: none;
     border-radius: 6px;
     font-size: 1.2rem;
@@ -77,14 +90,14 @@
     content: "";
     flex: 1;
     height: 1px;
-    background-color: #ffffff33;
+    background-color: #cacaca;
 }
 
 /* Círculo decorativo entre líneas. */
 .circulo {
     width: 8px;
     height: 8px;
-    background-color: #ffffff55;
+    background-color: #cacaca;
     border-radius: 50%;
     margin: 0 12px;
 }
@@ -95,6 +108,7 @@
     padding: 14px;
     background: #1e2939;
     color: white;
+    font-weight: 600;
     border: none;
     border-radius: 6px;
     font-size: 1.2rem;
@@ -111,7 +125,8 @@
 
 /* Estilo para el enlace de "Entrar sin registrarse". */
 .entrar-sin {
-    color: #b3b3b3;
+    color: #cacaca;
+    font-weight: 600;
     text-decoration: none;
     font-size: 1.0rem;
     margin-top: 10px;

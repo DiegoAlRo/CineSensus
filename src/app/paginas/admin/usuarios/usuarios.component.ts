@@ -10,7 +10,7 @@ import { ToastService } from '../../../servicios/toast.service';
   selector: 'app-usuarios',
   imports: [CommonModule, FormsModule],
   templateUrl: './usuarios.component.html',
-  styleUrl: './usuarios.component.css'
+  styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
 

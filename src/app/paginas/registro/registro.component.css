@@ -18,8 +18,10 @@
 
 /* Título del formulario. */
 .titulo-form {
-    color: #ffffff;
-    font-size: 2.2rem;
+    font-family: 'Oswald', sans-serif;
+    color: #e7000b;
+    font-size: 3.0rem;
+    margin-top: 0px;
     margin-bottom: 5px;
     font-weight: bold;
     text-align: center;
@@ -27,9 +29,10 @@
 
 /* Subtítulo del formulario */
 .subtitulo-form {
-    color: #b3b3b3;
-    font-size: 1rem;
-    margin-bottom: 25px;
+    color: #cacaca;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 35px;
     text-align: center;
 }
 
@@ -48,15 +51,24 @@
 
 /* Estilo para las etiquetas de los campos del formulario. */
 label {
-    font-size: 1rem;
-    color: #e7000b;
+    font-size: 1.1rem;
+    color: #cacaca;
     font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Estilo para los mensajes de error de los campos del formulario. */
+.mensaje-error {
+    color: #e7000b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: -6px 0 4px 0;
 }
 
 /* Estilo para los campos de entrada y textarea. */
 input {
     background: #1f1f1f;
-    border: 1px solid #333;
+    border: 1px solid #1e2939;
     padding: 12px;
     border-radius: 6px;
     color: white;
@@ -76,6 +88,7 @@ input:focus {
     padding: 14px;
     background: #e7000b;
     color: white;
+    font-weight: 600;
     border: none;
     border-radius: 6px;
     font-size: 1.1rem;
@@ -91,36 +104,71 @@ input:focus {
 
 /* Estilos del pop up con los términos. */
 .modal-fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
 
 .modal-contenido {
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 10px;
-  width: 85%;
-  max-width: 400px;
-  text-align: center;
-  color: white;
-  border: 1px solid #c62828;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 6px;
+    width: 85%;
+    max-width: 400px;
+    color: white;
+    border: 1px solid #e7000b;
+}
+
+/* Título centrado */
+.modal-contenido h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Párrafos justificados */
+.modal-contenido p {
+    text-align: justify;
+    margin-bottom: 12px;
+    line-height: 1.45;
 }
 
 /* Estilo del botón de enlace para los términos. */
 .btn-link {
-  background: none;
-  border: none;
-  color: #c62828;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  font-size: 0.9rem;
+    background: none;
+    border: none;
+    color: #e7000b;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.cambio-form {
+    margin-top: 35px;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.cambio-link {
+    color: #e7000b;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.cambio-link:hover {
+    text-decoration: underline;
 }

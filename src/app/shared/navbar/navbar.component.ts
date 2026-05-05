@@ -22,6 +22,9 @@ export class NavbarComponent implements OnInit {
   /* Este boolean determinará si el botón de volver será visible. */
   mostrarVolver = false;
 
+  /* Este otro boolean determinará si el navbar completo será visible. */
+  mostrarNavbar = true;
+
   /* Se inyectan los servicios necesarios para la navegación y autenticación. */
   constructor(
     private location: Location,
@@ -38,6 +41,10 @@ export class NavbarComponent implements OnInit {
     this.router.events.subscribe(() => {
       const ruta = this.router.url;
 
+      /* El navbar se mostrará en todas las rutas excepto en la página de bienvenida. */
+      this.mostrarNavbar = ruta !== '/';
+
+      /* El botón de volver se mostrará en todas las rutas excepto en las siguientes: */
       this.mostrarVolver = !['/', '/login', '/cartelera', '/perfil', '/muestra-compra'].includes(
         ruta,
       );

@@ -11,7 +11,7 @@
 .nav-izquierda {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
 }
 
 /* Estilo para el logo y el título. */
@@ -24,37 +24,47 @@
 
 /* Estilo para la imagen del logo. */
 .logo-img {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     object-fit: contain;
+    transform: scale(1.80);
+    transform-origin: left center;
+    margin-right: 40px;
 }
 
 /* Estilo para el título del sitio. */
 .titulo {
-    color: #e7000b;
-    font-size: 1.7rem;
-    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 2.5px;
+    color: #000;
+
+    -webkit-text-stroke: 1.5px #e7000b;
+
+    text-shadow: 0 0 6px rgba(231, 0, 11, 0.25);
 }
 
 /*Estilo para el nombre de usuario y botón de cerrar sesión. */
 .usuario-grupo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 /* Estilo para el nombre de usuario. */
 .usuario-nombre {
+    font-family: 'Oswald', sans-serif;
     color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 /* Estilo para el separador entre el nombre de usuario y el botón de cerrar sesión. */
 .separador {
-    width: 2px;
-    height: 30px;
-    background: #444;
+    width: 3px;
+    height: 45px;
+    background: #1e2939;
     border-radius: 2px;
 }
 
@@ -65,12 +75,12 @@
     color: white;
     padding: 8px 14px;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: 0.2s ease;
 }
 
 /* Efecto hover al pasar el ratón para el botón de volver a la página principal. */
 .btn-volver:hover {
-    background: rgba(229, 9, 20, 0.15);
+    background: #b20710;
 }

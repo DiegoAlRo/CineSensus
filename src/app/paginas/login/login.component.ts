@@ -1,14 +1,8 @@
 /* Imports para el componente de login. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { AuthService } from '../../servicios/auth.service';
 import { ErroresService } from '../../servicios/errores.service';
@@ -18,7 +12,7 @@ import { ToastService } from '../../servicios/toast.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })

@@ -2,8 +2,8 @@
 <div class="contenedor-form">
 
     <!-- Título y subtítulo del formulario. -->
-    <h2 class="titulo-form">Registrarse</h2>
-    <p class="subtitulo-form">Crea tu cuenta en CineSensus</p>
+    <h2 class="titulo-form">Regístrate</h2>
+    <p class="subtitulo-form">Crea una cuenta dentro de CineSensus</p>
 
     <!-- Formulario de registro con todas sus validacións. -->
     <form [formGroup]="form" (ngSubmit)="registrar()" class="form-card">
@@ -76,18 +76,32 @@
         </p>
 
         <!-- El botón de registrarse, estilo submit. -->
-        <button type="submit" class="btn-rojo">Registrarse</button>
+        <button type="submit" class="btn-rojo">Crear una cuenta en CineSensus</button>
 
     </form>
+
+    <!-- Este botón llevara al usuario al formulario de inicio de sesión. -->
+    <p class="cambio-form">
+        ¿Ya tienes una cuenta?
+        <a routerLink="/login" class="cambio-link">Inicia Sesión</a>
+    </p>
 
     <!-- Pop up de términos y condiciones. -->
     <div class="modal-fondo" *ngIf="abrirTerminos">
         <div class="modal-contenido">
             <h3>Términos y Condiciones</h3>
 
-            <p>
-                *Terminos*
+            <p>Mediante el marcado de esta casilla, el usuario acepta los términos y condiciones de uso de CineSensus:
             </p>
+
+            <p>- El usuario se compromete a utilizar la plataforma de manera responsable, respetando las leyes de
+                propiedad intelectual y no compartiendo contenido ilegal o inapropiado.</p>
+
+            <p>- CineSensus se reserva el derecho de eliminar cualquier contenido y/o cuentas que violen estas
+                condiciones e incumplan estas normas.</p>
+
+            <p>- El usuario es responsable de mantener la confidencialidad de su cuenta y contraseña, además de evitar
+                cualquier uso no autorizado de su cuenta.</p>
 
             <button class="btn-rojo" type="button" (click)="cerrarTerminos()">Cerrar</button>
         </div>
