@@ -23,6 +23,7 @@
     font-size: 3.0rem;
     font-weight: bold;
     text-align: center;
+    margin-top: -20px;
 }
 
 /* Subtítulo del formulario */
@@ -118,4 +119,83 @@ input:focus {
 
 .cambio-link:hover {
     text-decoration: underline;
+}
+
+/* Estilos responsive para tablets. */
+@media (max-width: 768px) {
+
+    .contenedor-form {
+        padding-top: 40px;
+        padding-bottom: 60px;
+    }
+
+    .titulo-form {
+        font-size: 2.4rem;
+    }
+
+    .subtitulo-form {
+        font-size: 1rem;
+        margin-top: -10px;
+        margin-bottom: 28px;
+    }
+
+    .form-card {
+        padding: 22px;
+        gap: 14px;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .btn-rojo {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .cambio-form {
+        font-size: 1rem;
+        margin-top: 28px;
+    }
+}
+
+/* Estilos responsive para móviles. */
+@media (max-width: 480px) {
+
+    .titulo-form {
+        font-size: 2rem;
+    }
+
+    .subtitulo-form {
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+    }
+
+    .form-card {
+        padding: 18px;
+        gap: 12px;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    input {
+        padding: 9px;
+        font-size: 0.9rem;
+    }
+
+    .btn-rojo {
+        font-size: 0.95rem;
+        padding: 11px;
+    }
+
+    .cambio-form {
+        font-size: 0.95rem;
+    }
 }

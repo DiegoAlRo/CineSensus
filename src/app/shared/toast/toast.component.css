@@ -36,3 +36,29 @@
   90% { opacity: 1; }
   100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
 }
+
+/* Estilo responsive para tablets. */
+@media (max-width: 768px) {
+  .toast {
+    font-size: 0.95rem;
+    padding: 9px 16px;
+    bottom: 75px;
+    border-width: 2px;
+    max-width: 90vw;
+    width: max-content;
+    text-align: center;
+    word-wrap: break-word; 
+  }
+}
+
+/* Estilo responsive para móviles. */
+@media (max-width: 480px) {
+  .toast {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    bottom: 175px;
+    border-width: 1.8px;
+    max-width: 95vw;
+    width: auto;
+  }
+}

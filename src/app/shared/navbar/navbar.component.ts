@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
       this.mostrarNavbar = ruta !== '/';
 
       /* El botón de volver se mostrará en todas las rutas excepto en las siguientes: */
-      this.mostrarVolver = !['/', '/login', '/cartelera', '/perfil', '/muestra-compra'].includes(
+      this.mostrarVolver = !['/', '/registro', '/login', '/cartelera', '/perfil', '/muestra-compra'].includes(
         ruta,
       );
     });
