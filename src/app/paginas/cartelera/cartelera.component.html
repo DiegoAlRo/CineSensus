@@ -4,7 +4,14 @@
 <!-- Cinta con imágenes de posters. -->
 <div class="cinta-posters">
     <div class="cinta-inner">
-        <img *ngFor="let p of peliculasOriginales" [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
+        <ng-container *ngFor="let p of peliculas">
+            <img [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
+        </ng-container>
+
+        <!-- Duplicado de la lista para un bucle de muestra. -->
+        <ng-container *ngFor="let p of peliculas">
+            <img [src]="p.poster" [alt]="p.titulo" class="poster-cinta">
+        </ng-container>
     </div>
 </div>
 
@@ -15,13 +22,13 @@
 
     <!-- Agrupación de botones de acciones. -->
     <div class="barra-acciones">
-        <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">Filtro</button>
 
         <div class="fecha-selector">
-            <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">Fecha</button>
+            <button class="btn-accion" (click)="mostrarFiltro = !mostrarFiltro">FILTROS</button>
+            <button class="btn-accion" (click)="mostrarFecha = !mostrarFecha">FECHA</button>
 
             <span class="fecha-mini">
-                Mostrando horarios para: {{ fechaFormateada }}
+                Horarios: {{ fechaFormateada }}
             </span>
         </div>
 
@@ -29,10 +36,10 @@
             <span class="texto-recomendador">¿No sabes qué ver?</span>
 
             <button class="btn-recomendar" (click)="irARecomendador()">
-                Dinos qué buscas
+                DINOS QUÉ BUSCAS
             </button>
         </div>
-        
+
     </div>
 
     <!-- Zona de Filtros. -->
@@ -40,10 +47,9 @@
 
         <!-- Panel lateral de filtros. -->
         <div class="panel-filtros" *ngIf="mostrarFiltro">
-            <h3>Filtros</h3>
 
             <!-- Filtro por título. -->
-            <label>Buscar película</label>
+            <label>Buscar Película</label>
             <input type="text" placeholder="Título..." [(ngModel)]="filtroTitulo" (input)="aplicarFiltros()">
 
             <!-- Filtro por género. -->
@@ -70,7 +76,7 @@
             </select>
 
             <!-- Filtro por restricción de edad. -->
-            <label>Restricción de edad</label>
+            <label>Restricción de Edad</label>
             <select [(ngModel)]="filtroEdad" (change)="aplicarFiltros()">
                 <option value="">Por defecto</option>
                 <option value="TP">TP (Todos los públicos)</option>
@@ -82,7 +88,7 @@
             </select>
 
             <!-- Filtro por puntuación media mínima. -->
-            <label>Puntuación mínima</label>
+            <label>Puntuación Mínima</label>
             <select [(ngModel)]="filtroPuntuacion" (change)="aplicarFiltros()">
                 <option value="">Por defecto</option>
 
@@ -93,7 +99,7 @@
 
             <!-- Bootón para borrar los filtros aplicados. -->
             <button class="btn-quitar-filtros" (click)="quitarFiltros()">
-                Quitar filtros
+                Quitar Filtros
             </button>
 
         </div>
@@ -106,7 +112,7 @@
                 <div class="calendario-header">
                     <button (click)="mesAnterior()" [disabled]="!puedeIrMesAnterior">‹</button>
                     <span>{{ nombreMesActual }} {{ anioActual }}</span>
-                    <button (click)="mesSiguiente()">›</button>
+                    <button (click)="mesSiguiente()" [disabled]="!puedeIrMesSiguiente">›</button>
                 </div>
 
                 <!-- Días de la semana. -->

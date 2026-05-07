@@ -1,11 +1,15 @@
 <!-- De esta manera se muestra el navbar solo si mostrarNavbar es true. -->
 <app-navbar *ngIf="mostrarNavbar" class="navbar"></app-navbar>
 
-<!-- Este será el loading que se mostrará mientras cargan las peticiones http. -->
-<app-loading></app-loading>
+<!-- Contenido principal de la aplicación. -->
+<div class="contenido-app">
 
-<!-- Aquí se mostrarán los componentes dependiendo de la ruta. -->
-<router-outlet></router-outlet>
+    <!-- Este será el loading que se mostrará mientras cargan las peticiones http. -->
+    <app-loading></app-loading>
+
+    <!-- Aquí se mostrarán los componentes dependiendo de la ruta. -->
+    <router-outlet></router-outlet>
+</div>
 
 <!-- El componente toast mostrará un mensaje dependiendo de la situación. -->
 <app-toast></app-toast>

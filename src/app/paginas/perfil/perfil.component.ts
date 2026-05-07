@@ -139,6 +139,7 @@ export class PerfilComponent implements OnInit {
   /* Este método será para cerrar la sesión del usuario y devolverlo al login. */
   cerrarSesion() {
     this.authService.logout();
+    localStorage.removeItem('fechaSeleccionada');
     this.toastService.show('Sesión cerrada correctamente', 'exito');
     this.router.navigate(['']);
   }

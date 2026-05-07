@@ -1,0 +1,18 @@
+/* Estilo para el contenido principal de la aplicación. */
+.contenido-app {
+  padding-top: 92px;
+}
+
+/* Estilos responsive para tablets. */
+@media (max-width: 768px) {
+  .contenido-app {
+    padding-top: 90px;
+  }
+}
+
+/* Estilos responsive para móviles. */
+@media (max-width: 480px) {
+  .contenido-app {
+    padding-top: 80px;
+  }
+}

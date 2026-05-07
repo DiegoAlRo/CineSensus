@@ -85,6 +85,14 @@ export class CarteleraComponent implements OnInit {
     );
   }
 
+  get puedeIrMesSiguiente() {
+    const hoy = new Date();
+    const mesLimite = hoy.getMonth() + 1; // mes siguiente
+    const anioLimite = hoy.getFullYear();
+
+    return !(this.anioActual === anioLimite && this.mesActual === mesLimite);
+  }
+
   /* Arrays con los valores de los enums para usarlos en los filtros. */
   generos = Object.values(Genero);
   puntuacion = Object.values(Puntuacion).filter(
@@ -101,9 +109,19 @@ export class CarteleraComponent implements OnInit {
 
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {
+    this.hoy = new Date();
+    this.hoy.setHours(0, 0, 0, 0);
+
     /* Se verifica si hay un usuario logueado y se le aportan los datos. */
     const data = localStorage.getItem('usuario');
     if (data) this.usuarioLogueado = JSON.parse(data);
+
+    const fechaGuardada = localStorage.getItem('fechaSeleccionada');
+    if (fechaGuardada) {
+      this.fechaSeleccionada = new Date(fechaGuardada);
+      this.mesActual = this.fechaSeleccionada.getMonth();
+      this.anioActual = this.fechaSeleccionada.getFullYear();
+    }
 
     /* Se carga la cartelera del día actual y se genera el calendario. */
     this.cargarCartelera();
@@ -113,6 +131,11 @@ export class CarteleraComponent implements OnInit {
     this.intervaloCambioDia = setInterval(() => {
       const ahora = new Date();
       if (ahora.getDate() !== this.hoy.getDate()) {
+        localStorage.removeItem('fechaSeleccionada');
+
+        this.hoy = new Date();
+        this.hoy.setHours(0, 0, 0, 0);
+
         this.hoy = ahora;
         this.fechaSeleccionada = ahora;
         this.mesActual = ahora.getMonth();
@@ -139,27 +162,16 @@ export class CarteleraComponent implements OnInit {
 
     this.carteleraService.getCartelera(fechaISO).subscribe({
       next: (peliculas) => {
-        const ahora = new Date();
-
-        peliculas.forEach((p) => {
-          p.sesiones = p.sesiones.filter((s) => {
-            const fechaSesion = new Date(s.fecha);
-            const hora = Number(s.hora.slice(0, 2));
-            const minuto = Number(s.hora.slice(2, 4));
-
-            fechaSesion.setHours(hora, minuto, 0, 0);
-
-            return fechaSesion > ahora;
-          });
-        });
-
         this.peliculasOriginales = peliculas;
         this.peliculas = peliculas;
 
         if (peliculas.length > 0) {
           this.toastService.show('Mostrando Cartelera', 'exito');
         } else {
-          this.toastService.show('No hay sesiones que coincidan con la búsqueda', 'error');
+          this.toastService.show(
+            'No hay sesiones que coincidan con la búsqueda',
+            'error',
+          );
         }
 
         this.aplicarFiltros();
@@ -208,6 +220,7 @@ export class CarteleraComponent implements OnInit {
 
     /* Junto a la fecha, se actualizarán las sesiones para mostrar solo las del día seleccionado. */
     this.fechaSeleccionada = diaSinHora;
+    localStorage.setItem('fechaSeleccionada', diaSinHora.toISOString());
     this.cargarCartelera();
 
     /* Luego se cerrará el calendario. */

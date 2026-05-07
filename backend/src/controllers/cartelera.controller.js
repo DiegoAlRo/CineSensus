@@ -21,14 +21,31 @@ export const obtenerCartelera = async (req, res) => {
     const inicio = new Date(year, month - 1, day, 0, 0, 0, 0);
     const fin = new Date(year, month - 1, day, 23, 59, 59, 999);
 
-    /* Se obtienen todas las películas */
-    const peliculas = await Pelicula.find();
-
     /* Se obtienen todas las sesiones del día */
+    const ahora = new Date();
+
     const sesiones = await Sesion.find({
-      fecha: { $gte: inicio, $lte: fin }
-    })
-    .populate('sala pelicula');
+      fecha: { $gte: inicio, $lte: fin },
+      $expr: {
+        $gt: [
+          {
+            $dateFromString: {
+              dateString: {
+                $concat: [
+                  { $dateToString: { format: "%Y-%m-%d", date: "$fecha" } },
+                  "T",
+                  { $substr: ["$hora", 0, 2] },
+                  ":",
+                  { $substr: ["$hora", 2, 2] },
+                  ":00"
+                ]
+              }
+            }
+          },
+          ahora
+        ]
+      }
+    }).populate('sala pelicula');
 
     /* Se agrupan las sesiones por película */
     const sesionesPorPelicula = {};
@@ -38,14 +55,18 @@ export const obtenerCartelera = async (req, res) => {
       if (!sesionesPorPelicula[id]) sesionesPorPelicula[id] = [];
       sesionesPorPelicula[id].push(s);
     });
-    
+
+    const peliculas = await Pelicula.find();
+
     /* Insertar sesiones en cada película. */
-    peliculas.forEach(x=>{
-      x.sesiones=sesionesPorPelicula[x.id.toString()] || []
-    })
+    peliculas.forEach(p => {
+      p.sesiones = sesionesPorPelicula[p.id.toString()] || [];
+    });
+
+    const peliculasConSesiones = peliculas.filter(p => p.sesiones.length > 0);
 
     /* Se devuelve la cartelera con las sesiones correspondientes. */
-    res.json(peliculas);
+    res.json(peliculasConSesiones);
 
   } catch (error) {
 
