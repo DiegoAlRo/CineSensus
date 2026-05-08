@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   padding: 60px 20px;
-  gap: 40px;              
+  gap: 40px;
 }
 
 .detalle-card {
@@ -63,7 +63,7 @@
   gap: 6px;
   margin-bottom: 10px;
   height: 30px;
-  width: 30px;    
+  width: 30px;
 }
 
 .ficha p {
@@ -136,10 +136,12 @@
 .lista-resenas::-webkit-scrollbar {
   width: 8px;
 }
+
 .lista-resenas::-webkit-scrollbar-thumb {
   background: #e7000b;
   border-radius: 4px;
 }
+
 .lista-resenas::-webkit-scrollbar-track {
   background: #1b1b1b;
 }
@@ -246,6 +248,14 @@
 
 .formulario-resena .btn-accion:hover {
   background: #b20710;
+}
+
+.sin-resenas {
+  text-align: center;
+  color: #cacaca;
+  font-size: 1.2rem;
+  padding: 20px 0;
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {

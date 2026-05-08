@@ -7,29 +7,29 @@
 
   <form [formGroup]="form" (ngSubmit)="recomendar()" class="form-card">
 
-    <label>¿Qué género prefieres?</label>
+    <label>¿Qué Género prefieres?</label>
     <select formControlName="genero">
       <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
     </select>
 
-    <label>¿Qué tono buscas?</label>
+    <label>¿Qué Tono buscas?</label>
     <select formControlName="tono">
       <option *ngFor="let t of tonos" [value]="t">{{ t }}</option>
     </select>
 
-    <label>¿Cuánto tiempo tienes?</label>
+    <label>¿Cuánto Tiempo tienes?</label>
     <select formControlName="duracion">
       <option *ngFor="let d of duraciones" [value]="d">{{ d }}</option>
     </select>
 
-    <label>Restricción de edad máxima</label>
+    <label>Restricción de Edad máxima</label>
     <select formControlName="edad">
       <option *ngFor="let e of edades" [value]="e">
         {{ e === 'TP' ? 'TP (Todos los públicos)' : '+' + e }}
       </option>
     </select>
 
-    <label>Puntuación mínima</label>
+    <label>Puntuación Mínima</label>
     <select formControlName="puntuacion">
       <option *ngFor="let p of puntuaciones" [value]="p">
         {{ p }} - Estrellas
@@ -37,7 +37,7 @@
     </select>
 
     <button type="submit" class="btn-rojo" [disabled]="buscando">
-      {{ buscando ? 'Buscando...' : 'Recomendar película' }}
+      {{ buscando ? 'Buscando...' : 'Recomendar Película' }}
     </button>
 
   </form>
@@ -69,7 +69,7 @@
           </p>
 
           <p class="pelicula-detalles" *ngIf="peliculaRecomendada!.puntuacionMedia !== undefined">
-            Puntuación media: {{ peliculaRecomendada!.puntuacionMedia }} - Estrellas
+            Puntuación media: {{ peliculaRecomendada!.puntuacionMedia }}
           </p>
         </div>
 

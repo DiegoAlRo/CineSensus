@@ -1,18 +1,13 @@
-.recomendacion-contenedor {
-  margin-top: 24px;
-}
-
-.pelicula-card.recomendada {
-  cursor: pointer;
-  margin-top: 12px;
-}
-
 :host {
     display: block;
     background: #000;
     min-height: 100vh;
     color: white;
     font-family: Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 /* Contenedor principal del formulario. */
@@ -26,17 +21,20 @@
 
 /* Título del formulario. */
 .titulo-form {
-    color: #ffffff;
-    font-size: 2.2rem;
+    font-family: 'Oswald', sans-serif;
+    color: #e7000b;
+    font-size: 3.0rem;
     margin-bottom: 5px;
+    margin-top: -20px;
     font-weight: bold;
     text-align: center;
 }
 
 /* Subtítulo del formulario */
 .subtitulo-form {
-    color: #b3b3b3;
-    font-size: 1rem;
+    color: #cacaca;
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -54,28 +52,40 @@
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
 }
 
+.form-card select {
+    width: 100%;
+    padding: 10px;
+    background: #1e1e1e;
+    color: white;
+    border: 2px solid #2a2a2a;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' width='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='0,0 20,0 10,12'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+.form-card select:hover {
+    border-color: #e7000b;
+}
+
+.form-card select:focus {
+    outline: none;
+    border-color: #e7000b;
+    box-shadow: 0 0 6px rgba(231, 0, 11, 0.6);
+}
+
 /* Estilo para las etiquetas de los campos del formulario. */
 label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #e7000b;
     font-weight: bold;
-}
-
-/* Estilo para los campos de entrada y textarea. */
-input {
-    background: #1f1f1f;
-    border: 1px solid #333;
-    padding: 12px;
-    border-radius: 6px;
-    color: white;
-    font-size: 1rem;
-    outline: none;
-    transition: 0.2s;
-}
-
-/* Estilo para los campos de entrada y textarea cuando están enfocados. */
-input:focus {
-    border-color: #e7000b;
 }
 
 /* Estilo para el botón de registro. */
@@ -84,6 +94,7 @@ input:focus {
     padding: 14px;
     background: #e7000b;
     color: white;
+    font-weight: 600;
     border: none;
     border-radius: 6px;
     font-size: 1.1rem;
@@ -97,43 +108,11 @@ input:focus {
     background: #b20710;
 }
 
-/* Estilos del pop up con los términos. */
-.modal-fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+.recomendacion-contenedor {
+    margin-top: 24px;
 }
 
-.modal-contenido {
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 10px;
-  width: 85%;
-  max-width: 400px;
-  text-align: center;
-  color: white;
-  border: 1px solid #c62828;
-}
-
-/* Estilo del botón de enlace para los términos. */
-.btn-link {
-  background: none;
-  border: none;
-  color: #c62828;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  font-size: 0.9rem;
-}
-
-peliculas {
+.peliculas {
     flex: 1;
     display: flex;
     align-items: center;
@@ -159,6 +138,11 @@ peliculas {
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.10);
 }
 
+.pelicula-card.recomendada {
+    cursor: pointer;
+    margin-top: 12px;
+}
+
 .poster {
     width: 140px;
     height: 200px;
@@ -170,19 +154,21 @@ peliculas {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    gap: 8px;
     padding-top: 5px;
 }
 
 .pelicula-titulo {
-    color: #ffffff;
-    font-size: 1.5rem;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.9rem;
     margin: 0 0 6px 0;
     font-weight: bold;
 }
 
 .pelicula-detalles {
     color: #e7000b;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     margin: 0;
 }
 
@@ -195,4 +181,97 @@ peliculas {
     font-size: 0.85rem;
     font-weight: bold;
     margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+
+    .form-card {
+        padding: 22px;
+        gap: 14px;
+    }
+
+    .form-card select {
+        font-size: 0.95rem;
+        padding: 8px;
+        background-position: right 10px center;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    .btn-rojo {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .form-card {
+        padding: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 12px;
+        max-width: 100%;
+    }
+
+    .form-card select {
+        font-size: 0.9rem;
+        padding: 7px;
+        background-position: right 8px center;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    .btn-rojo {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .titulo-form {
+        font-size: 2.2rem;
+    }
+
+    .subtitulo-form {
+        font-size: 1rem;
+    }
+
+    .recomendacion-contenedor {
+        max-width: 90%;
+    }
+
+    .poster {
+        width: 90px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .pelicula-titulo {
+        color: white;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.6rem;
+        margin: 0 0 6px 0;
+        font-weight: bold;
+    }
+
+    .pelicula-detalles {
+        color: #e7000b;
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .edad-badge {
+        display: inline-block;
+        background: #1e2939;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.55rem;
+        font-weight: bold;
+        margin-left: 10px;
+    }
 }
