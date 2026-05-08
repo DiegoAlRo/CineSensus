@@ -36,53 +36,67 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 18px;
   flex: 1;
 }
 
 .titulo {
   font-size: 2.6rem;
+  font-family: 'Oswald', sans-serif;
   font-weight: bold;
-  margin: 0;
+  color: white;
+  margin-top: -8px;
+  margin-bottom: 15px;
 }
 
 .puntuacion {
   display: flex;
+  font-family: 'Oswald', sans-serif;
   align-items: center;
   gap: 8px;
   font-size: 1.4rem;
   color: gold;
+  margin-bottom: 15px;
 }
 
-.puntuacion-num {
-  color: #ccc;
-  font-size: 1.1rem;
+.estrella-pelicula {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 30px;    
 }
 
 .ficha p {
   margin: 4px 0;
-  font-size: 1.15rem;
-  color: #ddd;
+  gap: 6px;
+  display: flex;
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 5px;
 }
 
 .info h3 {
-  margin-top: 20px;
-  font-size: 1.4rem;
-  color: #e50914;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  color: #e7000b;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .descripcion {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: #fff;
+  color: white;
+  margin-top: -5px;
+  margin-bottom: -0.5px;
 }
 
 .trailer-btn {
   display: inline-block;
-  margin-top: 5px;
   padding: 10px 16px;
-  background: #e50914;
+  background: #e7000b;
   color: white;
+  font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
@@ -91,29 +105,7 @@
 }
 
 .trailer-btn:hover {
-  background: #ff1a1a;
-}
-
-.btn-horarios {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #e50914;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s ease;
-}
-
-.btn-horarios:hover {
-  background: #ff1a1a;
-}
-
-.estrella {
-  width: 24px;
-  height: 24px;
+  background: #b20710;
 }
 
 .seccion-resenas {
@@ -125,29 +117,40 @@
   box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
 }
 
-.estrellas-selector {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+.seccion-resenas h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.9rem;
+  color: white;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
-.estrella-click {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  transition: transform 0.15s ease;
+.lista-resenas {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 30px;
 }
 
-.estrella-click:hover {
-  transform: scale(1.15);
+.lista-resenas::-webkit-scrollbar {
+  width: 8px;
+}
+.lista-resenas::-webkit-scrollbar-thumb {
+  background: #e7000b;
+  border-radius: 4px;
+}
+.lista-resenas::-webkit-scrollbar-track {
+  background: #1b1b1b;
 }
 
 .tarjeta-resena {
   background: #1b1b1b;
   padding: 20px;
   border-radius: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  font-family: Arial, sans-serif;
 }
 
 .cabecera-resena {
@@ -158,11 +161,12 @@
 
 .usuario {
   font-weight: bold;
-  color: #e50914;
+  font-size: 1.1rem;
+  color: #e7000b;
 }
 
 .fecha {
-  color: #aaa;
+  color: #cacaca;
   font-size: 0.9rem;
 }
 
@@ -173,39 +177,152 @@
 }
 
 .estrella-resena {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .comentario {
-  color: #ddd;
+  color: #cacaca;
   line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+.formulario-resena {
+  background: #1b1b1b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.formulario-resena h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.9rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.formulario-resena textarea {
+  width: 100%;
+  height: 90px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+  margin-bottom: 15px;
+  background: #2a2a2a;
+  color: white;
   font-size: 1rem;
 }
 
-.acciones-resena {
+.formulario-resena .fila-envio {
   display: flex;
   gap: 12px;
-  margin-top: 10px;
+  align-items: center;
 }
 
-.btn-icono {
-  background: transparent;
+.formulario-resena select {
+  flex: 1;
+  padding: 8px;
+  background: #2a2a2a;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.formulario-resena .btn-accion {
+  background: #e7000b;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+  font-weight: 600;
   border: none;
   cursor: pointer;
-  font-size: 1.4rem;
-  color: #e50914;
   transition: 0.2s ease;
 }
 
-.btn-icono:hover {
-  transform: scale(1.2);
+.formulario-resena .btn-accion:hover {
+  background: #b20710;
 }
 
-.estrella-pelicula {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
-  height: 30px;
-  width: 30px;    
+@media (max-width: 768px) {
+
+  /* La tarjeta pasa a vertical */
+  .detalle-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    gap: 25px;
+    text-align: left;
+  }
+
+  /* Póster centrado y más grande */
+  .poster {
+    width: 300px;
+    height: 450px;
+    margin: 0 auto;
+  }
+
+  /* Info alineada a la izquierda */
+  .info {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .titulo {
+    font-size: 2rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  .puntuacion {
+    font-size: 1.2rem;
+  }
+
+  .estrella-pelicula {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ficha p {
+    font-size: 1rem;
+  }
+
+  .info h3 {
+    font-size: 1.4rem;
+  }
+
+  .descripcion {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+
+  .poster {
+    width: 300px;
+    height: 430px;
+    margin-bottom: 30px;
+  }
+
+  .titulo {
+    font-size: 1.7rem;
+  }
+
+  .descripcion {
+    text-align: justify;
+  }
+
+  .info h3 {
+    font-size: 1.2rem;
+  }
+
+  .descripcion {
+    font-size: 0.85rem;
+  }
 }

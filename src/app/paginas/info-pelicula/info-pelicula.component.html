@@ -16,7 +16,7 @@
             <!-- Puntuación de película. -->
             <div class="puntuacion">
                 <img *ngFor="let icono of getIconos(pelicula.puntuacionMedia)" [src]="icono" class="estrella-pelicula">
-                <span class="fraccion">{{ pelicula.puntuacionMedia }}/5</span>
+                <span>{{ pelicula.puntuacionMedia }}/5</span>
             </div>
 
             <!-- Ficha técnica de película. -->
@@ -35,7 +35,7 @@
             <!-- Enlace a tráiler de película.-->
             <h3>Tráiler</h3>
             <a class="trailer-btn" [href]="pelicula.trailer" target="_blank">
-                Ver tráiler en YouTube
+                Ver Tráiler en YouTube
             </a>
 
         </div>
@@ -43,42 +43,45 @@
     </div>
 
     <div class="seccion-resenas">
-        <h2>Reseñas de usuarios</h2>
+        <h2>RESEÑAS DE USUARIOS</h2>
 
         <!-- Lista de reseñas -->
-        <ng-container *ngFor="let r of resenas">
-            <div class="tarjeta-resena">
+        <div class="lista-resenas">
+            <ng-container *ngFor="let r of resenas">
+                <div class="tarjeta-resena">
 
-                <div class="cabecera-resena">
-                    <span class="usuario">{{ r.usuario.username }}</span>
-                    <span class="fecha">{{ r.fecha | date:'yyyy-MM-dd' }}</span>
+                    <div class="cabecera-resena">
+                        <span class="usuario">{{ r.usuario.username }}</span>
+                        <span class="fecha">{{ r.fecha | date:'yyyy-MM-dd' }}</span>
+                    </div>
+
+                    <div class="estrellas-resena">
+                        <img *ngFor="let star of getIconos(r.puntuacion)" [src]="star" class="estrella-resena">
+                    </div>
+
+                    <p class="comentario">{{ r.comentario }}</p>
+
                 </div>
-
-                <div class="estrellas-resena">
-                    <img *ngFor="let star of getIconos(r.puntuacion)" [src]="star" class="estrella-resena">
-                </div>
-
-                <p class="comentario">{{ r.comentario }}</p>
-
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
 
         <!-- Formulario para escribir reseña -->
         <div *ngIf="mostrarFormularioResena" class="formulario-resena">
-            <h3>Escribe tu reseña</h3>
-
-            <select [(ngModel)]="puntuacion">
-                <option value="" disabled selected>Selecciona puntuación</option>
-                <option *ngFor="let p of puntuaciones" [value]="p">{{ p }} estrellas</option>
-            </select>
+            <h3>Escribe tu Reseña</h3>
 
             <textarea [(ngModel)]="comentario" placeholder="Escribe tu opinión..."></textarea>
 
-            <button class="btn-accion" (click)="enviarResena()">
-                Enviar reseña
-            </button>
+            <div class="fila-envio">
+                <select [(ngModel)]="puntuacion">
+                    <option value="" disabled selected>Selecciona Puntuación</option>
+                    <option *ngFor="let p of puntuaciones" [value]="p">{{ p }} - Estrellas</option>
+                </select>
+
+                <button class="btn-accion" (click)="enviarResena()">
+                    Enviar Reseña
+                </button>
+            </div>
+
         </div>
 
     </div>
-
-</div>

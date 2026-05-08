@@ -131,6 +131,16 @@ export class InfoPeliculaComponent implements OnInit {
     const usuario = JSON.parse(localStorage.getItem('usuario')!);
     if (!usuario || !this.pelicula) return;
 
+    if (!this.puntuacion || this.puntuacion <= 0) {
+      this.toastService.show('Debes seleccionar una puntuación', 'error');
+      return;
+    }
+
+    if (!this.comentario || this.comentario.trim().length === 0) {
+      this.toastService.show('Debes escribir un comentario', 'error');
+      return;
+    }
+
     if (this.resenaDelUsuario) {
       this.resenasService
         .editarResena(this.resenaDelUsuario.id, {
