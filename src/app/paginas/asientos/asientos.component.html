@@ -22,9 +22,9 @@
       </h2>
 
       <div class="detalles-sesion">
-        <span class="detalle-fecha">
-          {{ fechaLargaSesion }}
-        </span>
+
+        {{ fechaLargaSesion }}
+
 
         <span class="detalle-hora">
           {{ formatearHora(sesion?.hora || '') }}
@@ -34,26 +34,32 @@
 
   </div>
 
-  <!-- Con esto se representará visualmente la pantalla. -->
-  <div class="pantalla">Pantalla</div>
+  <div class="zona-asientos">
 
-  <!-- Aquí se generarán los asientos de la sala. -->
-  <div class="grid-asientos">
-    <div *ngFor="let fila of matrizAsientos; let i = index" class="fila-asientos">
+    <div class="asientos-wrapper">
 
-      <!-- Letras de las filas. -->
-      <span class="letra-fila">{{ getLetraFila(i) }}</span>
+      <!-- Con esto se representará visualmente la pantalla. -->
+      <div class="pantalla">Pantalla</div>
 
-      <!-- Asientos. -->
-      <div class="asientos-fila">
-        <div *ngFor="let asiento of fila; let j = index" class="asiento" [class.ocupado]="asiento.ocupado"
-          [class.seleccionado]="asiento.seleccionado" (click)="toggleAsiento(asiento, i, j)">
+      <!-- Aquí se generarán los asientos de la sala. -->
+      <div class="grid-asientos">
+        <div *ngFor="let fila of matrizAsientos; let i = index" class="fila-asientos">
+
+          <!-- Letras de las filas. -->
+          <span class="letra-fila">{{ getLetraFila(i) }}</span>
+
+          <!-- Asientos. -->
+          <div class="asientos-fila">
+            <div *ngFor="let asiento of fila; let j = index" class="asiento" [class.ocupado]="asiento.ocupado"
+              [class.seleccionado]="asiento.seleccionado" (click)="toggleAsiento(asiento, i, j)">
+            </div>
+          </div>
+
+          <!-- Letras de las filas. -->
+          <span class="letra-fila">{{ getLetraFila(i) }}</span>
+
         </div>
       </div>
-
-      <!-- Letras de las filas. -->
-      <span class="letra-fila">{{ getLetraFila(i) }}</span>
-
     </div>
   </div>
 
@@ -68,7 +74,7 @@
   <div class="resumen-compra" *ngIf="asientosSeleccionados.length > 0">
 
     <!-- Aquí se listarán los asientos seleccionados, la cantidad, el precio por entrada y el total. -->
-    <h3>Resumen de compra</h3>
+    <h3>RESUMEN DE COMPRA</h3>
 
     <p>
       Asientos seleccionados:
@@ -92,7 +98,7 @@
     </p>
 
     <!-- Botón para continuar con la compra, que llevará a la página de pago. -->
-    <button class="btn-confirmar" (click)="irAPago()">Continuar con la compra</button>
+    <button class="btn-confirmar" (click)="irAPago()">Continuar Compra</button>
   </div>
 
 </div>

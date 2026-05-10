@@ -9,7 +9,7 @@
     </h2>
 
     <div class="poster-container">
-      <img [src]="reserva?.sesion?.pelicula?.poster" alt="Póster de la película">
+      <img [src]="reserva?.pelicula?.poster" alt="Póster de la película">
     </div>
 
     <section class="info-bloque">
@@ -20,7 +20,7 @@
     </section>
 
     <section class="info-bloque">
-      <h3>Asientos</h3>
+      <h3>Asientos:</h3>
       <ul>
         <li *ngFor="let a of reserva?.asientos">
           {{ formatearAsiento(a) }}
@@ -33,12 +33,12 @@
     </section>
 
     <section class="info-bloque">
-      <p><strong>Código de entrada:</strong></p>
+      <p><strong>Código de Entrada:</strong></p>
       <div class="codigo-box">{{ reserva?.codigoEntrada }}</div>
     </section>
 
     <button type="button" routerLink="/cartelera" class="btn-volver">
-      Volver a la cartelera
+      Volver a la Cartelera
     </button>
 
   </div>

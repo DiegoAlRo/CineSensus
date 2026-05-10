@@ -4,37 +4,43 @@
   margin: 0 auto;
   padding: 20px;
   font-family: 'Inter', sans-serif;
-  color: #ccc;
+  color: white;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.5rem;
+  color: white;
 }
 
 /* Tarjeta superior. */
 .tarjeta-resumen {
-  background: #111;
+  background: #141414;
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid #333;
+  border: 1px solid #1e2939;
+  margin-top: 30px;
   margin-bottom: 25px;
 }
 
 .tarjeta-resumen h2 {
   margin: 0 0 10px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.9rem;
   color: white;
 }
 
 .tarjeta-resumen .info {
+  font-size: 1.1rem;
   margin: 0;
-  color: #ccc;
+  color: #cacaca;
 }
 
 .asientos strong {
-  color: #ebcb00;
-}
-
-.separador {
-  width: 100%;
-  height: 2px;
-  background: #333;
-  margin: 16px 0;
+  font-size: 1.2rem;
+  color: gold;
 }
 
 .total strong {
@@ -52,17 +58,25 @@
 label {
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
-  color: #ccc;
+  font-size: 1.1rem;
+  color: #cacaca;
 }
 
 input {
   margin-top: 6px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 6px;
-  border: 1px solid #444;
-  background: #1a1a1a;
+  background: #141414;
+  border: 1px solid #1e2939;
   color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #e7000b;
+  box-shadow: 0 0 6px rgba(231, 0, 11, 0.4);
 }
 
 .fila {
@@ -76,11 +90,103 @@ input {
   background: #e7000b;
   border: none;
   color: white;
-  font-size: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .btn-confirmar:hover {
   background: #b20710;
+}
+
+@media (max-width: 768px) {
+
+  .contenedor-pago {
+    max-width: 90%;
+    padding: 16px;
+  }
+
+  .titulo {
+    font-size: 1.3rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .tarjeta-resumen {
+    padding: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .tarjeta-resumen h2 {
+    font-size: 1.6rem;
+  }
+
+  .tarjeta-resumen .info {
+    font-size: 1rem;
+  }
+
+  .fila {
+    flex-direction: column;
+    /* 🔥 evita que se rompa en tablet */
+    gap: 12px;
+  }
+
+  input {
+    font-size: 0.95rem;
+    padding: 9px;
+  }
+
+  .btn-confirmar {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .contenedor-pago {
+    max-width: 92%;
+    padding: 14px;
+  }
+
+  .titulo {
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .tarjeta-resumen {
+    padding: 14px;
+    margin-top: 16px;
+    margin-bottom: 18px;
+  }
+
+  .tarjeta-resumen h2 {
+    font-size: 1.4rem;
+  }
+
+  .tarjeta-resumen .info {
+    font-size: 0.95rem;
+  }
+
+  .fila {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .btn-confirmar {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }

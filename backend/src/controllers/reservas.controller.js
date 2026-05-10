@@ -4,64 +4,70 @@ import Sesion from '../models/Sesion.js';
 import crypto from 'crypto';
 import mongoose from 'mongoose';
 
-/* Este método crea una reserva. */ 
+/* Este método crea una reserva. */
 export const crearReserva = async (req, res) => {
     try {
         const { usuarioId, sesionId, asientos, total } = req.body;
 
-    if (!usuarioId || !sesionId || !Array.isArray(asientos) || asientos.length === 0 || !total) {
-        return res.status(400).json({ error: 'Datos incompletos' });
-    }
+        if (!usuarioId || !sesionId || !Array.isArray(asientos) || asientos.length === 0 || !total) {
+            return res.status(400).json({ error: 'Datos incompletos' });
+        }
 
-    const sesion = await Sesion.findById(sesionId).populate('pelicula');
-    if (!sesion) {
-        return res.status(404).json({ error: 'Sesión no encontrada' });
-    }
+        const sesion = await Sesion.findById(sesionId).populate('pelicula');
+        if (!sesion) {
+            return res.status(404).json({ error: 'Sesión no encontrada' });
+        }
 
-    const ocupados = sesion.asientosOcupados || [];
+        const ocupados = sesion.asientosOcupados || [];
 
-    const conflicto = asientos.some(a =>
-    ocupados.some(o => o.fila === a.fila && o.columna === a.columna)
-    );
+        const conflicto = asientos.some(a =>
+            ocupados.some(o => o.fila === a.fila && o.columna === a.columna)
+        );
 
-    if (conflicto) {
-        return res.status(409).json({ error: 'Asiento ya ocupado' });
-    }
+        if (conflicto) {
+            return res.status(409).json({ error: 'Asiento ya ocupado' });
+        }
 
-    const totalReal = asientos.length * sesion.precio;
-    if (total !== totalReal) {
-      return res.status(400).json({ error: 'Total inválido' });
-    }
+        const totalReal = asientos.length * sesion.precio;
+        if (total !== totalReal) {
+            return res.status(400).json({ error: 'Total inválido' });
+        }
 
-    const codigoEntrada = crypto.randomUUID();
+        function generarCodigoEntrada() {
+            const bloque = () => Math.floor(1000 + Math.random() * 9000);
+            return `${bloque()}-${bloque()}-${bloque()}`;
+        }
 
-    /* Se crea la reserva con los datos recibidos. */
-    const reserva = await Reserva.create({
-        usuario: usuarioId,
-        sesion: sesionId,
-        pelicula: {
-            id: sesion.pelicula.id,
-            titulo: sesion.pelicula.titulo,
-            duracion: sesion.pelicula.duracion
-        },
-        estado: 'pagada',
-        asientos,
-        total,
-        codigoEntrada
-    });
+        const codigoEntrada = generarCodigoEntrada();
 
-    /* Se actualiza la sesión para marcar los asientos como ocupados. */
-    sesion.asientosOcupados.push(...asientos);
-    await sesion.save();
+        /* Se crea la reserva con los datos recibidos. */
+        const reserva = await Reserva.create({
+            usuario: usuarioId,
+            sesion: sesionId,
+            pelicula: {
+                id: sesion.pelicula.id,
+                titulo: sesion.pelicula.titulo,
+                duracion: sesion.pelicula.duracion,
+                poster: sesion.pelicula.poster
+            },
+            estado: 'pagada',
+            asientos,
+            total,
+            codigoEntrada
+        });
 
-    let reservaCompleta = await Reserva.findById(reserva._id)
-        .populate('usuario')
-        .populate({
-            path: 'sesion',
-            populate: { path: 'sala' }
-        })
+        /* Se actualiza la sesión para marcar los asientos como ocupados. */
+        sesion.asientosOcupados.push(...asientos);
+        await sesion.save();
 
-    res.status(201).json(reservaCompleta);
+        let reservaCompleta = await Reserva.findById(reserva._id)
+            .populate('usuario')
+            .populate({
+                path: 'sesion',
+                populate: { path: 'sala' }
+            })
+
+        res.status(201).json(reservaCompleta);
 
     } catch (error) {
         console.error('Error al crear reserva:', error);
@@ -71,20 +77,20 @@ export const crearReserva = async (req, res) => {
 
 /* Devuelve todas las reservas almacenadas en la base de datos. */
 export const obtenerReservas = async (req, res) => {
-    
-    try { 
-        
+
+    try {
+
         const reservas = await Reserva.find().populate('usuario')
             .populate({
                 path: 'sesion',
                 populate: { path: 'sala' }
-            }); 
-        res.json(reservas); 
-    
-    } catch (error) { 
-        
-        res.status(500).json({ mensaje: 'Error al obtener reservas', error }); 
-    } 
+            });
+        res.json(reservas);
+
+    } catch (error) {
+
+        res.status(500).json({ mensaje: 'Error al obtener reservas', error });
+    }
 };
 
 /* Devuelve las reservas de un usuario específico. */
@@ -95,37 +101,37 @@ export const obtenerReservasUsuario = async (req, res) => {
         const reservas = await Reserva.find({
             usuario: new mongoose.Types.ObjectId(usuario)
         })
-        .populate('usuario')
-        .populate({
-            path: 'sesion',
-            populate: { path: 'sala' }
-        })
+            .populate('usuario')
+            .populate({
+                path: 'sesion',
+                populate: { path: 'sala' }
+            })
 
         res.json(reservas);
-        
+
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener reservas del usuario' });
     }
 };
 
 export const obtenerReservaPorId = async (req, res) => {
-  try {
-    const reserva = await Reserva.findById(req.params.id)
-      .populate('usuario')
-      .populate({
-        path: 'sesion',
-        populate: { path: 'sala' }
-      })
+    try {
+        const reserva = await Reserva.findById(req.params.id)
+            .populate('usuario')
+            .populate({
+                path: 'sesion',
+                populate: { path: 'sala' }
+            })
 
-    if (!reserva) {
-      return res.status(404).json({ error: 'Reserva no encontrada' });
+        if (!reserva) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+
+        res.json(reserva);
+
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener la reserva' });
     }
-
-    res.json(reserva);
-
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener la reserva' });
-  }
 };
 
 /* Este método actualiza el estado de una reserva. */

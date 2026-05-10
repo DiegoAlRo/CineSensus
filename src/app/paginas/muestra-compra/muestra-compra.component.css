@@ -1,64 +1,74 @@
 .muestra-container {
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
   color: white;
+  font-family: Arial, sans-serif;
 }
 
 .tarjeta-compra {
-  background: #111;
+  background: #141414;
   border: 2px solid #e7000b;
   border-radius: 12px;
   padding: 30px;
-  max-width: 600px;
+  max-width: 450px;
   width: 100%;
   text-align: center;
 }
 
 .titulo-principal {
   font-size: 2rem;
+  font-family: 'Archivo Black', sans-serif;
   margin-bottom: 10px;
-  color: #e7000b;
-  font-weight: bold;
+  color: white;
+  font-weight: 600;
 }
 
 .subtitulo {
   font-size: 1.2rem;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .subtitulo span {
   color: #e7000b;
   font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
 }
 
 .poster-container {
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 .poster-container img {
   width: 70%;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 2px solid #e7000b;
+  box-shadow: 0 0 18px rgba(229, 9, 20, 0.4);
 }
 
 .info-bloque {
   margin: 20px 0;
   text-align: left;
+  font-size: 1.1rem;
+  padding: 0 25px;
 }
 
 .info-bloque h3 {
   margin-bottom: 8px;
   color: #e7000b;
+  font-family: 'Archivo Black', sans-serif;
 }
 
 .codigo-box {
   font-size: 1.1rem;
   font-weight: bold;
   padding: 10px;
-  background: #1e2939;
+  background: #000;
   color: #e7000b;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #e7000b;
   text-align: center;
 }
 
@@ -69,10 +79,95 @@
   border: none;
   border-radius: 6px;
   color: white;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
   cursor: pointer;
 }
 
 .btn-volver:hover {
   background: #b20710;
+}
+
+@media (max-width: 768px) {
+
+  .tarjeta-compra {
+    padding: 20px;
+    max-width: 380px;
+  }
+
+  .titulo-principal {
+    font-size: 1.7rem;
+  }
+
+  .subtitulo {
+    font-size: 1.1rem;
+  }
+
+  .subtitulo span {
+    font-size: 1.3rem;
+  }
+
+  .poster-container img {
+    width: 80%;
+  }
+
+  .info-bloque {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+
+  .codigo-box {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .btn-volver {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+
+  .tarjeta-compra {
+    padding: 18px;
+    max-width: 330px;
+  }
+
+  .titulo-principal {
+    font-size: 1.5rem;
+  }
+
+  .subtitulo {
+    font-size: 1rem;
+  }
+
+  .subtitulo span {
+    font-size: 1.2rem;
+  }
+
+  .poster-container {
+    margin: 20px 0;
+  }
+
+  .poster-container img {
+    width: 70%;
+    border-radius: 10px;
+  }
+
+  .info-bloque {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .codigo-box {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .btn-volver {
+    font-size: 0.95rem;
+    padding: 8px 14px;
+  }
 }

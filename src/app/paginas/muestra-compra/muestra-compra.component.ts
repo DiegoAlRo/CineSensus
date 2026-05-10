@@ -22,6 +22,7 @@ export class MuestraCompraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    debugger
     this.reserva = this.reservasService.reservaActual;
     this.reservasService.datosCompra = null;
 

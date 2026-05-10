@@ -139,7 +139,6 @@ export class AsientosComponent implements OnInit {
   irAPago() {
     const data = localStorage.getItem('usuario');
     if (!data) {
-      
       this.toastService.show('Inicia Sesión para continuar', 'exito');
       this.router.navigate(['/login']);
       return;

@@ -11,6 +11,7 @@ export interface Reserva {
     id: string;
     titulo: string;
     duracion: number;
+    poster: string;
   };
   fechaReserva: string;
   asientos: { fila: number; columna: number }[];

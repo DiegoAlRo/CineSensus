@@ -12,7 +12,8 @@ const ReservaSchema = new mongoose.Schema({
   pelicula: {
     id: String,
     titulo: String,
-    duracion: Number
+    duracion: Number,
+    poster: String
   },
 
   fechaReserva: { type: Date, default: Date.now },

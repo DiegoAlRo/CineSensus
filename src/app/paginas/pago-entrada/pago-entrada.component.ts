@@ -74,7 +74,7 @@ export class PagoEntradaComponent implements OnInit {
     }
 
     if (this.formulario.invalid) {
-      console.log('Formulario inválido');
+      console.log('Formulario Inválido');
       this.toastService.show('Formulario inválido', 'error');
       return;
     }
