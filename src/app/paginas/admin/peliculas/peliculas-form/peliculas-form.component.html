@@ -1,39 +1,42 @@
-<h1>{{ modoEdicion ? 'Editar Película' : 'Crear Película' }}</h1>
+<h1>{{ modoEdicion ? 'EDITAR PELÍCULA' : 'CREAR PELÍCULA' }}</h1>
 
-<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+<form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
-  <label>Título</label>
-  <input type="text" formControlName="titulo">
+  <label>TÍTULO</label>
+  <input type="text" formControlName="titulo" placeholder="Escribe el título de la película...">
 
-  <label>Director</label>
-  <input type="text" formControlName="director">
+  <label>DIRECTOR</label>
+  <input type="text" formControlName="director" placeholder="Escribe el nombre del director...">
 
-  <label>Género</label>
+  <label>GÉNERO</label>
   <select formControlName="genero">
+    <option value="">Seleccione un género...</option>
     <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
   </select>
 
-  <label>Tono</label>
+  <label>TONO</label>
   <select formControlName="tono">
+    <option value="">Seleccione un tono...</option>
     <option *ngFor="let t of tonos" [value]="t">{{ t }}</option>
   </select>
 
-  <label>Restricción de Edad</label>
+  <label>RESTRICCIÓN DE EDAD</label>
   <select formControlName="restriccionEdad">
+    <option value="">Seleccione una restricción...</option>
     <option *ngFor="let r of restricciones" [value]="r">{{ r }}</option>
   </select>
 
-  <label>Duración (minutos)</label>
-  <input type="number" formControlName="duracion">
+  <label>DURACIÓN (MINUTOS)</label>
+  <input type="number" formControlName="duracion" placeholder="Escribe la duración de la película en minutos...">
 
-  <label>Poster (URL)</label>
-  <input type="text" formControlName="poster">
+  <label>POSTER (URL)</label>
+  <input type="text" formControlName="poster" placeholder="Escribe la URL del poster...">
 
-  <label>Trailer (URL)</label>
-  <input type="text" formControlName="trailer">
+  <label>TRAILER (URL)</label>
+  <input type="text" formControlName="trailer" placeholder="Escribe la URL del trailer...">
 
-  <label>Sinopsis</label>
-  <textarea formControlName="sinopsis"></textarea>
+  <label>SINOPSIS</label>
+  <textarea formControlName="sinopsis" placeholder="Escribe la sinopsis de la película..."></textarea>
 
   <div class="botones">
     <button type="submit" class="btn-guardar">Guardar</button>

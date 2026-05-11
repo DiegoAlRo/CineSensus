@@ -1,26 +1,26 @@
-<h1>{{ modoEdicion ? 'Editar Sesión' : 'Crear Sesión' }}</h1>
+<h1>{{ modoEdicion ? 'EDITAR SESIÓN' : 'CREAR SESIÓN' }}</h1>
 
-<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+<form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
-  <label>Película</label>
+  <label>PELÍCULA</label>
   <select formControlName="pelicula">
     <option value="">Seleccione una película</option>
     <option *ngFor="let p of peliculas" [value]="p.id">{{ p.titulo }}</option>
   </select>
 
-  <label>Sala</label>
+  <label>SALA</label>
   <select formControlName="sala">
     <option value="">Seleccione una sala</option>
     <option *ngFor="let s of salas" [value]="s.id">{{ s.nombre }}</option>
   </select>
 
-  <label>Fecha</label>
+  <label>FECHA</label>
   <input type="date" formControlName="fecha">
 
-  <label>Hora</label>
+  <label>HORA</label>
   <input type="time" formControlName="hora">
 
-  <label>Precio (€)</label>
+  <label>PRECIO (€)</label>
   <input type="number" formControlName="precio" min="0" step="0.1">
 
   <div class="botones">

@@ -1,15 +1,15 @@
-<h1>{{ modoEdicion ? 'Editar Sala' : 'Crear Sala' }}</h1>
+<h1>{{ modoEdicion ? 'EDITAR SALA' : 'CREAR SALA' }}</h1>
 
-<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+<form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
-  <label>Nombre</label>
-  <input type="text" formControlName="nombre">
+  <label>NOMBRE</label>
+  <input type="text" formControlName="nombre" placeholder="Nombre de la sala...">
 
-  <label>Filas</label>
-  <input type="number" formControlName="filas">
+  <label>FILAS</label>
+  <input type="number" formControlName="filas" placeholder="Número de filas...">
 
-  <label>Columnas</label>
-  <input type="number" formControlName="columnas">
+  <label>COLUMNAS</label>
+  <input type="number" formControlName="columnas" placeholder="Número de columnas...">
 
   <div class="botones">
     <button type="submit" class="btn-guardar">Guardar</button>

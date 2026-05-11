@@ -1,12 +1,14 @@
 /* Contenedor del sidebar. */
 .admin-sidebar {
-    width: 240px;
+    width: 200px;
     background: #0d0d0d;
     padding: 25px 0;
     height: 100vh;
     border-right: 2px solid #1a1a1a;
     display: flex;
     flex-direction: column;
+    font-family: 'Archivo Black', sans-serif;
+    color: white;
 }
 
 /* Lista del menú. */
@@ -25,12 +27,13 @@
 .admin-sidebar a {
     display: block;
     padding: 14px 25px;
-    color: #ccc;
+    color: white;
     text-decoration: none;
+    text-align: center;
     font-size: 1.1rem;
-    font-weight: 500;
-    transition: 0.2s ease;
+    font-weight: 600;
     border-left: 4px solid transparent;
+    margin-top: 20px;
 }
 
 /* Hover. */
@@ -46,4 +49,54 @@
     color: #e7000b;
     border-left: 4px solid #e7000b;
     font-weight: bold;
+}
+
+.admin-sidebar-select {
+    display: none;
+    padding: 10px 20px;
+    background: #000;
+}
+
+.admin-sidebar-select select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #1e2939;
+    background: #141414;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid #1a1a1a;
+        padding: 10px 0;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .admin-sidebar a {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        margin-top: 0;
+    }
+}
+
+/* Móvil: ocultamos sidebar y usamos select */
+@media (max-width: 480px) {
+
+    .admin-sidebar {
+        display: none;
+    }
+
+    .admin-sidebar-select {
+        display: block;
+    }
 }

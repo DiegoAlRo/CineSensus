@@ -1,27 +1,29 @@
-<div class="salas-header">
-  <h1>Salas</h1>
+<div class="admin-header">
+  <h1>SALAS</h1>
   <button class="btn-crear" (click)="crearSala()">+ Crear</button>
 </div>
 
-<table class="tabla-salas">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Filas</th>
-      <th>Columnas</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
+<div class="tabla-wrapper">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>NOMBRE</th>
+        <th>FILAS</th>
+        <th>COLUMNAS</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let s of salas">
-      <td>{{ s.nombre }}</td>
-      <td>{{ s.filas }}</td>
-      <td>{{ s.columnas }}</td>
-      <td>
-        <button class="btn-editar" (click)="editarSala(s.id)">✏️</button>
-        <button class="btn-borrar" (click)="eliminarSala(s.id)">🗑️</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr *ngFor="let s of salas">
+        <td>{{ s.nombre }}</td>
+        <td>{{ s.filas }}</td>
+        <td>{{ s.columnas }}</td>
+        <td>
+          <button class="btn-editar" (click)="editarSala(s.id)">✏️</button>
+          <button class="btn-borrar" (click)="eliminarSala(s.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

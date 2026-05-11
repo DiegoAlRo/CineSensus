@@ -1,38 +1,17 @@
-.formulario {
+/* TÍTULO */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  color: #e7000b;
+}
+
+/* LABELS */
+label {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-width: 400px;
-}
-
-input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #222;
+  font-size: 1.1rem;
   color: white;
-}
-
-.botones {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.btn-guardar {
-  background: #e7000b;
-  color: white;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-cancelar {
-  background: #555;
-  color: white;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  font-weight: 600;
 }
