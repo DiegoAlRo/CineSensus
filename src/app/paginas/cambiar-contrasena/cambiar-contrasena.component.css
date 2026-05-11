@@ -1,4 +1,3 @@
-/* Estilo general del componente */
 :host {
     display: block;
     background: #000;
@@ -16,20 +15,23 @@
     padding-bottom: 80px;
 }
 
-/* Título */
+/* Título estilo Login */
 .titulo-form {
-    color: #ffffff;
-    font-size: 2.2rem;
-    margin-bottom: 5px;
+    font-family: 'Oswald', sans-serif;
+    color: #e7000b;
+    font-size: 3rem;
     font-weight: bold;
     text-align: center;
+    margin-top: -20px;
 }
 
-/* Subtítulo */
+/* Subtítulo estilo Login */
 .subtitulo-form {
-    color: #b3b3b3;
-    font-size: 1rem;
-    margin-bottom: 25px;
+    color: #cacaca;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: -15px;
+    margin-bottom: 33px;
     text-align: center;
 }
 
@@ -46,17 +48,17 @@
     box-shadow: 0 4px 18px rgba(255, 255, 255, 0.08);
 }
 
-/* Etiquetas */
+/* Labels estilo Login */
 label {
-    font-size: 1rem;
-    color: #e7000b;
+    font-size: 1.1rem;
+    color: #cacaca;
     font-weight: bold;
 }
 
-/* Inputs */
+/* Inputs estilo Login */
 input {
     background: #1f1f1f;
-    border: 1px solid #333;
+    border: 1px solid #1e2939;
     padding: 12px;
     border-radius: 6px;
     color: white;
@@ -69,12 +71,13 @@ input:focus {
     border-color: #e7000b;
 }
 
-/* Botón rojo */
+/* Botón rojo estilo Login */
 .btn-rojo {
     width: 100%;
     padding: 14px;
     background: #e7000b;
     color: white;
+    font-weight: 600;
     border: none;
     border-radius: 6px;
     font-size: 1.1rem;
@@ -87,10 +90,80 @@ input:focus {
     background: #b20710;
 }
 
-/* Mensajes de error */
+/* Mensajes de error estilo Login */
 .mensaje-error {
-    color: #ff4d4d;
-    font-size: 0.85rem;
-    margin-top: -10px;
-    margin-bottom: -5px;
+    color: #e7000b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: -6px 0 4px 0;
+}
+
+/* Responsive tablets */
+@media (max-width: 768px) {
+
+    .contenedor-form {
+        padding-top: 40px;
+        padding-bottom: 60px;
+    }
+
+    .titulo-form {
+        font-size: 2.4rem;
+    }
+
+    .subtitulo-form {
+        font-size: 1rem;
+        margin-top: -10px;
+        margin-bottom: 28px;
+    }
+
+    .form-card {
+        padding: 22px;
+        gap: 14px;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .btn-rojo {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+/* Responsive móviles */
+@media (max-width: 480px) {
+
+    .titulo-form {
+        font-size: 2rem;
+    }
+
+    .subtitulo-form {
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+    }
+
+    .form-card {
+        padding: 18px;
+        gap: 12px;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    input {
+        padding: 9px;
+        font-size: 0.9rem;
+    }
+
+    .btn-rojo {
+        font-size: 0.95rem;
+        padding: 11px;
+    }
 }

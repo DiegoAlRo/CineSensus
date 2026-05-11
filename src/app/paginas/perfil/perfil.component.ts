@@ -129,7 +129,7 @@ export class PerfilComponent implements OnInit {
 
   /* Este método se encargará de juntar las iniciales del usuario y mostrarlas de avatar. */
   generarIniciales(nombre: string, apellidos: string): string {
-    return nombre.charAt(0).toUpperCase() + apellidos.charAt(0).toUpperCase();
+    return nombre.charAt(0).toUpperCase() + "." + apellidos.charAt(0).toUpperCase() + ".";
   }
 
   cambiarContrasena() {

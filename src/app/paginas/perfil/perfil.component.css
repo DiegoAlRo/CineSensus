@@ -22,6 +22,7 @@
   padding: 30px;
   border-radius: 14px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  margin-bottom: 50px;
 }
 
 /* Título rojo. */
@@ -30,22 +31,24 @@
   padding: 12px;
   border-radius: 8px;
   text-align: center;
-  font-size: 1.4rem;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.5rem;
   margin-bottom: 25px;
 }
 
 /* Avatar del usuario. */
 .avatar {
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   background: #e7000b;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.2rem;
+  font-size: 3rem;
+  font-family: 'Oswald', sans-serif;
   font-weight: bold;
-  margin: 0 auto 25px auto;
+  margin: 40px auto 40px auto;
 }
 
 /* Estilos para los datos del usuario. */
@@ -53,16 +56,26 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.campo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .campo label {
   color: #e7000b;
   font-weight: bold;
-  display: block;
-  margin-bottom: 4px;
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 .campo span {
+  color: white;
+  font-weight: 600;
   font-size: 1.1rem;
 }
 
@@ -82,11 +95,12 @@
 .btn-accion {
   background: #e7000b;
   color: white;
+  font-weight: 600;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: 0.2s ease;
 }
 
@@ -98,6 +112,7 @@
 .btn-cerrar {
   background: transparent;
   border: 2px solid #e7000b;
+  font-size: 1.1rem;
   color: #e7000b;
 }
 
@@ -112,8 +127,23 @@
   width: 500px;
   padding: 25px;
   border-radius: 14px;
-  margin: 40px auto;
+  margin: 20px auto;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Mensaje cuando no hay elementos */
+.mensaje-vacio {
+  text-align: center;
+  color: #cacaca;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.lista-scroll {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 /* Tarjetas pequeñas dentro de las listas */
@@ -127,37 +157,16 @@
 
 /* Título de película */
 .titulo-pelicula {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-family: 'Oswald', sans-serif;
+  margin-top: -3px;
   margin-bottom: 10px;
-}
-
-/* Mensaje cuando no hay elementos */
-.mensaje-vacio {
-  text-align: center;
-  color: #aaa;
-  padding: 10px 0;
-}
-
-/* Lista simple */
-.lista-simple {
-  list-style: none;
-  padding: 0;
-}
-
-.lista-simple li {
-  padding: 6px 0;
-  border-bottom: 1px solid #333;
-}
-
-.lista-scroll {
-  max-height: 350px;
-  overflow-y: auto;
-  padding-right: 8px;
+  color: #e7000b;
 }
 
 /* Estados */
 .estado-pagada {
-  color: #e7c000;
+  color: gold;
 }
 
 .estado-consumida {
@@ -168,18 +177,138 @@
   color: #e7000b;
 }
 
-/* Botón de reseña */
-.btn-reseña {
-  margin-top: 10px;
-  width: 100%;
+/* Lista simple */
+.lista-simple {
+  margin-top: -3px;
+  list-style: none;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-.grupo-botones-doble {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+.lista-simple li {
+  padding: 10px 0;
+  border-bottom: 3px solid #333;
 }
 
-.grupo-botones-doble button {
-  flex: 1;
+@media (max-width: 768px) {
+
+  .tarjeta-perfil,
+  .seccion-lista {
+    width: 95%;
+    padding: 22px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.3rem;
+    padding: 10px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    font-size: 2.4rem;
+    margin: 30px auto;
+  }
+
+  .info-usuario {
+    font-size: 1rem;
+    gap: 14px;
+  }
+
+  .campo label {
+    font-size: 1.1rem;
+  }
+
+  .campo span {
+    font-size: 1rem;
+  }
+
+  .tarjeta-item {
+    padding: 15px;
+  }
+
+  .titulo-pelicula {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .tarjeta-perfil,
+  .seccion-lista {
+    box-sizing: border-box;
+    width: 90%;
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.1rem;
+    padding: 8px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    margin: 20px auto;
+  }
+
+  .info-usuario {
+    font-size: 0.95rem;
+    gap: 10px;
+  }
+
+  /* Igual que Cartelera: evitar aplastamiento → columna */
+  .campo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    width: 100%;
+  }
+
+  .campo label {
+    font-size: 1rem;
+  }
+
+  .campo span {
+    font-size: 0.95rem;
+  }
+
+  /* Botones centrados y cómodos */
+  .grupo-botones {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-accion,
+  .btn-cerrar {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  /* Listas más estrechas, como Cartelera */
+  .lista-scroll {
+    max-height: 300px;
+    padding-right: 4px;
+  }
+
+  .tarjeta-item {
+    padding: 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  .titulo-pelicula {
+    font-size: 1.15rem;
+  }
+
+  .lista-simple {
+    font-size: 0.95rem;
+    padding: 6px;
+  }
 }
