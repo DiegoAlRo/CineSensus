@@ -17,11 +17,9 @@ import { FormsModule } from '@angular/forms';
 export class SesionesListComponent implements OnInit {
   sesiones: Sesion[] = [];
   sesionesFiltradas: Sesion[] = [];
-  peliculasUnicas: { id: string; titulo: string }[] = [];
   salasUnicas: { id: string; nombre: string }[] = [];
 
   filtroTexto = '';
-  filtroPelicula = '';
   filtroSala = '';
   filtroFecha = '';
 
@@ -41,10 +39,9 @@ export class SesionesListComponent implements OnInit {
   cargarSesiones() {
     this.sesionesService.getTodas().subscribe({
       next: (data) => {
-        this.sesiones = data;
-        this.sesionesFiltradas = data;
+        this.sesiones = data.filter((s) => s.activo && s.pelicula && s.sala).sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+        this.sesionesFiltradas = this.sesiones;
 
-        this.generarPeliculasUnicas();
         this.generarSalasUnicas();
 
         this.paginaActual = 1;
@@ -53,21 +50,13 @@ export class SesionesListComponent implements OnInit {
     });
   }
 
-  generarPeliculasUnicas() {
-    const mapa = new Map<string, string>();
-
-    for (const s of this.sesiones) {
-      mapa.set(s.pelicula.id, s.pelicula.titulo);
-    }
-
-    this.peliculasUnicas = Array.from(mapa, ([id, titulo]) => ({ id, titulo }));
-  }
-
   generarSalasUnicas() {
     const mapa = new Map<string, string>();
 
     for (const s of this.sesiones) {
-      mapa.set(s.sala.id, s.sala.nombre);
+      if (s.sala && s.pelicula) {
+        mapa.set(s.sala.id, s.sala.nombre);
+      }
     }
 
     this.salasUnicas = Array.from(mapa, ([id, nombre]) => ({ id, nombre }));
@@ -78,20 +67,17 @@ export class SesionesListComponent implements OnInit {
 
     this.sesionesFiltradas = this.sesiones.filter((s) => {
       const coincideTexto =
-        s.pelicula.titulo.toLowerCase().includes(texto) ||
-        s.sala.nombre.toLowerCase().includes(texto) ||
+        s.pelicula?.titulo?.toLowerCase().includes(texto) ||
+        s.sala?.nombre?.toLowerCase().includes(texto) ||
         s.hora.includes(texto) ||
         s.fecha.includes(texto);
-
-      const coincidePelicula =
-        !this.filtroPelicula || s.pelicula.id === this.filtroPelicula;
 
       const coincideSala = !this.filtroSala || s.sala.id === this.filtroSala;
 
       const coincideFecha =
         !this.filtroFecha || s.fecha.slice(0, 10) === this.filtroFecha;
 
-      return coincideTexto && coincidePelicula && coincideSala && coincideFecha;
+      return coincideTexto && coincideSala && coincideFecha;
     });
     this.paginaActual = 1;
   }
@@ -119,6 +105,28 @@ export class SesionesListComponent implements OnInit {
   }
 
   editarSesion(id: string) {
+    const sesion = this.sesiones.find((s) => s.id === id);
+
+    if (!sesion) return;
+
+    if (!sesion.activo) {
+      this.toastService.show(
+        'No es posible editar una sesión eliminada',
+        'error',
+      );
+      return;
+    }
+
+    const fecha = new Date(sesion.fecha);
+    const h = Number(sesion.hora.slice(0, 2));
+    const m = Number(sesion.hora.slice(2, 4));
+    fecha.setHours(h, m);
+
+    if (fecha < new Date()) {
+      this.toastService.show('No es posible editar una sesión pasada', 'error');
+      return;
+    }
+
     this.router.navigate(['/admin/sesiones/editar', id]);
   }
 

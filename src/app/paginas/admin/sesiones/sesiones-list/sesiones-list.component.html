@@ -3,14 +3,7 @@
   <div class="filtros-header">
 
     <div class="filtros-inputs">
-      <input type="text" placeholder="Buscar..." [(ngModel)]="filtroTexto" (input)="aplicarFiltros()">
-
-      <select [(ngModel)]="filtroPelicula" (change)="aplicarFiltros()">
-        <option value="">Película</option>
-        <option *ngFor="let p of peliculasUnicas" [value]="p.id">
-          {{ p.titulo }}
-        </option>
-      </select>
+      <input type="text" placeholder="Buscar por título..." [(ngModel)]="filtroTexto" (input)="aplicarFiltros()">
 
       <select [(ngModel)]="filtroSala" (change)="aplicarFiltros()">
         <option value="">Sala</option>

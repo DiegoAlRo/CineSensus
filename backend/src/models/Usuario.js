@@ -35,6 +35,8 @@ const UsuarioSchema = new mongoose.Schema({
         enum: ['usuario', 'admin'],
         default: 'usuario'
     },
+
+    activo: { type: Boolean, default: true },
         
     historialPeliculas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula' }], 
     historialReservas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reserva' }], 

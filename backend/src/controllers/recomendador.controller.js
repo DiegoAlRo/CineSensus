@@ -7,16 +7,26 @@ export const recomendarPelicula = async (req, res) => {
 
         const ahora = new Date();
 
-        let peliculas = await Pelicula.find().lean();
+        let peliculas = await Pelicula.find({ activo: true }).lean();
 
-        const sesiones = await Sesion.find({fecha: { $gte: ahora }}).populate('pelicula sala');
+        const sesiones = await Sesion.find({ fecha: { $gte: ahora }, activo: true })
+            .populate({
+                path: 'pelicula',
+                match: { activo: true }
+            })
+            .populate({
+                path: 'sala',
+                match: { activo: true }
+            });
+
+        const sesionesValidas = sesiones.filter(s => s.pelicula && s.sala);
 
         const sesionesPorPelicula = {};
 
-        sesiones.forEach(s => {
-        const id = s.pelicula._id.toString();
-        if (!sesionesPorPelicula[id]) sesionesPorPelicula[id] = [];
-        sesionesPorPelicula[id].push(s);
+        sesionesValidas.forEach(s => {
+            const id = s.pelicula._id.toString();
+            if (!sesionesPorPelicula[id]) sesionesPorPelicula[id] = [];
+            sesionesPorPelicula[id].push(s);
         });
 
         peliculas = peliculas

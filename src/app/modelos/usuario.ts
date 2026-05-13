@@ -7,6 +7,8 @@ export interface Usuario {
   email: string;
 
   rol?: string;
+  activo: boolean; // Indica si el usuario está activo o no
+  createdAt?: string;
   
   /* Los IDs de elementos que referenciará. */
   historialPeliculas?: string[];

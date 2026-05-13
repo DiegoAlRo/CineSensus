@@ -26,6 +26,7 @@ export const obtenerCartelera = async (req, res) => {
 
     const sesiones = await Sesion.find({
       fecha: { $gte: inicio, $lte: fin },
+      activo: true,
       $expr: {
         $gt: [
           {
@@ -45,18 +46,28 @@ export const obtenerCartelera = async (req, res) => {
           ahora
         ]
       }
-    }).populate('sala pelicula');
+    })
+    .populate({
+      path: 'pelicula',
+      match: { activo: true }
+    })
+    .populate({
+      path: 'sala',
+      match: { activo: true }
+    });
+
+    const sesionesValidas = sesiones.filter(s => s.pelicula && s.sala);
 
     /* Se agrupan las sesiones por película */
     const sesionesPorPelicula = {};
 
-    sesiones.forEach(s => {
+    sesionesValidas.forEach(s => {
       const id = s.pelicula._id.toString();
       if (!sesionesPorPelicula[id]) sesionesPorPelicula[id] = [];
       sesionesPorPelicula[id].push(s);
     });
 
-    const peliculas = await Pelicula.find();
+    const peliculas = await Pelicula.find({ activo: true });
 
     /* Insertar sesiones en cada película. */
     peliculas.forEach(p => {

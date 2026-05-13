@@ -1,7 +1,12 @@
 /* Imports necesarios para el componente. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { ReservasService } from '../../servicios/reservas.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../servicios/toast.service';
@@ -26,9 +31,8 @@ export class PagoEntradaComponent implements OnInit {
     private reservasService: ReservasService,
     private fb: FormBuilder,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {
-
     /* Se crea el formulario con los campos necesarios y sus validaciones. */
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
@@ -50,6 +54,18 @@ export class PagoEntradaComponent implements OnInit {
       return;
     }
 
+    if (!this.datos.sesion) {
+      this.toastService.show('La sesión ya no está disponible', 'error');
+      this.router.navigate(['/cartelera']);
+      return;
+    }
+
+    if (!this.datos.sesion.sala) {
+      this.toastService.show('La sala ya no existe', 'error');
+      this.router.navigate(['/cartelera']);
+      return;
+    }
+
     this.asientosFormateados = this.datos.asientos.map((a) =>
       this.convertirAsiento(a),
     );
@@ -64,11 +80,13 @@ export class PagoEntradaComponent implements OnInit {
 
   /* Método para confirmar el pago teniendo en cuenta los datos del formulario. */
   confirmarPago() {
-
     const data = localStorage.getItem('usuario');
 
     if (!data) {
-      this.toastService.show('Debes iniciar sesión para completar la compra', 'error');
+      this.toastService.show(
+        'Debes iniciar sesión para completar la compra',
+        'error',
+      );
       this.router.navigate(['/login']);
       return;
     }
@@ -99,7 +117,10 @@ export class PagoEntradaComponent implements OnInit {
       next: (reserva) => {
         this.reservasService.reservaActual = reserva;
         this.router.navigate(['/muestra-compra']);
-        this.toastService.show('Compra exitosa, disfruta de la película', 'exito');
+        this.toastService.show(
+          'Compra exitosa, disfruta de la película',
+          'exito',
+        );
       },
       error: (err) => {
         console.error('Error al crear reserva:', err);

@@ -25,6 +25,7 @@ export class PerfilComponent implements OnInit {
   usuario: Usuario | null = null;
   iniciales: string = '';
   reservas: Reserva[] = [];
+  todasReservas: Reserva[] = [];
   resenas: Resena[] = [];
   peliculasVistas: { pelicula: any; fecha: Date }[] = [];
 
@@ -60,18 +61,30 @@ export class PerfilComponent implements OnInit {
 
     if (!this.usuario) return;
 
+    if (this.usuario.activo === false) {
+      this.toastService.show('Tu cuenta ha sido desactivada', 'error');
+      this.authService.logout();
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.cargandoReservas = true;
 
     try {
-      const reservas = await firstValueFrom(
+      let reservas = await firstValueFrom(
         this.reservasService.getReservasUsuario(this.usuario.id),
       );
 
-      this.reservas = reservas;
+      this.todasReservas = reservas;
+
+      this.reservas = reservas.filter((r) => r.sesion && r.sesion.sala);
 
       await this.actualizarEstadosSiEsNecesario();
 
       this.reservas.sort((a, b) => {
+        if (!a.sesion || !a.sesion.hora) return 1;
+        if (!b.sesion || !b.sesion.hora) return -1;
+
         const fechaA = this.combinarFechaHora(a.sesion.fecha, a.sesion.hora);
         const fechaB = this.combinarFechaHora(b.sesion.fecha, b.sesion.hora);
         return fechaB.getTime() - fechaA.getTime();
@@ -87,16 +100,20 @@ export class PerfilComponent implements OnInit {
     try {
       const vistas = new Map<string, { pelicula: any; fecha: Date }>();
 
-      this.reservas
+      this.todasReservas
         .filter((r) => r.estado === 'consumida')
         .forEach((r) => {
+          if (!r.pelicula) return;
           const peliculaId = r.pelicula.id;
-          const fecha = this.combinarFechaHora(r.sesion.fecha, r.sesion.hora);
+          let fecha = new Date(0);
 
-          if (
-            !vistas.has(peliculaId) ||
-            vistas.get(peliculaId)!.fecha < fecha
-          ) {
+          if (r.sesion && r.sesion.fecha && r.sesion.hora) {
+            fecha = this.combinarFechaHora(r.sesion.fecha, r.sesion.hora);
+          }
+
+          const actual = vistas.get(peliculaId);
+
+          if (!actual || actual.fecha < fecha) {
             vistas.set(peliculaId, { pelicula: r.pelicula, fecha });
           }
         });
@@ -104,6 +121,7 @@ export class PerfilComponent implements OnInit {
       this.peliculasVistas = Array.from(vistas.values()).sort(
         (a, b) => b.fecha.getTime() - a.fecha.getTime(),
       );
+
     } catch {
       this.toastService.show('Error al cargar películas vistas', 'error');
     }
@@ -113,9 +131,11 @@ export class PerfilComponent implements OnInit {
     this.cargandoResenas = true;
 
     try {
-      const resenas = await firstValueFrom(
+      let resenas = await firstValueFrom(
         this.resenasService.getResenasUsuario(this.usuario.id),
       );
+
+      resenas = resenas.filter((r) => r.usuario && r.pelicula);
 
       this.resenas = resenas.sort(
         (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
@@ -129,7 +149,12 @@ export class PerfilComponent implements OnInit {
 
   /* Este método se encargará de juntar las iniciales del usuario y mostrarlas de avatar. */
   generarIniciales(nombre: string, apellidos: string): string {
-    return nombre.charAt(0).toUpperCase() + "." + apellidos.charAt(0).toUpperCase() + ".";
+    return (
+      nombre.charAt(0).toUpperCase() +
+      '.' +
+      apellidos.charAt(0).toUpperCase() +
+      '.'
+    );
   }
 
   cambiarContrasena() {
@@ -149,6 +174,9 @@ export class PerfilComponent implements OnInit {
     const ahora = new Date();
 
     const reservasParaActualizar = this.reservas.filter((reserva) => {
+      if (!reserva.sesion) return false;
+      if (!reserva.sesion.hora) return false;
+
       const hora = reserva.sesion.hora.slice(0, 2);
       const minutos = reserva.sesion.hora.slice(2, 4);
 
@@ -193,6 +221,11 @@ export class PerfilComponent implements OnInit {
   }
 
   editarResena(resena: Resena) {
+    if (!resena.pelicula) {
+      this.toastService.show('La película ya no está disponible', 'error');
+      return;
+    }
+
     this.router.navigate(['/pelicula', resena.pelicula.id], {
       queryParams: { editarResena: resena.id },
     });
@@ -204,7 +237,7 @@ export class PerfilComponent implements OnInit {
         this.resenas = this.resenas.filter((r) => r.id !== resena.id);
         this.toastService.show('Reseña eliminada correctamente', 'exito');
 
-        if (this.router.url.includes('/pelicula/')) {
+        if (this.router.url.includes('/pelicula/') && resena.pelicula) {
           const id = resena.pelicula.id;
           this.router.navigate(['/pelicula', id]);
         }

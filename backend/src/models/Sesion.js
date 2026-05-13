@@ -12,6 +12,7 @@ const SesionSchema = new mongoose.Schema({
   fecha: { type: Date, required: true }, 
   precio: { type: Number, default: 7.5 },
   hora: { type: String, required: true }, // Formato HHMM
+  activo: { type: Boolean, default: true },
 
   asientosOcupados: [
     {

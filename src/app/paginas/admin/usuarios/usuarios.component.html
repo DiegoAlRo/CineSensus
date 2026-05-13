@@ -25,8 +25,12 @@
         <td>{{ u.nombre }} {{ u.apellidos }}</td>
         <td>{{ u.email }}</td>
         <td>{{ u.username }}</td>
+
         <td>
-          <button class="btn-borrar" (click)="eliminarUsuario(u.id)">🗑️</button>
+          <select [(ngModel)]="u.activo" (change)="cambiarEstado(u)">
+            <option [ngValue]="true">Activo</option>
+            <option [ngValue]="false">Inactivo</option>
+          </select>
         </td>
       </tr>
     </tbody>

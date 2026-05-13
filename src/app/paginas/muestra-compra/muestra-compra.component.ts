@@ -22,12 +22,24 @@ export class MuestraCompraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    debugger
+    debugger;
     this.reserva = this.reservasService.reservaActual;
     this.reservasService.datosCompra = null;
 
     if (!this.reserva) {
       this.toastService.show('No hay ninguna compra reciente', 'exito');
+      this.router.navigate(['/cartelera']);
+      return;
+    }
+
+    if (!this.reserva.sesion) {
+      this.toastService.show('La sesión ya no está disponible', 'error');
+      this.router.navigate(['/cartelera']);
+      return;
+    }
+
+    if (!this.reserva.sesion.sala) {
+      this.toastService.show('La sala ya no existe', 'error');
       this.router.navigate(['/cartelera']);
       return;
     }

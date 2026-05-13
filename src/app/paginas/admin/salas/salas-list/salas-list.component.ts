@@ -11,16 +11,15 @@ import { ToastService } from '../../../../servicios/toast.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './salas-list.component.html',
-  styleUrls: ['./salas-list.component.css']
+  styleUrls: ['./salas-list.component.css'],
 })
 export class SalasListComponent {
-
   salas: Sala[] = [];
 
   constructor(
     private salasService: SalasService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +28,10 @@ export class SalasListComponent {
 
   cargarSalas() {
     this.salasService.getSalas().subscribe({
-      next: (data) => this.salas = data,
-      error: () => this.toastService.show('Error al cargar salas', 'error')
+      next: (data) => {
+        this.salas = data.filter(s => s.activo);
+      },
+      error: () => this.toastService.show('Error al cargar salas', 'error'),
     });
   }
 
@@ -39,6 +40,12 @@ export class SalasListComponent {
   }
 
   editarSala(id: string) {
+    const sala = this.salas.find((s) => s.id === id);
+    if (sala && !sala.activo) {
+      this.toastService.show('No puedes editar una sala eliminada', 'error');
+      return;
+    }
+
     this.router.navigate(['/admin/salas/editar', id]);
   }
 
@@ -49,7 +56,7 @@ export class SalasListComponent {
           this.toastService.show('Sala eliminada correctamente', 'exito');
           this.cargarSalas();
         },
-        error: () => this.toastService.show('Error al eliminar sala', 'error')
+        error: () => this.toastService.show('Error al eliminar sala', 'error'),
       });
     }
   }

@@ -15,7 +15,6 @@ import { ToastService } from '../../../../servicios/toast.service';
   styleUrls: ['./peliculas-list.component.css'],
 })
 export class PeliculasListComponent implements OnInit {
-
   peliculas: Pelicula[] = [];
   peliculasFiltradas: Pelicula[] = [];
 
@@ -37,8 +36,8 @@ export class PeliculasListComponent implements OnInit {
   cargarPeliculas() {
     this.peliculasService.getPeliculas().subscribe({
       next: (data) => {
-        this.peliculas = data;
-        this.peliculasFiltradas = data;
+        this.peliculas = data.filter(p => p.activo).sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+        this.peliculasFiltradas = this.peliculas;
         this.paginaActual = 1;
       },
       error: (err) => console.error('Error cargando películas', err),
@@ -48,10 +47,10 @@ export class PeliculasListComponent implements OnInit {
   aplicarFiltros() {
     const texto = this.filtroTexto.toLowerCase();
 
-    this.peliculasFiltradas = this.peliculas.filter(p =>
-      p.titulo.toLowerCase().includes(texto)
+    this.peliculasFiltradas = this.peliculas.filter((p) =>
+      p.titulo.toLowerCase().includes(texto),
     );
-    this.paginaActual = 1; 
+    this.paginaActual = 1;
   }
 
   get peliculasPaginadas() {
@@ -69,6 +68,12 @@ export class PeliculasListComponent implements OnInit {
   }
 
   editarPelicula(id: string) {
+    const pelicula = this.peliculas.find((p) => p.id === id);
+    if (pelicula && !pelicula.activo) {
+      this.toastService.show('No puedes editar una película eliminada', 'error');
+      return;
+    }
+
     this.router.navigate(['/admin/peliculas/editar', id]);
   }
 
@@ -81,7 +86,7 @@ export class PeliculasListComponent implements OnInit {
         },
         error: () => {
           this.toastService.show('Error al eliminar la película', 'error');
-        }
+        },
       });
     }
   }

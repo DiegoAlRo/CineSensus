@@ -17,4 +17,6 @@ export interface Resena {
   puntuacion: Puntuacion;
   comentario: string;
   fecha: string;
+  activo: boolean; // Indica si la reseña está activa o no
+  createdAt?: string;
 }

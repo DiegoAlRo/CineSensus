@@ -16,10 +16,10 @@ import { ToastService } from '../../../servicios/toast.service';
 export class ReservasComponent implements OnInit {
   reservas: Reserva[] = [];
   reservasFiltradas: Reserva[] = [];
-  peliculasUnicas: { id: string; titulo: string }[] = [];
-
+  
   filtroEmail = '';
   filtroPelicula = '';
+  filtroCodigo = '';
   filtroFecha = '';
 
   paginaActual = 1;
@@ -37,37 +37,32 @@ export class ReservasComponent implements OnInit {
   cargarReservas() {
     this.reservasService.getTodasReservas().subscribe({
       next: (data) => {
-        this.reservas = data;
-        this.reservasFiltradas = data;
+        this.reservas = data.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 
-        this.generarPeliculasUnicas();
-        this.paginaActual = 1; 
+        this.reservasFiltradas = this.reservas;
+
+        this.paginaActual = 1;
       },
       error: () => this.toastService.show('Error al cargar reservas', 'error'),
     });
   }
 
-  generarPeliculasUnicas() {
-    const mapa = new Map<string, string>();
-
-    for (const r of this.reservas) {
-      mapa.set(r.pelicula.id, r.pelicula.titulo);
-    }
-
-    this.peliculasUnicas = Array.from(mapa, ([id, titulo]) => ({ id, titulo }));
-  }
-
   aplicarFiltros() {
     const email = this.filtroEmail.toLowerCase();
+    const peliculaTexto = this.filtroPelicula.toLowerCase();
+    const codigoTexto = this.filtroCodigo.toLowerCase();
 
     this.reservasFiltradas = this.reservas.filter((r) => {
-      const coincideEmail = r.usuario.email.toLowerCase().includes(email);
-      const coincidePelicula =
-        !this.filtroPelicula || r.pelicula.id === this.filtroPelicula;
-      const coincideFecha =
-        !this.filtroFecha || r.sesion.fecha.slice(0, 10) === this.filtroFecha;
 
-      return coincideEmail && coincidePelicula && coincideFecha;
+      const coincideEmail = r.usuario?.email?.toLowerCase().includes(email);
+
+      const coincidePelicula = r.pelicula?.titulo?.toLowerCase().includes(peliculaTexto);
+
+      const coincideFecha = !this.filtroFecha || (r.sesion && r.sesion.fecha?.slice(0, 10) === this.filtroFecha);
+
+      const coincideCodigo = r.codigoEntrada?.toLowerCase().includes(codigoTexto);
+
+      return coincideEmail && coincidePelicula && coincideFecha && coincideCodigo;
     });
     this.paginaActual = 1;
   }
@@ -105,8 +100,17 @@ export class ReservasComponent implements OnInit {
           reserva.estado = res.estado;
           this.toastService.show('Estado actualizado correctamente', 'exito');
         },
-        error: () => {
+        error: (err) => {
           reserva.estado = estadoAnterior;
+
+          if (err.status === 409) {
+            this.toastService.show(
+              'No se puede marcar como pagada: los asientos ya están ocupados',
+              'error',
+            );
+            return;
+          }
+
           this.toastService.show('Error al actualizar el estado', 'error');
         },
       });

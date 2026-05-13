@@ -42,15 +42,33 @@ export class AsientosComponent implements OnInit {
     if (!idSesion) return;
 
     this.sesionesService.getSesion(idSesion).subscribe((sesion) => {
-      this.sesion = sesion;
-      this.sala = sesion.sala;
-      this.generarMatrizDeAsientos();
-
       if (!sesion) {
-        this.toastService.show('Ha ocurrido un error con la sesión', 'error');
+        this.toastService.show('La sesión ya no está disponible', 'error');
         this.router.navigate(['/cartelera']);
         return;
       }
+
+      if (!sesion.pelicula) {
+        this.toastService.show('La película ya no está disponible', 'error');
+        this.router.navigate(['/cartelera']);
+        return;
+      }
+
+      if (!sesion.sala) {
+        this.toastService.show('La sala ya no existe', 'error');
+        this.router.navigate(['/cartelera']);
+        return;
+      }
+
+      if (sesion.activo === false) {
+        this.toastService.show('La sesión ya no está disponible', 'error');
+        this.router.navigate(['/cartelera']);
+        return;
+      }
+
+      this.sesion = sesion;
+      this.sala = sesion.sala;
+      this.generarMatrizDeAsientos();
     });
   }
 

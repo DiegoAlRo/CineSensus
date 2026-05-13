@@ -10,6 +10,8 @@ export interface Sesion {
   pelicula: Pelicula; // Objeto Pelicula
   precio: number;
   hora: string; // Formato HHMM
+  activo: boolean; // Indica si la sesión está activa o no
+  createdAt?: string;
 
   /* Id de elemento que referenciará. */
   asientosOcupados: {

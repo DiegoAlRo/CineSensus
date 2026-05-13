@@ -1,5 +1,5 @@
 /* Imports necesarios. */
-import mongoose from 'mongoose'; 
+import mongoose from 'mongoose';
 import Sesion from './Sesion.js';
 
 /** 
@@ -7,7 +7,7 @@ import Sesion from './Sesion.js';
  * Representa la información básica de una película almacenada en MongoDB.
  */
 const PeliculaSchema = new mongoose.Schema({
-    
+
   titulo: { type: String, required: true },
   director: String,
   genero: String,
@@ -20,7 +20,10 @@ const PeliculaSchema = new mongoose.Schema({
   poster: String,
   trailer: String,
   sesiones: [],
-  resenas: [Number]
+  resenas: [Number],
+  activo: { type: Boolean, default: true }
+}, {
+  timestamps: true
 });
 
 PeliculaSchema.virtual('id').get(function () {

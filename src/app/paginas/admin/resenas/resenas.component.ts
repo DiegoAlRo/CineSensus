@@ -16,7 +16,6 @@ import { ToastService } from '../../../servicios/toast.service';
 export class ResenasComponent implements OnInit {
   resenas: Resena[] = [];
   resenasFiltradas: Resena[] = [];
-  peliculasUnicas: { id: string; titulo: string }[] = [];
 
   filtroEmail = '';
   filtroPelicula = '';
@@ -36,33 +35,22 @@ export class ResenasComponent implements OnInit {
   cargarResenas() {
     this.resenasService.getTodasResenas().subscribe({
       next: (data) => {
-        this.resenas = data;
-        this.resenasFiltradas = data;
+        this.resenas = data.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+        this.resenasFiltradas = this.resenas;
 
-        this.generarPeliculasUnicas();
         this.paginaActual = 1;
       },
       error: () => this.toastService.show('Error al cargar reseñas', 'error'),
     });
   }
 
-  generarPeliculasUnicas() {
-    const mapa = new Map<string, string>();
-
-    for (const r of this.resenas) {
-      mapa.set(r.pelicula.id, r.pelicula.titulo);
-    }
-
-    this.peliculasUnicas = Array.from(mapa, ([id, titulo]) => ({ id, titulo }));
-  }
-
   aplicarFiltros() {
     const email = this.filtroEmail.toLowerCase();
+    const peliculaTexto = this.filtroPelicula.toLowerCase();
 
     this.resenasFiltradas = this.resenas.filter((r) => {
-      const coincideEmail = r.usuario.email?.toLowerCase().includes(email);
-      const coincidePelicula =
-        !this.filtroPelicula || r.pelicula.id === this.filtroPelicula;
+      const coincideEmail = r.usuario?.email?.toLowerCase().includes(email);
+      const coincidePelicula = r.pelicula?.titulo?.toLowerCase().includes(peliculaTexto);
 
       return coincideEmail && coincidePelicula;
     });

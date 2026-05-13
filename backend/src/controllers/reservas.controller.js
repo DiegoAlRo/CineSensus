@@ -13,9 +13,20 @@ export const crearReserva = async (req, res) => {
             return res.status(400).json({ error: 'Datos incompletos' });
         }
 
-        const sesion = await Sesion.findById(sesionId).populate('pelicula');
-        if (!sesion) {
+        const sesion = await Sesion.findById(sesionId)
+            .populate({
+                path: 'pelicula'
+            })
+            .populate({
+                path: 'sala'
+            });
+
+        if (!sesion || !sesion.pelicula || !sesion.sala) {
             return res.status(404).json({ error: 'Sesión no encontrada' });
+        }
+
+        if (!sesion.activo) {
+            return res.status(400).json({ error: 'La sesión está inactiva' });
         }
 
         const ocupados = sesion.asientosOcupados || [];
@@ -33,12 +44,7 @@ export const crearReserva = async (req, res) => {
             return res.status(400).json({ error: 'Total inválido' });
         }
 
-        function generarCodigoEntrada() {
-            const bloque = () => Math.floor(1000 + Math.random() * 9000);
-            return `${bloque()}-${bloque()}-${bloque()}`;
-        }
-
-        const codigoEntrada = generarCodigoEntrada();
+        const codigoEntrada = `${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`;
 
         /* Se crea la reserva con los datos recibidos. */
         const reserva = await Reserva.create({
@@ -61,13 +67,15 @@ export const crearReserva = async (req, res) => {
         await sesion.save();
 
         let reservaCompleta = await Reserva.findById(reserva._id)
-            .populate('usuario')
+            .populate({
+                path: 'usuario'
+            })
             .populate({
                 path: 'sesion',
                 populate: { path: 'sala' }
-            })
+            });
 
-        res.status(201).json(reservaCompleta);
+        res.json(reservaCompleta);
 
     } catch (error) {
         console.error('Error al crear reserva:', error);
@@ -80,11 +88,15 @@ export const obtenerReservas = async (req, res) => {
 
     try {
 
-        const reservas = await Reserva.find().populate('usuario')
+        const reservas = await Reserva.find()
+            .populate({
+                path: 'usuario'
+            })
             .populate({
                 path: 'sesion',
                 populate: { path: 'sala' }
             });
+
         res.json(reservas);
 
     } catch (error) {
@@ -101,11 +113,13 @@ export const obtenerReservasUsuario = async (req, res) => {
         const reservas = await Reserva.find({
             usuario: new mongoose.Types.ObjectId(usuario)
         })
-            .populate('usuario')
+            .populate({
+                path: 'usuario'
+            })
             .populate({
                 path: 'sesion',
                 populate: { path: 'sala' }
-            })
+            });
 
         res.json(reservas);
 
@@ -117,11 +131,13 @@ export const obtenerReservasUsuario = async (req, res) => {
 export const obtenerReservaPorId = async (req, res) => {
     try {
         const reserva = await Reserva.findById(req.params.id)
-            .populate('usuario')
+            .populate({
+                path: 'usuario'
+            })
             .populate({
                 path: 'sesion',
                 populate: { path: 'sala' }
-            })
+            });
 
         if (!reserva) {
             return res.status(404).json({ error: 'Reserva no encontrada' });
@@ -144,19 +160,42 @@ export const actualizarEstado = async (req, res) => {
             return res.status(404).json({ error: 'Reserva no encontrada' });
         }
 
-        if (estado === 'cancelada') {
-            const sesion = await Sesion.findById(reserva.sesion);
+        const sesion = await Sesion.findById(reserva.sesion);
 
-            if (sesion) {
-                sesion.asientosOcupados = sesion.asientosOcupados.filter(
-                    (a) =>
-                        !reserva.asientos.some(
-                            (r) => r.fila === a.fila && r.columna === a.columna
-                        )
-                );
+        if (sesion && sesion.activo === false && estado !== 'cancelada') {
+            return res.status(400).json({ error: 'No se puede modificar una reserva de una sesión eliminada' });
+        }
 
-                await sesion.save();
+        if (estado === 'cancelada' && sesion) {
+
+            sesion.asientosOcupados = sesion.asientosOcupados.filter((a) =>
+                !reserva.asientos.some((r) => r.fila === a.fila && r.columna === a.columna)
+            );
+
+            await sesion.save();
+        }
+
+        if (estado === 'pagada' && sesion) {
+
+            const conflicto = reserva.asientos.some(a =>
+                sesion.asientosOcupados.some(o => o.fila === a.fila && o.columna === a.columna)
+            );
+
+            if (conflicto) {
+                return res.status(409).json({
+                    error: 'No se puede volver a marcar como pagada: los asientos ya están ocupados'
+                });
             }
+
+            sesion.asientosOcupados.push(...reserva.asientos);
+            await sesion.save();
+        }
+
+        if (estado === 'consumida' && sesion) {
+            sesion.asientosOcupados = sesion.asientosOcupados.filter((a) =>
+                !reserva.asientos.some((r) => r.fila === a.fila && r.columna === a.columna)
+            );
+            await sesion.save();
         }
 
         reserva.estado = estado;
@@ -165,6 +204,7 @@ export const actualizarEstado = async (req, res) => {
         res.json(reserva);
 
     } catch (error) {
+        console.error('Error al actualizar estado de la reserva', error);
         res.status(500).json({ error: 'Error al actualizar estado de la reserva' });
     }
 };

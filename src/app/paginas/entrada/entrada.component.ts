@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReservasService } from '../../servicios/reservas.service';
 import { Reserva } from '../../modelos/reserva';
+import { ToastService } from '../../servicios/toast.service';
 
 @Component({
   selector: 'app-entrada',
@@ -18,6 +19,7 @@ export class EntradaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reservasService: ReservasService,
+    private toastService: ToastService,
     public router: Router,
   ) {}
 
@@ -33,8 +35,27 @@ export class EntradaComponent implements OnInit {
       next: (res) => {
         this.reserva = res;
         this.cargando = false;
+
+        if (this.reserva.estado === 'cancelada') {
+          this.toastService.show('Esta entrada está cancelada y no es válida', 'error');
+          this.router.navigate(['/perfil']);
+          return;
+        }
+
+        if (!this.reserva.sesion) {
+          this.toastService.show('La sesión de esta entrada no está disponible', 'error');
+          this.router.navigate(['/perfil']);
+          return;
+        }
+
+        if (!this.reserva.sesion.sala) {
+          this.toastService.show('La sala de esta entrada no está disponible', 'error');
+          this.router.navigate(['/perfil']);
+          return;
+        }
       },
       error: () => {
+        this.toastService.show('Error al cargar la entrada', 'error');
         this.router.navigate(['/perfil']);
       },
     });
@@ -45,5 +66,4 @@ export class EntradaComponent implements OnInit {
     const numero = a.columna + 1;
     return `${letra}${numero}`;
   }
-
 }

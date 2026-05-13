@@ -122,6 +122,8 @@ export class RegistroComponent {
           this.toastService.show(this.erroresService.get('emailDuplicado'), 'error');
         } else if (err.error?.mensaje === 'USERNAME_DUPLICADO') {
           this.toastService.show(this.erroresService.get('usernameDuplicado'), 'error');
+        } else if (err.error?.mensaje === 'USUARIO_ELIMINADO') {
+          this.toastService.show('Este email o usuario pertenece a una cuenta eliminada. Contacta con soporte.', 'error');
         } else {
           this.toastService.show(this.erroresService.get('errorGenerico'), 'error');
         }

@@ -55,8 +55,18 @@ export class PeliculasFormComponent implements OnInit {
 
   cargarPelicula() {
     this.peliculasService.getPelicula(this.peliculaId).subscribe({
-      next: (pelicula) => this.form.patchValue(pelicula),
+      next: (pelicula) => {
+        if (!pelicula.activo) {
+          this.toastService.show('Esta película está eliminada y no puede editarse', 'error');
+          this.router.navigate(['/admin/peliculas']);
+          return;
+        }
+
+        this.form.patchValue(pelicula);
+      },
+  
       error: (err) => console.error('Error cargando película', err),
+
     });
   }
 

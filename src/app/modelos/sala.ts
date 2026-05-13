@@ -4,4 +4,6 @@ export interface Sala {
   nombre: string;
   filas: number;
   columnas: number;
+  activo: boolean; // Indica si la sala está activa o no
+  createdAt?: string;
 }

@@ -7,7 +7,7 @@ export const crearResena = async (req, res) => {
     try {
         const { usuario, pelicula, puntuacion, comentario } = req.body;
 
-        const existente = await Resena.findOne({ usuario, pelicula });
+        const existente = await Resena.findOne({ usuario, pelicula, activo: true });
         if (existente) {
             return res.status(400).json({ error: 'Ya has reseñado esta película' });
         }
@@ -22,8 +22,12 @@ export const crearResena = async (req, res) => {
         await actualizarPuntuacionMedia(pelicula);
 
         const completa = await Resena.findById(nueva._id)
-            .populate('usuario')
-            .populate('pelicula');
+            .populate({
+                path: 'usuario'
+            })
+            .populate({
+                path: 'pelicula'
+            });
 
         res.status(201).json(completa);
 
@@ -37,13 +41,17 @@ export const obtenerResenas = async (req, res) => {
     try {
         const { usuario, pelicula } = req.query;
 
-        const filtro = {};
+        const filtro = { activo: true };
         if (usuario) filtro.usuario = usuario;
         if (pelicula) filtro.pelicula = pelicula;
 
         const resenas = await Resena.find(filtro)
-            .populate('usuario')
-            .populate('pelicula');
+            .populate({
+                path: 'usuario'
+            })
+            .populate({
+                path: 'pelicula'
+            });
 
         res.json(resenas);
 
@@ -57,21 +65,25 @@ export const editarResena = async (req, res) => {
     try {
         const { puntuacion, comentario } = req.body;
 
-        const actualizada = await Resena.findByIdAndUpdate(
-            req.params.id,
-            { puntuacion, comentario },
-            { new: true }
-        );
+        const resena = await Resena.findById(req.params.id);
 
-        if (!actualizada) {
-            return res.status(404).json({ error: 'Reseña no encontrada' });
+        if (!resena || resena.activo === false) {
+            return res.status(404).json({ error: 'Reseña no encontrada o inactiva' });
         }
 
-        await actualizarPuntuacionMedia(actualizada.pelicula);
+        resena.puntuacion = puntuacion;
+        resena.comentario = comentario;
+        await resena.save();
 
-        const completa = await Resena.findById(actualizada._id)
-            .populate('usuario')
-            .populate('pelicula');
+        await actualizarPuntuacionMedia(resena.pelicula);
+
+        const completa = await Resena.findById(resena._id)
+            .populate({
+                path: 'usuario'
+            })
+            .populate({
+                path: 'pelicula'
+            });
 
         res.json(completa);
 
@@ -89,11 +101,10 @@ export const eliminarResena = async (req, res) => {
             return res.status(404).json({ error: 'Reseña no encontrada' });
         }
 
-        const peliculaId = resena.pelicula;
+        resena.activo = false;
+        await resena.save();
 
-        await Resena.findByIdAndDelete(req.params.id);
-
-        await actualizarPuntuacionMedia(peliculaId);
+        await actualizarPuntuacionMedia(resena.pelicula);
 
         res.json({ mensaje: 'Reseña eliminada' });
 
@@ -103,7 +114,10 @@ export const eliminarResena = async (req, res) => {
 };
 
 async function actualizarPuntuacionMedia(peliculaId) {
-    const resenas = await Resena.find({ pelicula: peliculaId });
+    const pelicula = await Pelicula.findOne({ _id: peliculaId, activo: true });
+    if (!pelicula) return;
+
+    const resenas = await Resena.find({ pelicula: peliculaId, activo: true });
 
     if (resenas.length === 0) {
         await Pelicula.findByIdAndUpdate(peliculaId, { puntuacionMedia: 0 });

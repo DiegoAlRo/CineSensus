@@ -51,11 +51,23 @@ export class UsuariosService {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, datos);
   }
 
-  cambiarContrasena(datos: { id: string; contrasenaActual: string; nuevaContrasena: string }) {
+  eliminarUsuario(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  reactivarUsuario(id: string) {
+    return this.http.put(`${this.apiUrl}/${id}/reactivar`, {});
+  }
+
+  cambiarContrasena(datos: {
+    id: string;
+    contrasenaActual: string;
+    nuevaContrasena: string;
+  }) {
     const token = localStorage.getItem('token');
 
     return this.http.put(`${this.apiUrl}/cambiar-contrasena`, datos, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {}
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
   }
 }

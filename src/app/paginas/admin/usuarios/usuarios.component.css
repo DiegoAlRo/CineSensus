@@ -1,0 +1,21 @@
+.admin-table td:nth-child(7),
+.admin-table td:nth-child(8) {
+  text-align: center;
+}
+
+.admin-table td select {
+  background: #141414;
+  border: 1px solid #1e2939;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.admin-table td select:focus {
+  border-color: #e7000b;
+  box-shadow: 0 0 8px rgba(231, 0, 11, 0.35);
+}

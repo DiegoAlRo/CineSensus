@@ -6,14 +6,11 @@
     <div class="filtros-inputs">
       <input type="text" placeholder="Buscar email..." [(ngModel)]="filtroEmail" (input)="aplicarFiltros()">
 
-      <select [(ngModel)]="filtroPelicula" (change)="aplicarFiltros()">
-        <option value="">Película</option>
-        <option *ngFor="let p of peliculasUnicas" [value]="p.id">
-          {{ p.titulo }}
-        </option>
-      </select>
+      <input type="text" placeholder="Buscar película..." [(ngModel)]="filtroPelicula" (input)="aplicarFiltros()">
 
       <input type="date" [(ngModel)]="filtroFecha" (change)="aplicarFiltros()">
+
+      <input type="text" placeholder="Código entrada..." [(ngModel)]="filtroCodigo" (input)="aplicarFiltros()">
     </div>
   </div>
 </div>
@@ -28,7 +25,7 @@
         <th>FECHA</th>
         <th>HORA</th>
         <th>ASIENTOS</th>
-        <th>TOTAL</th>
+        <th>CÓDIGO</th>
         <th>ESTADO</th>
       </tr>
     </thead>
@@ -41,7 +38,7 @@
         <td>{{ r.sesion.fecha | date:'yyyy-MM-dd' }}</td>
         <td>{{ r.sesion.hora.slice(0,2) }}:{{ r.sesion.hora.slice(2,4) }}</td>
         <td>{{ formatearAsientos(r.asientos) }}</td>
-        <td>{{ r.total }}€</td>
+        <td>{{ r.codigoEntrada }}</td>
 
         <td>
           <select [(ngModel)]="r.estado" (change)="cambiarEstado(r, r.estado)">

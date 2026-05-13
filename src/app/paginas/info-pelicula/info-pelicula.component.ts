@@ -1,7 +1,7 @@
 /* Imports necesarios para el componente de información de película. */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { Pelicula } from '../../modelos/pelicula';
 import { ResenasService } from '../../servicios/resenas.service';
@@ -35,6 +35,7 @@ export class InfoPeliculaComponent implements OnInit {
     private resenasService: ResenasService,
     private reservasService: ReservasService,
     private toastService: ToastService,
+    private router: Router,
   ) {}
 
   /* Método que se ejecuta al inicializar el componente, obtiene el ID de la película de la ruta y llama al servicio para obtener su información. */
@@ -42,31 +43,39 @@ export class InfoPeliculaComponent implements OnInit {
     /* Se obtiene el ID de la película desde la ruta. */
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    const editarResenaId =
-      this.route.snapshot.queryParamMap.get('editarResena');
+    const editarResenaId = this.route.snapshot.queryParamMap.get('editarResena');
 
     this.peliculasService.getPelicula(id).subscribe({
       next: (p) => {
+        if (!p) {
+          this.toastService.show('La película fue eliminada', 'error');
+          this.router.navigate(['/cartelera']);
+          return;
+        }
+
         this.pelicula = p;
 
         this.resenasService.getResenasPelicula(id).subscribe({
           next: (res) => {
+
             this.resenas = res;
 
-            const usuario = JSON.parse(
-              localStorage.getItem('usuario') || 'null',
-            );
+            const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
             if (!usuario) return;
 
             this.reservasService.getReservasUsuario(usuario.id).subscribe({
               next: (reservas) => {
+
+                reservas = reservas.filter(r => r.sesion && r.sesion.sala);
+
                 const puedeResenar = reservas.some(
                   (r) => r.pelicula.id === id && r.estado === 'consumida',
                 );
 
                 const existente = this.resenas.find(
-                  (r) => r.usuario.id === usuario.id,
+                  (r) => r.usuario?.id === usuario.id,
                 );
+
                 this.resenaDelUsuario = existente || null;
 
                 if (
@@ -106,7 +115,8 @@ export class InfoPeliculaComponent implements OnInit {
         });
       },
       error: () => {
-        this.toastService.show('No se pudo cargar la película', 'error');
+        this.toastService.show('No se pudo cargar la película o fue eliminada', 'error');
+        this.router.navigate(['/cartelera']);
       },
     });
   }

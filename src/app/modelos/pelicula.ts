@@ -20,4 +20,6 @@ export interface Pelicula {
   trailer: string; // URL a YouTube
   sesiones: Sesion[];
   resenas: Number[];
+  activo: boolean; // Indica si la película está activa o no
+  createdAt?: string;
 }

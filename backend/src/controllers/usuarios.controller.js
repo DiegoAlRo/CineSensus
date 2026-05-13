@@ -1,10 +1,12 @@
 /* Imports necesarios. */
 import Usuario from '../models/Usuario.js';
+import Reserva from '../models/Reserva.js';
+import Sesion from '../models/Sesion.js';
 import jwt from 'jsonwebtoken';
 
 /* Este método creará y añadirá un usuario a la base de datos. */
-export const crearUsuario = async (req, res) => { 
-    
+export const crearUsuario = async (req, res) => {
+
   try {
 
     /* Aseguramos el correcto registro. */
@@ -12,13 +14,23 @@ export const crearUsuario = async (req, res) => {
     if (req.body.apellidos) req.body.apellidos = req.body.apellidos.trim();
     if (req.body.username) req.body.username = req.body.username.trim();
     if (req.body.email) req.body.email = req.body.email.trim().toLowerCase();
-        
-    const nuevoUsuario = new Usuario(req.body); 
-    await nuevoUsuario.save(); 
-    res.status(201).json(nuevoUsuario); 
-    
-  } catch (error) { 
-        
+
+    const existenteEmail = await Usuario.findOne({ email: req.body.email });
+    if (existenteEmail && existenteEmail.activo === false) {
+      return res.status(400).json({ mensaje: 'USUARIO_ELIMINADO' });
+    }
+
+    const existenteUsername = await Usuario.findOne({ username: req.body.username });
+    if (existenteUsername && existenteUsername.activo === false) {
+      return res.status(400).json({ mensaje: 'USUARIO_ELIMINADO' });
+    }
+
+    const nuevoUsuario = new Usuario(req.body);
+    await nuevoUsuario.save();
+    res.status(201).json(nuevoUsuario);
+
+  } catch (error) {
+
     /* Si el error es por un email duplicado, se devuelve un mensaje para ser mostrado por el errores.service. */
     if (error.code === 11000) {
 
@@ -35,15 +47,15 @@ export const crearUsuario = async (req, res) => {
 
     console.error('ERROR AL CREAR USUARIO:', error);
     res.status(500).json({ mensaje: 'Error al crear usuario' });
-  } 
+  }
 };
 
-/* Este método comprobará coincidencias en la base de datos e identificará al usuario. */ 
+/* Este método comprobará coincidencias en la base de datos e identificará al usuario. */
 export const loginUsuario = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const usuario = await Usuario.findOne({ email });
+    const usuario = await Usuario.findOne({ email, activo: true });
 
     if (!usuario || usuario.password !== password) {
       return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
@@ -96,12 +108,11 @@ export const cambiarContrasena = async (req, res) => {
     const { contrasenaActual, nuevaContrasena } = req.body;
 
     const usuario = await Usuario.findById(usuarioId);
-    if (!usuario) {
+    if (!usuario || usuario.activo === false) {
       return res.status(404).json({ mensaje: 'USUARIO_NO_ENCONTRADO' });
     }
 
-    const coincide = usuario.password === contrasenaActual;
-    if (!coincide) {
+    if (usuario.password !== contrasenaActual) {
       return res.status(400).json({ mensaje: 'CONTRASENA_INCORRECTA' });
     }
 
@@ -118,6 +129,11 @@ export const cambiarContrasena = async (req, res) => {
 /* Este método servirá para actualizar un usuario. */
 export const actualizarUsuario = async (req, res) => {
   try {
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario || usuario.activo === false) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado o inactivo' });
+    }
 
     /* Nos aseguraremos que de que el usuario se actualice sin fallos. */
     if (req.body.nombre) req.body.nombre = req.body.nombre.trim();
@@ -153,4 +169,60 @@ export const actualizarUsuario = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al actualizar usuario' });
   }
 
+};
+
+export const eliminarUsuario = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    const reservasActivas = await Reserva.find({
+      usuario: usuario._id,
+      estado: { $in: ['pagada', 'consumida'] }
+    });
+
+    for (const reserva of reservasActivas) {
+      const sesion = await Sesion.findById(reserva.sesion);
+
+      if (sesion) {
+       
+        sesion.asientosOcupados = sesion.asientosOcupados.filter(a =>
+          !reserva.asientos.some(r => r.fila === a.fila && r.columna === a.columna)
+        );
+        await sesion.save();
+      }
+
+      reserva.estado = 'cancelada';
+      await reserva.save();
+    }
+
+    usuario.activo = false;
+    await usuario.save();
+
+    res.json({ mensaje: 'Usuario eliminado y reservas canceladas' });
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al eliminar usuario', error });
+  }
+};
+
+export const reactivarUsuario = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    usuario.activo = true;
+    await usuario.save();
+
+    res.json({ mensaje: 'Usuario reactivado' });
+
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al reactivar usuario', error });
+  }
 };

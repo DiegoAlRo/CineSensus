@@ -6,12 +6,7 @@
         <div class="filtros-inputs">
             <input type="text" placeholder="Buscar email..." [(ngModel)]="filtroEmail" (input)="aplicarFiltros()">
 
-            <select [(ngModel)]="filtroPelicula" (change)="aplicarFiltros()">
-                <option value="">Película</option>
-                <option *ngFor="let p of peliculasUnicas" [value]="p.id">
-                    {{ p.titulo }}
-                </option>
-            </select>
+            <input type="text" placeholder="Buscar película..." [(ngModel)]="filtroPelicula" (input)="aplicarFiltros()">
         </div>
     </div>
 </div>

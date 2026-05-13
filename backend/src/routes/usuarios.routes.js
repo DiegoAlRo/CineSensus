@@ -1,6 +1,6 @@
 /* Imports y rutas necesarias para la gestión de usuarios. */
 import express from 'express'; 
-import { crearUsuario, loginUsuario, obtenerUsuario, obtenerUsuarios, actualizarUsuario, cambiarContrasena } from '../controllers/usuarios.controller.js';
+import { crearUsuario, loginUsuario, obtenerUsuario, obtenerUsuarios, actualizarUsuario, cambiarContrasena, eliminarUsuario, reactivarUsuario } from '../controllers/usuarios.controller.js';
 
 const router = express.Router(); 
 
@@ -35,5 +35,15 @@ router.get('/:id', obtenerUsuario);
  * Actualiza los datos de un usuario existente.
  */
 router.put('/:id', actualizarUsuario);
+
+/**
+ * 
+ */
+router.delete('/:id', eliminarUsuario);
+
+/**
+ * 
+ */
+router.put('/:id/reactivar', reactivarUsuario);
 
 export default router;

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -43,7 +48,17 @@ export class SalasFormComponent {
 
   cargarSala() {
     this.salasService.getSala(this.salaId).subscribe({
-      next: (sala) => this.form.patchValue(sala),
+      next: (sala) => {
+        if (!sala.activo) {
+          this.toastService.show(
+            'Esta sala está eliminada y no puede editarse',
+            'error',
+          );
+          this.router.navigate(['/admin/salas']);
+          return;
+        }
+        this.form.patchValue(sala);
+      },
       error: () => this.toastService.show('Error al cargar la sala', 'error'),
     });
   }

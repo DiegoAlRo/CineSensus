@@ -18,4 +18,6 @@ export interface Reserva {
   total: number;
   estado: 'pagada' | 'consumida' | 'cancelada';
   codigoEntrada: string;
+  activo: boolean; // Indica si la reserva está activa o no
+  createdAt?: string;
 }

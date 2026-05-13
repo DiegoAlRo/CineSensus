@@ -11,7 +11,8 @@ const ResenaSchema = new mongoose.Schema({
     pelicula: { type: mongoose.Schema.Types.ObjectId, ref: 'Pelicula', required: true }, 
     puntuacion: { type: Number, required: true }, 
     comentario: { type: String }, 
-    fecha: { type: Date, default: Date.now } 
+    fecha: { type: Date, default: Date.now },
+    activo: { type: Boolean, default: true }
 
 }, { 
     timestamps: true 

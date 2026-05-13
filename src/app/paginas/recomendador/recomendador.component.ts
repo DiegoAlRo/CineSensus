@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Genero } from '../../enums/genero';
 import { Tono } from '../../enums/tono';
@@ -64,6 +69,20 @@ export class RecomendadorComponent {
         if (!pelicula) {
           this.toastService.show(
             'No encontramos ninguna película que encaje con lo que buscas',
+            'error',
+          );
+          return;
+        }
+
+        if (!pelicula.activo) {
+          this.toastService.show('La película ya no está disponible', 'error');
+          return;
+        }
+
+        // 🔥 CAMBIO 2: Sin sesiones válidas
+        if (!pelicula.sesiones || pelicula.sesiones.length === 0) {
+          this.toastService.show(
+            'La película ya no tiene sesiones disponibles',
             'error',
           );
           return;

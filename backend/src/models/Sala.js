@@ -9,13 +9,14 @@ const SalaSchema = new mongoose.Schema({
 
     nombre: { type: String, required: true },
     filas: { type: Number, required: true },
-    columnas: { type: Number, required: true }
+    columnas: { type: Number, required: true },
+    activo: { type: Boolean, default: true }
 
 }, { 
     timestamps: true 
 }); 
 
-/* Mediante este método GET obtendremos el ID de una reserva. */
+/* Mediante este método GET obtendremos el ID de una sala. */
 SalaSchema.virtual('id').get(function () { 
     return this._id.toHexString(); 
 }); 
