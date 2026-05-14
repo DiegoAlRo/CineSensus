@@ -40,7 +40,8 @@ export const obtenerCartelera = async (req, res) => {
                   { $substr: ["$hora", 2, 2] },
                   ":00"
                 ]
-              }
+              },
+              timezone: "Europe/Madrid"
             }
           },
           ahora

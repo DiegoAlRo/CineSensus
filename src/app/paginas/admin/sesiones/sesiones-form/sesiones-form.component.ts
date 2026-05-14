@@ -64,7 +64,7 @@ export class SesionesFormComponent {
   cargarPeliculas() {
     this.peliculasService.getPeliculas().subscribe({
       next: (data) => {
-        this.peliculas = data.filter(p => p.activo);
+        this.peliculas = data.filter((p) => p.activo);
       },
       error: () => this.toastService.show('Error al cargar películas', 'error'),
     });
@@ -73,7 +73,7 @@ export class SesionesFormComponent {
   cargarSalas() {
     this.salasService.getSalas().subscribe({
       next: (data) => {
-        this.salas = data.filter(s => s.activo);
+        this.salas = data.filter((s) => s.activo);
       },
       error: () => this.toastService.show('Error al cargar salas', 'error'),
     });
@@ -83,17 +83,19 @@ export class SesionesFormComponent {
     this.sesionesService.getSesion(this.sesionId).subscribe({
       next: (sesion) => {
         if (!sesion.activo) {
-          this.toastService.show('Esta sesión está eliminada y no puede editarse', 'error');
+          this.toastService.show(
+            'Esta sesión está eliminada y no puede editarse',
+            'error',
+          );
           this.router.navigate(['/admin/sesiones']);
           return;
         }
 
-        const fecha = new Date(sesion.fecha);
-        const h = Number(sesion.hora.slice(0, 2));
-        const m = Number(sesion.hora.slice(2, 4));
-        fecha.setHours(h, m);
+        const fechaSesion = new Date(
+          `${sesion.fecha}T${sesion.hora.slice(0, 2)}:${sesion.hora.slice(2, 4)}:00`,
+        );
 
-        if (fecha < new Date()) {
+        if (fechaSesion < new Date()) {
           this.toastService.show('No puedes editar una sesión pasada', 'error');
           this.router.navigate(['/admin/sesiones']);
           return;

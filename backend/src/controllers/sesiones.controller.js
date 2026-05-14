@@ -115,11 +115,9 @@ export const actualizarSesion = async (req, res) => {
     }
 
     const ahora = new Date();
-    const fechaSesion = new Date(sesion.fecha);
-    const horas = parseInt(sesion.hora.substring(0, 2));
-    const minutos = parseInt(sesion.hora.substring(2, 4));
-
-    fechaSesion.setHours(horas, minutos);
+    const fechaSesion = new Date(
+      `${sesion.fecha}T${sesion.hora.slice(0,2)}:${sesion.hora.slice(2,4)}:00`
+    );
     
     if (fechaSesion < ahora) {
       return res.status(400).json({ mensaje: 'No se puede editar una sesión pasada' });

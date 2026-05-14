@@ -121,7 +121,6 @@ export class PerfilComponent implements OnInit {
       this.peliculasVistas = Array.from(vistas.values()).sort(
         (a, b) => b.fecha.getTime() - a.fecha.getTime(),
       );
-
     } catch {
       this.toastService.show('Error al cargar películas vistas', 'error');
     }
@@ -180,8 +179,11 @@ export class PerfilComponent implements OnInit {
       const hora = reserva.sesion.hora.slice(0, 2);
       const minutos = reserva.sesion.hora.slice(2, 4);
 
-      const fechaSesion = new Date(reserva.sesion.fecha);
-      fechaSesion.setHours(Number(hora), Number(minutos), 0, 0);
+      const fechaISO = new Date(reserva.sesion.fecha)
+        .toISOString()
+        .slice(0, 10);
+
+      const fechaSesion = new Date(`${fechaISO}T${hora}:${minutos}:00`);
 
       return fechaSesion < ahora && reserva.estado === 'pagada';
     });
@@ -206,9 +208,8 @@ export class PerfilComponent implements OnInit {
     const h = Number(hora.slice(0, 2));
     const m = Number(hora.slice(2, 4));
 
-    const d = new Date(fecha);
-    d.setHours(h, m, 0, 0);
-    return d;
+    const fechaISO = new Date(fecha).toISOString().slice(0, 10);
+    return new Date(`${fechaISO}T${hora.slice(0, 2)}:${hora.slice(2, 4)}:00`);
   }
 
   verEntrada(reserva: Reserva) {

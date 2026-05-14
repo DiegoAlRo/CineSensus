@@ -6,6 +6,7 @@ export const recomendarPelicula = async (req, res) => {
         const { genero, tono, duracion, edad, puntuacion } = req.body;
 
         const ahora = new Date();
+        ahora.setHours(0, 0, 0, 0);
 
         let peliculas = await Pelicula.find({ activo: true }).lean();
 

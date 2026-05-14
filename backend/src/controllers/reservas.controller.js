@@ -29,6 +29,14 @@ export const crearReserva = async (req, res) => {
             return res.status(400).json({ error: 'La sesión está inactiva' });
         }
 
+        const fechaSesion = new Date(
+            `${sesion.fecha}T${sesion.hora.slice(0, 2)}:${sesion.hora.slice(2, 4)}:00`
+        );
+
+        if (fechaSesion < new Date()) {
+            return res.status(400).json({ error: 'La sesión ya ha pasado' });
+        }
+
         const ocupados = sesion.asientosOcupados || [];
 
         const conflicto = asientos.some(a =>

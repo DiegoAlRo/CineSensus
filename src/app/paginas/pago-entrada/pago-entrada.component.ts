@@ -112,6 +112,19 @@ export class PagoEntradaComponent implements OnInit {
       total: this.datos!.total,
     };
 
+    const fechaSesion = new Date(
+      `${this.datos!.sesion.fecha}T${this.datos!.sesion.hora.slice(0, 2)}:${this.datos!.sesion.hora.slice(2, 4)}:00`,
+    );
+
+    if (fechaSesion < new Date()) {
+      this.toastService.show(
+        'Esta sesión ya no se encuentra disponible',
+        'error',
+      );
+      this.router.navigate(['/cartelera']);
+      return;
+    }
+
     /* Se llama al servicio para crear la reserva y se maneja la respuesta. */
     this.reservasService.crearReserva(datos).subscribe({
       next: (reserva) => {
@@ -124,6 +137,16 @@ export class PagoEntradaComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al crear reserva:', err);
+
+        if (err.error?.error === 'La sesión ya ha pasado') {
+          this.toastService.show(
+            'Esta sesión ya no se encuentra disponible',
+            'error',
+          );
+          this.router.navigate(['/cartelera']);
+          return;
+        }
+
         this.toastService.show('Error al procesar el pago', 'error');
       },
     });

@@ -39,7 +39,13 @@ export class SesionesListComponent implements OnInit {
   cargarSesiones() {
     this.sesionesService.getTodas().subscribe({
       next: (data) => {
-        this.sesiones = data.filter((s) => s.activo && s.pelicula && s.sala).sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+        this.sesiones = data
+          .filter((s) => s.activo && s.pelicula && s.sala)
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt || 0).getTime() -
+              new Date(a.createdAt || 0).getTime(),
+          );
         this.sesionesFiltradas = this.sesiones;
 
         this.generarSalasUnicas();
@@ -117,10 +123,9 @@ export class SesionesListComponent implements OnInit {
       return;
     }
 
-    const fecha = new Date(sesion.fecha);
-    const h = Number(sesion.hora.slice(0, 2));
-    const m = Number(sesion.hora.slice(2, 4));
-    fecha.setHours(h, m);
+    const fecha = new Date(
+      `${sesion.fecha}T${sesion.hora.slice(0, 2)}:${sesion.hora.slice(2, 4)}:00`,
+    );
 
     if (fecha < new Date()) {
       this.toastService.show('No es posible editar una sesión pasada', 'error');

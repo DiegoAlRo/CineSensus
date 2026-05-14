@@ -79,7 +79,6 @@ export class RecomendadorComponent {
           return;
         }
 
-        // 🔥 CAMBIO 2: Sin sesiones válidas
         if (!pelicula.sesiones || pelicula.sesiones.length === 0) {
           this.toastService.show(
             'La película ya no tiene sesiones disponibles',
