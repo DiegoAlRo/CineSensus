@@ -216,3 +216,23 @@ export const actualizarEstado = async (req, res) => {
         res.status(500).json({ error: 'Error al actualizar estado de la reserva' });
     }
 };
+
+export const obtenerReservasPorSesion = async (req, res) => {
+    try {
+        const { sesion } = req.query;
+
+        if (!sesion) {
+            return res.status(400).json({ error: 'Falta el ID de la sesión' });
+        }
+
+        const reservas = await Reserva.find({
+            sesion: sesion,
+            estado: { $in: ['pagada', 'consumida'] }
+        });
+
+        res.json(reservas);
+
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener reservas de la sesión' });
+    }
+};

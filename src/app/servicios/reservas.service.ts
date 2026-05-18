@@ -62,4 +62,8 @@ export class ReservasService {
       estado,
     });
   }
+
+  getReservasPorSesion(id: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/sesion?sesion=${id}`);
+  }
 }

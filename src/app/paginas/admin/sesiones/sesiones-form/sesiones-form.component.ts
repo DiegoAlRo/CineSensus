@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { SesionesService } from '../../../../servicios/sesiones.service';
+import { ReservasService } from '../../../../servicios/reservas.service';
 import { PeliculasService } from '../../../../servicios/peliculas.service';
 import { SalasService } from '../../../../servicios/salas.service';
 import { ToastService } from '../../../../servicios/toast.service';
@@ -36,6 +37,7 @@ export class SesionesFormComponent {
     private route: ActivatedRoute,
     private router: Router,
     private sesionesService: SesionesService,
+    private reservasService: ReservasService,
     private peliculasService: PeliculasService,
     private salasService: SalasService,
     private toastService: ToastService,
@@ -101,12 +103,33 @@ export class SesionesFormComponent {
           return;
         }
 
-        this.form.patchValue({
-          pelicula: sesion.pelicula.id,
-          sala: sesion.sala.id,
-          fecha: sesion.fecha.slice(0, 10),
-          hora: sesion.hora.slice(0, 2) + ':' + sesion.hora.slice(2, 4),
-          precio: sesion.precio,
+        this.reservasService.getReservasPorSesion(this.sesionId).subscribe({
+          next: (reservas) => {
+            if (reservas.length > 0) {
+              this.toastService.show(
+                'No puedes editar una sesión que ya tiene reservas',
+                'error',
+              );
+              this.router.navigate(['/admin/sesiones']);
+              return;
+            }
+
+            this.form.patchValue({
+              pelicula: sesion.pelicula.id,
+              sala: sesion.sala.id,
+              fecha: sesion.fecha.slice(0, 10),
+              hora: sesion.hora.slice(0, 2) + ':' + sesion.hora.slice(2, 4),
+              precio: sesion.precio,
+            });
+          },
+
+          error: () => {
+            this.toastService.show(
+              'Error al comprobar reservas de la sesión',
+              'error',
+            );
+            this.router.navigate(['/admin/sesiones']);
+          },
         });
       },
       error: () => this.toastService.show('Error al cargar sesión', 'error'),

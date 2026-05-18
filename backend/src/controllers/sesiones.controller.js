@@ -2,6 +2,7 @@
 import Sesion from '../models/Sesion.js';
 import Pelicula from '../models/Pelicula.js';
 import Sala from '../models/Sala.js';
+import Reserva from '../models/Reserva.js';
 
 export const obtenerTodasLasSesiones = async (req, res) => {
   try {
@@ -112,6 +113,15 @@ export const actualizarSesion = async (req, res) => {
 
     if (!sesion || sesion.activo === false) {
       return res.status(404).json({ mensaje: 'Sesión no encontrada o inactiva' });
+    }
+
+    const reservas = await Reserva.find({
+      sesion: req.params.id,
+      estado: { $in: ['pagada', 'consumida'] }
+    });
+
+    if (reservas.length > 0) {
+      return res.status(400).json({ mensaje: 'SESION_CON_RESERVAS' });
     }
 
     const ahora = new Date();
