@@ -1,4 +1,4 @@
-/* Imports necesario. */
+/* Imports necesarios. */
 import mongoose from 'mongoose';
 
 /** 
@@ -43,6 +43,8 @@ const UsuarioSchema = new mongoose.Schema({
     historialResenas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resena' }] 
     
 }, {
+
+    /* Con timestamps se sabrá cuándo se creó o actualizó un usuario. */
     timestamps: true 
 }); 
 
@@ -52,6 +54,7 @@ UsuarioSchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
+/* Con este método GET obtendremos el ID de una reserva. */
 UsuarioSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,

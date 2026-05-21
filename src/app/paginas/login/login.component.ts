@@ -19,23 +19,28 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* Clase del componente de login. */
 export class LoginComponent {
+  
   /* El login es un formulario reactivo. */
   form: FormGroup;
 
   /* Constructor para inyectar los servicios necesarios. */
   constructor(
+
     private usuariosService: UsuariosService,
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
     private toastService: ToastService,
     private erroresService: ErroresService,
+
   ) {
+
     /* Método para manejar el proceso de inicio de sesión. */
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
   }
 
   /* Método para verificar si un campo tiene un error específico. */
@@ -47,6 +52,7 @@ export class LoginComponent {
 
   /* Método para manejar el proceso de inicio de sesión. */
   login() {
+
     /* De estar mal el formulario, se retrocederá. */
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -60,8 +66,10 @@ export class LoginComponent {
     /* Se llama al método login del servicio de usuarios para buscar coincidencias en la BDD. */
     this.usuariosService.login(email, password).subscribe({
       next: (res) => {
+
         this.authService.login(res.usuario, res.token);
         this.toastService.show('Bienvenido de nuevo', 'exito');
+
         if (res.usuario.rol === 'admin') {
           this.router.navigate(['/admin']);
         } else {
@@ -78,7 +86,9 @@ export class LoginComponent {
             this.erroresService.get('credencialesIncorrectas'),
             'error',
           );
+
         } else {
+          
           this.toastService.show(
             this.erroresService.get('errorGenerico'),
             'error',

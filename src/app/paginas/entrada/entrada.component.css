@@ -1,3 +1,4 @@
+/* Estilo para el contenedor. */
 .muestra-container {
   display: flex;
   justify-content: center;
@@ -6,6 +7,7 @@
   font-family: Arial, sans-serif;
 }
 
+/* Estilo para la tarjeta de la entrada. */
 .tarjeta-compra {
   background: #141414;
   border: 2px solid #e7000b;
@@ -16,6 +18,7 @@
   text-align: center;
 }
 
+/* Estilo para el título. */
 .titulo-principal {
   font-size: 2rem;
   font-family: 'Archivo Black', sans-serif;
@@ -24,6 +27,7 @@
   font-weight: 600;
 }
 
+/* Estilo para el subtítulo. */
 .subtitulo {
   font-size: 1.2rem;
   margin-bottom: 20px;
@@ -37,6 +41,7 @@
   font-size: 1.5rem;
 }
 
+/* Estilos para el poster. */
 .poster-container {
   margin: 30px 0;
 }
@@ -48,6 +53,7 @@
   box-shadow: 0 0 18px rgba(229, 9, 20, 0.4);
 }
 
+/* Estilos para el bloque de datos. */
 .info-bloque {
   margin: 20px 0;
   text-align: left;
@@ -72,6 +78,7 @@
   text-align: center;
 }
 
+/* Estilo para el botón de volver. */
 .btn-volver {
   margin-top: 25px;
   padding: 10px 20px;
@@ -88,6 +95,7 @@
   background: #b20710;
 }
 
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
   .tarjeta-compra {
@@ -127,7 +135,7 @@
   }
 }
 
-/* Móviles */
+/* Estilos responsive para móviles. */
 @media (max-width: 480px) {
 
   .tarjeta-compra {

@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import { Component } from '@angular/core';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 import { AdminSidebarComponent } from '../admin-sidebar/admin-sidebar.component';
@@ -10,6 +11,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent {
 
-}
+/* Clase vacía. */
+export class AdminLayoutComponent {}

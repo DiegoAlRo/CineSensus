@@ -15,6 +15,8 @@ const ResenaSchema = new mongoose.Schema({
     activo: { type: Boolean, default: true }
 
 }, { 
+
+    /* Con timestamps se sabrá cuándo se creó o actualizó una reseña. */
     timestamps: true 
 }); 
 
@@ -23,6 +25,7 @@ ResenaSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
+/* Con este método GET obtendremos el ID de una reseña. */
 ResenaSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,

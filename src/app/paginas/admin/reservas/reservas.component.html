@@ -1,6 +1,10 @@
+<!-- Parte superior de la págoina. -->
 <div class="admin-header">
+
+  <!-- Título de la página. -->
   <h1>RESERVAS</h1>
 
+  <!-- Filtros de reservas. -->
   <div class="filtros-header">
 
     <div class="filtros-inputs">
@@ -15,9 +19,12 @@
   </div>
 </div>
 
+<!-- Tabla de reservas. -->
 <div class="tabla-wrapper">
   <table class="admin-table">
     <thead>
+
+      <!-- Enunciados de columnas. -->
       <tr>
         <th>USUARIO</th>
         <th>PELÍCULA</th>
@@ -31,6 +38,8 @@
     </thead>
 
     <tbody>
+
+      <!-- Contenido de la tabla. -->
       <tr *ngFor="let r of reservasPaginadas">
         <td>{{ r.usuario.email }}</td>
         <td>{{ r.pelicula.titulo }}</td>
@@ -41,6 +50,8 @@
         <td>{{ r.codigoEntrada }}</td>
 
         <td>
+
+          <!-- Selector de estados. -->
           <select [(ngModel)]="r.estado" (change)="cambiarEstado(r, r.estado)">
             <option value="pagada">Pagada</option>
             <option value="consumida">Consumida</option>

@@ -23,13 +23,17 @@ const PeliculaSchema = new mongoose.Schema({
   resenas: [Number],
   activo: { type: Boolean, default: true }
 }, {
+
+  /* Con timestamps se sabrá cuándo se creó o actualizó una película. */
   timestamps: true
 });
 
+/* Con este GET obtendremos el ID de una película. */
 PeliculaSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
+/* Con este método GET obtendremos el ID de una película. */
 PeliculaSchema.set('toObject', {
   virtuals: true,
   versionKey: false,
@@ -38,6 +42,7 @@ PeliculaSchema.set('toObject', {
   }
 });
 
+/* Con este método GET obtendremos el ID de una película. */
 PeliculaSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,

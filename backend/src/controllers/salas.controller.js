@@ -12,8 +12,11 @@ export const obtenerSalas = async (req, res) => {
   }
 };
 
+/* Devuelve una sala por su ID. */
 export const obtenerSalaPorId = async (req, res) => {
   try {
+
+    /* Se busca la sala por su ID y se comprueba que esté activa. */
     const sala = await Sala.findOne({ _id: req.params.id, activo: true });
     if (!sala) {
       return res.status(404).json({ mensaje: 'Sala no encontrada' });
@@ -37,6 +40,7 @@ export const crearSala = async (req, res) => {
   }
 };
 
+/* Este método servirá para crear una sala. */
 export const actualizarSala = async (req, res) => {
   try {
     const sala = await Sala.findById(req.params.id);
@@ -57,6 +61,7 @@ export const actualizarSala = async (req, res) => {
   }
 };
 
+/* Este método servirá para eliminar una sala. */
 export const eliminarSala = async (req, res) => {
   try {
     const sala = await Sala.findById(req.params.id);

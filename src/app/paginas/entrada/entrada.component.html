@@ -1,17 +1,22 @@
 <div class="muestra-container" *ngIf="!cargando && reserva">
 
+    <!-- Tarjeta de la entrada. -->
     <div class="tarjeta-compra">
 
+        <!-- Título principal. -->
         <h1 class="titulo-principal">ENTRADA</h1>
 
+        <!-- Subtítulo. -->
         <h2 class="subtitulo">
             Para: <span>{{ reserva.pelicula.titulo }}</span>
         </h2>
 
+        <!-- Poster de película de la reserva. -->
         <div class="poster-container">
             <img [src]="reserva.pelicula.poster" alt="Póster de la película">
         </div>
 
+        <!-- Datos sobre la reserva. -->
         <section class="info-bloque">
             <p><strong>Duración:</strong> {{ reserva.pelicula.duracion }} min</p>
             <p><strong>Fecha:</strong> {{ reserva.sesion.fecha | date:'shortDate' }}</p>
@@ -28,6 +33,7 @@
             </ul>
         </section>
 
+        <!-- Código de la entrada. -->
         <section class="info-bloque">
             <p><strong>Código de entrada:</strong></p>
             <div class="codigo-box">{{ reserva.codigoEntrada }}</div>
@@ -37,6 +43,7 @@
 
 </div>
 
+<!-- Aviso de carga de entrada. -->
 <div *ngIf="cargando" class="muestra-container">
     <p>Cargando entrada...</p>
 </div>

@@ -1,7 +1,11 @@
+<!-- Parte superior de la página. -->
 <div class="admin-header">
+
+  <!-- título de la página. -->
   <h1>SESIONES</h1>
   <div class="filtros-header">
 
+    <!-- Filtros de sesiones. -->
     <div class="filtros-inputs">
       <input type="text" placeholder="Buscar por título..." [(ngModel)]="filtroTexto" (input)="aplicarFiltros()">
 
@@ -15,12 +19,17 @@
       <input type="date" [(ngModel)]="filtroFecha" (change)="aplicarFiltros()">
     </div>
   </div>
+
+  <!-- Botón de crear una sesión. -->
   <button class="btn-crear" (click)="crearSesion()">+ Crear</button>
 </div>
 
+<!-- Tabla de sesiones. -->
 <div class="tabla-wrapper">
   <table class="admin-table">
     <thead>
+
+      <!-- Enunciados de columnas. -->
       <tr>
         <th>PELÍCULA</th>
         <th>SALA</th>
@@ -32,12 +41,16 @@
     </thead>
 
     <tbody>
+
+      <!-- Contenido de tabla. -->
       <tr *ngFor="let s of sesionesPaginadas">
         <td>{{ s.pelicula?.titulo }}</td>
         <td>{{ s.sala?.nombre }}</td>
         <td>{{ s.fecha | date:'yyyy-MM-dd' }}</td>
         <td>{{ s.hora.slice(0,2) }}:{{ s.hora.slice(2,4) }}</td>
         <td>{{ s.precio }}€</td>
+
+        <!-- Botones de acciones. -->
         <td>
           <button class="btn-editar" (click)="editarSesion(s.id)">✏️</button>
           <button class="btn-borrar" (click)="eliminarSesion(s.id)">🗑️</button>
@@ -47,6 +60,7 @@
   </table>
 </div>
 
+<!-- Botones de navegación entre páginas. -->
 <div class="paginacion">
   <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">
     ◀ Anterior

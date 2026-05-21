@@ -225,6 +225,7 @@
   background: #b20710;
 }
 
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
   .contenedor-asientos {
@@ -325,7 +326,7 @@
   }
 }
 
-/* Móvil */
+/* Estilos responsive para móviles. */
 @media (max-width: 480px) {
 
   .contenedor-asientos {

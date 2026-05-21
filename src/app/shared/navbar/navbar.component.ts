@@ -1,4 +1,4 @@
-/* Este componente ejercerá de barra superior en toda la página web. */
+/* Imports necesarios. */
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -14,9 +14,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 
-/* Clase principal del componente de la barra de navegación. */
+/* Este componente ejercerá de barra superior en toda la página web para el usuario. */
 export class NavbarComponent implements OnInit {
-  /* Se tendrá en cuenta si el usuario está logueado o no para mostrar su nombre y el botón de cerrar sesión. */
+  
+  /* Se tendrá en cuenta si el usuario está logueado. */
   usuarioLogueado: any = null;
 
   /* Este boolean determinará si el botón de volver será visible. */

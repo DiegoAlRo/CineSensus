@@ -77,6 +77,7 @@ export const loginUsuario = async (req, res) => {
   }
 };
 
+/* Método para obtener las reservas de un usuario. */
 export const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await Usuario.find();
@@ -102,6 +103,7 @@ export const obtenerUsuario = async (req, res) => {
   }
 };
 
+/* Este método servirá para crear una sala. */
 export const cambiarContrasena = async (req, res) => {
   try {
     const usuarioId = req.body.id;
@@ -171,6 +173,7 @@ export const actualizarUsuario = async (req, res) => {
 
 };
 
+/* Este método servirá para eliminar un usuario. */
 export const eliminarUsuario = async (req, res) => {
   try {
     const usuario = await Usuario.findById(req.params.id);
@@ -209,6 +212,7 @@ export const eliminarUsuario = async (req, res) => {
   }
 };
 
+/* Este método servirá para reactivar un usuario. */
 export const reactivarUsuario = async (req, res) => {
   try {
     const usuario = await Usuario.findById(req.params.id);

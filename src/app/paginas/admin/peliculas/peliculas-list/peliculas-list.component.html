@@ -1,6 +1,10 @@
+<!-- Parte superior de la página. -->
 <div class="admin-header">
+
+  <!-- Título de la página -->
   <h1>PELÍCULAS</h1>
 
+  <!-- Filtro de películas. -->
   <div class="filtros-header">
 
     <div class="filtros-inputs">
@@ -8,12 +12,16 @@
     </div>
   </div>
 
+  <!-- Botón para crear una película. -->
   <button class="btn-crear" (click)="crearPelicula()">+ Crear</button>
 </div>
 
+<!-- Tabla de películas. -->
 <div class="tabla-wrapper">
   <table class="admin-table">
     <thead>
+
+      <!-- Enunciados de columnas. -->
       <tr>
         <th>POSTER</th>
         <th>TÍTULO</th>
@@ -25,12 +33,16 @@
     </thead>
 
     <tbody>
+
+      <!-- Contenido de tablas. -->
       <tr *ngFor="let p of peliculasPaginadas">
         <td><img [src]="p.poster" class="poster"></td>
         <td>{{ p.titulo }}</td>
         <td>{{ p.genero }}</td>
         <td>{{ p.duracion }} min</td>
         <td>+{{ p.restriccionEdad }}</td>
+
+        <!-- Botones de acciones. -->
         <td>
           <button class="btn-editar" (click)="editarPelicula(p.id)">✏️</button>
           <button class="btn-borrar" (click)="eliminarPelicula(p.id)">🗑️</button>
@@ -40,7 +52,7 @@
   </table>
 </div>
 
-
+<!-- Botones de paginación. -->
 <div class="paginacion">
   <button (click)="paginaActual = paginaActual - 1" [disabled]="paginaActual === 1">
     ◀ Anterior

@@ -14,8 +14,11 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* Clase del componente de toast. */
 export class ToastComponent {
+
+  /* El mensaje podrá ser de dos tipos. */
   mensaje: { mensaje: string; tipo: 'exito' | 'error' } | null = null;
 
+  /* Se suscribe al observable del servicio para recibir y mostrar los mensajes del toast. */
   constructor(private toastService: ToastService) {
     this.toastService.mensaje$.subscribe((msg) => {
       this.mensaje = msg;

@@ -112,6 +112,7 @@ label {
     margin-top: 24px;
 }
 
+/* Estilos para la tarjeta de la película recomendada. */
 .peliculas {
     flex: 1;
     display: flex;

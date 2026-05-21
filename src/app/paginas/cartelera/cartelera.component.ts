@@ -23,6 +23,7 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* Clase la cartelera que usa OnInit para inicializar datos al cargar la página. */
 export class CarteleraComponent implements OnInit {
+
   /* Propiedades del componente. */
   peliculasOriginales: Pelicula[] = [];
   peliculas: Pelicula[] = [];
@@ -65,9 +66,7 @@ export class CarteleraComponent implements OnInit {
 
     const diaSemana = dias[this.fechaSeleccionada.getDay()];
     const dia = this.fechaSeleccionada.getDate().toString().padStart(2, '0');
-    const mes = (this.fechaSeleccionada.getMonth() + 1)
-      .toString()
-      .padStart(2, '0');
+    const mes = (this.fechaSeleccionada.getMonth() + 1).toString().padStart(2, '0');
 
     return `${diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1)} ${dia}/${mes}`;
   }
@@ -79,13 +78,15 @@ export class CarteleraComponent implements OnInit {
 
   /* Este getter evita poder navegar al mes anterior. */
   get puedeIrMesAnterior() {
+
     const hoy = new Date();
-    return !(
-      this.anioActual === hoy.getFullYear() && this.mesActual === hoy.getMonth()
-    );
+
+    return !(this.anioActual === hoy.getFullYear() && this.mesActual === hoy.getMonth());
   }
 
+  /* Este otro getter permitirá ir al mes siguiente, pero no más. */
   get puedeIrMesSiguiente() {
+
     const hoy = new Date();
     const mesLimite = hoy.getMonth() + 1; // mes siguiente
     const anioLimite = hoy.getFullYear();
@@ -109,6 +110,7 @@ export class CarteleraComponent implements OnInit {
 
   /* Método que se ejecuta al inicializar el componente, obtiene la lista de películas y verifica si hay un usuario logueado. */
   ngOnInit(): void {
+
     this.hoy = new Date();
     this.hoy.setHours(0, 0, 0, 0);
 
@@ -116,6 +118,7 @@ export class CarteleraComponent implements OnInit {
     const data = localStorage.getItem('usuario');
     if (data) this.usuarioLogueado = JSON.parse(data);
 
+    /* Se obtiene la fecha seleccionada por el usuario del localStorage. */
     const fechaGuardada = localStorage.getItem('fechaSeleccionada');
     if (fechaGuardada) {
       this.fechaSeleccionada = new Date(fechaGuardada);
@@ -146,6 +149,7 @@ export class CarteleraComponent implements OnInit {
     }, 60000);
   }
 
+  /* Para evitar problemas, el intervalo se destruirá al salir del componente. */
   ngOnDestroy(): void {
     if (this.intervaloCambioDia) {
       clearInterval(this.intervaloCambioDia);
@@ -216,10 +220,13 @@ export class CarteleraComponent implements OnInit {
       dia.getDate(),
     );
 
+    /* No se podrán seleccionar días pasados. */
     if (diaSinHora < hoySinHora) return;
 
     /* Junto a la fecha, se actualizarán las sesiones para mostrar solo las del día seleccionado. */
     this.fechaSeleccionada = diaSinHora;
+
+    /* Se guardará la fecha seleccionada en el localStorage. */
     localStorage.setItem('fechaSeleccionada', diaSinHora.toISOString());
     this.cargarCartelera();
 
@@ -254,6 +261,8 @@ export class CarteleraComponent implements OnInit {
     if (!this.puedeIrMesAnterior) return;
 
     this.mesActual--;
+
+    /* Se controlará el cambio de año. */
     if (this.mesActual < 0) {
       this.mesActual = 11;
       this.anioActual--;
@@ -265,7 +274,10 @@ export class CarteleraComponent implements OnInit {
 
   /* Método para navegar al mes siguiente, actualizando el calendario. */
   mesSiguiente() {
+
     this.mesActual++;
+
+    /* Se controlará el cambio de año. */
     if (this.mesActual > 11) {
       this.mesActual = 0;
       this.anioActual++;

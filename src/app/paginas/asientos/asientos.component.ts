@@ -20,6 +20,7 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* La clase del componente, que implementa OnInit para cargar los datos al iniciar. */
 export class AsientosComponent implements OnInit {
+
   /* Se almacenan la sesión, la sala y la matriz de asientos para mostrarlas en la plantilla. */
   sesion!: Sesion;
   sala!: Sala;
@@ -37,8 +38,11 @@ export class AsientosComponent implements OnInit {
 
   /* Al iniciar el componente, se obtiene el ID de la sesión desde la ruta y se carga la sesión correspondiente. */
   ngOnInit() {
+
+    /* Se obtendrá la sesión mediante la url. */
     const idSesion = this.route.snapshot.paramMap.get('idSesion');
 
+    /* Se comprobará que la sesión existe o es accesible y se informará al usuario. */
     if (!idSesion) return;
 
     this.sesionesService.getSesion(idSesion).subscribe((sesion) => {
@@ -66,6 +70,7 @@ export class AsientosComponent implements OnInit {
         return;
       }
 
+      /* Se almacenarán los datos y generará la vista de los asientos. */
       this.sesion = sesion;
       this.sala = sesion.sala;
       this.generarMatrizDeAsientos();

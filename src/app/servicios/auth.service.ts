@@ -8,8 +8,9 @@ import { Usuario } from '../modelos/usuario';
   providedIn: 'root',
 })
 
-/* Este servicio se encargará de gestionar el estado del usuario en la aplicación. */
+/* Este servicio se encargará de gestionar el acceso del usuario en la aplicación. */
 export class AuthService {
+
   /* El usuarioSubject almacena la información del usuario autenticado. */
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
 

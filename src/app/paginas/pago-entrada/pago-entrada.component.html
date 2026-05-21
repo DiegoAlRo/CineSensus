@@ -1,9 +1,12 @@
 <div class="contenedor-pago">
 
+    <!-- Título de la página de compra. -->
     <h1 class="titulo">INTRODUCE TUS DATOS DE PAGO</h1>
 
     <!-- Tarjeta con información de la compra. -->
     <div class="tarjeta-resumen">
+
+        <!-- Datos de la reserva. -->
         <h2>{{ datos?.sesion?.pelicula?.titulo }}</h2>
 
         <p class="info">
@@ -24,6 +27,7 @@
     <!-- Formulario de pago. -->
     <form [formGroup]="formulario" class="formulario">
 
+        <!-- Campos a rellenar. -->
         <label>
             Nombre del Titular
             <input formControlName="nombre" type="text" placeholder="Ej: Carlos Pérez">
@@ -46,6 +50,7 @@
             </label>
         </div>
 
+        <!-- Botón para confirmar la compra. -->
         <button type="button" class="btn-confirmar" (click)="confirmarPago()">
             Confirmar Compra
         </button>

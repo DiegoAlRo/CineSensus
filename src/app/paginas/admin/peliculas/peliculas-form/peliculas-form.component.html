@@ -1,5 +1,7 @@
+<!-- Título variable del formulario. -->
 <h1>{{ modoEdicion ? 'EDITAR PELÍCULA' : 'CREAR PELÍCULA' }}</h1>
 
+<!-- Formulario para crear/editar una película. -->
 <form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
   <label>TÍTULO</label>
@@ -38,6 +40,7 @@
   <label>SINOPSIS</label>
   <textarea formControlName="sinopsis" placeholder="Escribe la sinopsis de la película..."></textarea>
 
+  <!-- Botones del formulario. -->
   <div class="botones">
     <button type="submit" class="btn-guardar">Guardar</button>
     <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>

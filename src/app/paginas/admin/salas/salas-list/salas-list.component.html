@@ -1,11 +1,19 @@
+<!-- Parte superior de la página. -->
 <div class="admin-header">
+
+  <!-- Título de la página. -->
   <h1>SALAS</h1>
+
+  <!-- Botón para crear una sala. -->
   <button class="btn-crear" (click)="crearSala()">+ Crear</button>
 </div>
 
+<!-- Tabla de salas. -->
 <div class="tabla-wrapper">
   <table class="admin-table">
     <thead>
+
+      <!-- Enunciado de las columnas. -->
       <tr>
         <th>NOMBRE</th>
         <th>FILAS</th>
@@ -15,10 +23,14 @@
     </thead>
 
     <tbody>
+
+      <!-- Contenido de las tablas. -->
       <tr *ngFor="let s of salas">
         <td>{{ s.nombre }}</td>
         <td>{{ s.filas }}</td>
         <td>{{ s.columnas }}</td>
+
+        <!-- Botones de acciones. -->
         <td>
           <button class="btn-editar" (click)="editarSala(s.id)">✏️</button>
           <button class="btn-borrar" (click)="eliminarSala(s.id)">🗑️</button>

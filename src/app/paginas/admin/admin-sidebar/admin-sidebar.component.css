@@ -1,4 +1,4 @@
-/* Contenedor del sidebar. */
+/* Estilo del contenedor del sidebar. */
 .admin-sidebar {
     width: 200px;
     background: #0d0d0d;
@@ -11,19 +11,18 @@
     color: white;
 }
 
-/* Lista del menú. */
+/* Estilo para la lista del menú. */
 .admin-sidebar ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Elementos del menú. */
 .admin-sidebar li {
     margin: 0;
 }
 
-/* Enlaces del menú. */
+/* Estilos para los enlaces del menú. */
 .admin-sidebar a {
     display: block;
     padding: 14px 25px;
@@ -36,14 +35,13 @@
     margin-top: 20px;
 }
 
-/* Hover. */
 .admin-sidebar a:hover {
     background: rgba(231, 0, 11, 0.15);
     color: #e7000b;
     border-left: 4px solid #e7000b;
 }
 
-/* Enlace activo. */
+/* Versión de estilo para apartado seleccionado. */
 .admin-sidebar a.activo {
     background: rgba(231, 0, 11, 0.25);
     color: #e7000b;
@@ -69,7 +67,7 @@
     outline: none;
 }
 
-/* Tablet */
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
     .admin-sidebar {
@@ -89,7 +87,7 @@
     }
 }
 
-/* Móvil: ocultamos sidebar y usamos select */
+/* Estilos responsive para móviles(Cambia el sidebar por un select). */
 @media (max-width: 480px) {
 
     .admin-sidebar {

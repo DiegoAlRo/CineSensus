@@ -2,6 +2,7 @@
 import express from 'express';
 import { crearReserva, actualizarEstado, obtenerReservasUsuario, obtenerReservas, obtenerReservasPorSesion, obtenerReservaPorId } from '../controllers/reservas.controller.js';
 
+/* Se crea un router de Express para manejar las rutas relacionadas con las reservas. */
 const router = express.Router();
 
 /**
@@ -22,8 +23,16 @@ router.put('/:id/estado', actualizarEstado);
  */
 router.get('/', obtenerReservasUsuario);
 
+/**
+ * GET /reservas/todas
+ * Obtiene todas las reservas.
+ */
 router.get('/todas', obtenerReservas);
 
+/**
+ * GET /reservas/sesion
+ * Obtiene las reservas de una sesión específica.
+ */
 router.get('/sesion', obtenerReservasPorSesion);
 
 /**

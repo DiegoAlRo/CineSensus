@@ -22,6 +22,8 @@ export const routes: Routes = [
   { path: 'pago-entrada', loadComponent: () => import('./paginas/pago-entrada/pago-entrada.component').then(m => m.PagoEntradaComponent), canActivate: [authGuard] },
   { path: 'muestra-compra', loadComponent: () => import('./paginas/muestra-compra/muestra-compra.component').then(m => m.MuestraCompraComponent), canActivate: [authGuard] },
   { path: 'entrada/:id', loadComponent: () => import('./paginas/entrada/entrada.component').then(m => m.EntradaComponent), canActivate: [authGuard] },
+
+  /* Las rutas del admin serán hijas de una ruta superior, debido a que sus páginas se muestran dentro de otra.*/
   { path: 'admin', canActivate: [adminAuthGuard], loadComponent: () => import('./paginas/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent),
     children: [
       { path: 'peliculas',

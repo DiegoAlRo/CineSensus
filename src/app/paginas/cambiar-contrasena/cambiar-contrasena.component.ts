@@ -1,3 +1,4 @@
+/* Imports necesarios. */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -5,15 +6,20 @@ import { Router } from '@angular/router';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { ToastService } from '../../servicios/toast.service';
 
+/* Decorador del componente. */
 @Component({
   selector: 'app-cambiar-contrasena',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cambiar-contrasena.component.html',
   styleUrls: ['./cambiar-contrasena.component.css'],
 })
+
+/* Esta es la clase del componente donde el usuario puede cambiar su contraseña. */
 export class CambiarContrasenaComponent {
+
   form: FormGroup;
 
+  /* Constructor del componente. */
   constructor(
     private fb: FormBuilder,
     private usuariosService: UsuariosService,
@@ -22,6 +28,7 @@ export class CambiarContrasenaComponent {
   ) {
     this.form = this.fb.group(
       {
+        /* Esta será la estructura del formulario. */
         contrasenaActual: ['', Validators.required],
         nuevaContrasena: ['', [Validators.required, Validators.minLength(8)]],
         confirmarContrasena: ['', Validators.required],
@@ -35,6 +42,7 @@ export class CambiarContrasenaComponent {
     );
   }
 
+  /* Se confirmará que las dos contraseñas sean iguales. */
   passwordsIguales(pass1: string, pass2: string) {
     return (formGroup: FormGroup) => {
       const p1 = formGroup.get(pass1);
@@ -50,18 +58,23 @@ export class CambiarContrasenaComponent {
     };
   }
 
+  /* Se comprueban posibles errores. */
   tieneError(campo: string, error: string) {
     return (
       this.form.get(campo)?.hasError(error) && this.form.get(campo)?.touched
     );
   }
 
+  /* Este será el método para cambiar la contraseña del usuario. */
   cambiar() {
+
+    /* Se asegurará que el formulario es válido. */
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     
+    /* Se obtendrá el usuario del localStorage. */
     const usuario = JSON.parse(localStorage.getItem('usuario')!);
 
     const datos = {
@@ -70,17 +83,17 @@ export class CambiarContrasenaComponent {
       nuevaContrasena: this.form.value.nuevaContrasena,
     };
 
+    /* Se llamará al servicio para hacer el camboo. */
     this.usuariosService.cambiarContrasena(datos).subscribe({
+
+      /* Se avisará al usuario del resultado de la operación. */
       next: () => {
         this.toastService.show('Contraseña actualizada correctamente', 'exito');
         this.router.navigate(['/perfil']);
       },
       error: (err) => {
         if (err.error?.mensaje === 'CONTRASENA_INCORRECTA') {
-          this.toastService.show(
-            'La contraseña actual no es correcta',
-            'error',
-          );
+          this.toastService.show('La contraseña actual no es correcta', 'error');
         } else {
           this.toastService.show('No se pudo cambiar la contraseña', 'error');
         }

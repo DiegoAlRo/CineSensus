@@ -25,6 +25,7 @@ export const obtenerPeliculaPorId = async (req, res) => {
       return res.status(404).json({ mensaje: 'Película no encontrada' });
     }
 
+    /* Se obtienen las reseñas de la película y se añaden al objeto película. */
     const resenas = await Resena.find({ pelicula: pelicula._id, activo: true })
       .populate('usuario')
       .populate({
@@ -41,6 +42,7 @@ export const obtenerPeliculaPorId = async (req, res) => {
   }
 };
 
+/* Devuelve las películas filtradas por género o director. */
 export const crearPelicula = async (req, res) => {
   try {
     const {
@@ -80,6 +82,7 @@ export const crearPelicula = async (req, res) => {
   }
 };
 
+/* Método para actualizar una película. */
 export const actualizarPelicula = async (req, res) => {
   try {
     const {
@@ -94,6 +97,7 @@ export const actualizarPelicula = async (req, res) => {
       trailer
     } = req.body;
 
+    /* Se verifica que la película exista y esté activa. */
     const pelicula = await Pelicula.findById(req.params.id);
     if (!pelicula || pelicula.activo === false) {
       return res.status(404).json({ mensaje: 'Película no encontrada o inactiva' });
@@ -127,8 +131,10 @@ export const actualizarPelicula = async (req, res) => {
   }
 };
 
+/* Método para eliminar una película. */
 export const eliminarPelicula = async (req, res) => {
   try {
+    /* Se verifica que la película exista. */
     await Pelicula.findByIdAndUpdate(req.params.id, { activo: false });
     res.json({ mensaje: 'Película eliminada' });
   } catch (error) {

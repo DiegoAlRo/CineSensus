@@ -18,6 +18,7 @@ import { ErroresService } from '../../servicios/errores.service';
 
 /* Clase del componente de registro. */
 export class RegistroComponent {
+
   /* Declaración del formulario reactivo. */
   form: FormGroup;
 
@@ -41,6 +42,7 @@ export class RegistroComponent {
     private toastService: ToastService,
     private erroresService: ErroresService,
   ) {
+
     /* Formulario con validaciones. */
     this.form = this.fb.group(
       {
@@ -73,15 +75,20 @@ export class RegistroComponent {
   /* Se comprueba que las contraseñas coincidan. */
   passwordsIguales(pass1: string, pass2: string) {
     return (formGroup: FormGroup) => {
+
       const p1 = formGroup.get(pass1);
       const p2 = formGroup.get(pass2);
 
       if (p1?.value !== p2?.value) {
+
         p2?.setErrors({ noCoincide: true });
+
       } else {
+
         if (p2?.hasError('noCoincide')) {
           p2.setErrors(null);
         }
+
       }
     };
   }
@@ -112,18 +119,23 @@ export class RegistroComponent {
     /* Se llama al servicio para agregar el usuario a la base de datos. */
     this.usuariosService.addUsuario(usuario).subscribe({
       next: () => {
+
         /* Si el registro es exitoso, se muestra un mensaje y se redirige al login. */
         this.toastService.show('Se ha registrado correctamente', 'exito');
         this.router.navigate(['/login']);
       },
       error: (err) => {
+
         /* Si ocurre un error, se muestra el mensaje correspondiente. */
         if (err.error?.mensaje === 'EMAIL_DUPLICADO') {
           this.toastService.show(this.erroresService.get('emailDuplicado'), 'error');
+
         } else if (err.error?.mensaje === 'USERNAME_DUPLICADO') {
           this.toastService.show(this.erroresService.get('usernameDuplicado'), 'error');
+
         } else if (err.error?.mensaje === 'USUARIO_ELIMINADO') {
           this.toastService.show('Este email o usuario pertenece a una cuenta eliminada. Contacta con soporte.', 'error');
+          
         } else {
           this.toastService.show(this.erroresService.get('errorGenerico'), 'error');
         }

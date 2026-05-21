@@ -1,3 +1,4 @@
+/* Estilo del navbar. */
 .navbar {
     background: #111;
     padding: 8px 25px;
@@ -11,14 +12,14 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.6);
 }
 
-/* IZQUIERDA */
+/* Estilo para el apartado izquiero del navbar. */
 .nav-izquierda {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* LOGO */
+/* Estilo para el logo. */
 .logo {
     display: flex;
     align-items: center;
@@ -35,7 +36,7 @@
     margin-right: 30px;
 }
 
-/* TÍTULO */
+/* Estilo para el título. */
 .titulo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.1rem;
@@ -45,7 +46,7 @@
     text-shadow: 0 0 6px rgba(231, 0, 11, 0.25);
 }
 
-/* GRUPO USUARIO */
+/* Estilos para el nombre del usuario. */
 .usuario-grupo {
     display: flex;
     align-items: center;
@@ -64,7 +65,7 @@
     white-space: nowrap;
 }
 
-/* SEPARADOR */
+/* Estilo para el separador. */
 .separador {
     width: 3px;
     height: 45px;
@@ -72,13 +73,13 @@
     border-radius: 2px;
 }
 
-/* DERECHA */
+/* Estilo para el lado derecho. */
 .nav-derecha {
     display: flex;
     align-items: center;
 }
 
-/* BOTÓN CERRAR SESIÓN */
+/* Estilo para el botón de cerrar sesión. */
 .btn-cerrar {
     background: transparent;
     border: 2px solid #e7000b;
@@ -96,7 +97,7 @@
     background: #b20710;
 }
 
-/* RESPONSIVE TABLET */
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
     .navbar {
@@ -128,7 +129,7 @@
     }
 }
 
-/* RESPONSIVE MÓVIL */
+/* Estilos responsive para movil. */
 @media (max-width: 480px) {
 
     .navbar {

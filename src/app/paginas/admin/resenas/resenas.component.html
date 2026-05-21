@@ -1,6 +1,10 @@
+<!-- Parte superior de la página. -->
 <div class="admin-header">
+
+    <!-- Título de la página. -->
     <h1>RESEÑAS</h1>
 
+    <!-- Filtro de la película. -->
     <div class="filtros-header">
 
         <div class="filtros-inputs">
@@ -11,9 +15,12 @@
     </div>
 </div>
 
+<!-- Tabla de las reseñas. -->
 <div class="tabla-wrapper">
     <table class="admin-table">
         <thead>
+
+            <!-- Enunciados de las columnas. -->
             <tr>
                 <th>USUARIO</th>
                 <th>PELÍCULA</th>
@@ -25,6 +32,8 @@
         </thead>
 
         <tbody>
+
+            <!-- Contenidos de tablas. -->
             <tr *ngFor="let r of resenasPaginadas">
                 <td>{{ r.usuario.email }}</td>
                 <td>{{ r.pelicula.titulo }}</td>
@@ -33,6 +42,8 @@
                 <td>{{ r.fecha | date:'yyyy-MM-dd' }}</td>
 
                 <td>
+
+                    <!-- Botón para borrar la reseña. -->
                     <button class="btn-borrar" (click)="eliminarResena(r.id)">🗑️</button>
                 </td>
             </tr>
@@ -40,6 +51,7 @@
     </table>
 </div>
 
+<!-- Botones de paginación. -->
 <div class="paginacion">
     <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">
         ◀ Anterior

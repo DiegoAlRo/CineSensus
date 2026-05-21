@@ -2,6 +2,7 @@
 import express from 'express'; 
 import { crearUsuario, loginUsuario, obtenerUsuario, obtenerUsuarios, actualizarUsuario, cambiarContrasena, eliminarUsuario, reactivarUsuario } from '../controllers/usuarios.controller.js';
 
+/* Se crea un router de Express para manejar las rutas relacionadas con los usuarios. */
 const router = express.Router(); 
 
 /**
@@ -22,6 +23,10 @@ router.post('/login', loginUsuario);
  */
 router.put('/cambiar-contrasena', cambiarContrasena);
 
+/**
+ * GET /usuarios
+ * Obtiene la lista de todos los usuarios.
+ */
 router.get('/', obtenerUsuarios);
 
 /**
@@ -37,12 +42,14 @@ router.get('/:id', obtenerUsuario);
 router.put('/:id', actualizarUsuario);
 
 /**
- * 
+ * DELETE /:id
+ * Elimina un usuario existente por su ID.
  */
 router.delete('/:id', eliminarUsuario);
 
 /**
- * 
+ * PUT /:id/reactivar
+ * Reactiva un usuario existente por su ID.
  */
 router.put('/:id/reactivar', reactivarUsuario);
 

@@ -1,6 +1,10 @@
+<!-- Parte superior de la página. -->
 <div class="admin-header">
+
+  <!-- Título de la página. -->
   <h1>USUARIOS</h1>
 
+  <!-- Filtros de búsqueda. -->
   <div class="filtros-header">
 
     <div class="filtros-inputs">
@@ -9,9 +13,12 @@
   </div>
 </div>
 
+<!-- Tabla de usuarios. -->
 <div class="tabla-wrapper">
   <table class="admin-table">
     <thead>
+
+      <!-- Enunciados de columnas. -->
       <tr>
         <th>NOMBRE COMPLETO</th>
         <th>EMAIL</th>
@@ -21,11 +28,14 @@
     </thead>
 
     <tbody>
+
+      <!-- Contenido de la tabla. -->
       <tr *ngFor="let u of usuariosPaginados">
         <td>{{ u.nombre }} {{ u.apellidos }}</td>
         <td>{{ u.email }}</td>
         <td>{{ u.username }}</td>
 
+        <!-- Botones para alterar el estado de los usuarios. -->
         <td>
           <select [(ngModel)]="u.activo" (change)="cambiarEstado(u)">
             <option [ngValue]="true">Activo</option>
@@ -37,6 +47,7 @@
   </table>
 </div>
 
+<!-- Botones para navegar entre páginas. -->
 <div class="paginacion">
   <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">
     ◀ Anterior

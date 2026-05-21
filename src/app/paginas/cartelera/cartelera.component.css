@@ -7,6 +7,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Se evitará que los elementos se salgan de la pantalla. */
 * {
     box-sizing: border-box;
 }
@@ -71,6 +72,7 @@
     border-radius: 12px;
 }
 
+/* Estilo para el botón. */
 .btn-accion {
     background: #e7000b;
     color: white;
@@ -359,6 +361,7 @@
     margin-left: 10px;
 }
 
+/* Estilos para las casillas de los horarios. */
 .horarios {
     margin-top: 10px;
     display: flex;
@@ -394,12 +397,10 @@
 /* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
-    /* Cinta más pequeña */
     .poster-cinta {
         height: 150px;
     }
 
-    /* Barra de acciones más compacta */
     .barra-acciones {
         gap: 14px;
         padding: 10px 6px;
@@ -412,14 +413,12 @@
         font-size: 1rem;
     }
 
-    /* Paneles más estrechos */
     .panel-filtros,
     .panel-fecha {
         width: 220px;
         top: 160px;
     }
 
-    /* Tarjetas más compactas */
     .pelicula-card {
         padding: 16px;
         gap: 16px;

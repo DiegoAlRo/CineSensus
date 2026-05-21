@@ -1,8 +1,12 @@
 <div class="contenedor-form">
 
+    <!-- Título de la página. -->
     <h2 class="titulo-form">Cambiar Contraseña</h2>
+
+    <!-- Subtítulo de la página. -->
     <p class="subtitulo-form">Actualiza la Contraseña de tu Cuenta</p>
 
+    <!-- Formulario para el cambio de contraseña. -->
     <form [formGroup]="form" (ngSubmit)="cambiar()" class="form-card">
 
         <label>Contraseña Actual</label>
@@ -29,6 +33,7 @@
             Las contraseñas no coinciden.
         </p>
 
+        <!-- Botón para confirmar el cambio. -->
         <button type="submit" class="btn-rojo">Guardar Cambios</button>
 
     </form>

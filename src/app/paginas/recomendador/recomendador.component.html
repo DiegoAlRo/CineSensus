@@ -1,10 +1,13 @@
+<!-- Este contenedor mantendrá toda la página. -->
 <div class="contenedor-form">
 
+  <!-- Título y subtítulo de la página del recomendador. -->
   <h2 class="titulo-form">Recomendador de Películas</h2>
   <p class="subtitulo-form">
     Cuéntanos qué te apetece ver y te recomendaremos la mejor opción disponible
   </p>
 
+  <!-- Formulario del recomendador compuesto por selects. -->
   <form [formGroup]="form" (ngSubmit)="recomendar()" class="form-card">
 
     <label>¿Qué Género prefieres?</label>
@@ -42,10 +45,12 @@
 
   </form>
 
+  <!-- De encontrarse una película que recomendar, se mostrará la tarjeta de la misma. -->
   <div *ngIf="peliculaRecomendada" class="recomendacion-contenedor">
 
     <div class="peliculas">
 
+      <!-- Si se hace click sobre la tarjeta, se llamará al método para redirigir al usuario. -->
       <div class="pelicula-card recomendada" (click)="irAPelicula(peliculaRecomendada!.id)">
 
         <img class="poster" [src]="peliculaRecomendada!.poster">

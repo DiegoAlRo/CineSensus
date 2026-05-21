@@ -1,5 +1,7 @@
+<!-- Título variable de la página. -->
 <h1>{{ modoEdicion ? 'EDITAR SALA' : 'CREAR SALA' }}</h1>
 
+<!-- Formulario de salas.-->
 <form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
   <label>NOMBRE</label>
@@ -11,6 +13,7 @@
   <label>COLUMNAS</label>
   <input type="number" formControlName="columnas" placeholder="Número de columnas...">
 
+  <!-- Botónes del formulario. -->
   <div class="botones">
     <button type="submit" class="btn-guardar">Guardar</button>
     <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>

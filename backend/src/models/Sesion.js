@@ -22,6 +22,8 @@ const SesionSchema = new mongoose.Schema({
   ]
 
 }, { 
+
+  /* Con timestamps se sabrá cuándo se creó o actualizó una reserva. */
   timestamps: true 
 }); 
 

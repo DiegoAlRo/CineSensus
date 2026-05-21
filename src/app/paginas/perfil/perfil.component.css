@@ -6,7 +6,7 @@
   font-family: Arial, sans-serif;
 }
 
-/* Contenedor para el perfil. */
+/* Estilo del contenedor para el perfil. */
 .perfil-contenedor {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   gap: 40px;
 }
 
-/* Tarjeta principal con los datos. */
+/* Estilos para la tarjeta principal con los datos. */
 .tarjeta-perfil {
   background: #141414;
   width: 500px;
@@ -25,7 +25,7 @@
   margin-bottom: 50px;
 }
 
-/* Título rojo. */
+/* Estilo para los títulos de las secciones. */
 .titulo-seccion {
   background: #e7000b;
   padding: 12px;
@@ -79,12 +79,12 @@
   font-size: 1.1rem;
 }
 
-/* Contenedor de los botones interactivos. */
+/* Estilo del contenedor de los botones interactivos. */
 .botones-acciones {
   margin-top: 20px;
 }
 
-/* Grupo que junta los botones. */
+/* Estilo para el grupo que junta los botones. */
 .grupo-botones {
   display: flex;
   gap: 12px;
@@ -108,7 +108,7 @@
   background: #b20710;
 }
 
-/* Botón de cerrar sesión. */
+/* Estilo para el botón de cerrar sesión. */
 .btn-cerrar {
   background: transparent;
   border: 2px solid #e7000b;
@@ -121,7 +121,6 @@
   color: white;
 }
 
-/* Contenedor general de cada sección */
 .seccion-lista {
   background: #141414;
   width: 500px;
@@ -131,7 +130,7 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
-/* Mensaje cuando no hay elementos */
+/* Estilo de mensaje cuando no hay elementos */
 .mensaje-vacio {
   text-align: center;
   color: #cacaca;
@@ -140,6 +139,7 @@
   opacity: 0.8;
 }
 
+/* Estilo para el scroll de la lista. */
 .lista-scroll {
   max-height: 350px;
   overflow-y: auto;
@@ -155,7 +155,7 @@
   border-left: 4px solid #e7000b;
 }
 
-/* Título de película */
+/* Estilo para el título de película */
 .titulo-pelicula {
   font-size: 1.5rem;
   font-family: 'Oswald', sans-serif;
@@ -164,7 +164,7 @@
   color: #e7000b;
 }
 
-/* Estados */
+/* Estilos de los estados */
 .estado-pagada {
   color: gold;
 }
@@ -177,7 +177,7 @@
   color: #e7000b;
 }
 
-/* Lista simple */
+/* Estilo para la lista simple */
 .lista-simple {
   margin-top: -3px;
   list-style: none;
@@ -192,6 +192,7 @@
   border-bottom: 3px solid #333;
 }
 
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
   .tarjeta-perfil,
@@ -234,6 +235,7 @@
   }
 }
 
+/* Estilos responsive para móviles. */
 @media (max-width: 480px) {
 
   .tarjeta-perfil,

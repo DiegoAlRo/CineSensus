@@ -1,4 +1,4 @@
-/* TÍTULO */
+
 h1 {
   text-align: center;
   margin-bottom: 20px;
@@ -7,7 +7,6 @@ h1 {
   color: #e7000b;
 }
 
-/* LABELS */
 label {
   display: flex;
   flex-direction: column;

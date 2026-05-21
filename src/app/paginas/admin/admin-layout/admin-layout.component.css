@@ -1,4 +1,4 @@
-/* Contenedor general del layout del admin. */
+/* Estilo del contenedor general del layout del admin. */
 .admin-container {
     display: flex;
     height: calc(100vh - 110px);
@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-/* Contenido principal (a la derecha del sidebar). */
+/* Estilo del contenido principal (a la derecha del sidebar). */
 .admin-content {
     flex: 1;
     padding: 30px;
@@ -15,6 +15,7 @@
     color: white; 
 }
 
+/* Estilos responsive para tablets. */
 @media (max-width: 768px) {
 
     .admin-container {
@@ -29,6 +30,7 @@
     }
 }
 
+/* Estilo responsive para móviles. */
 @media (max-width: 480px) {
 
   .admin-content {

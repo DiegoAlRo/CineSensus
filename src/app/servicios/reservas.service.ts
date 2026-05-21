@@ -48,10 +48,12 @@ export class ReservasService {
     );
   }
 
+  /* Método para obtener todas las reservas. */
   getTodasReservas() {
     return this.http.get<Reserva[]>(`${this.apiUrl}/todas`);
   }
 
+  /* Método para obtener una reserva por su ID. */
   getReservaPorId(id: string) {
     return this.http.get<Reserva>(`${this.apiUrl}/${id}`);
   }
@@ -63,6 +65,7 @@ export class ReservasService {
     });
   }
 
+  /* Método para obtener las reservas de una sesión específica. */
   getReservasPorSesion(id: string) {
     return this.http.get<any[]>(`${this.apiUrl}/sesion?sesion=${id}`);
   }

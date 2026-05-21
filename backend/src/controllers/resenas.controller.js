@@ -5,13 +5,17 @@ import Pelicula from '../models/Pelicula.js';
 /* Método para crear una reseña. */
 export const crearResena = async (req, res) => {
     try {
+
+        /* Se reciben los datos necesarios para crear la reseña. */
         const { usuario, pelicula, puntuacion, comentario } = req.body;
 
+        /* Se comprueba que el usuario no haya reseñado ya la película. */
         const existente = await Resena.findOne({ usuario, pelicula, activo: true });
         if (existente) {
             return res.status(400).json({ error: 'Ya has reseñado esta película' });
         }
 
+        /* Se crea la reseña con los datos recibidos. */
         const nueva = await Resena.create({
             usuario,
             pelicula,
@@ -19,8 +23,10 @@ export const crearResena = async (req, res) => {
             comentario
         });
 
+        /* Se actualiza la puntuación media de la película. */
         await actualizarPuntuacionMedia(pelicula);
 
+        /* Se devuelve la reseña creada con los datos del usuario y la película. */
         const completa = await Resena.findById(nueva._id)
             .populate({
                 path: 'usuario'
@@ -113,6 +119,7 @@ export const eliminarResena = async (req, res) => {
     }
 };
 
+/* Función para actualizar la puntuación media de una película. */
 async function actualizarPuntuacionMedia(peliculaId) {
     const pelicula = await Pelicula.findOne({ _id: peliculaId, activo: true });
     if (!pelicula) return;

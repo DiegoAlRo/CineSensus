@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
 
 /* El servicio de peliculas se encarga de gestionar las películas. */
 export class PeliculasService {
+  
   /* Define la URL base para las operaciones relacionadas con las películas. */
   private apiUrl = environment.api + '/peliculas';
 
@@ -28,14 +29,17 @@ export class PeliculasService {
     return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
   }
 
+  /* Con este método post se podrán crear nuevas películas. */
   crearPelicula(datos: any): Observable<Pelicula> {
     return this.http.post<Pelicula>(this.apiUrl, datos);
   }
 
+  /* Con este método put se podrán editar las películas. */
   editarPelicula(id: string, datos: any): Observable<Pelicula> {
     return this.http.put<Pelicula>(`${this.apiUrl}/${id}`, datos);
   }
 
+  /* Con este método delete se podrán eliminar las películas. */
   eliminarPelicula(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

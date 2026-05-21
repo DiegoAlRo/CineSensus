@@ -20,6 +20,8 @@ import { ToastService } from '../../servicios/toast.service';
 
 /* Clase del componente de información de película. */
 export class InfoPeliculaComponent implements OnInit {
+
+  /* Propiedades del componente. */
   pelicula?: Pelicula;
   resenas: any[] = [];
   comentario: string = '';
@@ -40,21 +42,27 @@ export class InfoPeliculaComponent implements OnInit {
 
   /* Método que se ejecuta al inicializar el componente, obtiene el ID de la película de la ruta y llama al servicio para obtener su información. */
   ngOnInit(): void {
+
     /* Se obtiene el ID de la película desde la ruta. */
     const id = this.route.snapshot.paramMap.get('id')!;
 
+    /* Si el usuario viene desde el perfil tras pulsar el botón, se le dejará editar la reseña. */
     const editarResenaId = this.route.snapshot.queryParamMap.get('editarResena');
 
+    /* Se obtiene la pelícuka. */
     this.peliculasService.getPelicula(id).subscribe({
       next: (p) => {
+
+        /* Si la película no se encuentra, se avisará del error al usuario. */
         if (!p) {
-          this.toastService.show('La película fue eliminada', 'error');
+          this.toastService.show('La película no se encuentra accesible', 'error');
           this.router.navigate(['/cartelera']);
           return;
         }
 
         this.pelicula = p;
 
+        /* Se solicitan las reseñas de la película mediante el id de esta. */
         this.resenasService.getResenasPelicula(id).subscribe({
           next: (res) => {
 
@@ -63,21 +71,26 @@ export class InfoPeliculaComponent implements OnInit {
             const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
             if (!usuario) return;
 
+            /* Se obtendrán las reservas del usuario, en caso de que haya en el localStorage. */
             this.reservasService.getReservasUsuario(usuario.id).subscribe({
               next: (reservas) => {
 
+                /* Solo tendrá en cuenta las reservas válidas. */
                 reservas = reservas.filter(r => r.sesion && r.sesion.sala);
 
+                /* Se comprobará si posee alguna reserva de la película en estado de consumida, para permitir reseñas. */
                 const puedeResenar = reservas.some(
                   (r) => r.pelicula.id === id && r.estado === 'consumida',
                 );
 
+                /* Si la reseña ya existe, no permitirá reseñar. */
                 const existente = this.resenas.find(
                   (r) => r.usuario?.id === usuario.id,
                 );
 
                 this.resenaDelUsuario = existente || null;
 
+                /* Si el usuario viene de editar reseña en perfil, se le mostrará el formulario con la info de su reseña editable. */
                 if (
                   editarResenaId &&
                   this.resenaDelUsuario &&
@@ -89,6 +102,7 @@ export class InfoPeliculaComponent implements OnInit {
                   return;
                 }
 
+                /* En caso de no poder reseñar o editar nada, se le avisará al jusuario. */
                 if (!puedeResenar && !existente) {
                   this.toastService.show(
                     'Debes haber visto la película para reseñarla',
@@ -124,10 +138,13 @@ export class InfoPeliculaComponent implements OnInit {
   /* Este método mostrará la puntuación de la película con el número de estrellas adecuado. */
   getIconos(p: number): string[] {
     if (!p) return [];
+
+    /* Se tendrán en cuenta de forma separada, la parte entera y la decimal del número. */
     const icons = [];
     const enteras = Math.floor(p);
     const media = p % 1 !== 0;
 
+    /* Mostrará tantas estrellas como puntuación entera haya, y se le sumará una media estrella según haya decimal o no. */
     for (let i = 0; i < enteras; i++)
       icons.push('assets/EstrellaPuntuacion-Entera.png');
     if (media) icons.push('assets/EstrellaPuntuacion-Media.png');
@@ -137,6 +154,7 @@ export class InfoPeliculaComponent implements OnInit {
 
   /* Este método se encargará de enviar la reseña al backend tanto para crear una nueva o editar una existente. */
   enviarResena() {
+
     /* Se obtiene el usuario desde el localStorage para saber quién escribe la reseña. */
     const usuario = JSON.parse(localStorage.getItem('usuario')!);
     if (!usuario || !this.pelicula) return;
@@ -151,6 +169,7 @@ export class InfoPeliculaComponent implements OnInit {
       return;
     }
 
+    /* En el caso de que el usuario ya posea reseña, se le mostrarán sus datos en el formulario para editarlos. */
     if (this.resenaDelUsuario) {
       this.resenasService
         .editarResena(this.resenaDelUsuario.id, {
@@ -175,6 +194,7 @@ export class InfoPeliculaComponent implements OnInit {
       return;
     }
 
+    /* Si el usuario no posee una reseña, podrá crear una. */
     this.resenasService
       .crearResena({
         usuario: usuario.id,
@@ -199,6 +219,7 @@ export class InfoPeliculaComponent implements OnInit {
       });
   }
 
+  /* Actualiza la puntuación y el número de reseñas de la película. */
   actualizarPelicula() {
     const id = this.pelicula!.id;
     this.peliculasService.getPelicula(id).subscribe((p) => {

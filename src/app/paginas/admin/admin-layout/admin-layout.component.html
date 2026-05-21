@@ -1,9 +1,15 @@
+<!-- Arriba se mostrará el navbar del admin en todo momento. -->
 <app-admin-navbar></app-admin-navbar>
 
+<!-- Contenedor de apartados del admin. -->
 <div class="admin-container">
+
+  <!-- Esta será la barra de "navegación" del admin. -->
   <app-admin-sidebar></app-admin-sidebar>
 
+  <!-- Aquí se mostrará el contenido de cada apartado del admin. -->
   <div class="admin-content">
     <router-outlet></router-outlet>
   </div>
+  
 </div>

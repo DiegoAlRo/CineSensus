@@ -1,12 +1,15 @@
 /* Este enum contendrá los tonos asociables a las películas */
 export enum Tono {
-  Neutral = 'Neutral',
-  Alegre = 'Alegre',
-  Triste = 'Triste',
-  Intenso = 'Intenso',
-  Relajado = 'Relajado',
-  Oscuro = 'Oscuro',
-  Serio = 'Serio',
-  Reflexivo = 'Reflexivo',
-  Tenso = 'Tenso'
+  Alegre = 'Alegre', // Usado X 2
+  Triste = 'Triste', // Usado X 2
+  Intenso = 'Intenso', // Usado
+  Serio = 'Serio', // Usado
+  Reflexivo = 'Reflexivo', // Usado
+  Tenso = 'Tenso', // Usado X 2
+  Absurdo = 'Absurdo', // Usado X 2
+  Epico = 'Épico', // Usado
+  Humoristico = 'Humorístico', // Usado X 2
+  Melancolico = 'Melancólico', // Usado X 2
+  Dinamico = 'Dinámico', // Usado X 2
+  Explosivo = 'Explosivo' // Usado X 2
 }

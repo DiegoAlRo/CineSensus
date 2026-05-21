@@ -1,17 +1,22 @@
 <div class="muestra-container">
 
+  <!-- Toda la información de la compra se verá en la misma tarjeta. -->
   <div class="tarjeta-compra">
 
+    <!-- Título principal de la página. -->
     <h1 class="titulo-principal">COMPRA REALIZADA</h1>
 
+    <!-- Subtítulo de la página. -->
     <h2 class="subtitulo">
       Entrada/s para: <span>{{ reserva?.pelicula?.titulo }}</span>
     </h2>
 
+    <!-- Se mostrará el poster de la película de la reserva. -->
     <div class="poster-container">
       <img [src]="reserva?.pelicula?.poster" alt="Póster de la película">
     </div>
 
+    <!-- Aquí se mostrará la información de la reserva. -->
     <section class="info-bloque">
       <p><strong>Duración:</strong> {{ reserva?.pelicula?.duracion }} min</p>
       <p><strong>Fecha:</strong> {{ reserva?.sesion?.fecha | date:'shortDate' }}</p>
@@ -37,6 +42,7 @@
       <div class="codigo-box">{{ reserva?.codigoEntrada }}</div>
     </section>
 
+    <!-- Este botón enviará al usuario de vuelta a la cartelera. -->
     <button type="button" routerLink="/cartelera" class="btn-volver">
       Volver a la Cartelera
     </button>

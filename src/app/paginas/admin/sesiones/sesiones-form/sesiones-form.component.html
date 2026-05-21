@@ -1,5 +1,7 @@
+<!-- Título variable del formualrio. -->
 <h1>{{ modoEdicion ? 'EDITAR SESIÓN' : 'CREAR SESIÓN' }}</h1>
 
+<!-- Formulario para crear/editar sesiones. -->
 <form [formGroup]="form" (ngSubmit)="guardar()" class="admin-formulario">
 
   <label>PELÍCULA</label>
@@ -23,6 +25,7 @@
   <label>PRECIO (€)</label>
   <input type="number" formControlName="precio" min="0" step="0.1">
 
+  <!-- Botones del formulario. -->
   <div class="botones">
     <button type="submit" class="btn-guardar">Guardar</button>
     <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>

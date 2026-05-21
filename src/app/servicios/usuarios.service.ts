@@ -37,6 +37,7 @@ export class UsuariosService {
     });
   }
 
+  /* Con este GET se podrán obtener todos los usuarios. */
   getUsuarios() {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
@@ -51,14 +52,17 @@ export class UsuariosService {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, datos);
   }
 
+  /* Con este método delete se podrán eliminar los usuarios. */
   eliminarUsuario(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
+  /* Este método se encargará de reactivar un usuario previamente eliminado. */
   reactivarUsuario(id: string) {
     return this.http.put(`${this.apiUrl}/${id}/reactivar`, {});
   }
 
+  /* Este método se encargará de cambiar la contraseña de un usuario. */
   cambiarContrasena(datos: {
     id: string;
     contrasenaActual: string;

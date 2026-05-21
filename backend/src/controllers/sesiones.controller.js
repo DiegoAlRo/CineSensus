@@ -4,6 +4,7 @@ import Pelicula from '../models/Pelicula.js';
 import Sala from '../models/Sala.js';
 import Reserva from '../models/Reserva.js';
 
+/* Devuelve todas las sesiones almacenadas en la base de datos. */
 export const obtenerTodasLasSesiones = async (req, res) => {
   try {
     const sesiones = await Sesion.find({ activo: true })
@@ -107,6 +108,7 @@ export const crearSesion = async (req, res) => {
   }
 };
 
+/* Este método servirá para actualizar una sesión. */
 export const actualizarSesion = async (req, res) => {
   try {
     const sesion = await Sesion.findById(req.params.id);
@@ -145,6 +147,7 @@ export const actualizarSesion = async (req, res) => {
   }
 };
 
+/* Este método servirá para eliminar una sesión. */
 export const eliminarSesion = async (req, res) => {
   try {
     const sesion = await Sesion.findById(req.params.id);

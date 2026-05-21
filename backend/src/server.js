@@ -19,7 +19,7 @@ app.use(express.json());
 /* Conexión a la base de datos. */
 connectDB();
 
-/* Ruta principal. */
+/* Se prueba que el backend funcioa al recibir una ruta. */
 app.get('/', (req, res) => {
   res.send('Backend de CineSensus funcionando');
 });

@@ -2,6 +2,7 @@
 import express from 'express'; 
 import { obtenerResenas, crearResena, editarResena, eliminarResena } from '../controllers/resenas.controller.js';
 
+/* Se crea un router de Express para manejar las rutas relacionadas con las reseñas. */
 const router = express.Router(); 
 
 /**
